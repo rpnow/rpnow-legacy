@@ -1,0 +1,5 @@
+<?php
+
+$RoomIDLen    = 4;
+
+?>

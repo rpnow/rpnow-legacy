@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }} - RP Server</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+  </head>
+  <body>
+    <div id="header">
+      <h2>{{ title }}</h2>
+      <p>{{ desc }}</p>
+    </div>
+    <div id="input"></div>
+    <form action="/{{ room }}/message" method="post">
+      <input type="text" name="message"></input>
+      <input type="submit" value="Send"></input>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RP Server</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <style>
+      h1{
+        background-color:#262626;
+        color:#fafafa;
+        padding:40px;
+        box-shadow:0 5px 10px #555;
+        font-size:48px;
+        letter-spacing:8px;
+        word-spacing:16px;
+      }
+      table{
+        margin:auto;
+        padding:5px;
+      }
+      th{
+        text-align:right;
+      }
+      input[type=text],
+      textarea {
+        width: 100%;
+      }
+      input[type=submit] {
+        font-size:24px;
+        padding:10px 20px;
+        background:none;
+        border:solid 2px #555;
+        border-radius:8px;
+      }
+      input[type=submit]:hover {
+        cursor:pointer;
+        background-color:#555;
+        box-shadow: 0 0 10px #555;
+        color:#fafafa;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>RP Server</h1>
+    <form action="/create" method="post">
+      <table>
+        <tr>
+          <th>Title:</th>
+          <td><input type="text" name="title"></td>
+        </tr>
+        <tr>
+          <th>Description:</th>
+          <td><textarea name="desc"></textarea></td>
+        </tr>
+      </table>
+      <input type="submit" value="Create room">
+    </form>
+  </body>
+</html>

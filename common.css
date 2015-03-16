@@ -1,0 +1,23 @@
+body{
+  margin:0;
+  padding:0;
+  line-height:1.6;
+  font-size:18px;
+  background-color:#fafafa;
+  color:#3c3c3c;
+  text-align:center;
+}
+h1,h2,h3{
+  line-height:1.2
+}
+#header{
+  padding:10px 0;
+  margin:0;
+  background-color:#262626;
+  color:#fafafa;
+  border-bottom:solid 1px #fafafa;
+  box-shadow:0 5px 10px #555;
+}
+#header h2{
+  margin:0;
+}
