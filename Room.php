@@ -12,7 +12,7 @@ class Room {
   private function __construct($id, $title, $desc) {
     $this->id = $id;
     $this->title = $title;
-    $this->des = $desc;
+    $this->desc = $desc;
   }
   
   public static function CreateRoom($title, $desc) {

@@ -30,7 +30,7 @@ $app->get('/:id', function ($id) use ($app) {
 });
 
 // Create room
-$app->post('/create', function () use ($app, $RoomIDLen) {
+$app->post('/create', function () use ($app) {
   $title= htmlspecialchars($app->request()->post('title'));
   $desc = htmlspecialchars($app->request()->post('desc'));
   $room = Room::CreateRoom($title, $desc);
