@@ -3,24 +3,37 @@
   <head>
     <meta charset="utf-8">
     <title>{{ title }} - RP Server</title>
-    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="room.css">
   </head>
   <body>
-    <div id="header">
+    <header>
       <h2>{{ title }}</h2>
       <p>{{ desc }}</p>
-    </div>
+      <p>
+        <a href="/{{ room }}/1">Archive</a> |
+        <a href="/{{ room }}/export">Export</a> |
+        <a href="/{{ room }}/stats">Stats</a> |
+        <a href="/">New RP</a>
+      </p>
+    </header>
     <div id="messages">
       {% for message in messages %}
-        <div>{{ message.Name }}: {{ message.Content }}</div>
+        <div class="message message-{{ message.Name }}">
+          <div class="name">{{ message.Name }}</div>
+          <div class="content">{{ message.Content }}</div>
+        </div>
       {% else %}
         <p>Our story begins...</p>
       {% endfor %}
     </div>
     <form action="/{{ room }}/send" method="post">
       <input type="hidden" name="name" value="Narrator"></input>
-      <input type="text" name="content"></input>
-      <input type="submit" value="Send"></input>
+      <table>
+        <tr>
+          <td id="input-col"><textarea name="content"></textarea></td>
+          <td id="button-col"><input type="submit" value="Send"></input></td>
+        </tr>
+      </table>
     </form>
   </body>
 </html>

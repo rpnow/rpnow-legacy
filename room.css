@@ -1,0 +1,97 @@
+body{
+  background-color:#fafafa;
+  color:#3c3c3c;
+  text-align:center;
+  line-height:1.6;
+  font-size:16px;
+}
+h2{
+  line-height:1.2
+}
+header{
+  border-bottom: ridge;
+  margin-bottom: 20px;
+  font-size:18px;
+}
+#messages {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 650px;
+  display: inline-block;
+}
+#messages > .message{
+  box-shadow: 0 1px 1px #bbb;
+  outline: dotted 1px #bbb;
+  outline-offset: -5px;
+  padding: 10px;
+}
+#messages > .message > .name{
+  display: inline-block;
+}
+#messages > .message > .name::after{
+  content: ":";
+}
+#messages > .message > .content{
+  display: inline-block;
+}
+#messages > .message-Narrator {
+  background-color: #fff;
+}
+#messages > .message-Narrator > .name {
+  display: none;
+}
+
+input,
+textarea {
+  font-family:serif;
+}
+textarea {
+  border:none;
+  background: none;
+}
+table {
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  border: dotted 1px #555;
+  border-spacing: 6px;
+}
+td {
+  line-height: 1em;
+}
+td#input-col {
+  padding: 2px;
+  border: solid 1px #555;
+  box-shadow: 0 1px 1px #555 inset;
+  background-color:#fff;
+}
+td#button-col {
+  padding: 0;
+  width: 20%;
+  min-width: 75px;
+  max-height: 100px;
+}
+textarea {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  resize: vertical;
+  min-height: 60px;
+}
+input[type=submit] {
+  width: 100%;
+  height: 66px;
+  font-size:18px;
+  background-color: #fff;
+  color: #222;
+  border:solid 1px #3c3c3c;
+  font-weight:bold;
+  box-shadow: 0 1px 2px #888;
+}
+input[type=submit]:hover,
+input[type=submit]:active {
+  cursor:pointer;
+  background-color:#3c3c3c;
+  box-shadow: 0 1px 10px #555;
+  color:#fafafa;
+}
