@@ -10,9 +10,16 @@
       <h2>{{ title }}</h2>
       <p>{{ desc }}</p>
     </div>
-    <div id="input"></div>
-    <form action="/{{ room }}/message" method="post">
-      <input type="text" name="message"></input>
+    <div id="messages">
+      {% for message in messages %}
+        <div>{{ message.Name }}: {{ message.Content }}</div>
+      {% else %}
+        <p>Our story begins...</p>
+      {% endfor %}
+    </div>
+    <form action="/{{ room }}/send" method="post">
+      <input type="hidden" name="name" value="Narrator"></input>
+      <input type="text" name="content"></input>
       <input type="submit" value="Send"></input>
     </form>
   </body>

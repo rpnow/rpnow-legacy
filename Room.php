@@ -38,6 +38,7 @@ class Room {
     $title = self::conn()->real_escape_string($title);
     $desc = self::conn()->real_escape_string($desc);
     self::conn()->query("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES ('$id', '$title', '$desc')");
+    self::conn()->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('Narrator', '$id', '#ddd')");
     self::conn()->commit();
     return new Room($id, $title, $desc);
   }
@@ -69,6 +70,23 @@ class Room {
     var_dump($result);
     $row = $result->fetch_array();
     return $row[0] == '1';
+  }
+  
+  public function send($name, $content, $isAction = false) {
+    $name = self::conn()->real_escape_string($name);
+    $content = self::conn()->real_escape_string($content);
+    $isAction = boolval($isAction)? '1': '0';
+    $room = $this->getID();
+    $result = self::conn()->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
+  }
+  
+  public function getMessages($after = 0) {
+    if(!is_int($after) || $after < 0) {
+      throw new Exception("Value for 'after' must be a positive integer.");
+    }
+    $room = $this->getID();
+    $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Number` > '$after' AND `Character_Room` = '$room' ORDER BY `Number` ASC");
+    return $result->fetch_all(MYSQLI_ASSOC); 
   }
 }
 
