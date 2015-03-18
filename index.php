@@ -31,10 +31,13 @@ $app->get('/:id', function ($id) use ($app) {
 
 // Create room
 $app->post('/create', function () use ($app) {
-  $title= htmlspecialchars($app->request()->post('title'));
-  $desc = htmlspecialchars($app->request()->post('desc'));
-  $room = Room::CreateRoom($title, $desc);
+  $room = Room::CreateRoom(
+    $app->request()->post('title'),
+    $app->request()->post('desc')
+  );
   $app->redirect($room->getID());
 });
 
 $app->run();
+
+?>

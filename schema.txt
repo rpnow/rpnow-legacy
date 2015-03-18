@@ -1,0 +1,22 @@
+Room
+----
+* id [key]
+* title
+* description
+
+
+Character
+---------
+* name [key] 
+* room [key] [foreign key to Room.id]
+* color
+
+
+Message
+-------
+* content
+* is_action
+* timestamp [index]
+* character_name [foreign key to Character.name]
+* character_room [foreign key to Character.room]
+* number [key] [auto-increment]
