@@ -6,54 +6,86 @@
     <link rel="stylesheet" type="text/css" href="common.css">
     <style>
       h1{
-        background-color:#262626;
-        color:#fafafa;
-        padding:40px;
-        box-shadow:0 5px 10px #555;
         font-size:48px;
-        letter-spacing:8px;
-        word-spacing:16px;
+        letter-spacing:4px;
+        word-spacing:8px;
       }
       table{
         margin:auto;
-        padding:5px;
+        border-spacing: 6px;
+      }
+      th,td{
+        padding: 2px;
+        line-height: 1em;
       }
       th{
+        text-align:left;
+      }
+      td{
         text-align:right;
+        border: solid 1px #555;
+        box-shadow: 0 1px 1px #555 inset;
+        background-color:#fff;
+      }
+      input,
+      textarea {
+        font-family:serif;
       }
       input[type=text],
       textarea {
+        font-size: 16px;
+        border:none;
+        background: none;
+      }
+      input[type=text] {
         width: 100%;
       }
-      input[type=submit] {
-        font-size:24px;
-        padding:10px 20px;
-        background:none;
-        border:solid 2px #555;
-        border-radius:8px;
+      textarea {  
+        width: 300px;
+        height: 100px;
       }
-      input[type=submit]:hover {
+      input[type=submit],
+      input[type=submit]:visited {
+        font-size:18px;
+        margin-top:40px;
+        padding:6px 12px;
+        background-color: #fff;
+        color: #222;
+        border:solid 1px #3c3c3c;
+        border-radius:8px;
+        font-weight:bold;
+        box-shadow: 0 1px 2px #888;
+      }
+      input[type=submit]:hover,
+      input[type=submit]:active {
         cursor:pointer;
-        background-color:#555;
-        box-shadow: 0 0 10px #555;
+        background-color:#3c3c3c;
+        box-shadow: 0 1px 10px #555;
         color:#fafafa;
+      }
+      form {
+        display: inline-block;
+        margin: auto;
+        border: solid 1px #555;
+        padding: 30px;
+        box-shadow: 0 1px 3px #aaa;
       }
     </style>
   </head>
   <body>
-    <h1>RP Server</h1>
+    <h1>Start New RP</h1>
     <form action="/create" method="post">
       <table>
         <tr>
           <th>Title:</th>
-          <td><input type="text" name="title"></td>
+          <td><input type="text" name="title" maxlength="30"></td>
         </tr>
         <tr>
           <th>Description:</th>
-          <td><textarea name="desc"></textarea></td>
+          <td><textarea name="desc" maxlength="255"></textarea></td>
         </tr>
       </table>
-      <input type="submit" value="Create room">
+      <input type="submit" value="Begin">
     </form>
   </body>
 </html>
