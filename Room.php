@@ -88,6 +88,21 @@ class Room {
     $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Number` > '$after' AND `Character_Room` = '$room' ORDER BY `Number` ASC");
     return $result->fetch_all(MYSQLI_ASSOC); 
   }
+  
+  public function getCharacters() {
+    $room = $this->getID();
+    $result = self::conn()->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room'");
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+  
+  public function addCharacter($name, $color) {
+    $name = self::conn()->real_escape_string($name);
+    if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
+      throw new Exception("$color is not a valid hex color.");
+    }
+    $room = $this->getID();
+    $result = self::conn()->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
+  }
 }
 
 ?>

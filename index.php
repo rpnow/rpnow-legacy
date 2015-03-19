@@ -21,7 +21,8 @@ $app->get('/:id', function ($id) use ($app) {
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
       'room' => $room->getID(),
-      'messages' => $room->getMessages()
+      'messages' => $room->getMessages(),
+      'characters' => $room->getCharacters()
     ));
     $app->render('room.html');
   }
@@ -39,12 +40,26 @@ $app->post('/create', function () use ($app) {
   $app->redirect($room->getID());
 });
 
-$app->post('/:id/send', function($id) use ($app) {
+$app->post('/:id/send', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $room->send(
       $app->request()->post('name'),
       $app->request()->post('content')
+    );
+    $app->redirect('/'.$room->getID());
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+});
+
+$app->post('/:id/character', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $room->addCharacter(
+      $app->request()->post('name'),
+      $app->request()->post('color')
     );
     $app->redirect('/'.$room->getID());
   }

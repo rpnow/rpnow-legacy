@@ -41,44 +41,60 @@ header{
   display: none;
 }
 
+#characters {
+  display: block;
+  float: right;
+  width: 150px;
+  padding: 20px;
+  border: dotted 1px;
+}
+#characters > .character {
+  text-shadow: 0 0 2px #000;
+  font-weight: bold;
+}
+#new-character {
+  margin-top: 20px;
+  border-top: dotted 1px;
+}
+
 input,
 textarea {
   font-family:serif;
 }
-textarea {
+#message-box textarea {
   border:none;
   background: none;
 }
-table {
+#message-box table {
   width: 100%;
   max-width: 700px;
   margin: 20px auto;
   border: dotted 1px #555;
   border-spacing: 6px;
 }
-td {
+#message-box td {
   line-height: 1em;
 }
-td#input-col {
+#message-box td#input-col {
   padding: 2px;
   border: solid 1px #555;
   box-shadow: 0 1px 1px #555 inset;
   background-color:#fff;
 }
-td#button-col {
+#message-box td#button-col {
   padding: 0;
   width: 20%;
   min-width: 75px;
   max-height: 100px;
 }
-textarea {
+#message-box textarea {
   margin: 0;
   padding: 0;
   width: 100%;
   resize: vertical;
   min-height: 60px;
 }
-input[type=submit] {
+#message-box input[type=submit] {
   width: 100%;
   height: 66px;
   font-size:18px;
@@ -88,8 +104,8 @@ input[type=submit] {
   font-weight:bold;
   box-shadow: 0 1px 2px #888;
 }
-input[type=submit]:hover,
-input[type=submit]:active {
+#message-box input[type=submit]:hover,
+#message-box input[type=submit]:active {
   cursor:pointer;
   background-color:#3c3c3c;
   box-shadow: 0 1px 10px #555;

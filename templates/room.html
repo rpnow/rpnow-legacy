@@ -26,7 +26,21 @@
         <p>Our story begins...</p>
       {% endfor %}
     </div>
-    <form action="/{{ room }}/send" method="post">
+    <div id="characters">
+      {% for character in characters %}
+        <div class="character character-{{ character.Name }}">
+          <a href="#" style="color: {{ character.Color }}">{{ character.Name }}</a>
+        </div>
+      {% endfor %}
+      <div id="new-character">
+        <form id="char-form" action="/{{ room }}/character" method="post">
+          New Character: <input type="text" name="name"></input>
+          Color: <input type="color" name="color"></input>
+          <input type="submit" value="Add"></input>
+        </form>
+      </div>
+    </div>
+    <form id="message-box" action="/{{ room }}/send" method="post">
       <input type="hidden" name="name" value="Narrator"></input>
       <table>
         <tr>
