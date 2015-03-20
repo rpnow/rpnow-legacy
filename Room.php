@@ -90,9 +90,26 @@ class Room {
   }
   
   public function getCharacters() {
+    // get the characters
     $room = $this->getID();
     $result = self::conn()->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room'");
-    return $result->fetch_all(MYSQLI_ASSOC);
+    // calculate the secondary color for each and return in modified array
+    return array_map(
+      function($x) {
+        //YIQ algorithm retrieved from:
+        // http://24ways.org/2010/calculating-color-contrast/
+        $r = hexdec(substr($x['Color'],1,2));
+        $g = hexdec(substr($x['Color'],3,2));
+        $b = hexdec(substr($x['Color'],5,2));
+        $yiq = (($r*299)+($g*587)+($b*114))/1000;
+        return array(
+          'Name' => $x['Name'],
+          'Color' => $x['Color'],
+          'Contrast' => ($yiq >= 128) ? 'black' : 'white'
+        );
+      },
+      $result->fetch_all(MYSQLI_ASSOC)
+    );
   }
   
   public function addCharacter($name, $color) {
