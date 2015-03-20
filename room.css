@@ -18,27 +18,39 @@ header{
   width: 100%;
   max-width: 650px;
   display: inline-block;
+  text-align: left;
 }
 #messages > .message{
-  box-shadow: 0 1px 1px #bbb;
-  outline: dotted 1px #bbb;
-  outline-offset: -5px;
-  padding: 10px;
-}
-#messages > .message > .name{
-  display: inline-block;
-}
-#messages > .message > .name::after{
-  content: ":";
 }
 #messages > .message > .content{
   display: inline-block;
 }
 #messages > .message-Narrator {
   background-color: #fff;
+  box-shadow: 0 1px 1px #bbb;
+  outline: dotted 1px #bbb;
+  outline-offset: -5px;
+  padding: 10px;
+  text-align: center;
 }
 #messages > .message-Narrator > .name {
   display: none;
+}
+#messages > .message:not(.message-Narrator) {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 16px;
+  border-bottom-left-radius: 0;
+  box-shadow: 0 2px 3px #555;
+}
+#messages > .message:not(.message-Narrator) > .name{
+  font-size: 12px;
+  margin-left: 20px;
+  margin-top: -7px;
+  opacity: 0.75;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  
 }
 
 #characters {

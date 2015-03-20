@@ -4,6 +4,22 @@
     <meta charset="utf-8">
     <title>{{ title }} - RP Server</title>
     <link rel="stylesheet" type="text/css" href="room.css">
+    <style>
+      {% for character in characters if character.Name != "Narrator" %}
+        #messages > .message-{{ character.Name|replace({' ':'--'}) }} {
+          background-color: {{ character.Color }};
+          color: {{ character.Contrast }};
+        }
+      {% endfor %}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.character a').click(function(evt) {
+          $('#mb-name').val(evt.target.text);
+        });
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -18,7 +34,7 @@
     </header>
     <div id="messages">
       {% for message in messages %}
-        <div class="message message-{{ message.Name }}">
+        <div class="message message-{{ message.Name|replace({' ':'--'}) }}">
           <div class="name">{{ message.Name }}</div>
           <div class="content">{{ message.Content }}</div>
         </div>
@@ -28,21 +44,23 @@
     </div>
     <div id="characters">
       {% for character in characters %}
-        <div class="character character-{{ character.Name }}">
+        <div class="character">
           <a href="#" style="color: {{ character.Color }}">{{ character.Name }}</a>
         </div>
       {% endfor %}
       <div id="new-character">
         <form id="char-form" action="/{{ room }}/character" method="post">
           New Character: <input type="text" name="name"></input>
-          Color: <input type="color" name="color"></input>
+          Color: <input type="color" name="color" value="#FFF"></input>
           <input type="submit" value="Add"></input>
         </form>
       </div>
     </div>
     <form id="message-box" action="/{{ room }}/send" method="post">
-      <input type="hidden" name="name" value="Narrator"></input>
       <table>
+        <tr>
+          <td colspan="2"><input type="text" name="name" id="mb-name" value="Narrator"></input></td>
+        </tr>
         <tr>
           <td id="input-col"><textarea name="content"></textarea></td>
           <td id="button-col"><input type="submit" value="Send"></input></td>
