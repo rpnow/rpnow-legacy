@@ -14,7 +14,7 @@ $app->get('/', function () {
 });
 
 // View room
-$app->get('/:id', function ($id) use ($app) {
+$app->get('/:id/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $app->view()->setData(array(
@@ -32,7 +32,7 @@ $app->get('/:id', function ($id) use ($app) {
 });
 
 // Create room
-$app->post('/create', function () use ($app) {
+$app->post('/create/', function () use ($app) {
   $room = Room::CreateRoom(
     $app->request()->post('title'),
     $app->request()->post('desc')
@@ -41,7 +41,7 @@ $app->post('/create', function () use ($app) {
 });
 
 // Send message to room
-$app->post('/:id/send', function ($id) use ($app) {
+$app->post('/:id/send/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $room->send(
@@ -56,7 +56,7 @@ $app->post('/:id/send', function ($id) use ($app) {
 });
 
 // Add character to room
-$app->post('/:id/character', function ($id) use ($app) {
+$app->post('/:id/character/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $room->addCharacter(
@@ -71,7 +71,7 @@ $app->post('/:id/character', function ($id) use ($app) {
 });
 
 // Generate some statistics for the room
-$app->get('/:id/stats', function ($id) use ($app) {
+$app->get('/:id/stats/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $app->view()->setData(
@@ -89,7 +89,7 @@ $app->get('/:id/stats', function ($id) use ($app) {
 });
 
 // Export room to txt file
-$app->get('/:id/export', function ($id) use ($app) {
+$app->get('/:id/export/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     // .txt download response headers
