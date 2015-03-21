@@ -13,14 +13,6 @@
         }
       {% endfor %}
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('.character a').click(function(evt) {
-          $('#mb-name').val(evt.target.text.trim());
-        });
-      });
-    </script>
   </head>
   <body>
     {% include 'title.html' %}
@@ -31,8 +23,6 @@
           <div class="name">{{ message.Name }}</div>
           <div class="content">{{ message.Content|nl2br }}</div>
         </div>
-      {% else %}
-        <p>Our story begins...</p>
       {% endfor %}
     </div>
     {% include 'pages.html' %}
