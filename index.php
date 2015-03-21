@@ -88,6 +88,32 @@ $app->get('/:id/stats', function ($id) use ($app) {
   }
 });
 
+// Export room to txt file
+$app->get('/:id/export', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    // .txt download response headers
+    $app->response->headers->set('Content-Type', 'text/plain');
+    $app->response->headers->set('Content-disposition', 'attachment; filename="'.$room->getTitle().'.txt"');
+    // output text
+    // generate title text
+    echo strtoupper($room->getTitle()) . "\r\n";
+    echo wordwrap($room->getDesc(), 72, "\r\n") . "\r\n";
+    echo "--------\r\n\r\n";
+    // output each message
+    foreach($room->getMessages() as $message) {
+      if($message['Name'] != 'Narrator') {
+        echo strtoupper($message['Name']) . ":\r\n";
+      }
+      echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
+      echo "\r\n\r\n";
+    }
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+});
+
 $app->run();
 
 ?>
