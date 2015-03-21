@@ -104,8 +104,12 @@ $app->get('/:id/export', function ($id) use ($app) {
     foreach($room->getMessages() as $message) {
       if($message['Name'] != 'Narrator') {
         echo strtoupper($message['Name']) . ":\r\n";
+        echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
       }
-      echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
+      else {
+        echo str_replace("\n", "\r\n", wordwrap($message['Content'], 72, "\n"));
+      }
+      
       echo "\r\n\r\n";
     }
   }
