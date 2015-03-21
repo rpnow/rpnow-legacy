@@ -1,3 +1,4 @@
+{% macro cssClass(character) %}chara-{{ character.Name|e('css')|replace({' ':''})|replace({'\\':'--'}) }}{% endmacro %}
 <!doctype html>
 <html>
   <head>
@@ -6,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="room.css">
     <style>
       {% for character in characters if character.Name != "Narrator" %}
-        #messages > .message-{{ character.Name|replace({' ':'--'}) }} {
+        .{{ _self.cssClass(character) }} {
           background-color: {{ character.Color }};
           color: {{ character.Contrast }};
         }
@@ -16,7 +17,7 @@
     <script>
       $(document).ready(function() {
         $('.character a').click(function(evt) {
-          $('#mb-name').val(evt.target.text);
+          $('#mb-name').val(evt.target.text.trim());
         });
       });
     </script>
@@ -34,9 +35,9 @@
     </header>
     <div id="messages">
       {% for message in messages %}
-        <div class="message message-{{ message.Name|replace({' ':'--'}) }}">
+        <div class="message {{ _self.cssClass(message) }}">
           <div class="name">{{ message.Name }}</div>
-          <div class="content">{{ message.Content }}</div>
+          <div class="content">{{ message.Content|nl2br }}</div>
         </div>
       {% else %}
         <p>Our story begins...</p>
@@ -45,7 +46,9 @@
     <div id="characters">
       {% for character in characters %}
         <div class="character">
-          <a href="#" style="color: {{ character.Color }}">{{ character.Name }}</a>
+          <a href="#" class="{{ _self.cssClass(character) }}">
+            {{ character.Name }}
+          </a>
         </div>
       {% endfor %}
       <div id="new-character">

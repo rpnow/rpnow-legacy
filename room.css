@@ -25,7 +25,7 @@ header{
 #messages > .message > .content{
   display: inline-block;
 }
-#messages > .message-Narrator {
+#messages > .chara-Narrator {
   background-color: #fff;
   box-shadow: 0 1px 1px #bbb;
   outline: dotted 1px #bbb;
@@ -33,17 +33,17 @@ header{
   padding: 10px;
   text-align: center;
 }
-#messages > .message-Narrator > .name {
+#messages > .chara-Narrator > .name {
   display: none;
 }
-#messages > .message:not(.message-Narrator) {
+#messages > .message:not(.chara-Narrator) {
   margin: 10px;
   padding: 10px;
   border-radius: 16px;
   border-bottom-left-radius: 0;
   box-shadow: 0 2px 3px #555;
 }
-#messages > .message:not(.message-Narrator) > .name{
+#messages > .message:not(.chara-Narrator) > .name{
   font-size: 12px;
   margin-left: 20px;
   margin-top: -7px;
@@ -61,9 +61,21 @@ header{
   border: dotted 1px;
 }
 #characters > .character {
-  text-shadow: 0 0 2px #000;
   font-weight: bold;
 }
+#characters .chara-Narrator {
+  color: #555;
+}
+#characters > .character a {
+  display: block;
+  margin: 5px;
+  text-decoration: none;
+  box-shadow: 0 1px 2px #888;
+}
+#characters > .character a:hover {
+  opacity: 0.5;
+}
+
 #new-character {
   margin-top: 20px;
   border-top: dotted 1px;
