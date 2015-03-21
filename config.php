@@ -8,4 +8,7 @@ $DBName   = 'rpchat';
 // Length of the random room URL strings
 $RoomIDLen = 4;
 
+// Posts per page
+$PostsPerPage = 5;
+
 ?>

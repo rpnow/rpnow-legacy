@@ -19,6 +19,7 @@ class Room {
   private $id;
   private $title;
   private $desc;
+  private $numpages;
   
   private function __construct($id, $title, $desc) {
     $this->id = $id;
@@ -67,7 +68,6 @@ class Room {
   // CAUTION: only run if you're SURE it's not a malformed ID! could be catastrophic otherwise
   private static function IDExists($id) {
     $result = self::conn()->query("SELECT COUNT(*) FROM `Room` WHERE `ID` = '$id' LIMIT 1");
-    var_dump($result);
     $row = $result->fetch_array();
     return $row[0] == '1';
   }
@@ -80,13 +80,38 @@ class Room {
     $result = self::conn()->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
   }
   
-  public function getMessages($after = 0) {
-    if(!is_int($after) || $after < 0) {
-      throw new Exception("Value for 'after' must be a positive integer.");
-    }
+  public function getMessages($page) {
     $room = $this->getID();
-    $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Number` > '$after' AND `Character_Room` = '$room' ORDER BY `Number` ASC");
-    return $result->fetch_all(MYSQLI_ASSOC); 
+    global $PostsPerPage;
+    $result = NULL;
+    if($page == 'latest') {
+      $result = self::conn()->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color`, `Number` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $PostsPerPage) ORDER BY `Number` ASC;");
+    }
+    else if($page == 'all') {
+      $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color`, `Number` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
+    }
+    else {
+      if(intval($page) == false || intval($page) != floatval($page) || intval($page) < 1) {
+        throw new Exception('invalid page number.');
+      }
+      $page = intval($page);
+      if($page > $this->getNumPages()) {
+        throw new Exception('page does not yet exist.');
+      }
+      $start = ($page - 1) * $PostsPerPage;
+      $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $PostsPerPage;");
+    }
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+  
+  public function getNumPages() {
+    if(!$this->numpages) {
+      $room = $this->getID();
+      global $PostsPerPage;
+      $result = self::conn()->query("SELECT COUNT(*) FROM `Message` WHERE `Character_Room` = '$room';");
+      $this->numpages = ceil($result->fetch_array()[0] / $PostsPerPage);
+    }
+    return $this->numpages;
   }
   
   public function getCharacters() {

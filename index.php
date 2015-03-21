@@ -10,7 +10,7 @@ $app = new \Slim\Slim(array(
 
 // Home page
 $app->get('/', function () {
-  readfile('home.html');
+  readfile('templates/home.html');
 });
 
 // View room
@@ -20,8 +20,8 @@ $app->get('/:id/', function ($id) use ($app) {
     $app->view()->setData(array(
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'room' => $room->getID(),
-      'messages' => $room->getMessages(),
+      'room' => $id,
+      'messages' => $room->getMessages('latest'),
       'characters' => $room->getCharacters()
     ));
     $app->render('room.html');
@@ -30,6 +30,26 @@ $app->get('/:id/', function ($id) use ($app) {
     echo $e->getMessage();
   }
 });
+
+// Archive
+$app->get('/:id/:page/', function ($id, $page) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $app->view()->setData(array(
+      'title' => $room->getTitle(),
+      'desc' => $room->getDesc(),
+      'room' => $id,
+      'messages' => $room->getMessages($page),
+      'characters' => $room->getCharacters(),
+      'numpages' => $room->getNumPages(),
+      'page' => $page
+    ));
+    $app->render('archive.html');
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+})->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Create room
 $app->post('/create/', function () use ($app) {
@@ -78,7 +98,7 @@ $app->get('/:id/stats/', function ($id) use ($app) {
       array_merge($room->getStatsArray(), array(
         'title' => $room->getTitle(),
         'desc' => $room->getDesc(),
-        'room' => $room->getID()
+        'room' => $id
       ))
     );
     $app->render('stats.html');
@@ -101,7 +121,7 @@ $app->get('/:id/export/', function ($id) use ($app) {
     echo wordwrap($room->getDesc(), 72, "\r\n") . "\r\n";
     echo "--------\r\n\r\n";
     // output each message
-    foreach($room->getMessages() as $message) {
+    foreach($room->getMessages('all') as $message) {
       if($message['Name'] != 'Narrator') {
         echo strtoupper($message['Name']) . ":\r\n";
         echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));

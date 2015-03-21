@@ -1,0 +1,8 @@
+<div class="pages">
+  Page: 
+  {% for i in 1..numpages %}
+    {% if i == page %}<b>{{ i }}</b>
+    {% else %}<a href="/{{ room }}/{{ i }}">{{ i }}</a>{% endif %}
+    {% if i != numpages %} | {% endif %}
+  {% endfor %}
+</div>

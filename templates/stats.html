@@ -6,16 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/room.css">
   </head>
   <body>
-    <header>
-      <h2>{{ title }}</h2>
-      <p>{{ desc }}</p>
-      <p>
-        <a href="/{{ room }}/1">Archive</a> |
-        <a href="/{{ room }}/export">Export</a> |
-        <a href="/{{ room }}/stats">Stats</a> |
-        <a href="/">New RP</a>
-      </p>
-    </header>
+    {% include 'title.html' %}
     <h3>Stats</h3>
     <ul>
       <li>{{ MessageCount }} messages logged.</li>

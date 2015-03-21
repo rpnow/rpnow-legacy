@@ -50,7 +50,6 @@ header{
   opacity: 0.75;
   letter-spacing: 1px;
   word-spacing: 1px;
-  
 }
 
 #characters {
@@ -134,4 +133,8 @@ textarea {
   background-color:#3c3c3c;
   box-shadow: 0 1px 10px #555;
   color:#fafafa;
+}
+
+.pages {
+  margin: 20px;
 }
