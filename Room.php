@@ -120,6 +120,17 @@ class Room {
     $room = $this->getID();
     $result = self::conn()->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
   }
+  
+  public function getStatsArray() {
+    $room = $this->getID();
+    $result = self::conn()->query("SELECT
+      (SELECT COUNT(*) FROM `Message` WHERE `Character_Room`='$room') AS `MessageCount`,
+      (SELECT COUNT(*) FROM `Character` WHERE `Room`='$room') AS `CharacterCount`,
+      (SELECT MAX(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `LatestMessageDate`,
+      (SELECT MIN(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `FirstMessageDate`"
+    );
+    return $result->fetch_assoc(); 
+  }
 }
 
 ?>

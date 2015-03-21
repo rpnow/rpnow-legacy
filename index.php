@@ -40,6 +40,7 @@ $app->post('/create', function () use ($app) {
   $app->redirect($room->getID());
 });
 
+// Send message to room
 $app->post('/:id/send', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
@@ -54,6 +55,7 @@ $app->post('/:id/send', function ($id) use ($app) {
   }
 });
 
+// Add character to room
 $app->post('/:id/character', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
@@ -62,6 +64,24 @@ $app->post('/:id/character', function ($id) use ($app) {
       $app->request()->post('color')
     );
     $app->redirect('/'.$room->getID());
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+});
+
+// Generate some statistics for the room
+$app->get('/:id/stats', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $app->view()->setData(
+      array_merge($room->getStatsArray(), array(
+        'title' => $room->getTitle(),
+        'desc' => $room->getDesc(),
+        'room' => $room->getID()
+      ))
+    );
+    $app->render('stats.html');
   }
   catch(Exception $e) {
     echo $e->getMessage();
