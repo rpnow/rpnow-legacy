@@ -4,13 +4,28 @@ require_once 'Room.php';
 require_once 'Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
+
 $app = new \Slim\Slim(array(
   'view' => new \Slim\Views\Twig()
+));
+
+// All room ID's must be alphanumeric and N characters
+\Slim\Route::setDefaultConditions(array(
+  'id' => '[a-zA-Z0-9]{'.$RoomIDLen.','.$RoomIDLen.'}'
 ));
 
 // Home page
 $app->get('/', function () {
   readfile('templates/home.html');
+});
+
+// Create room
+$app->post('/create/', function () use ($app) {
+  $room = Room::CreateRoom(
+    $app->request()->post('title'),
+    $app->request()->post('desc')
+  );
+  $app->redirect($room->getID());
 });
 
 // View room
@@ -50,15 +65,6 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
     echo $e->getMessage();
   }
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
-
-// Create room
-$app->post('/create/', function () use ($app) {
-  $room = Room::CreateRoom(
-    $app->request()->post('title'),
-    $app->request()->post('desc')
-  );
-  $app->redirect($room->getID());
-});
 
 // Send message to room
 $app->post('/:id/send/', function ($id) use ($app) {
@@ -136,6 +142,11 @@ $app->get('/:id/export/', function ($id) use ($app) {
   catch(Exception $e) {
     echo $e->getMessage();
   }
+});
+
+// About
+$app->get('/about/', function () {
+  readfile('about.html');
 });
 
 $app->run();
