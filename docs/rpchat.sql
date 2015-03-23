@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2015 at 07:31 AM
+-- Generation Time: Mar 23, 2015 at 08:33 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `rpchat`
 --
-CREATE DATABASE IF NOT EXISTS `rpchat` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rpchat`;
 
 -- --------------------------------------------------------
 
@@ -39,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `character` (
   PRIMARY KEY (`Number`),
   UNIQUE KEY `NameRoom` (`Name`,`Room`),
   KEY `Room` (`Room`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   KEY `Timestamp` (`Timestamp`),
   KEY `Character` (`Character_Name`,`Character_Room`),
   KEY `Character_Room` (`Character_Room`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
