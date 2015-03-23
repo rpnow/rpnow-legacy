@@ -83,6 +83,9 @@ class Room {
   // CAUTION: only run if you're SURE it's not a malformed ID! could be catastrophic otherwise
   private static function IDExists($id, $conn) {
     $result = $conn->query("SELECT COUNT(*) FROM `Room` WHERE `ID` = '$id' LIMIT 1");
+    if(!$result) {
+      throw new Exception($conn->error);
+    }
     $row = $result->fetch_array();
     return $row[0] == '1';
   }
@@ -90,7 +93,7 @@ class Room {
   public function send($name, $content, $isAction = false) {
     $name = $this->db->real_escape_string($name);
     $content = $this->db->real_escape_string($content);
-    $isAction = boolval($isAction)? '1': '0';
+    $isAction = $isAction? '1': '0';
     $room = $this->getID();
     $result = $this->db->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
   }
@@ -116,13 +119,24 @@ class Room {
       $start = ($page - 1) * $PostsPerPage;
       $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $PostsPerPage;");
     }
-    return $result->fetch_all(MYSQLI_ASSOC);
+    if(!$result) {
+      throw new Exception($conn->error);
+    }
+    $arr = [];
+    while ($row = $result->fetch_assoc()) {
+      $arr[] = $row;
+    }
+    return $arr;
   }
   
   public function getCharacters() {
     // get the characters
     $room = $this->getID();
     $result = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room'");
+    $arr = [];
+    while ($row = $result->fetch_assoc()) {
+      $arr[] = $row;
+    }
     // calculate the secondary color for each and return in modified array
     return array_map(
       function($x) {
@@ -138,7 +152,7 @@ class Room {
           'Contrast' => ($yiq >= 128) ? 'black' : 'white'
         );
       },
-      $result->fetch_all(MYSQLI_ASSOC)
+      $arr
     );
   }
   
@@ -150,9 +164,17 @@ class Room {
     if(intval($numCharacters) === false || intval($numCharacters) != floatval($numCharacters) || intval($numCharacters) < 0) {
       throw new Exception('invalid numCharacters.');
     }
-    $newMessages = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numMessages")->fetch_all(MYSQLI_ASSOC);
-    $newChars = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numCharacters")->fetch_all(MYSQLI_ASSOC);
-    return array('messages' => $newMessages, 'characters' => $newChars);
+    $newMessages = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numMessages");
+    $messageArray = [];
+    while ($row = $newMessages->fetch_assoc()) {
+      $messageArray[] = $row;
+    }
+    $newChars = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numCharacters");
+    $charaArray = [];
+    while ($row = $newChars->fetch_assoc()) {
+      $charaArray[] = $row;
+    }
+    return array('messages' => $messageArray, 'characters' => $charaArray);
   }
   
   public function getNumPages() {
