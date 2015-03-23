@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2015 at 10:08 AM
+-- Generation Time: Mar 23, 2015 at 07:31 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -34,7 +34,10 @@ CREATE TABLE IF NOT EXISTS `character` (
   `Name` varchar(30) NOT NULL,
   `Color` tinytext NOT NULL,
   `Room` char(4) NOT NULL,
-  PRIMARY KEY (`Name`,`Room`),
+  `Number` int(11) NOT NULL AUTO_INCREMENT,
+  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Number`),
+  UNIQUE KEY `NameRoom` (`Name`,`Room`),
   KEY `Room` (`Room`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -55,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   KEY `Timestamp` (`Timestamp`),
   KEY `Character` (`Character_Name`,`Character_Room`),
   KEY `Character_Room` (`Character_Room`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
