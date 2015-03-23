@@ -34,7 +34,7 @@ $app->post('/create/', function () use ($app) {
 $app->get('/:id/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    global $PostsPerPage;
+    global $PostsPerPage, $RPRoot, $RefreshMillis;
     $app->view()->setData(array(
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
@@ -43,7 +43,9 @@ $app->get('/:id/', function ($id) use ($app) {
       'characters' => $room->getCharacters(),
       'messageCount' => $room->getMessageCount(),
       'characterCount' => $room->getCharacterCount(),
-      'postsPerPage' => $PostsPerPage
+      'postsPerPage' => $PostsPerPage,
+      'docroot' => $RPRoot,
+      'refreshMillis' => $RefreshMillis
     ));
     $room->close();
     $app->render('room.html');
@@ -56,6 +58,7 @@ $app->get('/:id/', function ($id) use ($app) {
 // Archive
 $app->get('/:id/:page/', function ($id, $page) use ($app) {
   try {
+    global $RPRoot;
     $room = Room::GetRoom($id);
     $app->view()->setData(array(
       'title' => $room->getTitle(),
@@ -64,7 +67,8 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
       'messages' => $room->getMessages($page),
       'characters' => $room->getCharacters(),
       'numpages' => $room->getNumPages(),
-      'page' => $page
+      'page' => $page,
+      'docroot' => $RPRoot
     ));
     $room->close();
     $app->render('archive.html');
@@ -132,12 +136,14 @@ $app->post('/:id/character/', function ($id) use ($app) {
 // Generate some statistics for the room
 $app->get('/:id/stats/', function ($id) use ($app) {
   try {
+    global $RPRoot;
     $room = Room::GetRoom($id);
     $app->view()->setData(
       array_merge($room->getStatsArray(), array(
         'title' => $room->getTitle(),
         'desc' => $room->getDesc(),
-        'room' => $id
+        'room' => $id,
+        'docroot' => $RPRoot
       ))
     );
     $room->close();

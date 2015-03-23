@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>{{ title }} - RP Server</title>
-    <link rel="stylesheet" type="text/css" href="/room.css">
+    <link rel="stylesheet" type="text/css" href="{{ rproot }}room.css">
     <style>
       {% for character in characters if character.Name != "Narrator" %}
         .{{ _self.cssClass(character) }} {
@@ -22,6 +22,8 @@
         $('#mb-name').val(evt.target.text.trim());
         evt.preventDefault();
       }
+      //YIQ algorithm retrieved from:
+      // http://24ways.org/2010/calculating-color-contrast/
       function getContrastYIQ(hexcolor){
         var r = parseInt(hexcolor.substr(1,2),16);
         var g = parseInt(hexcolor.substr(3,2),16);
@@ -34,7 +36,7 @@
         $('#message-box').submit(function(evt) {
           $.ajax({
             type: 'POST',
-            url: '/{{ room }}/send',
+            url: '{{ room }}/send',
             data: $('#message-box').serialize(),
           });
           evt.preventDefault();
@@ -43,7 +45,7 @@
           evt.preventDefault();
           $.ajax({
             type: 'POST',
-            url: '/{{ room }}/character',
+            url: '{{ room }}/character',
             data: $('#char-form').serialize(),
           });
         });
@@ -53,9 +55,13 @@
         function update() {
           $.ajax({
             type: 'GET',
-            url: '/{{ room }}/updates',
+            url: '{{ room }}/updates',
             data: { characters: numChar, messages: numMsg },
             success: function(data) {
+              // remove empty-room message if it's there
+              if(numMsg === 0 && data.messages.length > 0) {
+                $('#empty-room').remove();
+              }
               // update messages
               for(var i = 0; i < data.messages.length; ++i) {
                 if($('.message').length >= {{ postsPerPage }}) {
@@ -99,24 +105,28 @@
               // done. prepare for next load
               numMsg += data.messages.length;
               numChar += data.characters.length;
-              timer = setTimeout(update, 1000);
+              timer = setTimeout(update, {{ refreshMillis }});
             }
           });
         }
-        timer = setTimeout(update, 1000);
+        timer = setTimeout(update, {{ refreshMillis }});
       });
     </script>
   </head>
   <body>
     {% include 'title.html' %}
     <div id="messages">
+      {% if messageCount > postsPerPage %}
+        <p>These are the latest {{ postsPerPage }} posts.
+        To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
+      {% endif %}
       {% for message in messages %}
         <div class="message {{ _self.cssClass(message) }}">
           <div class="name">{{ message.Name }}</div>
           <div class="content">{{ message.Content|nl2br }}</div>
         </div>
       {% else %}
-        <p>Our story begins...</p>
+        <p id="empty-room">Send a message to get started...</p>
       {% endfor %}
     </div>
     <div id="characters">
@@ -128,14 +138,14 @@
         </div>
       {% endfor %}
       <div id="new-character">
-        <form id="char-form" action="/{{ room }}/character" method="post">
+        <form id="char-form" action="{{ room }}/character" method="post">
           New Character: <input type="text" name="name"></input>
           Color: <input type="color" name="color" value="#FFFFFF"></input>
           <input type="submit" value="Add"></input>
         </form>
       </div>
     </div>
-    <form id="message-box" action="/{{ room }}/send" method="post">
+    <form id="message-box" action="{{ room }}/send" method="post">
       <table>
         <tr>
           <td colspan="2"><input type="text" name="name" id="mb-name" value="Narrator"></input></td>

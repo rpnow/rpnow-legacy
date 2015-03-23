@@ -1,14 +1,16 @@
 <?php
+// Document root
+$RPRoot = '/';
+
 // Database access
 $DBServer = 'localhost';
 $DBUser   = 'rpchat_bot';
 $DBPass   = 'hUYQCAfvFM3Kw3wf';
 $DBName   = 'rpchat';
 
-// Length of the random room URL strings
+// Room configuration
 $RoomIDLen = 4;
-
-// Posts per page
-$PostsPerPage = 5;
+$PostsPerPage = 30;
+$RefreshMillis = 1000;
 
 ?>
