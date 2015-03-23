@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `character`
 --
 
-CREATE TABLE IF NOT EXISTS `character` (
+CREATE TABLE IF NOT EXISTS `Character` (
   `Name` varchar(30) NOT NULL,
   `Color` tinytext NOT NULL,
   `Room` char(4) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `character` (
 -- Table structure for table `message`
 --
 
-CREATE TABLE IF NOT EXISTS `message` (
+CREATE TABLE IF NOT EXISTS `Message` (
   `Content` text NOT NULL,
   `Is_Action` tinyint(1) NOT NULL DEFAULT '0',
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `message` (
 -- Table structure for table `room`
 --
 
-CREATE TABLE IF NOT EXISTS `room` (
+CREATE TABLE IF NOT EXISTS `Room` (
   `ID` char(4) NOT NULL,
   `Title` tinytext NOT NULL,
   `Description` tinytext NOT NULL,
@@ -78,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `room` (
 --
 -- Constraints for table `character`
 --
-ALTER TABLE `character`
-  ADD CONSTRAINT `character_ibfk_1` FOREIGN KEY (`Room`) REFERENCES `room` (`ID`);
+ALTER TABLE `Character`
+  ADD CONSTRAINT `character_ibfk_1` FOREIGN KEY (`Room`) REFERENCES `Room` (`ID`);
 
 --
 -- Constraints for table `message`
 --
-ALTER TABLE `message`
-  ADD CONSTRAINT `Character` FOREIGN KEY (`Character_Name`, `Character_Room`) REFERENCES `character` (`Name`, `Room`);
+ALTER TABLE `Message`
+  ADD CONSTRAINT `Character` FOREIGN KEY (`Character_Name`, `Character_Room`) REFERENCES `Character` (`Name`, `Room`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
