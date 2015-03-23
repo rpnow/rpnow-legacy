@@ -4,61 +4,76 @@ require_once 'config.php';
 class Room {
   private static $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   
-  private static $_conn = NULL;
-  private static function conn() {
-    if(static::$_conn === NULL) {
-      global $DBServer, $DBUser, $DBPass, $DBName;
-      static::$_conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
-      if(static::$_conn->connect_error) {
-        trigger_error('Database connection failed: '  . $_conn->connect_error, E_USER_ERROR);
-      }
+  private static function createConnection() {
+    global $DBServer, $DBUser, $DBPass, $DBName;
+    $myConn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
+    if($myConn->connect_error) {
+      trigger_error('Database connection failed: '  . $myConn->connect_error, E_USER_ERROR);
     }
-    return static::$_conn;
+    return $myConn;
   }
   
+  private $db;
   private $id;
   private $title;
   private $desc;
-  private $numpages;
+  private $numMsgs;
+  private $numChars;
   
-  private function __construct($id, $title, $desc) {
+  private function __construct($db, $id, $title, $desc, $numChars, $numMsgs) {
+    $this->db = $db;
     $this->id = $id;
     $this->title = $title;
     $this->desc = $desc;
+    $this->numMsgs = $numMsgs;
+    $this->numChars = $numChars;
   }
   
   public static function CreateRoom($title, $desc) {
     global $RoomIDLen;
-    self::conn()->autocommit(false);
+    $conn = self::createConnection();
+    $conn->autocommit(false);
     do {
       $id = '';
       for ($i = 0; $i < $RoomIDLen; $i++) {
         $id .= self::$characters[rand(0, strlen(self::$characters) - 1)];
       }
-    } while(Room::IDExists($id));
-    $title = self::conn()->real_escape_string($title);
-    $desc = self::conn()->real_escape_string($desc);
-    self::conn()->query("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES ('$id', '$title', '$desc')");
-    self::conn()->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('Narrator', '$id', '#ddd')");
-    self::conn()->commit();
-    return new Room($id, $title, $desc);
+    } while(Room::IDExists($id, $conn));
+    $title = $conn->real_escape_string($title);
+    $desc = $conn->real_escape_string($desc);
+    $conn->query("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES ('$id', '$title', '$desc')");
+    $conn->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('Narrator', '$id', '#ddd')");
+    return new Room($conn, $id, $title, $desc, 1, 0);
   }
   
   public static function GetRoom($id) {
     if(!Room::IsValidID($id)) {
       throw new Exception('Malformed Room ID.');
     }
-    $result = self::conn()->query("SELECT `Title`, `Description` FROM `Room` WHERE `ID` = '$id'");
+    $conn = self::createConnection();
+    $conn->autocommit(false);
+    $result = $conn->query("SELECT
+    (SELECT `Title` FROM `Room` WHERE `ID` = '$id') AS `Title`,
+    (SELECT `Description` FROM `Room` WHERE `ID` = '$id') AS `Description`,
+    (SELECT COUNT(*) FROM `Character` WHERE `Room` = '$id') AS `CharacterCount`,
+    (SELECT COUNT(*) FROM `Message` WHERE `Character_Room` = '$id') AS `MessageCount`");
     if($result->num_rows == 0) {
       throw new Exception("Room '$id' does not exist.");
     }
     $row = $result->fetch_assoc();
-    return new Room($id, $row['Title'], $row['Description']);
+    return new Room($conn, $id, $row['Title'], $row['Description'], $row['CharacterCount'], $row['MessageCount']);
+  }
+  
+  public function close() {
+    $this->db->commit();
+    $this->db->close();
   }
   
   public function getID() { return $this->id; }
   public function getTitle() { return $this->title; }
   public function getDesc() { return $this->desc; }
+  public function getMessageCount() { return $this->numMsgs; }
+  public function getCharacterCount() { return $this->numChars; }
   
   private static function IsValidID($id) {
     global $RoomIDLen;
@@ -66,18 +81,18 @@ class Room {
   }
   
   // CAUTION: only run if you're SURE it's not a malformed ID! could be catastrophic otherwise
-  private static function IDExists($id) {
-    $result = self::conn()->query("SELECT COUNT(*) FROM `Room` WHERE `ID` = '$id' LIMIT 1");
+  private static function IDExists($id, $conn) {
+    $result = $conn->query("SELECT COUNT(*) FROM `Room` WHERE `ID` = '$id' LIMIT 1");
     $row = $result->fetch_array();
     return $row[0] == '1';
   }
   
   public function send($name, $content, $isAction = false) {
-    $name = self::conn()->real_escape_string($name);
-    $content = self::conn()->real_escape_string($content);
+    $name = $this->db->real_escape_string($name);
+    $content = $this->db->real_escape_string($content);
     $isAction = boolval($isAction)? '1': '0';
     $room = $this->getID();
-    $result = self::conn()->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
+    $result = $this->db->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
   }
   
   public function getMessages($page) {
@@ -85,10 +100,10 @@ class Room {
     global $PostsPerPage;
     $result = NULL;
     if($page == 'latest') {
-      $result = self::conn()->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color`, `Number` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $PostsPerPage) ORDER BY `Number` ASC;");
+      $result = $this->db->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $PostsPerPage) ORDER BY `Number` ASC;");
     }
     else if($page == 'all') {
-      $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color`, `Number` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
     }
     else {
       if(intval($page) == false || intval($page) != floatval($page) || intval($page) < 1) {
@@ -99,25 +114,15 @@ class Room {
         throw new Exception('page does not yet exist.');
       }
       $start = ($page - 1) * $PostsPerPage;
-      $result = self::conn()->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Name`, `Color` FROM `Message` LEFT JOIN `Character` ON (`Character_Name` = `Name` AND `Character_Room` = `Room`)  WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $PostsPerPage;");
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $PostsPerPage;");
     }
     return $result->fetch_all(MYSQLI_ASSOC);
-  }
-  
-  public function getNumPages() {
-    if(!$this->numpages) {
-      $room = $this->getID();
-      global $PostsPerPage;
-      $result = self::conn()->query("SELECT COUNT(*) FROM `Message` WHERE `Character_Room` = '$room';");
-      $this->numpages = ceil($result->fetch_array()[0] / $PostsPerPage);
-    }
-    return $this->numpages;
   }
   
   public function getCharacters() {
     // get the characters
     $room = $this->getID();
-    $result = self::conn()->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room'");
+    $result = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room'");
     // calculate the secondary color for each and return in modified array
     return array_map(
       function($x) {
@@ -137,24 +142,36 @@ class Room {
     );
   }
   
+  public function getUpdates($numMessages, $numCharacters) {
+    $room = $this->getID();
+    $newMessages = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numMessages")->fetch_all(MYSQLI_ASSOC);
+    $newChars = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numCharacters")->fetch_all(MYSQLI_ASSOC);
+    return array('messages' => $newMessages, 'characters' => $newChars);
+  }
+  
+  public function getNumPages() {
+    global $PostsPerPage;
+    return ceil($this->getMessageCount() / $PostsPerPage);
+  }
+  
   public function addCharacter($name, $color) {
-    $name = self::conn()->real_escape_string($name);
+    $name = $this->db->real_escape_string($name);
     if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
       throw new Exception("$color is not a valid hex color.");
     }
     $room = $this->getID();
-    $result = self::conn()->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
+    $result = $this->db->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
   }
   
   public function getStatsArray() {
     $room = $this->getID();
-    $result = self::conn()->query("SELECT
-      (SELECT COUNT(*) FROM `Message` WHERE `Character_Room`='$room') AS `MessageCount`,
-      (SELECT COUNT(*) FROM `Character` WHERE `Room`='$room') AS `CharacterCount`,
-      (SELECT MAX(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `LatestMessageDate`,
-      (SELECT MIN(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `FirstMessageDate`"
+    return array_merge(
+      $this->db->query("SELECT
+        (SELECT MAX(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `LatestMessageDate`,
+        (SELECT MIN(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `FirstMessageDate`"
+      )->fetch_assoc(),
+      array('MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount())
     );
-    return $result->fetch_assoc(); 
   }
 }
 

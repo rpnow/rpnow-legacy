@@ -25,20 +25,27 @@ $app->post('/create/', function () use ($app) {
     $app->request()->post('title'),
     $app->request()->post('desc')
   );
-  $app->redirect($room->getID());
+  $id = $room->getID();
+  $room->close();
+  $app->redirect($id);
 });
 
 // View room
 $app->get('/:id/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
+    global $PostsPerPage;
     $app->view()->setData(array(
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
       'room' => $id,
       'messages' => $room->getMessages('latest'),
-      'characters' => $room->getCharacters()
+      'characters' => $room->getCharacters(),
+      'messageCount' => $room->getMessageCount(),
+      'characterCount' => $room->getCharacterCount(),
+      'postsPerPage' => $PostsPerPage
     ));
+    $room->close();
     $app->render('room.html');
   }
   catch(Exception $e) {
@@ -59,12 +66,30 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
       'numpages' => $room->getNumPages(),
       'page' => $page
     ));
+    $room->close();
     $app->render('archive.html');
   }
   catch(Exception $e) {
     echo $e->getMessage();
   }
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
+
+// Receive room updates
+$app->get('/:id/updates/', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $data = $room->getUpdates(
+      $app->request()->get('messages'),
+      $app->request()->get('characters')
+    );
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode($data);
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+});
 
 // Send message to room
 $app->post('/:id/send/', function ($id) use ($app) {
@@ -74,10 +99,14 @@ $app->post('/:id/send/', function ($id) use ($app) {
       $app->request()->post('name'),
       $app->request()->post('content')
     );
-    $app->redirect('/'.$room->getID());
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'OK'));
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
   }
 });
 
@@ -89,10 +118,14 @@ $app->post('/:id/character/', function ($id) use ($app) {
       $app->request()->post('name'),
       $app->request()->post('color')
     );
-    $app->redirect('/'.$room->getID());
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'OK'));
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
   }
 });
 
@@ -107,6 +140,7 @@ $app->get('/:id/stats/', function ($id) use ($app) {
         'room' => $id
       ))
     );
+    $room->close();
     $app->render('stats.html');
   }
   catch(Exception $e) {
@@ -138,6 +172,7 @@ $app->get('/:id/export/', function ($id) use ($app) {
       
       echo "\r\n\r\n";
     }
+    $room->close();
   }
   catch(Exception $e) {
     echo $e->getMessage();
