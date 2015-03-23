@@ -144,6 +144,12 @@ class Room {
   
   public function getUpdates($numMessages, $numCharacters) {
     $room = $this->getID();
+    if(intval($numMessages) == false || intval($numMessages) != floatval($numMessages) || intval($numMessages) < 1) {
+      throw new Exception('invalid numMessages.');
+    }
+    if(intval($numCharacters) == false || intval($numCharacters) != floatval($numCharacters) || intval($numCharacters) < 1) {
+      throw new Exception('invalid numCharacters.');
+    }
     $newMessages = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numMessages")->fetch_all(MYSQLI_ASSOC);
     $newChars = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numCharacters")->fetch_all(MYSQLI_ASSOC);
     return array('messages' => $newMessages, 'characters' => $newChars);
