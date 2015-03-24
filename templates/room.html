@@ -21,6 +21,7 @@
       }
       function clickCharaButton(evt) {
         $('#mb-name').val(evt.target.text.trim());
+        $('#message-box textarea').focus();
         evt.preventDefault();
       }
       //YIQ algorithm retrieved from:
@@ -35,20 +36,42 @@
       $(document).ready(function() {
         $('.character a').click(clickCharaButton);
         $('#message-box').submit(function(evt) {
+          evt.preventDefault();
           $.ajax({
             type: 'POST',
             url: '{{ room }}/send',
             data: $('#message-box').serialize(),
           });
-          evt.preventDefault();
+          $('#message-box textarea').val('');
         });
         $('#char-form').submit(function(evt) {
           evt.preventDefault();
+          //client side check to see if the character exists
+          try {
+            $('.character a').each(function() {
+              if($('#char-form input[name=name]').val().trim() === $(this).text().trim()) {
+                throw 'Character ' + $(this).val().trim() + ' already exists!';
+              }
+            })
+          } catch(ex) {
+            alert(ex);
+            return;
+          }
+          //ok? let's submit it
           $.ajax({
             type: 'POST',
             url: '{{ room }}/character',
             data: $('#char-form').serialize(),
           });
+          $('#message-box input[name=name]').val($('#char-form input[name=name]').val());
+          $('#message-box textarea').focus();
+          $('#char-form')[0].reset();
+        });
+        $('#message-box textarea').keypress(function(evt) {
+          if((evt.keyCode || evt.which) === 13 && !evt.shiftKey && !evt.ctrlKey) {
+            evt.preventDefault();
+            $('#message-box input[type=submit]')[0].click();
+          }
         });
         var timer;
         var numMsg = {{ messageCount }};
