@@ -60,7 +60,7 @@ header{
   float: right;
   width: 150px;
   padding: 20px;
-  border: dotted 1px;
+  border: dotted 1px #555;
 }
 #characters > .character {
   font-weight: bold;
@@ -80,7 +80,7 @@ header{
 
 #new-character {
   margin-top: 20px;
-  border-top: dotted 1px;
+  border-top: dotted 1px #555;
 }
 
 input,
@@ -140,4 +140,15 @@ textarea {
 
 .pages {
   margin: 20px;
+}
+
+ul#stats {
+  display: inline-block;
+  border: dotted 1px #555;
+  margin: 0;
+  padding: 20px;
+  padding-left: 40px;
+}
+#stats li {
+  text-align: left;
 }

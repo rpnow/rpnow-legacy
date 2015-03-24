@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RP Server</title>
     <style>
       body{
@@ -15,38 +16,35 @@
         letter-spacing:4px;
         word-spacing:8px;
       }
-      table{
-        margin:auto;
-        border-spacing: 6px;
-      }
-      th,td{
-        padding: 2px;
-        line-height: 1em;
-      }
-      th{
-        text-align:left;
-      }
-      td{
+      form {
+        margin: auto;
         border: solid 1px #555;
-        box-shadow: 0 1px 1px #555 inset;
-        background-color:#fff;
+        padding: 30px;
+        box-shadow: 0 1px 3px #aaa;
       }
-      input,
-      textarea {
+      .input-name, .input-container {
+        padding: 3px;
+      }
+      .input-name {
+        font-weight: bold;
+      }
+      .input-name::after {
+        content: ":";
+      }
+      input, textarea {
         font-family:serif;
       }
-      input[type=text],
-      textarea {
-        font-size: 16px;
-        border:none;
-        background: none;
-      }
-      input[type=text] {
+      input[type=text], textarea {
         width: 100%;
+        background-color: white;
+        border: solid 1px #555;
+        box-shadow: 0 1px 1px #555 inset;
+        padding: 3px;
+        font-size: 16px;
       }
-      textarea {  
-        width: 300px;
-        height: 100px;
+      textarea {
+        resize: vertical;
+        min-height: 100px;
       }
       input[type=submit] {
         font-size:18px;
@@ -59,35 +57,51 @@
         font-weight:bold;
         box-shadow: 0 1px 2px #888;
       }
-      input[type=submit]:hover,
-      input[type=submit]:active {
+      input[type=submit]:hover {
         cursor:pointer;
         background-color:#3c3c3c;
         box-shadow: 0 1px 10px #555;
         color:#fafafa;
       }
-      form {
-        display: inline-block;
-        margin: auto;
-        border: solid 1px #555;
-        padding: 30px;
-        box-shadow: 0 1px 3px #aaa;
+      @media all and (max-width: 550px) {
+        .input-name {
+          text-align: left;
+          padding-left: 20px;
+        }
+      }
+      @media not all and (max-width: 550px) {
+        form {
+          width: 450px;
+        }
+        .input-section {
+          display: table-row;
+        }
+        .input-name, .input-container {
+          display: table-cell;
+        }
+        .input-name {
+          padding-top: 6px;
+          padding-right: 10px;
+          vertical-align: top;
+          text-align: right;
+        }
+        .input-container {
+          width: 100%;
+        }
       }
     </style>
   </head>
   <body>
     <h1>Start New RP</h1>
     <form action="create" method="post">
-      <table>
-        <tr>
-          <th>Title:</th>
-          <td><input type="text" name="title" maxlength="30"></td>
-        </tr>
-        <tr>
-          <th>Description:</th>
-          <td><textarea name="desc" maxlength="255"></textarea></td>
-        </tr>
-      </table>
+      <div class="input-section">
+        <div class="input-name">Title</div>
+        <div class="input-container"><input type="text" name="title" maxlength="30"></div>
+      </div>
+      <div class="input-section">
+        <div class="input-name">Description</div>
+        <div class="input-container"><textarea name="desc" maxlength="255"></textarea></div>
+      </div>
       <input type="submit" value="Begin">
     </form>
   </body>
