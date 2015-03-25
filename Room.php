@@ -90,14 +90,6 @@ class Room {
     return $row[0] == '1';
   }
   
-  public function send($name, $content, $isAction = false) {
-    $name = $this->db->real_escape_string($name);
-    $content = $this->db->real_escape_string($content);
-    $isAction = $isAction? '1': '0';
-    $room = $this->getID();
-    $result = $this->db->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
-  }
-  
   public function getMessages($page) {
     $room = $this->getID();
     global $rpPostsPerPage;
@@ -182,15 +174,6 @@ class Room {
     return ceil($this->getMessageCount() / $rpPostsPerPage);
   }
   
-  public function addCharacter($name, $color) {
-    $name = $this->db->real_escape_string($name);
-    if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
-      throw new Exception("$color is not a valid hex color.");
-    }
-    $room = $this->getID();
-    $result = $this->db->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
-  }
-  
   public function getStatsArray() {
     $room = $this->getID();
     return array_merge(
@@ -200,6 +183,29 @@ class Room {
       )->fetch_assoc(),
       array('MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount())
     );
+  }
+  
+  public function send($name, $content, $isAction = false) {
+    $name = $this->db->real_escape_string(trim($name));
+    $content = $this->db->real_escape_string(trim($content));
+    if(!$content) {
+      throw new Exception('Message is empty.');
+    }
+    $isAction = $isAction? '1': '0';
+    $room = $this->getID();
+    $result = $this->db->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
+  }
+  
+  public function addCharacter($name, $color) {
+    $name = $this->db->real_escape_string(trim($name));
+    if(!$name) {
+      throw new Exception('Name is empty.');
+    }
+    if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
+      throw new Exception("$color is not a valid hex color.");
+    }
+    $room = $this->getID();
+    $result = $this->db->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
   }
 }
 

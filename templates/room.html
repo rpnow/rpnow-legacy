@@ -47,10 +47,15 @@
         $('#char-form').submit(function(evt) {
           evt.preventDefault();
           //client side check to see if the character exists
+          var newName = $('#char-form input[name=name]').val().trim();
+          if(!newName) {
+            alert('Please enter a name.');
+            return;
+          }
           try {
             $('.character a').each(function() {
-              if($('#char-form input[name=name]').val().trim() === $(this).text().trim()) {
-                throw 'Character ' + $(this).val().trim() + ' already exists!';
+              if(newName === $(this).text().trim()) {
+                throw 'Character "' + newName + '" already exists!';
               }
             })
           } catch(ex) {
@@ -63,7 +68,7 @@
             url: '{{ room }}/character',
             data: $('#char-form').serialize(),
           });
-          $('#message-box input[name=name]').val($('#char-form input[name=name]').val());
+          $('#message-box input[name=name]').val(newName);
           $('#message-box textarea').focus();
           $('#char-form')[0].reset();
         });
