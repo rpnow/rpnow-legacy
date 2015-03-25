@@ -33,6 +33,11 @@
         var yiq = ((r*299)+(g*587)+(b*114))/1000;
         return (yiq >= 128) ? 'black' : 'white';
       }
+      //nl2br equivalent modified from:
+      // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
+      function nl2br (str) {   
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+      }
       $(document).ready(function() {
         $('.character a').click(clickCharaButton);
         $('#message-box').submit(function(evt) {
@@ -106,7 +111,7 @@
                 ).append(
                   $('<div/>', {
                     'class': 'content',
-                    text: data.messages[i].Content
+                    html: nl2br(data.messages[i].Content)
                   })
                 ).appendTo('#messages');
               }
