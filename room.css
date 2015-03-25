@@ -21,9 +21,10 @@ header{
   text-align: left;
 }
 #messages > .message{
+  word-wrap: break-word;
 }
 #messages > .message > .content{
-  display: inline-block;
+  display: inline;
 }
 #messages > .chara-Narrator {
   background-color: #fff;
