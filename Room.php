@@ -5,8 +5,8 @@ class Room {
   private static $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   
   private static function createConnection() {
-    global $DBServer, $DBUser, $DBPass, $DBName;
-    $myConn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
+    global $rpDBServer, $rpDBUser, $rpDBPass, $rpDBName;
+    $myConn = new mysqli($rpDBServer, $rpDBUser, $rpDBPass, $rpDBName);
     if($myConn->connect_error) {
       trigger_error('Database connection failed: '  . $myConn->connect_error, E_USER_ERROR);
     }
@@ -30,12 +30,12 @@ class Room {
   }
   
   public static function CreateRoom($title, $desc) {
-    global $RoomIDLen;
+    global $rpIDLength;
     $conn = self::createConnection();
     $conn->autocommit(false);
     do {
       $id = '';
-      for ($i = 0; $i < $RoomIDLen; $i++) {
+      for ($i = 0; $i < $rpIDLength; $i++) {
         $id .= self::$characters[rand(0, strlen(self::$characters) - 1)];
       }
     } while(Room::IDExists($id, $conn));
@@ -76,8 +76,8 @@ class Room {
   public function getCharacterCount() { return $this->numChars; }
   
   private static function IsValidID($id) {
-    global $RoomIDLen;
-    return ctype_alnum($id) && strlen($id) == $RoomIDLen;
+    global $rpIDLength;
+    return ctype_alnum($id) && strlen($id) == $rpIDLength;
   }
   
   // CAUTION: only run if you're SURE it's not a malformed ID! could be catastrophic otherwise
@@ -100,10 +100,10 @@ class Room {
   
   public function getMessages($page) {
     $room = $this->getID();
-    global $PostsPerPage;
+    global $rpPostsPerPage;
     $result = NULL;
     if($page == 'latest') {
-      $result = $this->db->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $PostsPerPage) ORDER BY `Number` ASC;");
+      $result = $this->db->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage) ORDER BY `Number` ASC;");
     }
     else if($page == 'all') {
       $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
@@ -116,8 +116,8 @@ class Room {
       if($page > $this->getNumPages()) {
         throw new Exception('page does not yet exist.');
       }
-      $start = ($page - 1) * $PostsPerPage;
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $PostsPerPage;");
+      $start = ($page - 1) * $rpPostsPerPage;
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
     if(!$result) {
       throw new Exception($conn->error);
@@ -178,8 +178,8 @@ class Room {
   }
   
   public function getNumPages() {
-    global $PostsPerPage;
-    return ceil($this->getMessageCount() / $PostsPerPage);
+    global $rpPostsPerPage;
+    return ceil($this->getMessageCount() / $rpPostsPerPage);
   }
   
   public function addCharacter($name, $color) {
