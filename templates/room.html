@@ -168,7 +168,16 @@
           <div class="content">{{ message.Content|nl2br }}</div>
         </div>
       {% else %}
-        <p id="empty-room">Send a message to get started...</p>
+        <div id="empty-room">
+          <p><b>Success!</b></p>
+          <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. All you have to do now is link this page to some friends, and you can all start roleplaying together, in real time! Here are some things to keep in mind, though:</p>
+          <ol>
+            <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
+            <li>Currently, the data going to and from this server is not encrypted. <b>Don't post any sensitive information here!</b></li>
+            <li>RP Server is currently under development, so it's possible we might lose your stories &mdash; fortunately, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
+          </ol>
+          <p>Have fun!</p>
+        </div>
       {% endfor %}
     </div>
     <div id="characters">
