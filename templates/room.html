@@ -188,15 +188,15 @@
       </div>
     </div>
     <form id="message-box" action="{{ room }}/send" method="post">
-      <table>
-        <tr>
-          <td colspan="2"><input type="text" name="name" id="mb-name" value="Narrator"></input></td>
-        </tr>
-        <tr>
-          <td id="input-col"><textarea name="content"></textarea></td>
-          <td id="button-col"><input type="submit" value="Send"></input></td>
-        </tr>
-      </table>
+      <input type="text" name="name" id="mb-name" value="Narrator"></input>
+      <div id="message-bar">
+        <div id="message-text">
+          <textarea name="content"></textarea>
+        </div>
+        <div id="message-button">
+          <input type="submit" value="Send"></input>
+        </div>
+      </div>
     </form>
   </body>
 </html>

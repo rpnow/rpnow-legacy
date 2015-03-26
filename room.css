@@ -88,42 +88,42 @@ input,
 textarea {
   font-family:serif;
 }
-#message-box textarea {
-  border:none;
-  background: none;
-}
-#message-box table {
+#message-box {
   width: 100%;
   max-width: 700px;
-  margin: 20px auto;
+  margin: 20px auto 0;
   border: dotted 1px #555;
-  border-spacing: 6px;
+  border-spacing: 10px;
+  clear: both;
 }
-#message-box td {
-  line-height: 1em;
+#message-bar {
+  display: table-row;
 }
-#message-box td#input-col {
-  padding: 2px;
+#message-bar #message-text,
+#message-bar #message-button {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+}
+#message-box #message-text {
+  width: 100%;
+}
+#message-text textarea {
+  width: 100%;
+  background-color: white;
   border: solid 1px #555;
   box-shadow: 0 1px 1px #555 inset;
-  background-color:#fff;
-}
-#message-box td#button-col {
-  padding: 0;
-  width: 20%;
-  min-width: 75px;
-  max-height: 100px;
-}
-#message-box textarea {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  padding: 3px;
+  margin: -3px;
+  font-size: 16px;
   resize: vertical;
+  vertical-align: middle;
   min-height: 60px;
 }
 #message-box input[type=submit] {
-  width: 100%;
-  height: 66px;
+  min-width: 80px;
+  height: 68px;
   font-size:18px;
   background-color: #fff;
   color: #222;
