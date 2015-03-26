@@ -23,9 +23,6 @@ header{
 #messages > .message{
   word-wrap: break-word;
 }
-#messages > .message > .content{
-  display: inline;
-}
 #messages > .chara-Narrator {
   background-color: #fff;
   box-shadow: 0 1px 1px #bbb;
@@ -39,18 +36,36 @@ header{
 }
 #messages > .message:not(.chara-Narrator) {
   margin: 10px;
-  padding: 10px;
+  margin-top: 22px;
+  padding: 6px 8px 10px;
   border-radius: 16px;
   border-bottom-left-radius: 0;
   box-shadow: 0 2px 3px #555;
+  position: relative;
+  max-width: 100%;
 }
 #messages > .message:not(.chara-Narrator) > .name{
+  display: inline-block;
+  position: absolute;
+  left: 25px;
+  top: -13px;
+  background-color: inherit;
+  border-radius: 4px;
+  padding: 3px 10px;
   font-size: 12px;
-  margin-left: 20px;
-  margin-top: -7px;
-  opacity: 0.75;
   letter-spacing: 1px;
   word-spacing: 1px;
+  z-index: 100;
+  box-shadow: 0 1px 2px #555;
+}
+#messages > .message:not(.chara-Narrator) > .content {
+  background-color: white;
+  color: black;
+  opacity: 0.9;
+  padding: 5px;
+  border-radius: 12px;
+  border-bottom-left-radius: 0;
+  box-shadow: 0 1px 2px #888 inset;
 }
 #messages > .info {
   text-align: center;
