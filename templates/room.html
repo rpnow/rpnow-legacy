@@ -46,6 +46,7 @@
             type: 'POST',
             url: '{{ room }}/send',
             data: $('#message-box').serialize(),
+            success: updateNow
           });
           $('#message-box textarea').val('');
         });
@@ -72,6 +73,7 @@
             type: 'POST',
             url: '{{ room }}/character',
             data: $('#char-form').serialize(),
+            success: updateNow
           });
           $('#message-box input[name=name]').val(newName);
           $('#message-box textarea').focus();
@@ -83,10 +85,11 @@
             $('#message-box input[type=submit]')[0].click();
           }
         });
-        var timer;
         var numMsg = {{ messageCount }};
         var numChar = {{ characterCount }};
+        var timer = setTimeout(update, {{ refreshMillis }});
         function update() {
+          timer = null;
           $.ajax({
             type: 'GET',
             url: '{{ room }}/updates',
@@ -143,7 +146,12 @@
             }
           });
         }
-        timer = setTimeout(update, {{ refreshMillis }});
+        function updateNow() {
+          if(timer) {
+            clearTimeout(timer);
+            update();
+          }
+        }
       });
     </script>
   </head>
