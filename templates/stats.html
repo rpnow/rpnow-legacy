@@ -12,8 +12,10 @@
     <ul id="stats">
       <li>{{ MessageCount }} messages logged.</li>
       <li>{{ CharacterCount }} characters exist.</li>
+      {% if MessageCount > 0 %}
       <li>First message sent {{ FirstMessageDate }}.</li>
       <li>Most recent message sent {{ LatestMessageDate }}.</li>
+      {% endif %}
       <li>What other stats would be interesting?</li>
     </ul>
   </body>

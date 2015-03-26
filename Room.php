@@ -105,7 +105,7 @@ class Room {
         throw new Exception('invalid page number.');
       }
       $page = intval($page);
-      if($page > $this->getNumPages()) {
+      if($page > 1 && $page > $this->getNumPages()) {
         throw new Exception('page does not yet exist.');
       }
       $start = ($page - 1) * $rpPostsPerPage;

@@ -1,4 +1,4 @@
-{% macro cssClass(character) %}chara-{{ character.Name|e('css')|replace({' ':''})|replace({'\\':'--'}) }}{% endmacro %}
+{% macro cssClass(character) %}chara-{{ character.Name|e('css')|replace({' ':''})|replace({'\\':'-'}) }}{% endmacro %}
 <!doctype html>
 <html>
   <head>
@@ -17,15 +17,19 @@
   </head>
   <body>
     {% include 'title.html' %}
-    {% include 'pages.html' %}
-    <div id="messages">
-      {% for message in messages %}
-        <div class="message {{ _self.cssClass(message) }}">
-          <div class="name">{{ message.Name }}</div>
-          <div class="content">{{ message.Content|nl2br }}</div>
-        </div>
-      {% endfor %}
-    </div>
-    {% include 'pages.html' %}
+    {% if numpages == 0 %}
+      <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
+    {% else %}
+      {% include 'pages.html' %}
+      <div id="messages">
+        {% for message in messages %}
+          <div class="message {{ _self.cssClass(message) }}">
+            <div class="name">{{ message.Name }}</div>
+            <div class="content">{{ message.Content|nl2br }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      {% include 'pages.html' %}
+    {% endif %}
   </body>
 </html>
