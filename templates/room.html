@@ -39,6 +39,9 @@
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
       }
       $(document).ready(function() {
+        {% if messageCount <= postsPerPage %}
+          $('#showing-latest').hide();
+        {% endif %}
         $('.character a').click(clickCharaButton);
         $('#message-box').submit(function(evt) {
           evt.preventDefault();
@@ -139,9 +142,14 @@
                   })
                 );
               }
-              // done. prepare for next load
+              // maybe show the "showing-latest" message
+              if(numMsg <= {{ postsPerPage }} && numMsg + data.messages.length > {{ postsPerPage }}) {
+                $('#showing-latest').show();
+              }
+              // update counters
               numMsg += data.messages.length;
               numChar += data.characters.length;
+              // done. wait and then do this again
               timer = setTimeout(update, {{ refreshMillis }});
             }
           });
@@ -158,17 +166,17 @@
   <body>
     {% include 'title.html' %}
     <div id="messages">
-      {% if messageCount > postsPerPage %}
+      <div class="info" id="showing-latest">
         <p>These are the latest {{ postsPerPage }} posts.
         To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
-      {% endif %}
+      </div>
       {% for message in messages %}
         <div class="message {{ _self.cssClass(message) }}">
           <div class="name">{{ message.Name }}</div>
           <div class="content">{{ message.Content|nl2br }}</div>
         </div>
       {% else %}
-        <div id="empty-room">
+        <div class="info" id="empty-room">
           <p><b>Success!</b></p>
           <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. All you have to do now is link this page to some friends, and you can all start roleplaying together, in real time! Here are some things to keep in mind, though:</p>
           <ol>

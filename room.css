@@ -52,10 +52,10 @@ header{
   letter-spacing: 1px;
   word-spacing: 1px;
 }
-#messages > #empty-room {
+#messages > .info {
   text-align: center;
 }
-#messages > #empty-room ol {
+#messages > .info ol {
   display: inline-block;
   text-align: left;
 }
