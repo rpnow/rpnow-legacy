@@ -38,10 +38,39 @@
       function nl2br (str) {   
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
       }
+      
       $(document).ready(function() {
+        //timer function for the title bar
+        flashTitle = (function() {
+          var oldTitle = document.title;
+          var alertMsg = null;
+          var i = 0;
+          var informTimer = null;
+          function timerAction() {
+            if(i%2) document.title = oldTitle;
+            else document.title = alertMsg;
+            --i;
+            if(i >= 0) informTimer = setTimeout(timerAction, 500);
+          }
+          document.addEventListener('visibilitychange', function(evt) {
+            if(document.visibilityState === 'visible') {
+              clearTimeout(informTimer);
+              document.title = oldTitle;
+            }
+          });
+          return function(msg, flashes) {
+            if(document.visibilityState === 'visible') return;
+            i = (flashes===undefined? 1: flashes)*2;
+            if(informTimer) clearTimeout(informTimer);
+            alertMsg = msg;
+            timerAction(msg);
+          };
+        })();
+        //{# show the informative message about the archive at the top? #}
         {% if messageCount <= postsPerPage %}
           $('#showing-latest').hide();
         {% endif %}
+        //
         $('.character a').click(clickCharaButton);
         $('#message-box').submit(function(evt) {
           evt.preventDefault();
@@ -145,6 +174,10 @@
               // maybe show the "showing-latest" message
               if(numMsg <= {{ postsPerPage }} && numMsg + data.messages.length > {{ postsPerPage }}) {
                 $('#showing-latest').show();
+              }
+              // show alerts maybe
+              if(data.messages.length > 0) {
+                flashTitle('* ' + data.messages[data.messages.length -1].Name + ' says...', 3);
               }
               // update counters
               numMsg += data.messages.length;
