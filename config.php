@@ -16,11 +16,11 @@ $rpRootPath = '/';
 ## if it's one the same server, use 'localhost'
 $rpDBServer = 'localhost';
 ## Database name
-$rpDBName   = 'rp_db';
+$rpDBName   = 'rpchat';
 ## The user that has permissions to the database
-$rpDBUser   = 'rp_db_user';
+$rpDBUser   = 'rpchat_bot';
 ## Password for that user; PLEASE make it long and random!
-$rpDBPass   = 'abc123';
+$rpDBPass   = 'hUYQCAfvFM3Kw3wf';
 
 ## The length of the auto-generated URL for each RP room.
 $rpIDLength = 4;
