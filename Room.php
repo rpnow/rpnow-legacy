@@ -52,6 +52,9 @@ class Room {
     }
     $conn = self::createConnection();
     $conn->autocommit(false);
+    if(!Room::IDExists($id, $conn)) {
+      throw new Exception('Room does not exist!');
+    }
     $result = $conn->query("SELECT
     (SELECT `Title` FROM `Room` WHERE `ID` = '$id') AS `Title`,
     (SELECT `Description` FROM `Room` WHERE `ID` = '$id') AS `Description`,
@@ -90,26 +93,35 @@ class Room {
     return $row[0] == '1';
   }
   
-  public function getMessages($page) {
+  public function getMessages($which, $n = NULL) {
     $room = $this->getID();
     global $rpPostsPerPage;
     $result = NULL;
-    if($page == 'latest') {
+    if($which == 'latest') {
       $result = $this->db->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage) ORDER BY `Number` ASC;");
     }
-    else if($page == 'all') {
+    else if($which == 'all') {
       $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
     }
-    else {
-      if(intval($page) == false || intval($page) != floatval($page) || intval($page) < 1) {
+    else if($which == 'page' && !is_null($n)) {
+      if(intval($n) == false || intval($n) != floatval($n) || intval($n) < 1) {
         throw new Exception('invalid page number.');
       }
-      $page = intval($page);
-      if($page > 1 && $page > $this->getNumPages()) {
+      $n = intval($n);
+      if($n > 1 && $n > $this->getNumPages()) {
         throw new Exception('page does not yet exist.');
       }
-      $start = ($page - 1) * $rpPostsPerPage;
+      $start = ($n - 1) * $rpPostsPerPage;
       $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
+    }
+    else if($which == 'after' && !is_null($n)) {
+      if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
+        throw new Exception("invalid message request: $n is a bad number.");
+      }
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
+    }
+    else {
+      throw new Exception('unknown message request!');
     }
     if(!$result) {
       throw new Exception($conn->error);
@@ -121,10 +133,13 @@ class Room {
     return $arr;
   }
   
-  public function getCharacters() {
+  public function getCharacters($after = 0) {
+    if(intval($after) === false || intval($after) != floatval($after) || intval($after) < 0) {
+      throw new Exception("invalid character request: $after is a bad number.");
+    }
     // get the characters
     $room = $this->getID();
-    $result = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room'");
+    $result = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' LIMIT 9999 OFFSET $after");
     $arr = [];
     while ($row = $result->fetch_assoc()) {
       $arr[] = $row;
@@ -146,27 +161,6 @@ class Room {
       },
       $arr
     );
-  }
-  
-  public function getUpdates($numMessages, $numCharacters) {
-    $room = $this->getID();
-    if(intval($numMessages) === false || intval($numMessages) != floatval($numMessages) || intval($numMessages) < 0) {
-      throw new Exception('invalid numMessages.');
-    }
-    if(intval($numCharacters) === false || intval($numCharacters) != floatval($numCharacters) || intval($numCharacters) < 0) {
-      throw new Exception('invalid numCharacters.');
-    }
-    $newMessages = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numMessages");
-    $messageArray = [];
-    while ($row = $newMessages->fetch_assoc()) {
-      $messageArray[] = $row;
-    }
-    $newChars = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 999 OFFSET $numCharacters");
-    $charaArray = [];
-    while ($row = $newChars->fetch_assoc()) {
-      $charaArray[] = $row;
-    }
-    return array('messages' => $messageArray, 'characters' => $charaArray);
   }
   
   public function getNumPages() {

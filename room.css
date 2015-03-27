@@ -5,13 +5,42 @@ body{
   line-height:1.6;
   font-size:16px;
 }
-h2{
-  line-height:1.2
-}
 header{
   border-bottom: ridge;
   margin-bottom: 20px;
+  padding-bottom: 5px;
   font-size:18px;
+}
+header h2{
+  line-height:1;
+  margin: 20px auto 5px;
+}
+header p {
+  margin: 0 auto 10px;
+}
+header #title-links a {
+  display: inline-block;
+}
+@media not all and (max-width: 750px) {
+  header {
+    display: table;
+    width: 100%;
+  }
+  header h2 {
+    margin: 10px auto;
+  }
+  header p {
+    margin-bottom: 15px;
+  }
+  header #title-links {
+    display: table-header-group;
+    text-align: right;
+  }
+}
+@media not all and (max-width: 1000px) {
+  header h2 {
+    margin-top: 0;
+  }
 }
 #messages {
   margin: 0 auto;

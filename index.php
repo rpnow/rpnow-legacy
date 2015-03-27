@@ -64,7 +64,7 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
       'room' => $id,
-      'messages' => $room->getMessages($page),
+      'messages' => $room->getMessages('page', $page),
       'characters' => $room->getCharacters(),
       'numpages' => $room->getNumPages(),
       'page' => $page,
@@ -82,9 +82,9 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
 $app->get('/:id/updates/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    $data = $room->getUpdates(
-      $app->request()->get('messages'),
-      $app->request()->get('characters')
+    $data = array(
+      'messages' => $room->getMessages('after', $app->request()->get('messages')),
+      'characters' => $room->getCharacters($app->request()->get('characters'))
     );
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
