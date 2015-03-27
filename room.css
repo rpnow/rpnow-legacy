@@ -13,29 +13,30 @@ body{
 header{
   border-bottom: ridge;
   margin-bottom: 20px;
-  padding-bottom: 5px;
   font-size:18px;
 }
 header h2{
   line-height:1;
-  margin: 20px auto 5px;
 }
 header p {
-  margin: 0 auto 10px;
+  margin: 0 auto 15px;
 }
 header #title-links a {
   display: inline-block;
+}
+@media all and (max-width: 750px) {
+  header h2{
+    margin: 25px auto 5px;
+  }
 }
 @media not all and (max-width: 750px) {
   header {
     display: table;
     width: 100%;
+    padding-bottom: 5px;
   }
   header h2 {
     margin: 10px auto;
-  }
-  header p {
-    margin-bottom: 15px;
   }
   header #title-links {
     display: table-header-group;
