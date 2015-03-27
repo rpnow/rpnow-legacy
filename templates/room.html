@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='{{ rproot }}spectrum/spectrum.js'></script>
     <link rel='stylesheet' href='{{ rproot }}spectrum/spectrum.css' />
+    <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
     <style>
       {% for character in characters if character.Name != "Narrator" %}
         .{{ _self.cssClass(character) }} {
@@ -120,61 +121,18 @@
             url: '{{ room }}/updates',
             data: { characters: numChar, messages: numMsg },
             success: function(data) {
-              // remove empty-room message if it's there
-              if(numMsg === 0 && data.messages.length > 0) {
-                $('#empty-room').remove();
-              }
               // update messages
               for(var i = 0; i < data.messages.length; ++i) {
-                if($('.message').length >= {{ postsPerPage }}) {
-                  $('.message').slice(0,1).remove();
-                }
-                $('<div/>', {
-                  'class': 'message ' + cssName(data.messages[i].Name)
-                }).append(
-                  $('<div/>', {
-                    'class': 'name',
-                    text: data.messages[i].Name
-                  })
-                ).append(
-                  $('<div/>', {
-                    'class': 'content',
-                    html: nl2br(data.messages[i].Content)
-                  })
-                ).appendTo('#messages');
+                addMessageElement(data.messages[i])
               }
               // update characters
               for(var i = 0; i < data.characters.length; ++i) {
-                $('<div/>', {
-                  'class': 'character'
-                }).append(
-                  $('<a/>', {
-                    href: '#',
-                    'class': cssName(data.characters[i].Name),
-                    text: data.characters[i].Name
-                  })
-                ).insertAfter($('#characters .character').last())
-                .click(clickCharaButton);
-                // as well as giving them css
-                $('head').append(
-                  $('<style/>', {
-                    text: '.' + cssName(data.characters[i].Name)
-                      + "{ background-color: " + data.characters[i].Color + "; "
-                      + "color: " + data.characters[i].Contrast + "; }"
-                  })
-                );
-              }
-              // maybe show the "showing-latest" message
-              if(numMsg <= {{ postsPerPage }} && numMsg + data.messages.length > {{ postsPerPage }}) {
-                $('#showing-latest').show();
+                addCharacterElement(data.characters[i]);
               }
               // show alerts maybe
               if(data.messages.length > 0) {
                 flashTitle('* ' + data.messages[data.messages.length -1].Name + ' says...', 3);
               }
-              // update counters
-              numMsg += data.messages.length;
-              numChar += data.characters.length;
               // done. wait and then do this again
               timer = setTimeout(update, {{ refreshMillis }});
             }
@@ -186,6 +144,78 @@
             update();
           }
         }
+        function addMessageElement(message) {
+          var screenMsgs = $('.message').length;
+          // remove empty-room message if it's there
+          if(screenMsgs === 0) {
+            $('#empty-room').remove();
+          }
+          // remove old messages if there's too many
+          else if(screenMsgs >= {{ postsPerPage }}) {
+            $('.message').slice(0,1).remove();
+            // maybe now show the "showing-latest" message
+            if(numMsg === {{ postsPerPage }}) {
+              $('#showing-latest').show();
+            }
+          }
+          // create and add element
+          $('<div/>', {
+            'class': 'message ' + cssName(message.Name)
+          }).append(
+            $('<div/>', {
+              'class': 'name',
+              text: message.Name
+            })
+          ).append(
+            $('<div/>', {
+              'class': 'timestamp',
+              'data-timestamp': message.Timestamp,
+              text: displayTimestamp(message.Timestamp)
+            })
+          ).append(
+            $('<div/>', {
+              'class': 'content',
+              html: nl2br(message.Content)
+            })
+          ).appendTo('#messages');
+          // update counter
+          ++numMsg;
+        }
+        function addCharacterElement(character) {
+          //create and add element
+          $('<div/>', {
+            'class': 'character'
+          }).append(
+            $('<a/>', {
+              href: '#',
+              'class': cssName(character.Name),
+              text: character.Name
+            })
+          ).insertAfter($('#characters .character').last())
+          // ... and add click functionality
+          .click(clickCharaButton);
+          // as well as giving them css
+          $('head').append(
+            $('<style/>', {
+              text: '.' + cssName(character.Name)
+                + "{ background-color: " + character.Color + "; "
+                + "color: " + character.Contrast + "; }"
+            })
+          );
+          // update counter
+          ++numChar;
+        }
+        // timers for updating the "seconds ago" messages
+        function displayTimestamp(t) {
+          return moment.unix(t).calendar();
+        }
+        function updateTimeAgo() {
+          $('#messages .message .timestamp').text(
+            function() { return displayTimestamp($(this).data().timestamp); }
+          );
+        }
+        updateTimeAgo();
+        setInterval(updateTimeAgo, 600000);
       });
     </script>
   </head>
@@ -199,6 +229,7 @@
       {% for message in messages %}
         <div class="message {{ _self.cssClass(message) }}">
           <div class="name">{{ message.Name }}</div>
+          <div class="timestamp" data-timestamp="{{ message.Timestamp }}"></div>
           <div class="content">{{ message.Content|nl2br }}</div>
         </div>
       {% else %}

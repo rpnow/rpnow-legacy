@@ -58,16 +58,28 @@ header #title-links a {
 #messages > .message{
   word-wrap: break-word;
 }
+#messages > .message .timestamp {
+  font-size: smaller;
+  opacity: 0.5;
+  text-align: right;
+  margin-right: 15px;
+}
 #messages > .chara-Narrator {
   background-color: #fff;
   box-shadow: 0 1px 1px #bbb;
+}
+#messages > .chara-Narrator > .name {
+  display: none;
+}
+#messages > .chara-Narrator > .content {
   outline: dotted 1px #bbb;
   outline-offset: -5px;
   padding: 10px;
   text-align: center;
 }
-#messages > .chara-Narrator > .name {
-  display: none;
+#messages > .chara-Narrator > .timestamp {
+  margin-top: 0px;
+  margin-bottom: -7px;
 }
 #messages > .message:not(.chara-Narrator) {
   margin: 10px;
@@ -101,6 +113,10 @@ header #title-links a {
   border-radius: 12px;
   border-bottom-left-radius: 0;
   box-shadow: 0 1px 2px #888 inset;
+}
+#messages > .message:not(.chara-Narrator) > .timestamp {
+  margin-top: -5px;
+  margin-bottom: -2px;
 }
 #messages > .info {
   text-align: center;

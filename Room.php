@@ -98,10 +98,10 @@ class Room {
     global $rpPostsPerPage;
     $result = NULL;
     if($which == 'latest') {
-      $result = $this->db->query("(SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage) ORDER BY `Number` ASC;");
+      $result = $this->db->query("(SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage) ORDER BY `Number` ASC;");
     }
     else if($which == 'all') {
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
     }
     else if($which == 'page' && !is_null($n)) {
       if(intval($n) == false || intval($n) != floatval($n) || intval($n) < 1) {
@@ -112,13 +112,13 @@ class Room {
         throw new Exception('page does not yet exist.');
       }
       $start = ($n - 1) * $rpPostsPerPage;
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
     else if($which == 'after' && !is_null($n)) {
       if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
         throw new Exception("invalid message request: $n is a bad number.");
       }
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
+      $result = $this->db->query("SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
     else {
       throw new Exception('unknown message request!');
