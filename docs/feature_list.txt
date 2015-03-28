@@ -1,0 +1,11 @@
+Feature List
+------------
+* Free, private RP rooms
+* Absolutely NO registration process
+* Entirely in-browser; no downloads
+* Unlimited players
+* Unlimited characters
+* Works on both desktop and mobile
+* Updates in real time; no refreshing needed
+* Flashing banner alerts when a new post is made
+* Download a text backup of your RP at any time
