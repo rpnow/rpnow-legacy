@@ -75,9 +75,14 @@ header #title-links a {
   border: dotted 1px #bbb;
   padding: 5px;
   text-align: center;
+  font-style: italic;
 }
+#messages > .chara-Narrator > .content::first-letter {
+  font-size: 125%;
+  font-style: normal;
+} 
 #messages > .chara-Narrator > .timestamp {
-  margin: -5px 15px -2px;
+  margin: -5px 28px -2px;
 }
 #messages > .message:not(.chara-Narrator) {
   margin: 10px;
