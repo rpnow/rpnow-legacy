@@ -40,6 +40,16 @@
       function nl2br (str) {   
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
       }
+      //cross-browser get height of document.
+      // http://james.padolsey.com/javascript/get-document-height-cross-browser/
+      function getDocHeight() {
+        var D = document;
+        return Math.max(
+            D.body.scrollHeight, D.documentElement.scrollHeight,
+            D.body.offsetHeight, D.documentElement.offsetHeight,
+            D.body.clientHeight, D.documentElement.clientHeight
+        );
+      }
       // fetch and apply character/message updates from server
       function update() {
         timer = null;
@@ -75,6 +85,8 @@
       // add a message element and adjust other things accordingly
       function addMessageElement(message) {
         var screenMsgs = $('.message').length;
+        // check if we're at the bottom of the page
+        var isAtBottom = $(window).scrollTop() + $(window).height() >= getDocHeight();
         // remove empty-room message if it's there
         if(screenMsgs === 0) {
           $('#empty-room').remove();
@@ -107,6 +119,8 @@
             html: nl2br(message.Content)
           })
         ).appendTo('#messages');
+        // if we were at the bottom of the page, scroll down to bottom
+        if(isAtBottom) $('html, body').animate({scrollTop: $(document).height()}, 250);
         // update counter
         ++numMsg;
       }
