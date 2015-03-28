@@ -49,7 +49,7 @@ header #title-links a {
   }
 }
 #messages {
-  margin: 0 auto;
+  margin: 0 auto 125px;
   width: 100%;
   max-width: 650px;
   display: inline-block;
@@ -129,10 +129,17 @@ header #title-links a {
 }
 
 #character-menu {
+  position: fixed;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  margin: auto;
+  max-width: 700px;
+  z-index: 300;
+  background: inherit;
   border: dotted 1px #555;
   margin: 20px auto 0;
   padding: 15px 10px;
-  max-width: 700px;
 }
 #character-menu h3 {
   margin: 0 auto;
@@ -167,6 +174,11 @@ header #title-links a {
   background-color: inherit;
   position: fixed;
   top: 25px;
+  left: 5px;
+  right: 5px;
+  margin: auto;
+  max-width: 350px;
+  padding: 0 25px;
 }
 #new-character input[type=submit] {
   margin: 20px;
@@ -186,23 +198,12 @@ header #title-links a {
   width: 100%;
 }
 @media all and (max-width: 425px) {
-  #new-character {
-    padding: 0 25px;
-    left: 5px;
-    right: 5px;
-  }
   .input-name {
     text-align: left;
     padding-left: 20px;
   }
 }
 @media not all and (max-width: 425px) {
-  #new-character {
-    width: 350px;
-    padding: 25px;
-    margin: 0 0 0 -200px;
-    left: 50%;
-  }
   .input-section {
     display: table-row;
   }
@@ -248,12 +249,17 @@ input[type=submit]:hover {
   color:#fafafa;
 }
 #message-box {
-  width: 100%;
+  position: fixed;
+  z-index: 200;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  margin: auto;
   max-width: 700px;
-  margin: 20px auto 0;
+  background: inherit;
   border: dotted 1px #555;
+  border-bottom: none;
   border-spacing: 10px;
-  clear: both;
 }
 #message-bar {
   display: table-row;
