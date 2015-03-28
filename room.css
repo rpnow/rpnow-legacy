@@ -123,21 +123,31 @@ header #title-links a {
   text-align: left;
 }
 
+#character-menu {
+  border: dotted 1px #555;
+  margin: 20px auto 0;
+  padding: 15px 10px;
+  max-width: 700px;
+}
+#character-menu h3 {
+  margin: 0 auto;
+}
 #characters {
   display: block;
-  float: right;
-  width: 150px;
-  padding: 20px;
-  border: dotted 1px #555;
+  margin: 0 auto 20px;
+  max-width: 600px;
 }
 #characters > .character {
-  font-weight: bold;
+  display: inline-block;
+  width: 135px;
 }
 #characters .chara-Narrator {
   color: #555;
 }
 #characters > .character a {
   display: block;
+  text-align: center;
+  font-weight: bold;
   margin: 5px;
   text-decoration: none;
   box-shadow: 0 1px 2px #888;
@@ -147,13 +157,90 @@ header #title-links a {
 }
 
 #new-character {
-  margin-top: 20px;
-  border-top: dotted 1px #555;
+  border: dotted 1px #3c3c3c;
+  z-index: 600;
+  background-color: inherit;
+  position: fixed;
+  top: 25px;
+}
+#new-character input[type=submit] {
+  margin: 20px;
+  padding: 10px 20px;
 }
 
+.input-name, .input-container {
+  padding: 3px;
+}
+.input-name {
+  font-weight: bold;
+}
+.input-name::after {
+  content: ":";
+}
+.input-container input {
+  width: 100%;
+}
+@media all and (max-width: 425px) {
+  #new-character {
+    padding: 0 25px;
+    left: 5px;
+    right: 5px;
+  }
+  .input-name {
+    text-align: left;
+    padding-left: 20px;
+  }
+}
+@media not all and (max-width: 425px) {
+  #new-character {
+    width: 350px;
+    padding: 25px;
+    margin: 0 0 0 -200px;
+    left: 50%;
+  }
+  .input-section {
+    display: table-row;
+  }
+  .input-name, .input-container {
+    display: table-cell;
+  }
+  .input-name {
+    padding-top: 6px;
+    padding-right: 10px;
+    vertical-align: top;
+    text-align: right;
+  }
+  .input-container {
+    width: 100%;
+  }
+}
 input,
 textarea {
   font-family:serif;
+}
+input[type=text],
+textarea {
+  background-color: white;
+  border: solid 1px #555;
+  box-shadow: 0 1px 1px #555 inset;
+  padding: 3px;
+  margin: -3px;
+  font-size: 16px;
+  vertical-align: middle;
+}
+input[type=submit] {
+  font-size:18px;
+  background-color: #fff;
+  color: #222;
+  border:solid 1px #3c3c3c;
+  font-weight:bold;
+  box-shadow: 0 1px 2px #888;
+}
+input[type=submit]:hover {
+  cursor:pointer;
+  background-color:#3c3c3c;
+  box-shadow: 0 1px 10px #555;
+  color:#fafafa;
 }
 #message-box {
   width: 100%;
@@ -178,32 +265,12 @@ textarea {
 }
 #message-text textarea {
   width: 100%;
-  background-color: white;
-  border: solid 1px #555;
-  box-shadow: 0 1px 1px #555 inset;
-  padding: 3px;
-  margin: -3px;
-  font-size: 16px;
   resize: vertical;
-  vertical-align: middle;
   min-height: 60px;
 }
 #message-box input[type=submit] {
   min-width: 80px;
   height: 68px;
-  font-size:18px;
-  background-color: #fff;
-  color: #222;
-  border:solid 1px #3c3c3c;
-  font-weight:bold;
-  box-shadow: 0 1px 2px #888;
-}
-#message-box input[type=submit]:hover,
-#message-box input[type=submit]:active {
-  cursor:pointer;
-  background-color:#3c3c3c;
-  box-shadow: 0 1px 10px #555;
-  color:#fafafa;
 }
 
 .pages {
