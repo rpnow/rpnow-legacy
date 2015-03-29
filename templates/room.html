@@ -204,9 +204,6 @@
         $('.character a').click(clickCharaButton);
         $('#message-box button#change-character').click(function(evt) {
           $('#character-menu').stop().slideDown(250);
-          $('html, body').animate({ 
-            scrollTop: $('#character-menu').offset().top 
-          }, 250);
           $('#message-box').slideUp(250);
           evt.preventDefault();
         });
@@ -231,13 +228,17 @@
         });
         $('#message-box').submit(function(evt) {
           evt.preventDefault();
+          // send message
           $.ajax({
             type: 'POST',
             url: '{{ room }}/send',
             data: $('#message-box').serialize(),
             success: updateNow
           });
+          // clear message box
           $('#message-box textarea').val('');
+          // scroll to bottom if we're not there
+          $('html, body').animate({scrollTop: $(document).height()}, 250);
         });
         $('#char-form').submit(function(evt) {
           evt.preventDefault();
