@@ -1,10 +1,14 @@
 RewriteEngine On
 
-# Some hosts may require you to use the `RewriteBase` directive.
-# If you need to use the `RewriteBase` directive, it should be the
-# absolute physical path to the directory that contains this htaccess file.
-#
+## Some hosts may require you to use the `RewriteBase` directive.
+## If you need to use the `RewriteBase` directive, it should be the
+## absolute physical path to the directory that contains this htaccess file.
 # RewriteBase /
+
+## If your server has an SSL cert, uncomment the following lines
+## to ensure that they are redirected to a HTTPS URL.
+# RewriteCond %{HTTPS} off
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} (.+)/$
