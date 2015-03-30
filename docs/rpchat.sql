@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.10.7
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 23, 2015 at 08:33 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Mar 29, 2015 at 07:17 PM
+-- Server version: 5.5.42-cll
+-- PHP Version: 5.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `rpchat`
+-- Database: `rzone_rp`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `character`
+-- Table structure for table `Character`
 --
 
 CREATE TABLE IF NOT EXISTS `Character` (
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Character` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Table structure for table `Message`
 --
 
 CREATE TABLE IF NOT EXISTS `Message` (
@@ -61,13 +61,14 @@ CREATE TABLE IF NOT EXISTS `Message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room`
+-- Table structure for table `Room`
 --
 
 CREATE TABLE IF NOT EXISTS `Room` (
   `ID` char(4) NOT NULL,
   `Title` tinytext NOT NULL,
   `Description` tinytext NOT NULL,
+  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -76,13 +77,13 @@ CREATE TABLE IF NOT EXISTS `Room` (
 --
 
 --
--- Constraints for table `character`
+-- Constraints for table `Character`
 --
 ALTER TABLE `Character`
-  ADD CONSTRAINT `character_ibfk_1` FOREIGN KEY (`Room`) REFERENCES `Room` (`ID`);
+  ADD CONSTRAINT `Character_ibfk_1` FOREIGN KEY (`Room`) REFERENCES `Room` (`ID`);
 
 --
--- Constraints for table `message`
+-- Constraints for table `Message`
 --
 ALTER TABLE `Message`
   ADD CONSTRAINT `Character` FOREIGN KEY (`Character_Name`, `Character_Room`) REFERENCES `Character` (`Name`, `Room`);
