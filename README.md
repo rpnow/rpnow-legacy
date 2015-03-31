@@ -39,6 +39,7 @@ Here is a general idea of what needs to be done:
 7. Create a MySQL database and import the database in the /docs/ folder
 8. Give a user SELECT and INSERT permissions on that database
 9. Update config.php with the correct database information, as well as the path to the main folder
+10. If you have an SSL certificate for your site, uncomment the HTTPS segment in the .htaccess file
 
 ## License
 RP Now is licensed under the [GNU General Public License V3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.html).
