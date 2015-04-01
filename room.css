@@ -49,11 +49,14 @@ header #title-links a {
   }
 }
 #messages {
-  margin: 0 auto 125px;
+  margin: 0 auto;
   width: 100%;
   max-width: 650px;
   display: inline-block;
   text-align: left;
+}
+#messages.room-feed {
+  margin-bottom: 125px;
 }
 #messages > .message{
   word-wrap: break-word;
