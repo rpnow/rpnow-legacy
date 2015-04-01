@@ -79,6 +79,76 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
   }
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
+// Sample room!
+$app->get('/sample/', function () use ($app) {
+  global $rpRootPath;
+  $app->view()->setData(array(
+    'title' => 'Sample Roleplay',
+    'desc' => 'This is what an RP will look like!',
+    'characters' => array(
+      array('Name' => 'Cool Character', 'Color' => '#7ad7e7', 'Contrast' => 'black'),
+      array('Name' => 'Dog', 'Color' => '#dcc6a7', 'Contrast' => 'black'),
+      array('Name' => '<BAD ROBOT>', 'Color' => '#620000', 'Contrast' => 'white'),
+      array('Name' => 'Green Rat', 'Color' => '#88be18', 'Contrast' => 'black'),
+      array('Name' => 'Some Nerd', 'Color' => '#e69e1a', 'Contrast' => 'black')
+    ),
+    'messages' => array(
+      array('Name' => 'Narrator', 'Content' =>
+        "RP Now is a place where you can roleplay with your friends!",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "Creating an RP here takes seconds - give it a title and you're ready to go! There's no account registration process, and it's free!",
+      ),
+      array('Name' => 'Cool Character', 'Content' =>
+        "If you want, you can give your characters their own dialogue boxes!",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "Cool Character's trusty Dog confidently enters the scene.",
+      ),
+      array('Name' => 'Dog', 'Content' =>
+        "Arf! (You can pick the color for each character!)",
+      ),
+      array('Name' => 'Cool Character', 'Content' =>
+        "Haha!",
+      ),
+      array('Name' => '<BAD ROBOT>', 'Content' =>
+        "CREATE AS MANY CHARACTERS AS YOU WANT",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "A stray cat joins the scene. \"However,\" he explains, \"You don't have to use the dialogue boxes if you don't want to. Writing paragraphs in the Narrator voice works just as well.\"",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "Cool Character and Dog go off to fight the Bad Robot. A long and heartwrenching story unfolds. Meanwhile, the stray cat breaks into their house and eats their food, with the help of a green rat.",
+      ),
+      array('Name' => 'Green Rat', 'Content' =>
+        "Once you make an RP, it creates a link you can send to your friends. Then you can all play together in real time.",
+      ),
+      array('Name' => 'Green Rat', 'Content' =>
+        "Even if you all close your browser windows, you can pick up where you left off just by revisiting the link. We won't throw your stories away!",
+      ),
+      array('Name' => 'Green Rat', 'Content' =>
+        "You can also browse through the entire archive of your posts from beginning to end, or download a text copy!",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "The Stray Cat thanks the Green Rat by eating it. The Cat is sick for three days.",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "Some nerd takes a picture of the tragedy on his smartphone.",
+      ),
+      array('Name' => 'Some Nerd', 'Content' =>
+        "RP Now works on smartphones, too. Roleplay on the go!",
+      ),
+      array('Name' => 'Narrator', 'Content' =>
+        "Thanks for reading! Now go back and make an RP!",
+      )
+    ),
+    'hidemenu' => true,
+    'numpages' => 1,
+    'docroot' => $rpRootPath
+  ));
+  $app->render('archive.html');
+});
+
 // Receive room updates
 $app->get('/:id/updates/', function ($id) use ($app) {
   try {
