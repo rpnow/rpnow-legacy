@@ -1,19 +1,146 @@
+
+/**********************************************************
+ * BASIC ELEMENT STYLING
+ *
+ **********************************************************/
 @media (orientation: landscape) {
   html {
     -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
   }
 }
-body{
-  background-color:#fafafa;
-  color:#3c3c3c;
-  text-align:center;
-  line-height:1.6;
-  font-size:16px;
+body {
+  background-color: #fafafa;
+  color: #3c3c3c;
+  font-size: 18px;
+  text-align: center;
 }
+body.article {
+  margin: 40px auto;
+  padding: 0 10px;
+  max-width: 650px;
+  text-align: left;
+}
+h1 {
+  margin: 25px auto 10px;
+  letter-spacing: 3px;
+  word-spacing: 2px;
+}
+body > p,
+body > ul,
+body > ol {
+  margin: 18px auto;
+  max-width: 650px;
+  line-height: 1.6;
+}
+li {
+  text-align: left;
+}
+input, textarea, button {
+  font-family: serif;
+  vertical-align: middle;
+}
+input[type=text],
+textarea {
+  background-color: white;
+  border: solid 1px #555;
+  box-shadow: 0 1px 1px #555 inset;
+  font-size: 16px;
+  padding: 3px;
+}
+input[type=submit], button {
+  font-size:18px;
+  background-color: #fff;
+  color: #222;
+  border: solid 1px #3c3c3c;
+  font-weight: bold;
+  box-shadow: 0 1px 2px #888;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+input[type=submit]:hover, button:hover {
+  cursor: pointer;
+  background-color: #3c3c3c;
+  box-shadow: 0 1px 10px #555;
+  color: #fafafa;
+}
+
+
+
+
+/**********************************************************
+ * NEAT FORMS
+ *
+ **********************************************************/
+form.form-box {
+  margin: 18px auto;
+  border: solid 1px #555;
+  padding: 30px;
+  box-shadow: 0 1px 3px #aaa;
+}
+form.form-box .input-container input,
+form.form-box .input-container textarea {
+  width: 100%;
+  padding: 3px;
+  margin: -3px;
+}
+form.form-box .input-name,
+form.form-box .input-container {
+  padding: 6px;
+}
+form.form-box .input-name {
+  font-weight: bold;
+}
+form.form-box .input-name::after {
+  content: ":";
+}
+form.form-box input[type=submit] {
+  font-size: 18px;
+  margin-top: 20px;
+  background-color: #fff;
+  color: #222;
+  border: solid 1px #3c3c3c;
+  font-weight: bold;
+}
+@media all and (max-width: 550px) {
+  form.form-box .input-name {
+    text-align: left;
+    padding: 5px 20px 0;
+  }
+}
+@media not all and (max-width: 550px) {
+  form.form-box {
+    width: 400px;
+  }
+  form.form-box .input-section {
+    display: table-row;
+  }
+  form.form-box .input-name,
+  form.form-box .input-container {
+    display: table-cell;
+  }
+  form.form-box .input-name {
+    padding-top: 6px;
+    padding-right: 10px;
+    vertical-align: top;
+    text-align: right;
+  }
+  form.form-box .input-container {
+    width: 100%;
+  }
+}
+
+
+
+
+/**********************************************************
+ * roleplay chat page:
+ *   HEADER
+ *
+ **********************************************************/
 header{
   border-bottom: ridge;
   margin-bottom: 20px;
-  font-size:18px;
+  font-size:20px;
 }
 header h2{
   line-height:1;
@@ -27,6 +154,9 @@ header #title-links a {
 @media all and (max-width: 750px) {
   header h2{
     margin: 25px auto 5px;
+  }
+  header #title-links {
+    padding-bottom: 5px;
   }
 }
 @media not all and (max-width: 750px) {
@@ -48,6 +178,15 @@ header #title-links a {
     margin-top: 0;
   }
 }
+
+
+
+
+/**********************************************************
+ * roleplay chat page:
+ *   MESSAGES
+ *
+ **********************************************************/
 #messages {
   margin: 0 auto;
   width: 100%;
@@ -56,12 +195,15 @@ header #title-links a {
   text-align: left;
 }
 #messages.room-feed {
-  margin-bottom: 125px;
+  margin-bottom: 135px;
 }
 #messages > .message{
   word-wrap: break-word;
 }
-#messages > .message .timestamp {
+#messages > .message > .content {
+  line-height: 1.6;
+}
+#messages > .message > .timestamp {
   font-size: smaller;
   opacity: 0.5;
   text-align: right;
@@ -115,7 +257,7 @@ header #title-links a {
   background-color: white;
   color: black;
   opacity: 0.9;
-  padding: 5px;
+  padding: 8px;
   border-radius: 12px;
   border-bottom-left-radius: 0;
   box-shadow: 0 1px 2px #888 inset;
@@ -123,134 +265,36 @@ header #title-links a {
 #messages > .message:not(.chara-Narrator) > .timestamp {
   margin: -5px 15px -2px;
 }
+
+
+
+
+/**********************************************************
+ * roleplay chat page:
+ *   MESSAGE STREAM INFO BOXES
+ *
+ **********************************************************/
 #messages > .info {
+  font-size: 16px;
   text-align: center;
+  background-color: #E8EFFF;
+  margin: 20px;
+  padding: 5px 10px;
+  border: ridge 3px #003380;
 }
 #messages > .info ol {
   display: inline-block;
   text-align: left;
 }
 
-#character-menu {
-  position: fixed;
-  bottom: 0;
-  left: 5px;
-  right: 5px;
-  margin: auto;
-  max-width: 700px;
-  z-index: 300;
-  background: inherit;
-  border: dotted 1px #555;
-  margin: 20px auto 0;
-  padding: 15px 10px;
-}
-#character-menu h3 {
-  margin: 0 auto;
-}
-#characters {
-  display: block;
-  margin: 0 auto 20px;
-  max-width: 600px;
-}
-#characters > .character {
-  display: inline-block;
-  width: 135px;
-}
-#characters .chara-Narrator {
-  color: #555;
-}
-#characters > .character a {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin: 5px;
-  text-decoration: none;
-  box-shadow: 0 1px 2px #888;
-}
-#characters > .character a:hover {
-  opacity: 0.5;
-}
 
-#new-character {
-  border: dotted 1px #3c3c3c;
-  z-index: 600;
-  background-color: inherit;
-  position: fixed;
-  top: 25px;
-  left: 5px;
-  right: 5px;
-  margin: auto;
-  max-width: 350px;
-  padding: 0 25px;
-}
-#new-character input[type=submit] {
-  margin: 20px;
-  padding: 10px 20px;
-}
 
-.input-name, .input-container {
-  padding: 3px;
-}
-.input-name {
-  font-weight: bold;
-}
-.input-name::after {
-  content: ":";
-}
-.input-container input {
-  width: 100%;
-}
-@media all and (max-width: 425px) {
-  .input-name {
-    text-align: left;
-    padding-left: 20px;
-  }
-}
-@media not all and (max-width: 425px) {
-  .input-section {
-    display: table-row;
-  }
-  .input-name, .input-container {
-    display: table-cell;
-  }
-  .input-name {
-    padding-top: 6px;
-    padding-right: 10px;
-    vertical-align: top;
-    text-align: right;
-  }
-  .input-container {
-    width: 100%;
-  }
-}
-input,
-textarea {
-  font-family:serif;
-}
-input[type=text],
-textarea {
-  background-color: white;
-  border: solid 1px #555;
-  box-shadow: 0 1px 1px #555 inset;
-  padding: 3px;
-  margin: -3px;
-  font-size: 16px;
-  vertical-align: middle;
-}
-input[type=submit] {
-  font-size:18px;
-  background-color: #fff;
-  color: #222;
-  border:solid 1px #3c3c3c;
-  font-weight:bold;
-  box-shadow: 0 1px 2px #888;
-}
-input[type=submit]:hover {
-  cursor:pointer;
-  background-color:#3c3c3c;
-  box-shadow: 0 1px 10px #555;
-  color:#fafafa;
-}
+
+/**********************************************************
+ * roleplay chat page:
+ *   MESSAGE BOX
+ *
+ **********************************************************/
 #message-box {
   position: fixed;
   z-index: 200;
@@ -258,6 +302,7 @@ input[type=submit]:hover {
   left: 5px;
   right: 5px;
   margin: auto;
+  width: 100%;
   max-width: 700px;
   background: inherit;
   border: dotted 1px #555;
@@ -287,17 +332,100 @@ input[type=submit]:hover {
   height: 68px;
 }
 
+
+
+
+/**********************************************************
+ * roleplay chat page:
+ *   CHARACTER SELECT MENU
+ *
+ **********************************************************/
+#character-menu {
+  position: fixed;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  margin: auto;
+  max-width: 700px;
+  z-index: 300;
+  background: inherit;
+  border: dotted 1px #555;
+  margin: 20px auto 0;
+  padding: 15px 10px;
+}
+#character-menu > h3 {
+  margin: 0 auto;
+}
+#character-menu > ul {
+  display: block;
+  margin: 0 auto 20px;
+  padding-left: 0;
+  max-width: 600px;
+}
+#character-menu > ul > li {
+  display: inline-block;
+  width: 135px;
+  word-wrap: break-word;
+}
+#character-menu > ul > li > a {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin: 5px;
+  padding: 2px;
+  text-decoration: none;
+  box-shadow: 0 1px 2px #888;
+}
+#character-menu > ul > li > a.chara-Narrator {
+  color: #555;
+}
+#character-menu > ul > li > a:hover {
+  opacity: 0.5;
+}
+
+
+
+/**********************************************************
+ * roleplay chat page:
+ *   NEW CHARACTER POP-UP
+ *
+ **********************************************************/
+#new-character {
+  border: dotted 1px #3c3c3c;
+  z-index: 600;
+  background-color: inherit;
+  position: fixed;
+  top: 25px;
+  left: 5px;
+  right: 5px;
+  margin: auto;
+  max-width: 350px;
+  padding: 0 25px;
+}
+#new-character input[type=submit] {
+  margin: 20px;
+  padding: 10px 20px;
+}
+#new-character h3 {
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+
+
+
+/**********************************************************
+ * roleplay chat page:
+ *   MISC PAGE ELEMENTS
+ *
+ **********************************************************/
 .pages {
   margin: 20px;
 }
-
 ul#stats {
   display: inline-block;
   border: dotted 1px #555;
   margin: 0;
   padding: 20px;
   padding-left: 40px;
-}
-#stats li {
-  text-align: left;
 }

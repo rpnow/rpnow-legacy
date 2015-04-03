@@ -4,108 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RP Now</title>
-    <style>
-      body{
-        background-color:#fafafa;
-        color:#3c3c3c;
-        font-size:18px;
-        text-align: center;
-      }
-      h1{
-        margin: 25px auto 10px;
-        letter-spacing:3px;
-        word-spacing:2px;
-      }
-      p {
-        line-height: 1.6;
-        max-width: 650px;
-        margin: 18px auto;
-      }
-      #info {
-        margin: 18px auto;
-      }
-      form {
-        margin: 10px auto;
-        border: solid 1px #555;
-        padding: 30px;
-        box-shadow: 0 1px 3px #aaa;
-      }
-      .input-name, .input-container {
-        padding: 3px;
-      }
-      .input-name {
-        font-weight: bold;
-      }
-      .input-name::after {
-        content: ":";
-      }
-      input, textarea {
-        font-family:serif;
-      }
-      input[type=text], textarea {
-        width: 100%;
-        background-color: white;
-        border: solid 1px #555;
-        box-shadow: 0 1px 1px #555 inset;
-        padding: 3px;
-        font-size: 16px;
-      }
-      textarea {
-        resize: vertical;
-        min-height: 60px;
-      }
-      input[type=submit] {
-        font-size:18px;
-        margin-top:20px;
-        padding:6px 12px;
-        background-color: #fff;
-        color: #222;
-        border:solid 1px #3c3c3c;
-        border-radius:8px;
-        font-weight:bold;
-        box-shadow: 0 1px 2px #888;
-      }
-      input[type=submit]:hover {
-        cursor:pointer;
-        background-color:#3c3c3c;
-        box-shadow: 0 1px 10px #555;
-        color:#fafafa;
-      }
-      @media all and (max-width: 550px) {
-        .input-name {
-          text-align: left;
-          padding-left: 20px;
-        }
-      }
-      @media not all and (max-width: 550px) {
-        form {
-          width: 400px;
-        }
-        .input-section {
-          display: table-row;
-        }
-        .input-name, .input-container {
-          display: table-cell;
-        }
-        .input-name {
-          padding-top: 6px;
-          padding-right: 10px;
-          vertical-align: top;
-          text-align: right;
-        }
-        .input-container {
-          width: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="room.css">
   </head>
-  <body>
+  <body class="centered">
     <h1>Roleplay Now</h1>
     <p>Welcome! Here you can create a free, private chatroom specifically designed for roleplaying with small groups of friends. No registration required!</p>
     <p><a href="sample">Click here to see an example RP!</a></p> 
     <p>Just type a title (and optionally a description) for the RP and you're ready to start your adventures...</p>
-    <p></p>
-    <form action="create" method="post">
+    <form id="new-rp" class="form-box" action="create" method="post">
       <div class="input-section">
         <div class="input-name">Title</div>
         <div class="input-container"><input type="text" name="title" maxlength="30"></div>
