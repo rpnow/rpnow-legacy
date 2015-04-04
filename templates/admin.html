@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ADMIN - RP Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="room.css">
+  </head>
+  <body class="article">
+    <h1>ADMIN</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Msgs</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rp in rps %}
+        <tr>
+          <td><a href="{{ docroot }}{{ rp.ID }}">
+            {% if rp.Title is empty %}[{{ rp.ID }}]{% else %}{{ rp.Title }}{% endif %}
+          </a></td>
+          <td>{{ rp.Num_Msgs }}</td>
+          <td>{{ rp.Created }}</td>
+          <td>{{ rp.Updated }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

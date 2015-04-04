@@ -67,6 +67,26 @@ class Room {
     return new Room($conn, $id, $row['Title'], $row['Description'], $row['CharacterCount'], $row['MessageCount']);
   }
   
+  public static function AuditRooms() {
+    $conn = self::createConnection();
+    $result = $conn->query("SELECT
+    `Title`,
+    `ID`,
+    `Timestamp` AS `Created`,
+    (SELECT COALESCE(MAX(`Timestamp`), `Room`.`Timestamp`) FROM `Message` WHERE `Character_Room` = `ID`) AS `Updated`,
+    (SELECT COUNT(*) FROM `Message` WHERE `Character_Room` = `ID`) AS `Num_Msgs`
+    FROM `Room`
+    ORDER BY `Updated` DESC");
+    if(!$result) {
+      throw new Exception($conn->error);
+    }
+    $arr = [];
+    while ($row = $result->fetch_assoc()) {
+      $arr[] = $row;
+    }
+    return $arr;
+  }
+  
   public function close() {
     $this->db->commit();
     $this->db->close();
