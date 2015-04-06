@@ -35,12 +35,11 @@ Here is a general idea of what needs to be done:
 3. Retrieve the extra Views add-on for the Slim framework
 4. Retrieve the Twig templating engine
 5. Retrieve the HttpBasicAuth middleware from Slim-Extras and put it in the Slim/Middleware folder
-6. Retrieve the files for the Spectrum color picker
-7. Put these all in the correct locations in the directory
-8. Create a MySQL database and import the database in the /docs/ folder
-9. Give a user SELECT and INSERT permissions on that database
-10. Update config.php with the correct database information, as well as the path to the main folder
-11. If you have an SSL certificate for your site, uncomment the HTTPS segment in the .htaccess file
+6. Put these all in the correct locations in the directory
+7. Create a MySQL database and import the database in the /docs/ folder
+8. Give a user SELECT and INSERT permissions on that database
+9. Update config.php with the correct database information, as well as the path to the main folder
+10. If you have an SSL certificate for your site, uncomment the HTTPS segment in the .htaccess file
 
 ## License
 RP Now is licensed under the [GNU General Public License V3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.html).
