@@ -66,10 +66,6 @@ $app->get('/:id/', function ($id) use ($app) {
       'desc' => $room->getDesc(),
       'room' => $id,
       'fullUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}$rpRootPath$id",
-      'messages' => $room->getMessages('latest'),
-      'characters' => $room->getCharacters(),
-      'messageCount' => $room->getMessageCount(),
-      'characterCount' => $room->getCharacterCount(),
       'postsPerPage' => $rpPostsPerPage,
       'docroot' => $rpRootPath,
       'refreshMillis' => $rpRefreshMillis
@@ -81,6 +77,26 @@ $app->get('/:id/', function ($id) use ($app) {
     echo $e->getMessage();
   }
 });
+
+// Get room data
+$app->get('/:id/data/', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $data = array(
+      'messages' => $room->getMessages('latest'),
+      'characters' => $room->getCharacters(),
+      'messageCount' => $room->getMessageCount(),
+      'characterCount' => $room->getCharacterCount()
+    );
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode($data);
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+});
+
 
 // Archive
 $app->get('/:id/:page/', function ($id, $page) use ($app) {

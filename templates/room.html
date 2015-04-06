@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }} - RP Now</title>
     <link rel="stylesheet" type="text/css" href="{{ rproot }}room.css">
+    <script src='{{ rproot }}room.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='{{ rproot }}spectrum/spectrum.js'></script>
     <link rel='stylesheet' href='{{ rproot }}spectrum/spectrum.css' />
@@ -19,262 +20,94 @@
       {% endfor %}
     </style>
     <script>
-      // variables
-      var numMsg = {{ messageCount }};
-      var numChar = {{ characterCount }};
-      var timer = null;
-      // css name string for this character
-      function cssName(name) {
-        return 'chara-' + name.replace(/[^0-9a-zA-Z]/g, function(x) { return '-' + x.charCodeAt(0).toString(16).toUpperCase(); });
-      }
-      // function for when character button is clicked
+      var room;
+      
       function clickCharaButton(evt) {
-        $('#mb-name').val(evt.target.text.trim());
+        $('#message-box input[name=name]').val(evt.target.text.trim());
         $('#character-menu').slideUp(250);
         $('#message-box').slideDown(250);
         $('#message-box textarea').focus();
         evt.preventDefault();
       }
-      //nl2br equivalent modified from:
-      // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
-      function nl2br (str) {   
-        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+      
+      function showCharacterSelectMenu() {
+        $('#character-menu').stop().slideDown(250);
+        $('#message-box').slideUp(250);
       }
-      //cross-browser get height of document.
-      // http://james.padolsey.com/javascript/get-document-height-cross-browser/
-      function getDocHeight() {
-        var D = document;
-        return Math.max(
-            D.body.scrollHeight, D.documentElement.scrollHeight,
-            D.body.offsetHeight, D.documentElement.offsetHeight,
-            D.body.clientHeight, D.documentElement.clientHeight
-        );
-      }
-      //escape html special chars from AJAX updates
-      // http://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
-      function escapeHtml(text) {
-        var map = {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#039;'
-        };
-        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-      }
-      // fetch and apply character/message updates from server
-      function update() {
-        timer = null;
-        $.ajax({
-          type: 'GET',
-          url: '{{ room }}/updates',
-          data: { characters: numChar, messages: numMsg },
-          success: function(data) {
-            // update messages
-            for(var i = 0; i < data.messages.length; ++i) {
-              addMessageElement(data.messages[i])
-            }
-            // update characters
-            for(var i = 0; i < data.characters.length; ++i) {
-              addCharacterElement(data.characters[i]);
-            }
-            // show alerts maybe
-            if(data.messages.length > 0) {
-              flashTitle('* ' + data.messages[data.messages.length -1].Name + ' says...', 3);
-            }
-            // done. wait and then do this again
-            timer = setTimeout(update, {{ refreshMillis }});
-          }
+      
+      function showNewCharacterMenu() {
+        $('<div/>', { id:'overlay' }).appendTo('body');
+        $('#overlay').css({
+          position: 'fixed',
+          'background-color': 'rgba(0,0,0, 0.5)',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          'z-index': 599
         });
+        $('#new-character').show();
+        $('#new-character input[name=name]').focus();
       }
-      // cancel update timer and refresh now
-      function updateNow() {
-        if(timer) {
-          clearTimeout(timer);
-          update();
-        }
+      
+      function hideNewCharacterMenu() {
+        $('#overlay').remove();
+        $('#new-character').hide();
       }
-      // add a message element and adjust other things accordingly
-      function addMessageElement(message) {
-        var screenMsgs = $('.message').length;
-        // check if we're at the bottom of the page
-        var isAtBottom = $(window).scrollTop() + $(window).height() >= getDocHeight();
-        // remove empty-room message if it's there
-        if(screenMsgs === 0) {
-          $('#empty-room').remove();
-        }
-        // remove old messages if there's too many
-        else if(screenMsgs >= {{ postsPerPage }}) {
-          $('.message').slice(0,1).remove();
-          // maybe now show the "showing-latest" message
-          if(numMsg === {{ postsPerPage }}) {
-            $('#showing-latest').show();
-          }
-        }
-        // create and add element
-        $('<div/>', {
-          'class': 'message ' + cssName(message.Name)
-        }).append(
-          $('<div/>', {
-            'class': 'name',
-            text: message.Name
-          })
-        ).append(
-          $('<div/>', {
-            'class': 'timestamp',
-            'data-timestamp': message.Timestamp,
-            text: displayTimestamp(message.Timestamp)
-          })
-        ).append(
-          $('<div/>', {
-            'class': 'content',
-            html: nl2br(escapeHtml(message.Content))
-          })
-        ).appendTo('#messages');
-        // if we were at the bottom of the page, scroll down to bottom
-        if(isAtBottom) $('html, body').animate({scrollTop: $(document).height()}, 250);
-        // update counter
-        ++numMsg;
-      }
-      // add character button and character css
-      function addCharacterElement(character) {
-        //create and add element
-        $('<li/>', {}).append(
-          $('<a/>', {
-            href: '#',
-            'class': cssName(character.Name),
-            text: character.Name
-          })
-        ).insertAfter($('#character-menu li').last())
-        // ... and add click functionality
-        .click(clickCharaButton);
-        // as well as giving them css
-        $('head').append(
-          $('<style/>', {
-            text: '.' + cssName(character.Name)
-              + "{ background-color: " + character.Color + "; "
-              + "color: " + character.Contrast + "; }"
-          })
-        );
-        // update counter
-        ++numChar;
-      }
-      // text displayed in the timestamp field
-      function displayTimestamp(t) {
-        return moment.unix(t).calendar();
-      }
-      //timer function for the title bar
-      flashTitle = (function() {
-        var oldTitle = document.title;
-        var alertMsg = null;
-        var i = 0;
-        var informTimer = null;
-        function timerAction() {
-          if(i%2) document.title = oldTitle;
-          else document.title = alertMsg;
-          --i;
-          if(i >= 0) informTimer = setTimeout(timerAction, 500);
-        }
-        document.addEventListener('visibilitychange', function(evt) {
-          if(document.visibilityState === 'visible') {
-            clearTimeout(informTimer);
-            document.title = oldTitle;
-          }
+      
+      function sendMessage() {
+        // send message
+        room.send({
+          name: $('#message-box input[name=name]').val(),
+          content: $('#message-box textarea').val()
         });
-        return function(msg, flashes) {
-          if(document.visibilityState === 'visible') return;
-          i = (flashes===undefined? 1: flashes)*2;
-          if(informTimer) clearTimeout(informTimer);
-          alertMsg = msg;
-          timerAction(msg);
-        };
-      })();
+        // clear message box
+        $('#message-box textarea').val('');
+        // scroll to bottom if we're not there
+        $('html, body').animate({scrollTop: $(document).height()}, 250);
+      }
       
       $(document).ready(function() {
-        // display elements
+        
+        // hide certain elements
+        $('#message-box').hide();
+        $('#empty-room').hide();
         $('#new-character').hide();
         $('#character-menu').hide();
-        {% if messageCount <= postsPerPage %}
-          $('#showing-latest').hide();
-        {% endif %}
+        $('#showing-latest').hide();
         
-        // timer to fetch character/message updates
-        timer = setTimeout(update, {{ refreshMillis }});
-        
-        // update the timestamps every so often
-        function updateTimeAgo() {
-          $('#messages .message .timestamp').text(
-            function() { return displayTimestamp($(this).data().timestamp); }
-          );
-        }
-        updateTimeAgo();
-        setInterval(updateTimeAgo, 600000);
+        // create the room object
+        room = new RPRoom('{{ room }}', {{ postsPerPage }});
+        room.startUpdating({{ refreshMillis }});
         
         // button functions
-        $('#character-menu a').click(clickCharaButton);
-        $('#message-box button#change-character').click(function(evt) {
-          $('#character-menu').stop().slideDown(250);
-          $('#message-box').slideUp(250);
-          evt.preventDefault();
+        $('#message-box button#change-character').click(function(e) {
+          showCharacterSelectMenu();
+          e.preventDefault();
         });
-        $('#new-character-button').click(function(evt) {
-          $('<div/>', { id:'overlay' }).appendTo('body');
-          $('#overlay').css({
-            position: 'fixed',
-            'background-color': 'rgba(0,0,0, 0.5)',
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0,
-            'z-index': 599
-          });
-          $('#new-character').show();
-          $('#new-character input[name=name]').focus();
+        $('#new-character-button').click(showNewCharacterMenu);
+        $('#cancel-character').click(function(e) {
+          hideNewCharacterMenu();
+          e.preventDefault();
         });
-        $('#cancel-character').click(function(evt) {
-          $('#overlay').remove();
-          $('#new-character').hide();
-          evt.preventDefault();
-        });
-        $('#message-box').submit(function(evt) {
-          evt.preventDefault();
-          // send message
-          $.ajax({
-            type: 'POST',
-            url: '{{ room }}/send',
-            data: $('#message-box').serialize(),
-            success: updateNow
-          });
-          // clear message box
-          $('#message-box textarea').val('');
-          // scroll to bottom if we're not there
-          $('html, body').animate({scrollTop: $(document).height()}, 250);
+        $('#message-box').submit(function(e) {
+          sendMessage();
+          e.preventDefault();
         });
         $('#new-character').submit(function(evt) {
           evt.preventDefault();
-          //client side check to see if the character exists
+          // submit form
           var newName = $('#new-character input[name=name]').val().trim();
-          if(!newName) {
-            alert('Please enter a name.');
-            return;
-          }
           try {
-            $('.character a').each(function() {
-              if(newName === $(this).text().trim()) {
-                throw 'Character "' + newName + '" already exists!';
-              }
-            })
-          } catch(ex) {
-            alert(ex);
+            room.addCharacter({
+              name: newName,
+              color: $('#new-character input[name=color]').val()
+            });
+          }
+          catch(ex) {
+            alert(ex.message);
             return;
           }
-          //ok? let's submit it
-          $.ajax({
-            type: 'POST',
-            url: '{{ room }}/character',
-            data: $('#new-character').serialize(),
-            success: updateNow
-          });
           $('#new-character').hide();
           $('#overlay').remove();
           $('#character-menu').slideUp(250);
@@ -286,7 +119,7 @@
         $('#message-box textarea').keypress(function(evt) {
           if((evt.keyCode || evt.which) === 13 && !evt.shiftKey && !evt.ctrlKey) {
             evt.preventDefault();
-            $('#message-box input[type=submit]')[0].click();
+            sendMessage();
           }
         });
       });
@@ -299,37 +132,26 @@
         <p>These are the latest {{ postsPerPage }} posts.
         To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
       </div>
-      {% for message in messages %}
-        <div class="message {{ _self.cssClass(message) }}">
-          <div class="name">{{ message.Name }}</div>
-          <div class="timestamp" data-timestamp="{{ message.Timestamp }}"></div>
-          <div class="content">{{ message.Content|nl2br }}</div>
-        </div>
-      {% else %}
-        <div class="info" id="empty-room">
-          <p><b>Success!</b></p>
-          <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
-          <a href="{{ fullUrl }}">{{ fullUrl }}</a>
-          <p>Please keep the following things in mind, however:</p>
-          <ol>
-            <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
-            <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
-            <li><b>Don't post any sensitive information here!</b> In the event of a database breach, we would not want anything confidential to be lost.</li>
-            <li>RP Now is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
-          </ol>
-          <p>Have fun!</p>
-        </div>
-      {% endfor %}
+      <div class="info" id="empty-room">
+        <p><b>Success!</b></p>
+        <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
+        <a href="{{ fullUrl }}">{{ fullUrl }}</a>
+        <p>Please keep the following things in mind, however:</p>
+        <ol>
+          <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
+          <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
+          <li><b>Don't post any sensitive information here!</b> In the event of a database breach, we would not want anything confidential to be lost.</li>
+          <li>RP Now is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
+        </ol>
+        <p>Have fun!</p>
+      </div>
+      <div class="info" id="loading">
+        <p>Loading...</p>
+      </div>
     </div>
     <div id="character-menu">
       <h3>Characters</h3>
-      <ul>
-        {% for character in characters %}
-          <li><a href="#" class="{{ _self.cssClass(character) }}">
-            {{ character.Name }}
-          </a></li>
-        {% endfor %}
-      </ul>
+      <ul></ul>
       <button id="new-character-button">New Character...</button>
     </div>
     <form id="new-character" class="form-box" action="{{ room }}/character" method="post" autocomplete="off">
@@ -346,7 +168,7 @@
       <button id="cancel-character">Cancel</button>
     </form>
     <form id="message-box" action="{{ room }}/send" method="post" autocomplete="off">
-      <input type="text" name="name" id="mb-name" value="Narrator" readonly="readonly"></input>
+      <input type="text" name="name" value="Narrator" readonly="readonly"></input>
       <button id="change-character">Change...</button>
       <div id="message-bar">
         <div id="message-text">

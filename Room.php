@@ -64,7 +64,7 @@ class Room {
       throw new Exception("Room '$id' does not exist.");
     }
     $row = $result->fetch_assoc();
-    return new Room($conn, $id, $row['Title'], $row['Description'], $row['CharacterCount'], $row['MessageCount']);
+    return new Room($conn, $id, $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
   }
   
   public static function AuditRooms() {
@@ -167,11 +167,13 @@ class Room {
     // calculate the secondary color for each and return in modified array
     return array_map(
       function($x) {
-        //YIQ algorithm retrieved from:
+        //YIQ algorithm modified from:
         // http://24ways.org/2010/calculating-color-contrast/
-        $r = hexdec(substr($x['Color'],1,2));
-        $g = hexdec(substr($x['Color'],3,2));
-        $b = hexdec(substr($x['Color'],5,2));
+        $prec = floor(strlen($x['Color']) / 3);
+        $mult = $prec == 1 ? 17: 1;
+        $r = hexdec(substr($x['Color'],1+$prec*0,$prec))*$mult;
+        $g = hexdec(substr($x['Color'],1+$prec*1,$prec))*$mult;
+        $b = hexdec(substr($x['Color'],1+$prec*2,$prec))*$mult;
         $yiq = (($r*299)+($g*587)+($b*114))/1000;
         return array(
           'Name' => $x['Name'],
