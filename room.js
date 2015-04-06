@@ -82,7 +82,6 @@ function RPRoom(reqUrl, postsPerPage) {
           var isAtBottom = $(window).scrollTop() + $(window).height() >= getDocHeight();
           // add the messages
           for(var i = 0; i < data.messages.length; ++i) {
-            console.log(data.messages);
             addMessageElement(data.messages[i]);
           }
           // if we were at the bottom of the page, scroll down to bottom
@@ -144,7 +143,7 @@ function RPRoom(reqUrl, postsPerPage) {
     ).append(
       $('<div/>', {
         'class': 'content',
-        html: nl2br(escapeHtml(message.Content))
+        html: formatMessage(message.Content)
       })
     ).appendTo('#messages');
   }
@@ -175,7 +174,6 @@ function RPRoom(reqUrl, postsPerPage) {
   }
   
   this.send = function(data) {
-    console.log(data);
     $.ajax({
       type: 'POST',
       url: reqUrl + '/send',
@@ -211,19 +209,29 @@ function RPRoom(reqUrl, postsPerPage) {
 function cssName(name) {
   return 'chara-' + name.replace(/[^0-9a-zA-Z]/g, function(x) { return '-' + x.charCodeAt(0).toString(16).toUpperCase(); });
 }
-//nl2br equivalent modified from:
-// http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
-function nl2br (str) {   
-  return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+// format string to have minimal markdown
+function formatMessage(str) {
+  // escape special characters
+  str = escapeHtml(str);
+  // asterisks -> bold
+  str = str.replace(/\*([^\*\r\n_]+)\*/g, '<b>$1</b>');
+  // underscore -> italix
+  str = str.replace(/_([^\*\r\n_]+)_/g, '<i>$1</i>');
+  // line breaks
+  // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
+  str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+  
+  // done.
+  return str;
 }
 //cross-browser get height of document.
 // http://james.padolsey.com/javascript/get-document-height-cross-browser/
 function getDocHeight() {
   var D = document;
   return Math.max(
-      D.body.scrollHeight, D.documentElement.scrollHeight,
-      D.body.offsetHeight, D.documentElement.offsetHeight,
-      D.body.clientHeight, D.documentElement.clientHeight
+    D.body.scrollHeight, D.documentElement.scrollHeight,
+    D.body.offsetHeight, D.documentElement.offsetHeight,
+    D.body.clientHeight, D.documentElement.clientHeight
   );
 }
 //escape html special chars from AJAX updates
