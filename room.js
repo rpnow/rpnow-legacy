@@ -262,13 +262,21 @@ function cssName(name) {
 function formatMessage(str, name) {
   // escape special characters
   str = escapeHtml(str);
+  // urls
+  // http://stackoverflow.com/a/3890175
+  str = str.replace(
+    /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim,
+    '<a href="$1" target="_blank">$1</a>'
+  );
   // actions
   str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action ' + cssName(name) + '">*$1*</span>');
   // bold
-  str = str.replace(/__([^\r\n_]+)__/g, '<b>$1</b>');
+  str = str.replace(/(^|\s)__([^\r\n_]+)__(\s|$)/g, '$1<b>$2</b>$3');
   // italix
-  str = str.replace(/_([^\r\n_]+)_/g, '<i>$1</i>');
-  str = str.replace(/\/([^\r\n\/>]+)\//g, '<i>$1</i>');
+  str = str.replace(/(^|\s)_([^\r\n_]+)_(\s|$)/g, '$1<i>$2</i>$3');
+  str = str.replace(/(^|\s)\/([^\r\n\/>]+)\/(\s|$)/g, '$1<i>$2</i>$3');
+  // both!
+  str = str.replace(/(^|\s)___([^\r\n_]+)___(\s|$)/g, '$1<b><i>$2</i></b>$3');
   // line breaks
   // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
   str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
