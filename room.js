@@ -1,9 +1,16 @@
-function RPRoom(reqUrl, postsPerPage) {
+
+/*****
+ * MAIN ROOM CLASS *
+               *****/
+//
+
+function RPRoom(reqUrl) {
   // robustness
   if(!reqUrl) throw new Error('No room specified.');
   
   // variables
   var interval = null;
+  var postsPerPage = null;
   
   var self = this;
   var numMsg = 0;
@@ -11,12 +18,14 @@ function RPRoom(reqUrl, postsPerPage) {
   var timer = null;
   var charList = [];
   
-  // get the latest posts
-  this.loadLatest = function(callback) {
+  // get latest posts and refresh
+  this.loadFeed = function(myInterval) {
     $.ajax({
       type: 'GET',
-      url: reqUrl + '/data',
+      url: reqUrl + '/ajax/latest',
       success: function(data) {
+        // ppp
+        postsPerPage = data.postsPerPage;
         // add messages
         for(var i = 0; i < data.messages.length; ++i) {
           addMessageElement(data.messages[i]);
@@ -24,6 +33,8 @@ function RPRoom(reqUrl, postsPerPage) {
         // add characters
         for(var i = 0; i < data.characters.length; ++i) {
           addCharacterElement(data.characters[i]);
+          addCharacterCSS(data.characters[i]);
+          charList.push(data.characters[i].Name);
         }
         // initialize counters
         numMsg = data.messageCount;
@@ -37,11 +48,14 @@ function RPRoom(reqUrl, postsPerPage) {
           $('#empty-room').show();
         }
         $('#message-box').slideDown(250);
-        // done.
-        callback();
+        // start updating
+        interval = myInterval;
+        timer = setTimeout(ajaxUpdate, interval);
+        // additionally update the timestamps every so often
+        updateTimeAgo();
       }
     });
-  }
+  };
   
   // cancel update timer and refresh now
   this.updateNow = function() {
@@ -50,30 +64,38 @@ function RPRoom(reqUrl, postsPerPage) {
       clearTimeout(timer);
       ajaxUpdate();
     }
-  }
+  };
   
-  // begin updating!
-  this.startUpdating = function(myInterval) {
-    // check to see if we're already fetching updates
-    if(interval) throw new Error('already updating!');
-    if(!(myInterval > 0)) throw new Error('bad inverval.');
-    // set interval
-    interval = myInterval;
-    // update on a timer
-    self.loadLatest(function() {
-      timer = setTimeout(ajaxUpdate, interval);
-      // additionally update the timestamps every so often
-      updateTimeAgo();
-      setInterval(updateTimeAgo, 600000);
+  // load specified page
+  this.loadPage = function(num) {
+    $.ajax({
+      type: 'GET',
+      url: reqUrl + '/ajax/' + num,
+      success: function(data) {
+        // ppp
+        postsPerPage = data.postsPerPage;
+        // add messages
+        for(var i = 0; i < data.messages.length; ++i) {
+          addMessageElement(data.messages[i]);
+        }
+        // add characters
+        for(var i = 0; i < data.characters.length; ++i) {
+          addCharacterCSS(data.characters[i]);
+        }
+        // remove loading message
+        $('#loading').hide();
+        // update the timestamps every so often
+        updateTimeAgo();
+      }
     });
-  }
+  };
   
   // fetch and apply character/message updates from server
   function ajaxUpdate() {
     timer = null;
     $.ajax({
       type: 'GET',
-      url: reqUrl + '/updates',
+      url: reqUrl + '/ajax/updates',
       data: { characters: numChar, messages: numMsg },
       success: function(data) {
         // update messages
@@ -85,11 +107,13 @@ function RPRoom(reqUrl, postsPerPage) {
             addMessageElement(data.messages[i]);
           }
           // if we were at the bottom of the page, scroll down to bottom
-          if(isAtBottom) $('html, body').animate({scrollTop: getDocHeight()}, 250);
+          if(isAtBottom) $('html, body').stop().animate({scrollTop: getDocHeight()}, 250);
         }
         // update characters
         for(var i = 0; i < data.characters.length; ++i) {
           addCharacterElement(data.characters[i]);
+          addCharacterCSS(data.characters[i]);
+          charList.push(data.characters[i].Name);
         }
         // update counters
         numMsg += data.messages.length;
@@ -109,6 +133,7 @@ function RPRoom(reqUrl, postsPerPage) {
     $('#messages .message .timestamp').text(
       function() { return displayTimestamp($(this).data().timestamp); }
     );
+    setInterval(updateTimeAgo, 600000);
   }
   
   // add a message element and adjust other things accordingly
@@ -159,6 +184,8 @@ function RPRoom(reqUrl, postsPerPage) {
     ).appendTo('#character-menu ul')
     // ... and add click functionality
     .click(clickCharaButton);
+  }
+  function addCharacterCSS(character) {
     // as well as giving them css (unless Narrator)
     if(character.Name !== 'Narrator') {
       $('head').append(
@@ -169,18 +196,16 @@ function RPRoom(reqUrl, postsPerPage) {
         })
       );
     }
-    // remember that character!
-    charList.push(character.Name);
   }
   
   this.send = function(data) {
     $.ajax({
       type: 'POST',
-      url: reqUrl + '/send',
+      url: reqUrl + '/ajax/send',
       data: data,
       success: function() { self.updateNow(); }
     });
-  }
+  };
   this.addCharacter = function(data) {
     if(!data.name) {
       throw new Error('Please enter a name.');
@@ -190,12 +215,37 @@ function RPRoom(reqUrl, postsPerPage) {
     }
     $.ajax({
       type: 'POST',
-      url:  reqUrl + '/character',
+      url:  reqUrl + '/ajax/character',
       data: data,
       success: function() { self.updateNow(); }
     });
-  }
+  };
 }
+
+
+
+
+/*****
+ * ENCLOSE CLASS IN A FACTORY *
+                          *****/
+//
+
+var RPRoom = (function() {
+  var _class = RPRoom;
+  var _last = null;
+  
+  return function() {
+    if(arguments.length === 1) {
+      if(_last) throw new Error('Already connected to a room.');
+      _last = new _class(arguments[0]);
+    }
+    if(_last === null) {
+      throw new Error('Please specify room ID.');
+    }
+    return _last;
+  }
+})();
+
 
 
 
@@ -203,7 +253,6 @@ function RPRoom(reqUrl, postsPerPage) {
  * MISC FUNCTIONS *
               *****/
 //
-
 
 // css name string for this character
 function cssName(name) {

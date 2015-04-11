@@ -66,7 +66,6 @@ $app->get('/:id/', function ($id) use ($app) {
       'desc' => $room->getDesc(),
       'room' => $id,
       'fullUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}$rpRootPath$id",
-      'postsPerPage' => $rpPostsPerPage,
       'docroot' => $rpRootPath,
       'refreshMillis' => $rpRefreshMillis
     ));
@@ -78,15 +77,57 @@ $app->get('/:id/', function ($id) use ($app) {
   }
 });
 
-// Get room data
-$app->get('/:id/data/', function ($id) use ($app) {
+
+// Archive
+$app->get('/:id/:page/', function ($id, $page) use ($app) {
   try {
+    global $rpRootPath, $rpPostsPerPage;
+    $room = Room::GetRoom($id);
+    $app->view()->setData(array(
+      'title' => $room->getTitle(),
+      'desc' => $room->getDesc(),
+      'room' => $id,
+      'numpages' => $room->getNumPages(),
+      'page' => $page,
+      'docroot' => $rpRootPath,
+      'postsPerPage' => $rpPostsPerPage
+    ));
+    $room->close();
+    $app->render('archive.html');
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+})->conditions(array('page' => '[1-9][0-9]{0,}'));
+
+// Get archive page data
+$app->get('/:id/ajax/:page/', function ($id, $page) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $data = array(
+      'messages' => $room->getMessages('page', $page),
+      'characters' => $room->getCharacters()
+    );
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode($data);
+  }
+  catch(Exception $e) {
+    echo $e->getMessage();
+  }
+})->conditions(array('page' => '[1-9][0-9]{0,}'));
+
+// Get latest posts for room
+$app->get('/:id/ajax/latest/', function ($id) use ($app) {
+  try {
+    global $rpPostsPerPage;
     $room = Room::GetRoom($id);
     $data = array(
       'messages' => $room->getMessages('latest'),
       'characters' => $room->getCharacters(),
       'messageCount' => $room->getMessageCount(),
-      'characterCount' => $room->getCharacterCount()
+      'characterCount' => $room->getCharacterCount(),
+      'postsPerPage' => $rpPostsPerPage
     );
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
@@ -97,29 +138,60 @@ $app->get('/:id/data/', function ($id) use ($app) {
   }
 });
 
-
-// Archive
-$app->get('/:id/:page/', function ($id, $page) use ($app) {
+// Receive room updates
+$app->get('/:id/ajax/updates/', function ($id) use ($app) {
   try {
-    global $rpRootPath;
     $room = Room::GetRoom($id);
-    $app->view()->setData(array(
-      'title' => $room->getTitle(),
-      'desc' => $room->getDesc(),
-      'room' => $id,
-      'messages' => $room->getMessages('page', $page),
-      'characters' => $room->getCharacters(),
-      'numpages' => $room->getNumPages(),
-      'page' => $page,
-      'docroot' => $rpRootPath
-    ));
+    $data = array(
+      'messages' => $room->getMessages('after', $app->request()->get('messages')),
+      'characters' => $room->getCharacters($app->request()->get('characters'))
+    );
     $room->close();
-    $app->render('archive.html');
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode($data);
   }
   catch(Exception $e) {
     echo $e->getMessage();
   }
-})->conditions(array('page' => '[1-9][0-9]{0,}'));
+});
+
+// Send message to room
+$app->post('/:id/ajax/send/', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $room->send(
+      $app->request()->post('name'),
+      $app->request()->post('content')
+    );
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'OK'));
+  }
+  catch(Exception $e) {
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
+  }
+});
+
+// Add character to room
+$app->post('/:id/ajax/character/', function ($id) use ($app) {
+  try {
+    $room = Room::GetRoom($id);
+    $room->addCharacter(
+      $app->request()->post('name'),
+      $app->request()->post('color')
+    );
+    $room->close();
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'OK'));
+  }
+  catch(Exception $e) {
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
+  }
+});
 
 // Sample room!
 $app->get('/sample/', function () use ($app) {
@@ -189,61 +261,6 @@ $app->get('/sample/', function () use ($app) {
     'docroot' => $rpRootPath
   ));
   $app->render('archive.html');
-});
-
-// Receive room updates
-$app->get('/:id/updates/', function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $data = array(
-      'messages' => $room->getMessages('after', $app->request()->get('messages')),
-      'characters' => $room->getCharacters($app->request()->get('characters'))
-    );
-    $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode($data);
-  }
-  catch(Exception $e) {
-    echo $e->getMessage();
-  }
-});
-
-// Send message to room
-$app->post('/:id/send/', function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $room->send(
-      $app->request()->post('name'),
-      $app->request()->post('content')
-    );
-    $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'OK'));
-  }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
-  }
-});
-
-// Add character to room
-$app->post('/:id/character/', function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $room->addCharacter(
-      $app->request()->post('name'),
-      $app->request()->post('color')
-    );
-    $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'OK'));
-  }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
-  }
 });
 
 // Generate some statistics for the room

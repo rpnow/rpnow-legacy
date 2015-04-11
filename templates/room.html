@@ -11,8 +11,6 @@
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.css' />
     <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
     <script>
-      var room;
-      
       function clickCharaButton(evt) {
         $('#message-box input[name=name]').val(evt.target.text.trim());
         $('#character-menu').slideUp(250);
@@ -48,7 +46,7 @@
       
       function sendMessage() {
         // send message
-        room.send({
+        RPRoom().send({
           name: $('#message-box input[name=name]').val(),
           content: $('#message-box textarea').val()
         });
@@ -68,8 +66,7 @@
         $('#showing-latest').hide();
         
         // create the room object
-        room = new RPRoom('{{ room }}', {{ postsPerPage }});
-        room.startUpdating({{ refreshMillis }});
+        RPRoom('{{ room }}').loadFeed({{ refreshMillis }});
         
         // button functions
         $('#message-box button#change-character').click(function(e) {
@@ -90,7 +87,7 @@
           // submit form
           var newName = $('#new-character input[name=name]').val().trim();
           try {
-            room.addCharacter({
+            RPRoom().addCharacter({
               name: newName,
               color: $('#new-character input[name=color]').val()
             });
@@ -145,7 +142,7 @@
       <ul></ul>
       <button id="new-character-button">New Character...</button>
     </div>
-    <form id="new-character" class="form-box" action="{{ room }}/character" method="post" autocomplete="off">
+    <form id="new-character" class="form-box" autocomplete="off">
       <h3>New Character</h3>
       <div class="input-section">
         <div class="input-name">Name</div>
@@ -158,7 +155,7 @@
       <input type="submit" value="Add"></input>
       <button id="cancel-character">Cancel</button>
     </form>
-    <form id="message-box" action="{{ room }}/send" method="post" autocomplete="off">
+    <form id="message-box" autocomplete="off">
       <input type="text" name="name" value="Narrator" readonly="readonly"></input>
       <button id="change-character">Change...</button>
       <div id="message-bar">

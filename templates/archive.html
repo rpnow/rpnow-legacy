@@ -1,4 +1,3 @@
-{% macro cssClass(character) %}chara-{{ character.Name|e('css')|replace({' ':''})|replace({'\\':'-'}) }}{% endmacro %}
 <!doctype html>
 <html>
   <head>
@@ -6,30 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>[PAGE {{ page }}] {{ title }} - RP Now</title>
     <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
-    <style>
-      {% for character in characters if character.Name != "Narrator" %}
-        .{{ _self.cssClass(character) }} {
-          background-color: {{ character.Color }};
-          color: {{ character.Contrast }};
-        }
-      {% endfor %}
-    </style>
+    {% if numpages > 0 %}
+    <script src='{{ docroot }}room.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+    <script>
+      $(document).ready(function() {
+        RPRoom('{{ docroot }}{{ room }}').loadPage({{ page }});
+      });
+    </script>
+    {% endif %}
   </head>
   <body>
     {% include 'title.html' %}
     {% if numpages == 0 %}
-      <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
+    <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
     {% else %}
-      {% include 'pages.html' %}
-      <div id="messages">
-        {% for message in messages %}
-          <div class="message {{ _self.cssClass(message) }}">
-            <div class="name">{{ message.Name }}</div>
-            <div class="content">{{ message.Content|nl2br }}</div>
-          </div>
-        {% endfor %}
+    {% include 'pages.html' %}
+    <div id="messages">
+      <div class="info" id="loading">
+        <p>Loading...</p>
       </div>
-      {% include 'pages.html' %}
+    </div>
+    {% include 'pages.html' %}
     {% endif %}
   </body>
 </html>
