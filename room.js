@@ -271,12 +271,12 @@ function formatMessage(str, name) {
   // actions
   str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action ' + cssName(name) + '">*$1*</span>');
   // bold
-  str = str.replace(/(^|\s)__([^\r\n_]+)__(\s|$)/g, '$1<b>$2</b>$3');
+  str = str.replace(/(^|\s|(?:&quot;))__([^\r\n_]+)__([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b>$2</b>$3');
   // italix
-  str = str.replace(/(^|\s)_([^\r\n_]+)_(\s|$)/g, '$1<i>$2</i>$3');
-  str = str.replace(/(^|\s)\/([^\r\n\/>]+)\/(\s|$)/g, '$1<i>$2</i>$3');
+  str = str.replace(/(^|\s|(?:&quot;))_([^\r\n_]+)_([\s,\.\?!]|(?:&quot;)|$)/g, '$1<i>$2</i>$3');
+  str = str.replace(/(^|\s|(?:&quot;))\/([^\r\n\/>]+)\/([\s,\.\?!]|(?:&quot;)|$)/g, '$1<i>$2</i>$3');
   // both!
-  str = str.replace(/(^|\s)___([^\r\n_]+)___(\s|$)/g, '$1<b><i>$2</i></b>$3');
+  str = str.replace(/(^|\s|(?:&quot;))___([^\r\n_]+)___([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b><i>$2</i></b>$3');
   // line breaks
   // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
   str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
