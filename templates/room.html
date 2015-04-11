@@ -1,4 +1,3 @@
-{% macro cssClass(character) %}chara-{{ character.Name|e('css')|replace({' ':''})|replace({'\\':'-'}) }}{% endmacro %}
 <!doctype html>
 <html>
   <head>
@@ -11,14 +10,6 @@
     <script src='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.js'></script>
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.css' />
     <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
-    <style>
-      {% for character in characters if character.Name != "Narrator" %}
-        .{{ _self.cssClass(character) }} {
-          background-color: {{ character.Color }};
-          color: {{ character.Contrast }};
-        }
-      {% endfor %}
-    </style>
     <script>
       var room;
       
