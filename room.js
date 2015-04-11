@@ -143,7 +143,7 @@ function RPRoom(reqUrl, postsPerPage) {
     ).append(
       $('<div/>', {
         'class': 'content',
-        html: formatMessage(message.Content)
+        html: formatMessage(message.Content, message.Name)
       })
     ).appendTo('#messages');
   }
@@ -210,13 +210,16 @@ function cssName(name) {
   return 'chara-' + name.replace(/[^0-9a-zA-Z]/g, function(x) { return '-' + x.charCodeAt(0).toString(16).toUpperCase(); });
 }
 // format string to have minimal markdown
-function formatMessage(str) {
+function formatMessage(str, name) {
   // escape special characters
   str = escapeHtml(str);
-  // asterisks -> bold
-  str = str.replace(/\*([^\*\r\n_]+)\*/g, '<b>$1</b>');
-  // underscore -> italix
-  str = str.replace(/_([^\*\r\n_]+)_/g, '<i>$1</i>');
+  // actions
+  str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action ' + cssName(name) + '">*$1*</span>');
+  // bold
+  str = str.replace(/__([^\r\n_]+)__/g, '<b>$1</b>');
+  // italix
+  str = str.replace(/_([^\r\n_]+)_/g, '<i>$1</i>');
+  str = str.replace(/\/([^\r\n\/>]+)\//g, '<i>$1</i>');
   // line breaks
   // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
   str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');

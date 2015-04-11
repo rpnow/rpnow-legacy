@@ -226,11 +226,9 @@ header #title-links a {
   border: dotted 1px #bbb;
   padding: 5px;
   text-align: center;
-  font-style: italic;
 }
 #messages > .chara-Narrator > .content::first-letter {
   font-size: 125%;
-  font-style: normal;
 } 
 #messages > .chara-Narrator > .timestamp {
   margin: -5px 28px -2px;
@@ -267,6 +265,13 @@ header #title-links a {
   border-radius: 12px;
   border-bottom-left-radius: 0;
   box-shadow: 0 1px 2px #888 inset;
+}
+#messages > .message:not(.chara-Narrator) > .content span.action {
+  font-size: 80%;
+  padding: 0.3em;
+  border-radius: 4px;
+  opacity: 0.8;
+  box-shadow: 0 1px 1px #3c3c3c;
 }
 #messages > .message:not(.chara-Narrator) > .timestamp {
   margin: -5px 15px -2px;
