@@ -199,6 +199,16 @@ $app->get('/sample/', function () use ($app) {
   $app->view()->setData(array(
     'title' => 'Sample Roleplay',
     'desc' => 'This is what an RP will look like!',
+    'room' => 'sample',
+    'hidemenu' => true,
+    'numpages' => 1,
+    'page' => 1,
+    'docroot' => $rpRootPath
+  ));
+  $app->render('archive.html');
+});
+$app->get('/sample/ajax/1', function () use ($app) {
+  $data = array(
     'characters' => array(
       array('Name' => 'Cool Character', 'Color' => '#7ad7e7', 'Contrast' => 'black'),
       array('Name' => 'Dog', 'Color' => '#dcc6a7', 'Contrast' => 'black'),
@@ -255,12 +265,14 @@ $app->get('/sample/', function () use ($app) {
       array('Name' => 'Narrator', 'Content' =>
         "Thanks for reading! Now go back and make an RP!",
       )
-    ),
-    'hidemenu' => true,
-    'numpages' => 1,
-    'docroot' => $rpRootPath
-  ));
-  $app->render('archive.html');
+    )
+  );
+  foreach($data['messages'] as &$m) {
+    $d = new DateTime();
+    $m['Timestamp'] = $d->getTimestamp();
+  }
+  $app->response->headers->set('Content-Type', 'application/json');
+  echo json_encode($data);
 });
 
 // Generate some statistics for the room
