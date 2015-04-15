@@ -1,9 +1,9 @@
 <?php
 require_once 'config.php';
 require_once 'Room.php';
-require_once 'Slim/Slim.php';
-require_once 'Slim/Middleware.php';
-require_once 'Slim/Middleware/HttpBasicAuth.php';
+require_once 'lib/Slim/Slim.php';
+require_once 'lib/Slim/Middleware.php';
+require_once 'lib/Slim/Middleware/HttpBasicAuth.php';
 use Slim\Slim;
 use Slim\Extras\Middleware\HttpBasicAuth;
 
