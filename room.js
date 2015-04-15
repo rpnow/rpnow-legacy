@@ -17,6 +17,7 @@ function RPRoom(reqUrl) {
   var numChar = 0;
   var timer = null;
   var charList = [];
+  var alertNoise = new Audio('alert.mp3');
   
   // get latest posts and refresh
   this.loadFeed = function(myInterval) {
@@ -119,8 +120,9 @@ function RPRoom(reqUrl) {
         numMsg += data.messages.length;
         numChar += data.characters.length;
         // show alerts maybe
-        if(data.messages.length > 0) {
+        if(data.messages.length > 0 && document.visibilityState === 'hidden') {
           flashTitle('* ' + data.messages[data.messages.length -1].Name + ' says...', 3);
+          alertNoise.play();
         }
         // done. wait and then do this again
         timer = setTimeout(ajaxUpdate, interval);
