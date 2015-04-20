@@ -210,30 +210,50 @@ header #title-links a {
   line-height: 1.6;
 }
 #messages > .message > .timestamp {
-  font-size: smaller;
+  font-size: 90%;
   opacity: 0.5;
   text-align: right;
 }
-#messages > .chara-Narrator {
+#messages > .message-narrator {
   background-color: #fff;
   box-shadow: 0 1px 1px #bbb;
   padding: 5px;
 }
-#messages > .chara-Narrator > .name {
-  display: none;
-}
-#messages > .chara-Narrator > .content {
+#messages > .message-narrator > .content {
   border: dotted 1px #bbb;
   padding: 5px;
   text-align: center;
 }
-#messages > .chara-Narrator > .content::first-letter {
+#messages > .message-narrator > .content::first-letter {
   font-size: 125%;
 } 
-#messages > .chara-Narrator > .timestamp {
+#messages > .message-narrator > .timestamp {
   margin: -5px 28px -2px;
 }
-#messages > .message:not(.chara-Narrator) {
+#messages > .message-ooc {
+  background-color: #707070;
+  box-shadow: 0 0 2px #555;
+  color: #eee;
+  margin: 0 15px;
+  padding: 0 5px;
+}
+#messages > .message-ooc:nth-of-type(2n+1) {
+  background-color: #7a7a7a;
+}
+#messages > .message-ooc + .message-narrator,
+#messages > .message-narrator + .message-ooc {
+  margin-top: 8px;
+}
+#messages > .message-ooc > .timestamp {
+  display: inline;
+  opacity: 0.66;
+}
+#messages > .message-ooc > .timestamp::before { content: '[ '; }
+#messages > .message-ooc > .timestamp::after { content: ' ] '; }
+#messages > .message-ooc > .content {
+  display: inline;
+}
+#messages > .message-chara {
   margin: 10px;
   margin-top: 22px;
   padding: 6px 8px 10px;
@@ -243,7 +263,7 @@ header #title-links a {
   position: relative;
   max-width: 100%;
 }
-#messages > .message:not(.chara-Narrator) > .name{
+#messages > .message-chara > .name{
   display: inline-block;
   position: absolute;
   left: 25px;
@@ -257,7 +277,7 @@ header #title-links a {
   z-index: 100;
   box-shadow: 0 1px 2px #555;
 }
-#messages > .message:not(.chara-Narrator) > .content {
+#messages > .message-chara > .content {
   background-color: white;
   color: black;
   opacity: 0.9;
@@ -266,14 +286,14 @@ header #title-links a {
   border-bottom-left-radius: 0;
   box-shadow: 0 1px 2px #888 inset;
 }
-#messages > .message:not(.chara-Narrator) > .content span.action {
+#messages > .message-chara > .content span.action {
   font-size: 80%;
   padding: 0.3em;
   border-radius: 4px;
   opacity: 0.8;
   box-shadow: 0 1px 1px #3c3c3c;
 }
-#messages > .message:not(.chara-Narrator) > .timestamp {
+#messages > .message-chara > .timestamp {
   margin: -5px 15px -2px;
 }
 
@@ -370,29 +390,59 @@ header #title-links a {
 #character-menu > ul {
   display: block;
   margin: 0 auto 20px;
-  padding-left: 0;
+  padding-left: 5px;
   max-width: 600px;
+}
+#character-menu > ul#normal-characters {
+  border: dotted 1px #bbb;
 }
 #character-menu > ul > li {
   display: inline-block;
-  width: 135px;
   word-wrap: break-word;
+  width: 135px;
+  margin: 5px;
+  padding: 0;
 }
 #character-menu > ul > li > a {
   display: block;
+  padding: 2px;
   text-align: center;
   font-weight: bold;
-  margin: 5px;
-  padding: 2px;
   text-decoration: none;
+  border-radius: 4px;
   box-shadow: 0 1px 2px #888;
-}
-#character-menu > ul > li > a.chara-Narrator {
-  color: #555;
 }
 #character-menu > ul > li > a:hover {
   opacity: 0.5;
 }
+#character-menu > ul#special-characters > li {
+  width: 155px;
+  box-shadow: 0 1px 2px #888;
+}
+#character-menu > ul#special-characters > li > a {
+  border-radius: 0;
+  box-shadow: none;
+}
+#character-menu > ul > li#narrator-button {
+  background-color: #fff;
+  padding: 5px;
+}
+#character-menu > ul > li#narrator-button > a {
+  color: #555;
+  border: dotted 1px #bbb;
+  border-radius: 0;
+  box-shadow: none;
+}
+#character-menu > ul > li#ooc-button {
+  background-color: #3c3c3c;
+}
+#character-menu > ul > li#ooc-button > a {
+  font-size: 75%;
+  line-height: 1.5;
+  padding: 10px;
+  color: #bbb;
+}
+
 
 
 

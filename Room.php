@@ -42,7 +42,6 @@ class Room {
     $title = $conn->real_escape_string($title);
     $desc = $conn->real_escape_string($desc);
     $conn->query("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES ('$id', '$title', '$desc')");
-    $conn->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('Narrator', '$id', '#ddd')");
     return new Room($conn, $id, $title, $desc, 1, 0);
   }
   
@@ -59,7 +58,7 @@ class Room {
     (SELECT `Title` FROM `Room` WHERE `ID` = '$id') AS `Title`,
     (SELECT `Description` FROM `Room` WHERE `ID` = '$id') AS `Description`,
     (SELECT COUNT(*) FROM `Character` WHERE `Room` = '$id') AS `CharacterCount`,
-    (SELECT COUNT(*) FROM `Message` WHERE `Character_Room` = '$id') AS `MessageCount`");
+    (SELECT COUNT(*) FROM `Message` WHERE `Room` = '$id') AS `MessageCount`");
     if($result->num_rows == 0) {
       throw new Exception("Room '$id' does not exist.");
     }
@@ -73,8 +72,8 @@ class Room {
     `Title`,
     `ID`,
     `Timestamp` AS `Created`,
-    (SELECT COALESCE(MAX(`Timestamp`), `Room`.`Timestamp`) FROM `Message` WHERE `Character_Room` = `ID`) AS `Updated`,
-    (SELECT COUNT(*) FROM `Message` WHERE `Character_Room` = `ID`) AS `Num_Msgs`
+    (SELECT COALESCE(MAX(`Timestamp`), `Room`.`Timestamp`) FROM `Message` WHERE `Room` = `ID`) AS `Updated`,
+    (SELECT COUNT(*) FROM `Message` WHERE `Room` = `ID`) AS `Num_Msgs`
     FROM `Room`
     ORDER BY `Updated` DESC");
     if(!$result) {
@@ -118,10 +117,19 @@ class Room {
     global $rpPostsPerPage;
     $result = NULL;
     if($which == 'latest') {
-      $result = $this->db->query("(SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage) ORDER BY `Number` ASC;");
+      $result = $this->db->query("(SELECT
+      `Type`,
+      `Content`,
+      UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`,
+      `Character_Name` AS `Name`,
+      `Number`
+      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
+      ORDER BY `Number` ASC;");
     }
     else if($which == 'all') {
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `Number` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC;");
+      $result = $this->db->query("SELECT
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
+      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` ASC;");
     }
     else if($which == 'page' && !is_null($n)) {
       if(intval($n) == false || intval($n) != floatval($n) || intval($n) < 1) {
@@ -132,13 +140,17 @@ class Room {
         throw new Exception('page does not yet exist.');
       }
       $start = ($n - 1) * $rpPostsPerPage;
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
+      $result = $this->db->query("SELECT
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
+      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
     else if($which == 'after' && !is_null($n)) {
       if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
         throw new Exception("invalid message request: $n is a bad number.");
       }
-      $result = $this->db->query("SELECT `Content`, `Is_Action`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name` FROM `Message` WHERE `Character_Room` = '$room' ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
+      $result = $this->db->query("SELECT
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
+      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
     else {
       throw new Exception('unknown message request!');
@@ -194,22 +206,24 @@ class Room {
     $room = $this->getID();
     return array_merge(
       $this->db->query("SELECT
-        (SELECT MAX(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `LatestMessageDate`,
-        (SELECT MIN(`Timestamp`) FROM `Message` WHERE `Character_Room`='$room') AS `FirstMessageDate`"
+        (SELECT MAX(`Timestamp`) FROM `Message` WHERE `Room`='$room') AS `LatestMessageDate`,
+        (SELECT MIN(`Timestamp`) FROM `Message` WHERE `Room`='$room') AS `FirstMessageDate`"
       )->fetch_assoc(),
       array('MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount())
     );
   }
   
-  public function send($name, $content, $isAction = false) {
-    $name = $this->db->real_escape_string(trim($name));
+  public function addMessage($type, $content, $character = null) {
+    if(!in_array($type, array('Narrator', 'Character', 'OOC'))) {
+      throw new Exception('Invalid type: ' . $type);
+    }
     $content = $this->db->real_escape_string(trim($content));
     if(!$content) {
       throw new Exception('Message is empty.');
     }
-    $isAction = $isAction? '1': '0';
+    $character = $this->db->real_escape_string(trim($character));
     $room = $this->getID();
-    $result = $this->db->query("INSERT INTO `Message` (`Character_Name`, `Character_Room`, `Content`, `Is_Action`) VALUES ('$name', '$room', '$content', '$isAction')");
+    $result = $this->db->query("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`) VALUES ('$type', '$content', '$room', '$character')");
   }
   
   public function addCharacter($name, $color) {

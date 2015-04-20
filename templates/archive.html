@@ -11,7 +11,10 @@
     <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
     <script>
       $(document).ready(function() {
-        RPRoom('{{ docroot }}{{ room }}').loadPage({{ page }});
+        RPRoom('{{ docroot }}{{ room }}').loadPage({
+          page: {{ page }},
+          onload: function() { $('#loading').hide(); }
+        });
       });
     </script>
     {% endif %}

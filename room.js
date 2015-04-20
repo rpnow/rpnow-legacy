@@ -17,10 +17,18 @@ function RPRoom(reqUrl) {
   var numChar = 0;
   var timer = null;
   var charList = [];
-  var alertNoise = new Audio('alert.mp3');
+  var alertNoise = null;
+  
+  Object.defineProperty(this, 'messageCount', {
+    get: function() { return numMsg; }
+  });
+  
+  Object.defineProperty(this, 'postsPerPage', {
+    get: function() { return postsPerPage; }
+  });
   
   // get latest posts and refresh
-  this.loadFeed = function(myInterval) {
+  this.loadFeed = function(params) {
     $.ajax({
       type: 'GET',
       url: reqUrl + '/ajax/latest',
@@ -37,21 +45,18 @@ function RPRoom(reqUrl) {
           addCharacterCSS(data.characters[i]);
           charList.push(data.characters[i].Name);
         }
+        // grab the notification noise
+        alertNoise = new Audio('alert.mp3');
         // initialize counters
         numMsg = data.messageCount;
         numChar = data.characterCount;
-        // alter page
-        $('#loading').hide();
-        if(data.messageCount > postsPerPage) {
-          $('#showing-latest').show();
-        }
-        else if(data.messageCount === 0) {
-          $('#empty-room').show();
-        }
-        $('#message-box').slideDown(250);
+        // callback
+        if(params.onload) params.onload();
         // start updating
-        interval = myInterval;
-        timer = setTimeout(ajaxUpdate, interval);
+        if(params.millis) {
+          interval = params.millis;
+          timer = setTimeout(ajaxUpdate, interval);
+        }
         // additionally update the timestamps every so often
         updateTimeAgo();
       }
@@ -68,10 +73,10 @@ function RPRoom(reqUrl) {
   };
   
   // load specified page
-  this.loadPage = function(num) {
+  this.loadPage = function(params) {
     $.ajax({
       type: 'GET',
-      url: reqUrl + '/ajax/' + num,
+      url: reqUrl + '/ajax/' + params.page,
       success: function(data) {
         // ppp
         postsPerPage = data.postsPerPage;
@@ -83,8 +88,8 @@ function RPRoom(reqUrl) {
         for(var i = 0; i < data.characters.length; ++i) {
           addCharacterCSS(data.characters[i]);
         }
-        // remove loading message
-        $('#loading').hide();
+        // callback
+        if(params.onload) params.onload();
         // update the timestamps every so often
         updateTimeAgo();
       }
@@ -154,14 +159,28 @@ function RPRoom(reqUrl) {
       }
     }
     // create and add element
-    $('<div/>', {
-      'class': 'message ' + cssName(message.Name)
-    }).append(
-      $('<div/>', {
-        'class': 'name',
-        text: message.Name
-      })
-    ).append(
+    var el = null;
+    if(message.Type === 'Narrator') {
+      el = $('<div/>', {
+        'class': 'message message-narrator'
+      });
+    }
+    else if(message.Type === 'Character') {
+      el = $('<div/>', {
+        'class': 'message message-chara ' + cssName(message.Name)
+      }).append(
+        $('<div/>', {
+          'class': 'name',
+          text: message.Name
+        })
+      );
+    }
+    else if(message.Type === 'OOC') {
+      el = $('<div/>', {
+        'class': 'message message-ooc'
+      });
+    }
+    el.append(
       $('<div/>', {
         'class': 'timestamp',
         'data-timestamp': message.Timestamp,
@@ -170,40 +189,40 @@ function RPRoom(reqUrl) {
     ).append(
       $('<div/>', {
         'class': 'content',
-        html: formatMessage(message.Content, message.Name)
+        html: formatMessage(message)
       })
     ).appendTo('#messages');
   }
   // add character button and character css
-  function addCharacterElement(character) {
-    //create and add element
-    $('<li/>', {}).append(
+  function characterElement(name) {
+    return $('<li/>').append(
       $('<a/>', {
         href: '#',
-        'class': cssName(character.Name),
-        text: character.Name
-      })
-    ).appendTo('#character-menu ul')
-    // ... and add click functionality
-    .click(clickCharaButton);
+        'class': cssName(name),
+        text: name
+      }).click(clickCharaButton)
+    );
+  }
+  function addCharacterElement(character) {
+    //create and add element
+    characterElement(character.Name)
+      .appendTo('#character-menu ul#normal-characters');
   }
   function addCharacterCSS(character) {
-    // as well as giving them css (unless Narrator)
-    if(character.Name !== 'Narrator') {
-      $('head').append(
-        $('<style/>', {
-          text: '.' + cssName(character.Name)
-            + "{ background-color: " + character.Color + "; "
-            + "color: " + character.Contrast + "; }"
-        })
-      );
-    }
+    // add character css to page
+    $('head').append(
+      $('<style/>', {
+        text: '.' + cssName(character.Name)
+          + "{ background-color: " + character.Color + "; "
+          + "color: " + character.Contrast + "; }"
+      })
+    );
   }
   
-  this.send = function(data) {
+  this.addMessage = function(data) {
     $.ajax({
       type: 'POST',
-      url: reqUrl + '/ajax/send',
+      url: reqUrl + '/ajax/message',
       data: data,
       success: function() { self.updateNow(); }
     });
@@ -261,9 +280,9 @@ function cssName(name) {
   return 'chara-' + name.replace(/[^0-9a-zA-Z]/g, function(x) { return '-' + x.charCodeAt(0).toString(16).toUpperCase(); });
 }
 // format string to have minimal markdown
-function formatMessage(str, name) {
+function formatMessage(message) {
   // escape special characters
-  str = escapeHtml(str);
+  str = escapeHtml(message.Content);
   // urls
   // http://stackoverflow.com/a/3890175
   str = str.replace(
@@ -271,7 +290,9 @@ function formatMessage(str, name) {
     '<a href="$1" target="_blank">$1</a>'
   );
   // actions
-  str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action ' + cssName(name) + '">*$1*</span>');
+  if(message.Type === 'Character') {
+    str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action ' + cssName(message.Name) + '">*$1*</span>');
+  }
   // bold
   str = str.replace(/(^|\s|(?:&quot;))__([^\r\n_]+)__([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b>$2</b>$3');
   // italix

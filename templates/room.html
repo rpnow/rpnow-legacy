@@ -46,10 +46,15 @@
       
       function sendMessage() {
         // send message
-        RPRoom().send({
-          name: $('#message-box input[name=name]').val(),
-          content: $('#message-box textarea').val()
-        });
+        var data = { content: $('#message-box textarea').val() };
+        var name = $('#message-box input[name=name]').val();
+        if(name === 'Narrator') data.type = 'Narrator';
+        else if(name === 'Out of Character') data.type = 'OOC';
+        else {
+          data.type = 'Character';
+          data.name = name;
+        }
+        RPRoom().addMessage(data);
         // clear message box
         $('#message-box textarea').val('');
         // scroll to bottom if we're not there
@@ -66,9 +71,22 @@
         $('#showing-latest').hide();
         
         // create the room object
-        RPRoom('{{ room }}').loadFeed({{ refreshMillis }});
+        RPRoom('{{ room }}').loadFeed({
+          millis: {{ refreshMillis }},
+          onload: function() {
+            $('#loading').hide();
+            if(RPRoom().messageCount > RPRoom().postsPerPage) {
+              $('#showing-latest').show();
+            }
+            else if(RPRoom().messageCount === 0) {
+              $('#empty-room').show();
+            }
+            $('#message-box').slideDown(250);
+          }
+        });
         
         // button functions
+        $('#special-characters a').click(clickCharaButton);
         $('#message-box button#change-character').click(function(e) {
           showCharacterSelectMenu();
           e.preventDefault();
@@ -139,7 +157,11 @@
     </div>
     <div id="character-menu">
       <h3>Characters</h3>
-      <ul></ul>
+      <ul id="special-characters">
+        <li id="narrator-button"><a href="#">Narrator</a></li>
+        <li id="ooc-button"><a href="#">Out of Character</a></li>
+      </ul>
+      <ul id="normal-characters"></ul>
       <button id="new-character-button">New Character...</button>
     </div>
     <form id="new-character" class="form-box" autocomplete="off">

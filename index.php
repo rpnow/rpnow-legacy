@@ -156,13 +156,22 @@ $app->get('/:id/ajax/updates/', function ($id) use ($app) {
 });
 
 // Send message to room
-$app->post('/:id/ajax/send/', function ($id) use ($app) {
+$app->post('/:id/ajax/message/', function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    $room->send(
-      $app->request()->post('name'),
-      $app->request()->post('content')
-    );
+    if($app->request()->post('type') == 'Character') {
+      $room->addMessage(
+        'Character',
+        $app->request()->post('content'),
+        $app->request()->post('name')
+      );
+    }
+    else {
+      $room->addMessage(
+        $app->request()->post('type'),
+        $app->request()->post('content')
+      );
+    }
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
     echo json_encode(array('status'=>'OK'));
@@ -310,9 +319,12 @@ $app->get('/:id/export/', function ($id) use ($app) {
     echo "--------\r\n\r\n";
     // output each message
     foreach($room->getMessages('all') as $message) {
-      if($message['Name'] != 'Narrator') {
+      if($message['Type'] == 'Character') {
         echo strtoupper($message['Name']) . ":\r\n";
         echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
+      }
+      else if($message['Type'] == 'OOC') {
+        echo str_replace("\n", "\r\n", wordwrap('(( OOC: ' . $message['Content'] . ' ))', 72, "\n"));
       }
       else {
         echo str_replace("\n", "\r\n", wordwrap($message['Content'], 72, "\n"));
