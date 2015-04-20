@@ -303,6 +303,10 @@ function formatMessage(message) {
   // line breaks
   // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
   str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+  // fake line breaks
+  str = str.replace(/(\\r\\n|\\n\\r|\\r|\\n|\&lt;br(?: ?\/)?\&gt;)/g, '<br />');
+  // mdash
+  str = str.replace(/--/g, '&mdash;');
   
   // done.
   return str;
