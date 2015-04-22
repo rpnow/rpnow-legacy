@@ -20,7 +20,7 @@ Noteworthy features of RPNow include:
 
 ## Installing
 1. Download the RPNow repository from GitHub
-2. Place in its own directory on the target web server
+2. Place the contents of the /rpnow/ directory somewhere on the target web server
 3. Import the MySQL database from /docs/rpnow.sql
 4. Give a user SELECT and INSERT permissions on that database
 5. Update config.php with the correct database information, as well as the path to the main folder
