@@ -246,6 +246,11 @@ $app->get('/about/', function () {
   readfile('templates/about.html');
 });
 
+// Terms
+$app->get('/terms/', function () {
+  readfile('templates/terms.html');
+});
+
 // Admin panel!
 if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
