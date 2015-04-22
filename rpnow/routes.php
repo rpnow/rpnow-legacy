@@ -1,4 +1,5 @@
 <?php
+
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
   'id' => '[a-zA-Z0-9]{'.$rpIDLength.','.$rpIDLength.'}'
@@ -310,6 +311,13 @@ $app->get('/about/', function () {
 
 // Admin panel!
 if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
+  $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
+    'path' => '/admin/',
+    'realm' => 'RPNow Admin Panel',
+    'users' => array(
+      $rpAdminPanelUser => $rpAdminPanelPass
+    )
+  )));
   $app->get('/admin/', function () use ($app) {
     global $rpRootPath;
     $data = array(

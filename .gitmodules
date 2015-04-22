@@ -1,3 +1,12 @@
 [submodule "rpnow/lib/Twig"]
 	path = rpnow/lib/Twig
 	url = https://github.com/twigphp/Twig.git
+[submodule "rpnow/lib/Slim"]
+	path = rpnow/lib/Slim
+	url = https://github.com/slimphp/Slim.git
+[submodule "rpnow/lib/Slim-Views"]
+	path = rpnow/lib/Slim-Views
+	url = https://github.com/slimphp/Slim-Views.git
+[submodule "rpnow/lib/Slim-Basic-Auth"]
+	path = rpnow/lib/Slim-Basic-Auth
+	url = https://github.com/tuupola/slim-basic-auth.git

@@ -1,43 +1,30 @@
 <?php
+// Require source files
 require_once 'config.php';
 require_once 'Room.php';
-require_once 'lib/Slim/Slim.php';
-require_once 'lib/Slim/Middleware.php';
-require_once 'lib/Slim/Middleware/HttpBasicAuth.php';
+require_once 'lib/Slim/Slim/Slim.php';
+
+// Autoloader gets some other files
+\Slim\Slim::registerAutoloader();
+
+// But some stuff isn't loaded automatically...
+require_once 'lib/Slim/Slim/View.php';
+require_once 'lib/Slim-Views/Twig.php';
+require_once 'lib/Slim/Slim/Middleware.php';
+require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication.php';
+require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication/AuthenticatorInterface.php';
+require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication/ArrayAuthenticator.php';require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication/RuleInterface.php';
+require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication/RequestMethodRule.php';
+require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication/RequestPathRule.php';
 require_once 'lib/Twig/lib/Twig/Autoloader.php';
-use Slim\Slim;
-use Slim\Extras\Middleware\HttpBasicAuth;
 
-Slim::registerAutoloader();
+// Create the application
+$app = new \Slim\Slim(array('view' => new \Slim\Views\Twig()));
 
-$app = new Slim(array(
-  'view' => new \Slim\Views\Twig()
-));
-
-// Route-specific authentication
-// http://stackoverflow.com/questions/17212753/httpbasicauth-inside-of-a-slim-route
-class HttpBasicAuthCustom extends HttpBasicAuth {
-  protected $route;
-
-  public function __construct($username, $password, $realm = 'Protected Area', $route = '') {
-    $this->route = $route;
-    parent::__construct($username, $password, $realm);        
-  }
-
-  public function call() {
-    if(strpos($this->app->request()->getPathInfo(), $this->route) !== false) {
-      parent::call();
-      return;
-    }
-    $this->next->call();
-  }
-}
-if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
-  $app->add(new HttpBasicAuthCustom($rpAdminPanelUser, $rpAdminPanelPass, 'RPNow Admin Panel', '/admin'));
-}
-
+// Routes are specified in another file
 require 'routes.php';
 
+// Run
 $app->run();
 
 ?>
