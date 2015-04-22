@@ -28,4 +28,4 @@ Noteworthy features of RPNow include:
 7. To enable the admin panel, uncomment the appropriate lines in the config.php file. _Be sure to change the admin username and password!_
 
 ## Credits
-For additional information on the contributors, libraries, and references, see [about.html](about.html).
+For additional information on the contributors, libraries, and references, see [about.html](rpnow/templates/about.html).
