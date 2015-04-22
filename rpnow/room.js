@@ -46,7 +46,7 @@ function RPRoom(reqUrl) {
           charList.push(data.characters[i].Name);
         }
         // grab the notification noise
-        alertNoise = new Audio('alert.mp3');
+        alertNoise = new Audio('assets/alert.mp3');
         // initialize counters
         numMsg = data.messageCount;
         numChar = data.characterCount;
