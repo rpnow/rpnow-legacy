@@ -489,4 +489,5 @@ ul#stats {
   margin: 0;
   padding: 20px;
   padding-left: 40px;
+  max-width: 650px;
 }

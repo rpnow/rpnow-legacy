@@ -5,18 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>[STATS] {{ title }} - RP Now</title>
     <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
+    <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
   </head>
   <body>
     {% include 'title.html' %}
-    <h3>Stats</h3>
+    <h3>RP Statistics</h3>
     <ul id="stats">
-      <li>{{ MessageCount }} messages logged.</li>
-      <li>{{ CharacterCount }} characters exist.</li>
+      <li>{{ MessageCount }} messages logged.
       {% if MessageCount > 0 %}
-      <li>First message sent {{ FirstMessageDate }}.</li>
-      <li>Most recent message sent {{ LatestMessageDate }}.</li>
+      <ul>
+        <li>{{ NarratorMessageCount }} were made by the Narrator. ({{ (NarratorMessageCount / MessageCount * 100)|number_format(1) }}%)</li>
+        <li>{{ CharacterMessageCount }} were character-specific messages. ({{ (CharacterMessageCount / MessageCount * 100)|number_format(1) }}%)</li>
+        <li>{{ OOCMessageCount }} were Out of Character chat messages. ({{ (OOCMessageCount / MessageCount * 100)|number_format(1) }}%)</li>
+      </ul>
+      </li>
+      <li>On average, messages are {{ (TotalCharCount / MessageCount)|number_format(1) }} characters long.
+      <ul>
+        <li>... In total, that's {{ TotalCharCount }} characters.</li>
+        {% if NarratorMessageCount > 0 %}
+        <li>Narrator messages tend to be {{ (NarratorCharCount / NarratorMessageCount)|number_format(1) }} characters long.
+        <ul>
+          <li>{{ NarratorCharCount }} characters total.</li>
+          <li>{{ (NarratorCharCount / TotalCharCount * 100)|number_format(1) }}% of all characters.</li>
+        </ul>
+        </li>
+        {% endif %}
+        {% if NarratorMessageCount > 0 %}
+        <li>Character messages tend to be {{ (CharacterCharCount / CharacterMessageCount)|number_format(1) }} characters long.
+        <ul>
+          <li>{{ CharacterCharCount }} characters total.</li>
+          <li>{{ (CharacterCharCount / TotalCharCount * 100)|number_format(1) }}% of all characters.</li>
+        </ul>
+        </li>
+        {% endif %}
+        {% if NarratorMessageCount > 0 %}
+        <li>OOC messages tend to be {{ (OOCCharCount / OOCMessageCount)|number_format(1) }} characters long.
+        <ul>
+          <li>{{ OOCCharCount }} characters total.</li>
+          <li>{{ (OOCCharCount / TotalCharCount * 100)|number_format(1) }}% of all characters.</li>
+        </ul>
+        </li>
+        {% endif %}
+      </ul>
+      </li>
       {% endif %}
-      <li>What other stats would be interesting?</li>
+      {% if CharacterCount == 0 %}
+      <li>No Characters have yet been created in this RP.</li>
+      {% elseif CharacterCount == 1 %}
+      <li>Only one Character has been created in this RP.</li>
+      {% else %}
+      <li>
+      {{ CharacterCount }} different Characters were created for this RP.
+      </li>
+      <li>Top {{ min(5, CharacterCount) }} characters:</li>
+      <ol>
+        {% for c in TopCharacters %}
+        <li>{{ c.Name }}: {{ c.MessageCount }} message{% if c.MessageCount != 1 %}s{% endif %}.</li>
+        {% endfor %}
+      </ol>
+      </li>
+      {% endif %}
+      {% if MessageCount > 0 %}
+      <li>First message sent {{ FirstMessageDate }}.
+      <ul>
+        <li>That was roughly <span id="firstSecsAgo"></span>.</li>
+        <script>document.querySelector('#firstSecsAgo').innerHTML = moment('{{ FirstMessageDate }}').fromNow();</script>
+      </ul>
+      </li>
+      {% if MessageCount > 1 %}
+      <li>Most recent message sent {{ LatestMessageDate }}.
+      <ul>
+        <li>That was roughly <span id="lastSecsAgo"></span>.</li>
+        <script>document.querySelector('#lastSecsAgo').innerHTML = moment('{{ LatestMessageDate }}').fromNow();</script>
+      </ul>
+      </li>
+      <li>That's about <span id="elapsed"></span> between the two.</li>
+      <script>document.querySelector('#elapsed').innerHTML = moment('{{ LatestMessageDate }}').from('{{ FirstMessageDate }}', true);</script>
+      {% endif %}
+      {% endif %}
     </ul>
   </body>
 </html>

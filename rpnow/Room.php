@@ -204,12 +204,35 @@ class Room {
   
   public function getStatsArray() {
     $room = $this->getID();
-    return array_merge(
-      $this->db->query("SELECT
-        (SELECT MAX(`Timestamp`) FROM `Message` WHERE `Room`='$room') AS `LatestMessageDate`,
-        (SELECT MIN(`Timestamp`) FROM `Message` WHERE `Room`='$room') AS `FirstMessageDate`"
-      )->fetch_assoc(),
-      array('MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount())
+    $data = $this->db->query("SELECT
+      MAX(`Timestamp`) AS `LatestMessageDate`,
+      MIN(`Timestamp`) AS `FirstMessageDate`,
+      SUM(if(`Type`='Narrator', 1,0)) AS `NarratorMessageCount`,
+      SUM(if(`Type`='OOC', 1,0)) AS `OOCMessageCount`,
+      SUM(if(`Type`='Narrator', char_length(`Content`),0)) AS `NarratorCharCount`,
+      SUM(if(`Type`='Character', char_length(`Content`),0)) AS `CharacterCharCount`,
+      SUM(if(`Type`='OOC', char_length(`Content`),0)) AS `OOCCharCount`
+      
+      FROM `Message`
+      WHERE `Room`='$room'"
+    )->fetch_assoc();
+    $topChars = $this->db->query("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room`='$room' GROUP BY `Character_Name` ORDER BY `MessageCount` DESC");
+    $topCharArr = [];
+    while ($row = $topChars->fetch_assoc()) {
+      $topCharArr[] = $row;
+    }
+    return array(
+      'MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount(),
+      'FirstMessageDate' => $data['FirstMessageDate'],
+      'LatestMessageDate' => $data['LatestMessageDate'],
+      'NarratorMessageCount' => $data['NarratorMessageCount'],
+      'CharacterMessageCount' => $this->getMessageCount() - $data['NarratorMessageCount'] - $data['OOCMessageCount'],
+      'OOCMessageCount' => $data['OOCMessageCount'],
+      'NarratorCharCount' => $data['NarratorCharCount'],
+      'CharacterCharCount' => $data['CharacterCharCount'],
+      'OOCCharCount' => $data['OOCCharCount'],
+      'TotalCharCount' => $data['NarratorCharCount'] + $data['CharacterCharCount'] + $data['OOCCharCount'],
+      'TopCharacters' => $topCharArr
     );
   }
   
