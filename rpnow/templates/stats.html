@@ -30,7 +30,7 @@
         </ul>
         </li>
         {% endif %}
-        {% if NarratorMessageCount > 0 %}
+        {% if CharacterMessageCount > 0 %}
         <li>Character messages tend to be {{ (CharacterCharCount / CharacterMessageCount)|number_format(1) }} characters long.
         <ul>
           <li>{{ CharacterCharCount }} characters total.</li>
@@ -38,7 +38,7 @@
         </ul>
         </li>
         {% endif %}
-        {% if NarratorMessageCount > 0 %}
+        {% if OOCMessageCount > 0 %}
         <li>OOC messages tend to be {{ (OOCCharCount / OOCMessageCount)|number_format(1) }} characters long.
         <ul>
           <li>{{ OOCCharCount }} characters total.</li>
