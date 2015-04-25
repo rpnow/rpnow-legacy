@@ -216,9 +216,9 @@ class Room {
       FROM `Message`
       WHERE `Room`='$room'"
     )->fetch_assoc();
-    $topChars = $this->db->query("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room`='$room' GROUP BY `Character_Name` ORDER BY `MessageCount` DESC");
+    $topFiveChars = $this->db->query("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room`='$room' GROUP BY `Character_Name` ORDER BY `MessageCount` DESC LIMIT 5;");
     $topCharArr = [];
-    while ($row = $topChars->fetch_assoc()) {
+    while ($row = $topFiveChars->fetch_assoc()) {
       $topCharArr[] = $row;
     }
     return array(
