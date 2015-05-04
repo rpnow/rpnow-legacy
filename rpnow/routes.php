@@ -2,7 +2,7 @@
 
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
-  'id' => '[a-zA-Z0-9]{'.$rpIDLength.','.$rpIDLength.'}'
+  'id' => '[a-zA-Z0-9]{'.$rpIDLength.'}'
 ));
 
 // Home page
