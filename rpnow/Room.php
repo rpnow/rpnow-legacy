@@ -6,10 +6,10 @@ class Room {
   
   private static function createConnection() {
     global $rpDBServer, $rpDBUser, $rpDBPass, $rpDBName;
-    $myConn = new mysqli($rpDBServer, $rpDBUser, $rpDBPass, $rpDBName);
-    if($myConn->connect_error) {
-      trigger_error('Database connection failed: '  . $myConn->connect_error, E_USER_ERROR);
-    }
+    $dsn = 'mysql:host=' . $rpDBServer . ';dbname=' . $rpDBName;
+    $myConn = new PDO($dsn, $rpDBUser, $rpDBPass);
+    $myConn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    $myConn->beginTransaction();
     return $myConn;
   }
   
@@ -32,16 +32,15 @@ class Room {
   public static function CreateRoom($title, $desc) {
     global $rpIDLength;
     $conn = self::createConnection();
-    $conn->autocommit(false);
     do {
       $id = '';
       for ($i = 0; $i < $rpIDLength; $i++) {
         $id .= self::$characters[rand(0, strlen(self::$characters) - 1)];
       }
     } while(Room::IDExists($id, $conn));
-    $title = $conn->real_escape_string($title);
-    $desc = $conn->real_escape_string($desc);
-    $conn->query("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES ('$id', '$title', '$desc')");
+    $conn
+      ->prepare("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES (?, ?, ?)")
+      ->execute(array($id, $title, $desc));
     return new Room($conn, $id, $title, $desc, 1, 0);
   }
   
@@ -50,25 +49,25 @@ class Room {
       throw new Exception('Malformed Room ID.');
     }
     $conn = self::createConnection();
-    $conn->autocommit(false);
     if(!Room::IDExists($id, $conn)) {
       throw new Exception('Room does not exist!');
     }
-    $result = $conn->query("SELECT
-    (SELECT `Title` FROM `Room` WHERE `ID` = '$id') AS `Title`,
-    (SELECT `Description` FROM `Room` WHERE `ID` = '$id') AS `Description`,
-    (SELECT COUNT(*) FROM `Character` WHERE `Room` = '$id') AS `CharacterCount`,
-    (SELECT COUNT(*) FROM `Message` WHERE `Room` = '$id') AS `MessageCount`");
-    if($result->num_rows == 0) {
+    $statement = $conn->prepare("SELECT
+      (SELECT `Title` FROM `Room` WHERE `ID` = :id) AS `Title`,
+      (SELECT `Description` FROM `Room` WHERE `ID` = :id) AS `Description`,
+      (SELECT COUNT(*) FROM `Character` WHERE `Room` = :id) AS `CharacterCount`,
+      (SELECT COUNT(*) FROM `Message` WHERE `Room` = :id) AS `MessageCount`");
+    $statement->execute(array('id'=>$id));
+    if($statement->rowCount() == 0) {
       throw new Exception("Room '$id' does not exist.");
     }
-    $row = $result->fetch_assoc();
+    $row = $statement->fetch();
     return new Room($conn, $id, $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
   }
   
   public static function AuditRooms() {
     $conn = self::createConnection();
-    $result = $conn->query("SELECT
+    return $conn->query("SELECT
     `Title`,
     `ID`,
     `Timestamp` AS `Created`,
@@ -76,19 +75,11 @@ class Room {
     (SELECT COUNT(*) FROM `Message` WHERE `Room` = `ID`) AS `Num_Msgs`
     FROM `Room`
     ORDER BY `Updated` DESC");
-    if(!$result) {
-      throw new Exception($conn->error);
-    }
-    $arr = [];
-    while ($row = $result->fetch_assoc()) {
-      $arr[] = $row;
-    }
-    return $arr;
   }
   
   public function close() {
     $this->db->commit();
-    $this->db->close();
+    $this->db = null;
   }
   
   public function getID() { return $this->id; }
@@ -102,34 +93,30 @@ class Room {
     return ctype_alnum($id) && strlen($id) == $rpIDLength;
   }
   
-  // CAUTION: only run if you're SURE it's not a malformed ID! could be catastrophic otherwise
   private static function IDExists($id, $conn) {
-    $result = $conn->query("SELECT COUNT(*) FROM `Room` WHERE `ID` = '$id' LIMIT 1");
-    if(!$result) {
-      throw new Exception($conn->error);
-    }
-    $row = $result->fetch_array();
+    $statement = $conn->prepare("SELECT COUNT(*) FROM `Room` WHERE `ID` = ? LIMIT 1");
+    $statement->execute(array($id));
+    $row = $statement->fetch();
     return $row[0] == '1';
   }
   
   public function getMessages($which, $n = NULL) {
     $room = $this->getID();
     global $rpPostsPerPage;
-    $result = NULL;
+    $statement = NULL;
     if($which == 'latest') {
-      $result = $this->db->query("(SELECT
-      `Type`,
-      `Content`,
-      UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`,
-      `Character_Name` AS `Name`,
+      $statement = $this->db->prepare("(SELECT
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`,
       `Number`
-      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
+      FROM `Message` WHERE `Room` = '$room'
+      ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
       ORDER BY `Number` ASC;");
     }
     else if($which == 'all') {
-      $result = $this->db->query("SELECT
+      $statement = $this->db->prepare("SELECT
       `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
-      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` ASC;");
+      FROM `Message` WHERE `Room` = '$room'
+      ORDER BY `Number` ASC;");
     }
     else if($which == 'page' && !is_null($n)) {
       if(intval($n) == false || intval($n) != floatval($n) || intval($n) < 1) {
@@ -140,29 +127,25 @@ class Room {
         throw new Exception('page does not yet exist.');
       }
       $start = ($n - 1) * $rpPostsPerPage;
-      $result = $this->db->query("SELECT
+      $statement = $this->db->prepare("SELECT
       `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
-      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
+      FROM `Message` WHERE `Room` = '$room'
+      ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
     else if($which == 'after' && !is_null($n)) {
       if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
         throw new Exception("invalid message request: $n is a bad number.");
       }
-      $result = $this->db->query("SELECT
+      $statement = $this->db->prepare("SELECT
       `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
-      FROM `Message` WHERE `Room` = '$room' ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
+      FROM `Message` WHERE `Room` = '$room'
+      ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
     else {
       throw new Exception('unknown message request!');
     }
-    if(!$result) {
-      throw new Exception($conn->error);
-    }
-    $arr = [];
-    while ($row = $result->fetch_assoc()) {
-      $arr[] = $row;
-    }
-    return $arr;
+    $statement->execute();
+    return $statement->fetchAll();
   }
   
   public function getCharacters($after = 0) {
@@ -170,12 +153,8 @@ class Room {
       throw new Exception("invalid character request: $after is a bad number.");
     }
     // get the characters
-    $room = $this->getID();
-    $result = $this->db->query("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = '$room' LIMIT 9999 OFFSET $after");
-    $arr = [];
-    while ($row = $result->fetch_assoc()) {
-      $arr[] = $row;
-    }
+    $statement = $this->db->prepare("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = ? LIMIT 9999 OFFSET $after");
+    $statement->execute(array($this->getID()));
     // calculate the secondary color for each and return in modified array
     return array_map(
       function($x) {
@@ -193,7 +172,7 @@ class Room {
           'Contrast' => ($yiq >= 128) ? 'black' : 'white'
         );
       },
-      $arr
+      $statement->fetchAll()
     );
   }
   
@@ -203,8 +182,7 @@ class Room {
   }
   
   public function getStatsArray() {
-    $room = $this->getID();
-    $data = $this->db->query("SELECT
+    $dataStatement = $this->db->prepare("SELECT
       MAX(`Timestamp`) AS `LatestMessageDate`,
       MIN(`Timestamp`) AS `FirstMessageDate`,
       SUM(if(`Type`='Narrator', 1,0)) AS `NarratorMessageCount`,
@@ -214,13 +192,12 @@ class Room {
       SUM(if(`Type`='OOC', char_length(`Content`),0)) AS `OOCCharCount`
       
       FROM `Message`
-      WHERE `Room`='$room'"
-    )->fetch_assoc();
-    $topFiveChars = $this->db->query("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room`='$room' GROUP BY `Character_Name` ORDER BY `MessageCount` DESC LIMIT 5;");
-    $topCharArr = [];
-    while ($row = $topFiveChars->fetch_assoc()) {
-      $topCharArr[] = $row;
-    }
+      WHERE `Room` = ?"
+    );
+    $dataStatement->execute(array($this->getID()));
+    $data = $dataStatement->fetch();
+    $top5Statement = $this->db->prepare("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room` = ? GROUP BY `Character_Name` ORDER BY `MessageCount` DESC LIMIT 5;");
+    $top5Statement->execute(array($this->getID()));
     return array(
       'MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount(),
       'FirstMessageDate' => $data['FirstMessageDate'],
@@ -232,7 +209,7 @@ class Room {
       'CharacterCharCount' => $data['CharacterCharCount'],
       'OOCCharCount' => $data['OOCCharCount'],
       'TotalCharCount' => $data['NarratorCharCount'] + $data['CharacterCharCount'] + $data['OOCCharCount'],
-      'TopCharacters' => $topCharArr
+      'TopCharacters' => $top5Statement->fetchAll()
     );
   }
   
@@ -240,25 +217,24 @@ class Room {
     if(!in_array($type, array('Narrator', 'Character', 'OOC'))) {
       throw new Exception('Invalid type: ' . $type);
     }
-    $content = $this->db->real_escape_string(trim($content));
+    $content = trim($content);
     if(!$content) {
       throw new Exception('Message is empty.');
     }
-    $character = $this->db->real_escape_string(trim($character));
-    $room = $this->getID();
-    $result = $this->db->query("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`) VALUES ('$type', '$content', '$room', '$character')");
+    $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`) VALUES (?, ?, ?, ?)");
+    $statement->execute(array($type, $content, $this->getID(), $character));
   }
   
   public function addCharacter($name, $color) {
-    $name = $this->db->real_escape_string(trim($name));
+    $name = trim($name);
     if(!$name) {
       throw new Exception('Name is empty.');
     }
     if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
       throw new Exception("$color is not a valid hex color.");
     }
-    $room = $this->getID();
-    $result = $this->db->query("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES ('$name', '$room', '$color')");
+    $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES (?, ?, ?)");
+    $statement->execute(array($name, $this->getID(), $color));
   }
 }
 
