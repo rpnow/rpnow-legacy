@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.10.7
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 20, 2015 at 11:00 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: May 06, 2015 at 04:29 PM
+-- Server version: 5.5.42-cll
+-- PHP Version: 5.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `rp_db`
+-- Database: `rpnow_db`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,7 @@ CREATE TABLE `Character` (
   `Color` tinytext NOT NULL,
   `Room` char(4) NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IP` varchar(45) NOT NULL,
   PRIMARY KEY (`Number`),
   UNIQUE KEY `NameRoom` (`Name`,`Room`),
   KEY `Room` (`Room`)
@@ -50,6 +51,7 @@ CREATE TABLE `Message` (
   `Room` char(4) NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Character_Name` varchar(30) DEFAULT NULL,
+  `IP` varchar(45) NOT NULL,
   PRIMARY KEY (`Number`),
   KEY `Timestamp` (`Timestamp`),
   KEY `Character` (`Character_Name`,`Room`),
@@ -67,18 +69,9 @@ CREATE TABLE `Room` (
   `Title` tinytext NOT NULL,
   `Description` tinytext NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IP` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `Character`
---
-ALTER TABLE `Character`
-  ADD CONSTRAINT `Character_ibfk_1` FOREIGN KEY (`Room`) REFERENCES `room` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

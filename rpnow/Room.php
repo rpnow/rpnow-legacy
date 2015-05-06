@@ -39,8 +39,8 @@ class Room {
       }
     } while(Room::IDExists($id, $conn));
     $conn
-      ->prepare("INSERT INTO `Room` (`ID`, `Title`, `Description`) VALUES (?, ?, ?)")
-      ->execute(array($id, $title, $desc));
+      ->prepare("INSERT INTO `Room` (`ID`, `Title`, `Description`, `IP`) VALUES (?, ?, ?, ?)")
+      ->execute(array($id, $title, $desc, $_SERVER['REMOTE_ADDR']));
     return new Room($conn, $id, $title, $desc, 1, 0);
   }
   
@@ -71,6 +71,7 @@ class Room {
     `Title`,
     `ID`,
     `Timestamp` AS `Created`,
+    `IP`,
     (SELECT COALESCE(MAX(`Timestamp`), `Room`.`Timestamp`) FROM `Message` WHERE `Room` = `ID`) AS `Updated`,
     (SELECT COUNT(*) FROM `Message` WHERE `Room` = `ID`) AS `Num_Msgs`
     FROM `Room`
@@ -221,8 +222,8 @@ class Room {
     if(!$content) {
       throw new Exception('Message is empty.');
     }
-    $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`) VALUES (?, ?, ?, ?)");
-    $statement->execute(array($type, $content, $this->getID(), $character));
+    $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`, `IP`) VALUES (?, ?, ?, ?, ?)");
+    $statement->execute(array($type, $content, $this->getID(), $character, $_SERVER['REMOTE_ADDR']));
   }
   
   public function addCharacter($name, $color) {
@@ -233,8 +234,8 @@ class Room {
     if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
       throw new Exception("$color is not a valid hex color.");
     }
-    $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`) VALUES (?, ?, ?)");
-    $statement->execute(array($name, $this->getID(), $color));
+    $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`, `IP`) VALUES (?, ?, ?, ?)");
+    $statement->execute(array($name, $this->getID(), $color, $_SERVER['REMOTE_ADDR']));
   }
 }
 
