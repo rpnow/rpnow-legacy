@@ -124,9 +124,14 @@ function RPRoom(reqUrl) {
         // update counters
         numMsg += data.messages.length;
         numChar += data.characters.length;
-        // show alerts maybe
+        // do an alert if the tab isn't in focus
         if(data.messages.length > 0 && document.visibilityState === 'hidden') {
-          flashTitle('* ' + data.messages[data.messages.length -1].Name + ' says...', 3);
+          var lastMsg = data.messages[data.messages.length -1];
+          var alertText;
+          if(lastMsg.Type === 'Character') alertText = lastMsg.Name + ' says...';
+          else if(lastMsg.Type === 'Narrator') alertText = 'The narrator says...';
+          else if(lastMsg.Type === 'OOC') alertText = 'OOC message...';
+          flashTitle('* ' + alertText, 3);
           alertNoise.play();
         }
         // done. wait and then do this again
