@@ -107,10 +107,19 @@ form.form-box input[type=submit] {
   border: solid 1px #3c3c3c;
   font-weight: bold;
 }
+form.form-box .input-button button {
+  border-radius: 0;
+  padding: 2px 2px;
+  font-size: 80%;
+}
 @media all and (max-width: 550px) {
   form.form-box .input-name {
     text-align: left;
     padding: 5px 20px 0;
+  }
+  form.form-box .input-button {
+    text-align: right;
+    margin-right: 20px;
   }
 }
 @media not all and (max-width: 550px) {
@@ -132,6 +141,9 @@ form.form-box input[type=submit] {
   }
   form.form-box .input-container {
     width: 100%;
+  }
+  form.form-box .input-button button {
+    letter-spacing: -1px;
   }
 }
 

@@ -6,6 +6,7 @@
     <title>Roleplay Now</title>
     <meta name="description" content="Roleplay Now is a site where small groups of friends can instantly create private roleplaying chatrooms.">
     <link rel="stylesheet" type="text/css" href="room.css">
+    <script src="rprandom.js"></script>
   </head>
   <body class="centered">
     <h1>Roleplay Now</h1>
@@ -15,7 +16,8 @@
     <form id="new-rp" class="form-box" action="create" method="post">
       <div class="input-section">
         <div class="input-name">Title</div>
-        <div class="input-container"><input type="text" name="title" maxlength="30"></div>
+        <div class="input-container"><input type="text" name="title" maxlength="30" placeholder="My Adventures" required></div>
+        <div class="input-button"><button type="button" class="dice" onclick="document.querySelector('input[name=title]').value = RPRandom.shortTitle(30)">Random</button></div>
       </div>
       <div class="input-section">
         <div class="input-name">Description (optional)</div>
