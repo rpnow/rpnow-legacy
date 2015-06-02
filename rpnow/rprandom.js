@@ -1,5 +1,5 @@
 var RPRandom = (function() {
-  
+
   var dictionary = {
     Title: [
       ":The :Noun",
@@ -12,12 +12,16 @@ var RPRandom = (function() {
       ":My :Adjective :Nouns",
       ":A :Noun :Prep :Nouns",
       ":Prep :the :Noun",
+      ":Prep :the :Nouns",
       ":The :Adjective",
       ":The :Adjective :Noun",
       ":Verbed",
       ":Verbed by :the :Noun",
       ":Verbed by :the :Nouns",
-      
+      ":Verbed :Noun",
+      ":Verbed :Nouns",
+      ":I :Verbed",
+      ":Who :I :Verbed"
     ],
     the: [
       "the", ""
@@ -31,23 +35,30 @@ var RPRandom = (function() {
     My: [
       "My", "Our", "Your", "His", "Her", "Their"
     ],
+    I: [
+      "I", "You", "He", "She", "We", "They", "It"
+    ],
     Noun: [
-      "Anchor", "Anything", "Autumn",
+      "Anchor", "Animal", "Anything", "Autumn",
       "Bone", "Book", "Blade", "Boy", "Breeze", "Bullet",
+      "Case", "Carnival", "Chasm", "Circle", "Contraption", "Cloud",
       "Dog",
-      "Elephant", "Everything",
-      "Carnival",
-      "Event",
-      "Fire", "Flame", "Forest",
+      "Elephant", "Event", "Era", "Everything",
+      "Farm", "Fire", "Field", "Flame", "Forest", "Friend",
       "Gate", "Girl",
-      "Haze", "Hint",
-      "Land", "Letter", "Light", "Lord", "Luck",
-      "Man",
+      "Hand", "Haze", "Heart", "Hint", "Horizon",
+      "Invention", "Inventor",
+      "Land", "Laughter", "Letter", "Light", "Lord", "Luck",
+      "Man", "Material", "Mind",
       "Nothing",
-      "Page", "Power", "Pulse",
-      "Ring", "Rock",
-      "Something", "Someone", "Sound", "Soul", "Stone", "Stranger", 
-      "Wanderer", "Winter", "Word", "Wrath",
+      "Ocean",
+      "Page", "Pasture", "Pilot", "Pioneer", "Plain", "Plane", "Power", "Pulse",
+      "Queen",
+      "Ring", "Ridge", "Rock",
+      "Sailboat", "Shade", "Shadow", "Ship", "Smile", "Something", "Someone", "Sound", "Soul", "Stone", "Stranger",
+      "Tear", "Time",
+      "Umbrella", 
+      "Wanderer", "Water", "Winter", "Word", "Wrath", "Wrinkle",
       "Zoo",
       ":Noun :Noun"
     ],
@@ -57,34 +68,44 @@ var RPRandom = (function() {
     Prep: [
       "Above", "Across", "Along", "Among", "Around",
       "Before", "Below", "Between", "Betwixt", "Beyond",
-      "From"
+      "From",
+      "Over",
+      "Under",
+      "Through",
+    ],
+    Who: [
+      "Who", "What", "When", "Where", "Why", "How", "Which"
     ],
     Adjective: [
       "Auburn",
-      "Blue", "Breezy",
+      "Blue", "Blonde", "Breezy",
       "Colored", "Cold", "Curious",
+      "Dark",
+      "Fallen",
       "Green",
-      "Hidden",
-      "Littlest", "Lost",
+      "Haunted", "Hidden",
+      "Littlest", "Light", "Lost",
       "Peculiar", "Periwinkle",
-      "Smallest",
-      "Unfortunate", "Unmarked", "Unbreakable",
+      "Quiet",
+      "Shady", "Silly", "Smallest",
+      "Tattered", "Torn", "True",
+      "Unfortunate", "Unknown", "Unmarked", "Unbreakable",
       "Wandering", "Wonderful",
     ],
     Verbed: [
       "Consumed",
       "Encompassed",
-      "Forgotten",
+      "Forgot",
       "Kept",
       "Lost",
-      "Revered"
+      "Revered", "Remembered",
     ]
   };
-  
+
   function generateTitle() {
     // start with some title
     var str = ":Title";
-    
+
     // resolve all terms
     do {
       var lastStr = str;
@@ -96,7 +117,7 @@ var RPRandom = (function() {
           return match.toUpperCase() + '?';
       });
     } while(str !== lastStr);
-    
+
     // remove extra spaces and return
     return str.trim().replace(/\s+/g, ' ');
   }
@@ -108,10 +129,10 @@ var RPRandom = (function() {
     } while(str.length > maxLength);
     return str;
   }
-  
+
   return {
     title: generateTitle,
     shortTitle: generateShortTitle
   };
-  
+
 })();
