@@ -242,13 +242,13 @@ $app->get('/:id/export/', function ($id) use ($app) {
 });
 
 // About
-$app->get('/about/', function () {
-  readfile('templates/about.html');
+$app->get('/about/', function () use ($app) {
+  $app->render('about.html');
 });
 
 // Terms
-$app->get('/terms/', function () {
-  readfile('templates/terms.html');
+$app->get('/terms/', function () use ($app) {
+  $app->render('terms.html');
 });
 
 // Admin panel!
