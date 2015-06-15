@@ -4,10 +4,11 @@ var RPRandom = (function() {
     Title: [
       ":The :Nounss",
       ":The :Noun of :the :Nounss",
-      ":The :Noun :Noun",
+      ":The :Noun :Nounss",
       ":The :Adjective",
       ":The :Adjective :Nounss",
       ":The :Adjective :Adjective :Nounss",
+      ":The :Adjective :Noun :Nounss",
       ":The :Noun's :Nounss",
       ":The :Noun's :Adjective :Nounss",
       ":My :Nounss",
@@ -38,7 +39,13 @@ var RPRandom = (function() {
       ":Who :IAm",
       ":Who :IAm :Prep :the :Nounss",
       ":Who :IAm :Prep :the :Verbing",
-      ":Who :IAm :Prep :Me"
+      ":I :Will :Verb",
+      ":I :Will be :Adjective",
+      ":Who :Will :I :Verb",
+      ":Nounss :Will :Verb",
+      ":Nounss :Will :Verb :Nounss",
+      ":Nounss :Will be :Adjective",
+      ":Nounss :Will be :Nounss"
     ],
     the: [
       "the", ""
@@ -53,7 +60,8 @@ var RPRandom = (function() {
       "I", "You", "He", "She", "We", "They", "It"
     ],
     IAm: [
-      "I Am", "You Are", "He Is", "She Is", "We Are", "They Are", "It Was"
+      "I Am", "You Are", "He Is", "She Is", "We Are", "They Are", "It Is",
+      "I Was", "You Were", "He Was", "She Was", "We Were", "They Were", "It Was"
     ],
     Me: [
       "Me", "You", "Him", "Her", "Us", "Them", "It"
@@ -64,7 +72,7 @@ var RPRandom = (function() {
     Noun: [
       "Age", "Air", "Altar", "Amber", "Anchor", "Animal", "Anything", "Apology", "Authority", "Autumn",
       "Banana", "Bat", "Bean", "Bed", "Beginning", "Bell", "Bet", "Bit", "Blade", "Bone", "Book", "Box", "Boy", "Bread", "Breeze", "Bullet",
-      "Cable", "Call", "Case", "Cat", "Carnival", "Chasm", "Chimney", "Circle", "City", "Contraption", "Clock", "Cloud", "Compass", "Core", "Creation", "Cure",
+      "Cable", "Call", "Case", "Cat", "Carnival", "Chasm", "Chimney", "Circle", "City", "Conspiracy", "Contraband", "Contraption", "Clock", "Cloud", "Compass", "Core", "Creation", "Cure",
       "Danger", "Dawn", "District", "Dog",
       "Earth", "Echo", "Egg", "Elephant", "End", "Event", "Era", "Everything",
       "Farm", "Feeling", "Fish", "Fire", "Field", "Flash", "Flame", "Flight", "Flow", "Flute", "Forest", "Friend",
@@ -78,9 +86,9 @@ var RPRandom = (function() {
       "Ocean",
       "Page", "Pasture", "Penumbra", "Person", "Pilot", "Pioneer", "Plain", "Plane", "Pond", "Power", "Pulse",
       "Queen",
-      "Reflection", "Ring", "Ridge", "Rock",
+      "Reason", "Reflection", "Ring", "Ridge", "Rock",
       "Sailboat", "Seed", "Shade", "Shadow", "Ship", "Skull", "Sky", "Smile", "Something", "Someone", "Sound", "Soul", "Spider", "Spike", "Spoon", "Spout", "Spring", "Stable", "Stair", "Star", "Stone", "Stranger", "String", "Sugar",
-      "Tear", "Throne", "Time", "Touch", "Tree",
+      "Tear", "Theme", "Theory", "Throne", "Time", "Touch", "Tree",
       "Ultimatum", "Umbrella",
       "Vinegar", "Void", "Voyage",
       "Wand", "Wanderer", "Water", "Wedding", "Wind", "Wing", "Winter", "Wolf", "Word", "Worth", "Wraith", "Wrath", "Wrinkle",
@@ -89,11 +97,11 @@ var RPRandom = (function() {
     Nouns: [
       "Ages", "Altars", "Anchors", "Animals", "Apologies", "Authorities", "Autumns",
       "Bananas", "Bats", "Beans", "Beds", "Beginnings", "Bells", "Bets", "Bits", "Blades", "Bones", "Books", "Boxes", "Boys", "Breezes", "Bullets",
-      "Cables", "Calls", "Cases", "Cats", "Carnivals", "Chasms", "Chimneys", "Circles", "Cities", "Contraptions", "Clocks", "Clouds", "Compasses", "Cores", "Creations", "Cures",
+      "Cables", "Calls", "Cases", "Cats", "Carnivals", "Chasms", "Chimneys", "Circles", "Cities", "Conspiracies", "Contraptions", "Clocks", "Clouds", "Compasses", "Cores", "Creations", "Cures",
       "Dangers", "Dawns", "Districts", "Dogs",
       "Echoes", "Eggs", "Elephants", "Ends", "Events", "Eras",
       "Farms", "Feelings", "Fishes", "Fires", "Fields", "Flashes", "Flames", "Flights", "Flows", "Flutes", "Forests", "Friends",
-      "Games", "Gates", "Ghostd", "Girld", "Glasses", "Guitars",
+      "Games", "Gates", "Ghosts", "Girls", "Glasses", "Guitars",
       "Hands", "Hazes", "Hearts", "Heirs", "Hints", "Horizons", "Houses",
       "Inventions", "Inventors", "Islands",
       "Kings", "Knives",
@@ -103,9 +111,9 @@ var RPRandom = (function() {
       "Oceans",
       "Pages", "Pastures", "People", "Pilots", "Pioneers", "Plains", "Planes", "Ponds", "Powers", "Pulses",
       "Queens",
-      "Reflections", "Rings", "Ridges", "Rocks",
+      "Reasons", "Reflections", "Rings", "Ridges", "Rocks",
       "Sailboats", "Seeds", "Shades", "Shadows", "Ships", "Skulls", "Skies", "Smiles", "Somethings", "Sounds", "Souls", "Spiders", "Spikes", "Spoons", "Spouts", "Springs", "Stables", "Stairs", "Stars", "Stones", "Strangers", "Strings", "Sugars",
-      "Tears", "Thrones", "Times", "Touches", "Trees",
+      "Tears", "Themes", "Theories", "Thrones", "Times", "Touches", "Trees",
       "Ultimatums", "Umbrellas",
       "Voyages",
       "Wands", "Wanderers", "Waters", "Weddings", "Winds", "Wings", "Winters", "Wolves", "Words", "Wraiths", "Wrinkles",
@@ -127,6 +135,9 @@ var RPRandom = (function() {
     Who: [
       "Who", "What", "When", "Where", "Why", "How", "Which"
     ],
+    Will: [
+      "Could", "Couldn't", "Could Not", "Will", "Won't", "Will Not", "Shall", "Shall Not"
+    ],
     Adjective: [
       "Auburn", "Azure",
       "Beloved", "Blue", "Blonde", "Breezy",
@@ -140,6 +151,7 @@ var RPRandom = (function() {
       "Old",
       "Peculiar", "Periwinkle",
       "Quiet",
+      "Rusty",
       "Sacred", "Scarlet", "Shady", "Shining", "Shy", "Silly", "Smallest", "Stalwart", "Strong", "Subtle",
       "Tattered", "Tiny", "Torn", "Tricky", "True",
       "Unfinished", "Unfortunate", "Unknown", "Unmarked", "Unbreakable",
@@ -149,12 +161,12 @@ var RPRandom = (function() {
     Verb: [
       "Act", "Ascend", "Allow", "Arrange", "Attack", "Awaken",
       "Bail", "Buy",
-      "Call", "Care", "Consume", "Created", "Crumble", "Crush", "Cry", "Cut",
+      "Call", "Care", "Conspire", "Consume", "Created", "Crumble", "Crush", "Cry", "Cut",
       "Desire", "Doubt",
       "Encompass", "Entrust",
       "Fly", "Forget", "Freeze",
       "Keep",
-      "Learn", "Live", "Lock", "Look", "Lose", "Love",
+      "Learn", "Leave", "Live", "Lock", "Look", "Lose", "Love",
       "Mend", "Miss", "Mold",
       "Pack",
       "Race", "Remove", "Revere", "Remember", "Run",
@@ -165,12 +177,12 @@ var RPRandom = (function() {
     Verbed: [
       "Acted", "Ascended", "Allowed", "Arranged", "Attacked", "Awakened",
       "Bailed", "Bought",
-      "Called", "Cared", "Consumed", "Created", "Crumbled", "Crushed", "Cried", "Cut",
+      "Called", "Cared", "Conspired", "Consumed", "Created", "Crumbled", "Crushed", "Cried", "Cut",
       "Desired", "Doubted",
       "Encompassed", "Entrusted",
       "Flew", "Forgot", "Froze",
       "Kept",
-      "Learnt", "Lived", "Locked", "Looked", "Lost", "Loved",
+      "Learnt", "Left", "Lived", "Locked", "Looked", "Lost", "Loved",
       "Mended", "Missed", "Molded",
       "Packed",
       "Raced", "Removed", "Revered", "Remembered", "Ran",
@@ -181,12 +193,12 @@ var RPRandom = (function() {
     Verbing: [
       "Acting", "Ascending", "Allowing", "Arranging", "Attacking", "Awakening",
       "Bailing", "Buying",
-      "Calling", "Caring", "Consuming", "Creating", "Crumbling", "Crushing", "Crying", "Cutting",
+      "Calling", "Caring", "Conspiring", "Consuming", "Creating", "Crumbling", "Crushing", "Crying", "Cutting",
       "Desiring", "Doubting",
       "Encompassing", "Entrusting",
       "Flying", "Forgetting", "Freezing",
       "Keeping",
-      "Learning", "Living", "Locking", "Looking", "Losing", "Loving",
+      "Learning", "Leaving", "Living", "Locking", "Looking", "Losing", "Loving",
       "Mending", "Missing", "Molding",
       "Packing",
       "Racing", "Removing", "Revering", "Remembering", "Running",
