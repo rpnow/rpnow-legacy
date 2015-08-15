@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ title }}{% endblock %} - RP Now</title>
+  <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
+</head>
+<body>
+  <header>
+    <h2>{{ title }}</h2>
+    <p>{{ desc }}</p>
+    {% if not hidemenu %}
+    <div id="title-links">
+      <a href="{{ docroot }}{{ room }}">Home</a> |
+      <a href="{{ docroot }}{{ room }}/1">Archive</a> |
+      <a href="{{ docroot }}{{ room }}/export">Export</a> |
+      <a href="{{ docroot }}{{ room }}/stats">Stats</a> |
+      <a href="{{ docroot }}">New RP</a>
+    </div>
+    {% endif %}
+  </header>
+    
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

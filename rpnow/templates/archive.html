@@ -1,14 +1,34 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>[PAGE {{ page }}] {{ title }} - RP Now</title>
-    <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
-    {% if numpages > 0 %}
+{% extends "room.layout.html" %}
+
+{% block title %}[PAGE {{ page }}] {{ title }}{% endblock %}
+
+{% macro pages(docroot, room, page, numpages) %}
+  {% if numpages > 1 %}
+    <div class="pages">
+      Page: 
+      {% for i in 1..numpages %}
+        {% if i == page %}<b>{{ i }}</b>
+        {% else %}<a href="{{ docroot }}{{ room }}/{{ i }}">{{ i }}</a>{% endif %}
+        {% if i != numpages %} | {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+{% block content %}
+  {% if numpages == 0 %}
+    <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
+  {% else %}
+    {{ _self.pages(docroot, room, page, numpages) }}
+    <div id="messages">
+      <div class="info" id="loading">
+        <p>Loading...</p>
+      </div>
+    </div>
+    {{ _self.pages(docroot, room, page, numpages) }}
     <script src='{{ docroot }}room.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
     <script>
       $(document).ready(function() {
         RPRoom('{{ docroot }}{{ room }}').loadPage({
@@ -17,20 +37,5 @@
         });
       });
     </script>
-    {% endif %}
-  </head>
-  <body>
-    {% include 'title.html' %}
-    {% if numpages == 0 %}
-    <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
-    {% else %}
-    {% include 'pages.html' %}
-    <div id="messages">
-      <div class="info" id="loading">
-        <p>Loading...</p>
-      </div>
-    </div>
-    {% include 'pages.html' %}
-    {% endif %}
-  </body>
-</html>
+  {% endif %}
+{% endblock %}
