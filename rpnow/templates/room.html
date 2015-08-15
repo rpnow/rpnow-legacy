@@ -1,193 +1,189 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }} - RP Now</title>
-    <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
-    <script src='{{ docroot }}room.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.js'></script>
-    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.css' />
-    <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
-    <script>
-      function clickCharaButton(evt) {
-        $('#message-box input[name=name]').val(evt.target.text.trim());
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} - RP Now</title>
+  <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
+</head>
+<body>
+  {% include 'title.html' %}
+  <div id="messages" class="room-feed">
+    <div class="info" id="showing-latest" style="display:none">
+      <p>These are the latest {{ postsPerPage }} posts.
+      To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
+    </div>
+    <div class="info" id="empty-room" style="display:none">
+      <p><b>Success!</b></p>
+      <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
+      <a href="{{ fullUrl }}">{{ fullUrl }}</a>
+      <p>Please keep the following things in mind, however:</p>
+      <ol>
+        <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
+        <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
+        <li><b>Don't post any sensitive information here!</b> In the event of a database breach, we would not want anything confidential to be lost.</li>
+        <li>RP Now is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
+      </ol>
+      <p>Have fun!</p>
+    </div>
+    <div class="info" id="loading">
+      <p>Loading...</p>
+    </div>
+  </div>
+  <div id="character-menu" style="display:none">
+    <h3>Characters</h3>
+    <ul id="special-characters">
+      <li id="narrator-button"><a href="#">Narrator</a></li>
+      <li id="ooc-button"><a href="#">Out of Character</a></li>
+    </ul>
+    <ul id="normal-characters"></ul>
+    <button id="new-character-button">New Character...</button>
+  </div>
+  <form id="new-character" class="form-box" autocomplete="off" style="display:none">
+    <h3>New Character</h3>
+    <div class="input-section">
+      <div class="input-name">Name</div>
+      <div class="input-container"><input type="text" name="name" maxlength="30"></input></div>
+    </div>
+    <div class="input-section">
+      <div class="input-name">Color</div>
+      <div class="input-container"><input type="color" name="color" value="#DDDDDD"></input></div>
+    </div>
+    <input type="submit" value="Add"></input>
+    <button id="cancel-character">Cancel</button>
+  </form>
+  <form id="message-box" autocomplete="off" style="display:none">
+    <input type="text" name="name" value="Narrator" readonly="readonly"></input>
+    <button id="change-character">Change...</button>
+    <div id="message-bar">
+      <div id="message-text">
+        <textarea name="content"></textarea>
+      </div>
+      <div id="message-button">
+        <input type="submit" value="Send"></input>
+      </div>
+    </div>
+  </form>
+  
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.css' />
+  <script src='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.js'></script>
+  <script src='{{ docroot }}room.js'></script>
+  
+  <script>
+    function clickCharaButton(evt) {
+      $('#message-box input[name=name]').val(evt.target.text.trim());
+      $('#character-menu').slideUp(250);
+      $('#message-box').slideDown(250);
+      $('#message-box textarea').focus();
+      evt.preventDefault();
+    }
+    
+    function showCharacterSelectMenu() {
+      $('#character-menu').stop().slideDown(250);
+      $('#message-box').slideUp(250);
+    }
+    
+    function showNewCharacterMenu() {
+      $('<div/>', { id:'overlay' }).appendTo('body');
+      $('#overlay').css({
+        position: 'fixed',
+        'background-color': 'rgba(0,0,0, 0.5)',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        'z-index': 599
+      });
+      $('#new-character').show();
+      $('#new-character input[name=name]').focus();
+    }
+    
+    function hideNewCharacterMenu() {
+      $('#overlay').remove();
+      $('#new-character').hide();
+    }
+    
+    function sendMessage() {
+      // send message
+      var data = { content: $('#message-box textarea').val() };
+      var name = $('#message-box input[name=name]').val();
+      if(name === 'Narrator') data.type = 'Narrator';
+      else if(name === 'Out of Character') data.type = 'OOC';
+      else {
+        data.type = 'Character';
+        data.name = name;
+      }
+      RPRoom().addMessage(data);
+      // clear message box
+      $('#message-box textarea').val('');
+      // scroll to bottom if we're not there
+      $('html, body').animate({scrollTop: $(document).height()}, 250);
+    }
+    
+    $(document).ready(function() {
+      
+      // create the room object
+      RPRoom('{{ room }}').loadFeed({
+        millis: {{ refreshMillis }},
+        onload: function() {
+          $('#loading').hide();
+          if(RPRoom().messageCount > RPRoom().postsPerPage) {
+            $('#showing-latest').show();
+          }
+          else if(RPRoom().messageCount === 0) {
+            $('#empty-room').show();
+          }
+          $('#message-box').slideDown(250);
+        }
+      });
+      
+      // button functions
+      $('#special-characters a').click(clickCharaButton);
+      $('#message-box button#change-character').click(function(e) {
+        showCharacterSelectMenu();
+        e.preventDefault();
+      });
+      $('#new-character-button').click(showNewCharacterMenu);
+      $('#cancel-character').click(function(e) {
+        hideNewCharacterMenu();
+        e.preventDefault();
+      });
+      $('#message-box').submit(function(e) {
+        sendMessage();
+        e.preventDefault();
+      });
+      $('#new-character').submit(function(evt) {
+        evt.preventDefault();
+        // submit form
+        var newName = $('#new-character input[name=name]').val().trim();
+        try {
+          RPRoom().addCharacter({
+            name: newName,
+            color: $('#new-character input[name=color]').val()
+          });
+        }
+        catch(ex) {
+          alert(ex.message);
+          return;
+        }
+        $('#new-character').hide();
+        $('#overlay').remove();
         $('#character-menu').slideUp(250);
         $('#message-box').slideDown(250);
+        $('#message-box input[name=name]').val(newName);
         $('#message-box textarea').focus();
-        evt.preventDefault();
-      }
-      
-      function showCharacterSelectMenu() {
-        $('#character-menu').stop().slideDown(250);
-        $('#message-box').slideUp(250);
-      }
-      
-      function showNewCharacterMenu() {
-        $('<div/>', { id:'overlay' }).appendTo('body');
-        $('#overlay').css({
-          position: 'fixed',
-          'background-color': 'rgba(0,0,0, 0.5)',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          'z-index': 599
-        });
-        $('#new-character').show();
-        $('#new-character input[name=name]').focus();
-      }
-      
-      function hideNewCharacterMenu() {
-        $('#overlay').remove();
-        $('#new-character').hide();
-      }
-      
-      function sendMessage() {
-        // send message
-        var data = { content: $('#message-box textarea').val() };
-        var name = $('#message-box input[name=name]').val();
-        if(name === 'Narrator') data.type = 'Narrator';
-        else if(name === 'Out of Character') data.type = 'OOC';
-        else {
-          data.type = 'Character';
-          data.name = name;
-        }
-        RPRoom().addMessage(data);
-        // clear message box
-        $('#message-box textarea').val('');
-        // scroll to bottom if we're not there
-        $('html, body').animate({scrollTop: $(document).height()}, 250);
-      }
-      
-      $(document).ready(function() {
-        
-        // hide certain elements
-        $('#message-box').hide();
-        $('#empty-room').hide();
-        $('#new-character').hide();
-        $('#character-menu').hide();
-        $('#showing-latest').hide();
-        
-        // create the room object
-        RPRoom('{{ room }}').loadFeed({
-          millis: {{ refreshMillis }},
-          onload: function() {
-            $('#loading').hide();
-            if(RPRoom().messageCount > RPRoom().postsPerPage) {
-              $('#showing-latest').show();
-            }
-            else if(RPRoom().messageCount === 0) {
-              $('#empty-room').show();
-            }
-            $('#message-box').slideDown(250);
-          }
-        });
-        
-        // button functions
-        $('#special-characters a').click(clickCharaButton);
-        $('#message-box button#change-character').click(function(e) {
-          showCharacterSelectMenu();
-          e.preventDefault();
-        });
-        $('#new-character-button').click(showNewCharacterMenu);
-        $('#cancel-character').click(function(e) {
-          hideNewCharacterMenu();
-          e.preventDefault();
-        });
-        $('#message-box').submit(function(e) {
-          sendMessage();
-          e.preventDefault();
-        });
-        $('#new-character').submit(function(evt) {
-          evt.preventDefault();
-          // submit form
-          var newName = $('#new-character input[name=name]').val().trim();
-          try {
-            RPRoom().addCharacter({
-              name: newName,
-              color: $('#new-character input[name=color]').val()
-            });
-          }
-          catch(ex) {
-            alert(ex.message);
-            return;
-          }
-          $('#new-character').hide();
-          $('#overlay').remove();
-          $('#character-menu').slideUp(250);
-          $('#message-box').slideDown(250);
-          $('#message-box input[name=name]').val(newName);
-          $('#message-box textarea').focus();
-          $('#new-character')[0].reset();
-        });
-        $('#message-box textarea').keypress(function(evt) {
-          if((evt.keyCode || evt.which) === 13 && !evt.shiftKey && !evt.ctrlKey) {
-            evt.preventDefault();
-            sendMessage();
-          }
-        });
+        $('#new-character')[0].reset();
       });
-    </script>
-  </head>
-  <body>
-    {% include 'title.html' %}
-    <div id="messages" class="room-feed">
-      <div class="info" id="showing-latest">
-        <p>These are the latest {{ postsPerPage }} posts.
-        To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
-      </div>
-      <div class="info" id="empty-room">
-        <p><b>Success!</b></p>
-        <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
-        <a href="{{ fullUrl }}">{{ fullUrl }}</a>
-        <p>Please keep the following things in mind, however:</p>
-        <ol>
-          <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
-          <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
-          <li><b>Don't post any sensitive information here!</b> In the event of a database breach, we would not want anything confidential to be lost.</li>
-          <li>RP Now is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
-        </ol>
-        <p>Have fun!</p>
-      </div>
-      <div class="info" id="loading">
-        <p>Loading...</p>
-      </div>
-    </div>
-    <div id="character-menu">
-      <h3>Characters</h3>
-      <ul id="special-characters">
-        <li id="narrator-button"><a href="#">Narrator</a></li>
-        <li id="ooc-button"><a href="#">Out of Character</a></li>
-      </ul>
-      <ul id="normal-characters"></ul>
-      <button id="new-character-button">New Character...</button>
-    </div>
-    <form id="new-character" class="form-box" autocomplete="off">
-      <h3>New Character</h3>
-      <div class="input-section">
-        <div class="input-name">Name</div>
-        <div class="input-container"><input type="text" name="name" maxlength="30"></input></div>
-      </div>
-      <div class="input-section">
-        <div class="input-name">Color</div>
-        <div class="input-container"><input type="color" name="color" value="#DDDDDD"></input></div>
-      </div>
-      <input type="submit" value="Add"></input>
-      <button id="cancel-character">Cancel</button>
-    </form>
-    <form id="message-box" autocomplete="off">
-      <input type="text" name="name" value="Narrator" readonly="readonly"></input>
-      <button id="change-character">Change...</button>
-      <div id="message-bar">
-        <div id="message-text">
-          <textarea name="content"></textarea>
-        </div>
-        <div id="message-button">
-          <input type="submit" value="Send"></input>
-        </div>
-      </div>
-    </form>
-  </body>
+      $('#message-box textarea').keypress(function(evt) {
+        if((evt.keyCode || evt.which) === 13 && !evt.shiftKey && !evt.ctrlKey) {
+          evt.preventDefault();
+          sendMessage();
+        }
+      });
+    });
+  </script>
+</body>
 </html>
