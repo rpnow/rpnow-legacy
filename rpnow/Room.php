@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 class Room {
-  private static $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  private static $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
   
   private static function createConnection() {
     global $rpDBServer, $rpDBUser, $rpDBPass, $rpDBName;
