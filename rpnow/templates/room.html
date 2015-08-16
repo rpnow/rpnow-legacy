@@ -23,6 +23,7 @@
       <p>Loading...</p>
     </div>
   </div>
+  
   <div id="character-menu" style="display:none">
     <h3>Characters</h3>
     <ul id="special-characters">
@@ -32,6 +33,7 @@
     <ul id="normal-characters"></ul>
     <button id="new-character-button">New Character...</button>
   </div>
+  
   <form id="new-character" class="form-box" autocomplete="off" style="display:none">
     <h3>New Character</h3>
     <div class="input-section">
@@ -45,9 +47,12 @@
     <input type="submit" value="Add"></input>
     <button id="cancel-character">Cancel</button>
   </form>
+  
   <form id="message-box" autocomplete="off" style="display:none">
-    <input type="text" name="name" value="Narrator" readonly="readonly"></input>
-    <button id="change-character">Change...</button>
+    <div id="format-bar">
+      <input type="text" name="name" value="Narrator" readonly="readonly"></input>
+      <button id="change-character">Change...</button>
+    </div>
     <div id="message-bar">
       <div id="message-text">
         <textarea name="content"></textarea>
@@ -79,7 +84,7 @@
       $('#message-box').slideUp(250);
     }
     
-    function showNewCharacterMenu() {
+    function createOverlay() {
       $('<div/>', { id:'overlay' }).appendTo('body');
       $('#overlay').css({
         position: 'fixed',
@@ -90,12 +95,19 @@
         left: 0,
         'z-index': 599
       });
+    }
+    function destroyOverlay() {
+      $('#overlay').remove();
+    }
+    
+    function showNewCharacterMenu() {
+      createOverlay();
       $('#new-character').show();
       $('#new-character input[name=name]').focus();
     }
     
     function hideNewCharacterMenu() {
-      $('#overlay').remove();
+      destroyOverlay();
       $('#new-character').hide();
     }
     
