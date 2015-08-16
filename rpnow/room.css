@@ -342,24 +342,53 @@ header #title-links a {
   position: fixed;
   z-index: 200;
   bottom: 0;
-  left: 5px;
-  right: 5px;
-  margin: auto;
-  width: 100%;
-  max-width: 700px;
   background: inherit;
-  border: dotted 1px #555;
+  border: dotted 1px #222;
   border-bottom: none;
   border-spacing: 10px;
+  box-shadow: 0 0 20px #222;
+}
+@media all and (max-width: 750px) {
+  #message-box {
+    left: 2px;
+    right: 2px;
+  }
+}
+@media not all and (max-width: 750px) {
+  #message-box {
+    left: 0;
+    right: 0;
+    width: 700px;
+    margin: auto;
+  }
+}
+#format-bar {
+  text-align: left;
+  margin-left: 50px;
+  padding-top: 5px;
+}
+#format-bar input {
+  display: inline-block;
+  margin-right: 0;
+}
+#format-bar #change-character {
+  display: inline-block;
+  border-radius: 0;
+  padding: 2px 2px;
+  font-size: 80%;
+  letter-spacing: -1px;
+  margin-left: 0;
 }
 #message-bar {
-  display: table-row;
+  display: table;
+  border-spacing: 0;
+  border-collapse: separate;
 }
 #message-bar #message-text,
 #message-bar #message-button {
   display: table-cell;
   vertical-align: middle;
-  padding: 0;
+  padding: 5px;
   margin: 0;
 }
 #message-box #message-text {
@@ -373,6 +402,8 @@ header #title-links a {
 #message-box input[type=submit] {
   min-width: 80px;
   height: 68px;
+  margin-left: 5px;
+  border-radius: 5px;
 }
 
 
@@ -386,15 +417,26 @@ header #title-links a {
 #character-menu {
   position: fixed;
   bottom: 0;
-  left: 5px;
-  right: 5px;
-  margin: auto;
-  max-width: 700px;
   z-index: 300;
   background: inherit;
   border: dotted 1px #555;
   margin: 20px auto 0;
   padding: 15px 10px;
+  box-shadow: 0 0 20px #222;
+}
+@media all and (max-width: 750px) {
+  #character-menu {
+    left: 2px;
+    right: 2px;
+  }
+}
+@media not all and (max-width: 750px) {
+  #character-menu {
+    left: 0;
+    right: 0;
+    width: 700px;
+    margin: auto;
+  }
 }
 #character-menu > h3 {
   margin: 0 auto;
@@ -407,11 +449,15 @@ header #title-links a {
 }
 #character-menu > ul#normal-characters {
   border: dotted 1px #bbb;
+  background-color: #eee;
+  max-height: 50vh;
+  overflow-y: auto;
 }
 #character-menu > ul > li {
   display: inline-block;
   word-wrap: break-word;
   width: 135px;
+  max-width: 32vw;
   margin: 5px;
   padding: 0;
 }
