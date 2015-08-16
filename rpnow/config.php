@@ -23,11 +23,11 @@ $rpDBUser   = 'rp_db_user';
 $rpDBPass   = 'abc123';
 
 ## Is the admin panel enabled?
-# $rpAdminPanelEnabled = true;
+$rpAdminPanelEnabled = true;
 ## Admin panel username and password.
 ## Uncomment and ***CHANGE*** these when you enable the panel!
-# $rpAdminPanelUser = 'admin';
-# $rpAdminPanelPass = 'rpnow999';
+$rpAdminPanelUser = 'admin';
+$rpAdminPanelPass = 'admin';
 
 ## The length of the auto-generated URL for each RP room.
 $rpIDLength = 4;
