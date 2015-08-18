@@ -223,10 +223,17 @@ header #title-links a {
 }
 #messages > .message .color-ip-box {
   display: inline-block;
-  width: 10px;
+  vertical-align: middle;
   height: 10px;
   border: solid 1px white;
   margin-right: 5px;
+  margin-top: -2px;
+}
+#messages > .message .color-ip-box > span {
+  display: inline-block;
+  vertical-align: top;
+  width: 7px;
+  height: 10px;
 }
 #messages > .message .timestamp {
   font-size: 90%;

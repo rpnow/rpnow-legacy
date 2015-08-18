@@ -158,7 +158,11 @@ class Room {
           'Content' => $x['Content'],
           'Timestamp' => $x['Timestamp'],
           'Name' => $x['Name'],
-          'IPColor' => '#' . substr(md5($x['IP']), 0, 6)
+          'IPColor' => array(
+            '#' . substr(md5($x['IP']), 0, 6),
+            '#' . substr(md5($x['IP']), 6, 6),
+            '#' . substr(md5($x['IP']), 12, 6)
+          )
         );
       },
       $statement->fetchAll()

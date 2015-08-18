@@ -192,10 +192,10 @@ function RPRoom(reqUrl) {
       })
       // color ip box
       .append(
-        $('<span/>', { 
-          'class': 'color-ip-box',
-          'style': 'background-color: ' + message.IPColor
-        })
+        $('<span/>', { 'class': 'color-ip-box' })
+        .append($('<span/>', { 'style': 'background-color: ' + message.IPColor[0] }))
+        .append($('<span/>', { 'style': 'background-color: ' + message.IPColor[1] }))
+        .append($('<span/>', { 'style': 'background-color: ' + message.IPColor[2] }))
       )
       // timestamp
       .append(
