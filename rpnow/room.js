@@ -185,13 +185,29 @@ function RPRoom(reqUrl) {
         'class': 'message message-ooc'
       });
     }
+    // post details
     el.append(
       $('<div/>', {
-        'class': 'timestamp',
-        'data-timestamp': message.Timestamp,
-        text: displayTimestamp(message.Timestamp)
+        'class': 'message-details'
       })
-    ).append(
+      // color ip box
+      .append(
+        $('<span/>', { 
+          'class': 'color-ip-box',
+          'style': 'background-color: ' + message.IPColor
+        })
+      )
+      // timestamp
+      .append(
+        $('<span/>', {
+          'class': 'timestamp',
+          'data-timestamp': message.Timestamp,
+          text: displayTimestamp(message.Timestamp)
+        })
+      )
+    )
+    // message body
+    .append(
       $('<div/>', {
         'class': 'content',
         html: formatMessage(message)

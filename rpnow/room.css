@@ -221,15 +221,22 @@ header #title-links a {
 #messages > .message > .content {
   line-height: 1.6;
 }
-#messages > .message > .timestamp {
+#messages > .message .color-ip-box {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: solid 1px white;
+  margin-right: 5px;
+}
+#messages > .message .timestamp {
   font-size: 90%;
   opacity: 0.5;
-  text-align: right;
 }
 #messages > .message-narrator {
   background-color: #fff;
   box-shadow: 0 1px 1px #bbb;
   padding: 5px;
+  text-align: right;
 }
 #messages > .message-narrator > .content {
   border: dotted 1px #bbb;
@@ -238,9 +245,12 @@ header #title-links a {
 }
 #messages > .message-narrator > .content::first-letter {
   font-size: 125%;
-} 
-#messages > .message-narrator > .timestamp {
+}
+#messages > .message-narrator > .message-details {
   margin: -5px 28px -2px;
+}
+#messages > .message-narrator .color-ip-box {
+  border-color: #555;
 }
 #messages > .message-ooc {
   background-color: #707070;
@@ -256,12 +266,15 @@ header #title-links a {
 #messages > .message-narrator + .message-ooc {
   margin-top: 8px;
 }
-#messages > .message-ooc > .timestamp {
+#messages > .message-ooc > .message-details {
   display: inline;
-  opacity: 0.66;
 }
-#messages > .message-ooc > .timestamp::before { content: '[ '; }
-#messages > .message-ooc > .timestamp::after { content: ' ] '; }
+#messages > .message-ooc .timestamp {
+  opacity: 0.66;
+  font-size: 80%;
+}
+#messages > .message-ooc .timestamp::before { content: '[ '; }
+#messages > .message-ooc .timestamp::after { content: ' ] '; }
 #messages > .message-ooc > .content {
   display: inline;
 }
@@ -274,6 +287,7 @@ header #title-links a {
   box-shadow: 0 2px 3px #555;
   position: relative;
   max-width: 100%;
+  text-align: right;
 }
 #messages > .message-chara > .name{
   display: inline-block;
@@ -297,6 +311,7 @@ header #title-links a {
   border-radius: 12px;
   border-bottom-left-radius: 0;
   box-shadow: 0 1px 2px #888 inset;
+  text-align: left;
 }
 #messages > .message-chara > .content span.action {
   font-size: 80%;
@@ -305,8 +320,8 @@ header #title-links a {
   opacity: 0.8;
   box-shadow: 0 1px 1px #3c3c3c;
 }
-#messages > .message-chara > .timestamp {
-  margin: -5px 15px -2px;
+#messages > .message-chara > .message-details {
+  margin: -5px 15px -2px 5px;
 }
 
 
