@@ -271,4 +271,10 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
   });
 }
 
+// MOTD
+$app->get('/broadcast/', function () use ($app) {
+  global $rpBroadcast;
+  if(isset($rpBroadcast)) echo $rpBroadcast;
+});
+
 ?>

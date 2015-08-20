@@ -105,20 +105,23 @@ class Room {
     $room = $this->getID();
     global $rpPostsPerPage;
     $statement = NULL;
+    // latest (ppp) messages
     if($which == 'latest') {
       $statement = $this->db->prepare("(SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`,
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`,
       `Number`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
       ORDER BY `Number` ASC;");
     }
+    // all messages
     else if($which == 'all') {
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC;");
     }
+    // page of archive
     else if($which == 'page' && !is_null($n)) {
       if(intval($n) == false || intval($n) != floatval($n) || intval($n) < 1) {
         throw new Exception('invalid page number.');
@@ -129,16 +132,17 @@ class Room {
       }
       $start = ($n - 1) * $rpPostsPerPage;
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
+    // updates
     else if($which == 'after' && !is_null($n)) {
       if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
         throw new Exception("invalid message request: $n is a bad number.");
       }
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`
+      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
@@ -146,7 +150,23 @@ class Room {
       throw new Exception('unknown message request!');
     }
     $statement->execute();
-    return $statement->fetchAll();
+    // also retrieve IP color mapping
+    return array_map(
+      function($x) {
+        return array(
+          'Type' => $x['Type'],
+          'Content' => $x['Content'],
+          'Timestamp' => $x['Timestamp'],
+          'Name' => $x['Name'],
+          'IPColor' => array(
+            '#' . substr(md5($x['IP']), 0, 6),
+            '#' . substr(md5($x['IP']), 6, 6),
+            '#' . substr(md5($x['IP']), 12, 6)
+          )
+        );
+      },
+      $statement->fetchAll()
+    );
   }
   
   public function getCharacters($after = 0) {
