@@ -151,6 +151,47 @@ form.form-box .input-button button {
 
 
 /**********************************************************
+ * MOTD ALERT BOXES
+ *
+ **********************************************************/
+#motd {
+  position: fixed;
+  left: 4vw;
+  right: 4vw;
+  top: 2vh;
+  max-width: 600px;
+  margin: auto;
+  background-color: #E8EFFF;
+  box-shadow: 0 6px 10px #8899CC;
+  padding: 20px 10px 10px;
+  border: 2px solid #9AB3DC;
+  animation: fadein 0.2s;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+#motd #motd-content {
+  padding-bottom: 20px;
+}
+#motd #motd-close {
+  background-color: inherit;
+  box-shadow: none;
+  border: 2px solid #9AB3DC;
+  color: #9AB3DC;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 80%;
+  border-radius: 80px;
+  padding: 8px 20px;
+}
+#motd #motd-close:hover {
+  background-color: #9AB3DC;
+  color: white;
+}
+
+
+
+/**********************************************************
  * roleplay chat page:
  *   HEADER
  *
