@@ -5,13 +5,30 @@
   'id' => '[a-zA-Z0-9]{'.$rpIDLength.'}'
 ));
 
+// Maintenance Mode Middleware
+$downCheck = function () use ($app) {
+  global $rpDown;
+  if(isset($rpDown)) {
+    $app->response->setStatus(503);
+    $app->view()->setData(array('info' => $rpDown));
+    $app->render('down.html');
+    $app->stop();
+  }
+};
+$downCheckAjax = function () use ($app) {
+  global $rpDown;
+  if(isset($rpDown)) {
+    $app->halt(503);
+  }
+};
+
 // Home page
-$app->get('/', function () {
+$app->get('/', $downCheck, function () {
   readfile('templates/home.html');
 });
 
 // Create room
-$app->post('/create/', function () use ($app) {
+$app->post('/create/', $downCheck, function () use ($app) {
   $room = Room::CreateRoom(
     $app->request()->post('title'),
     $app->request()->post('desc')
@@ -22,7 +39,7 @@ $app->post('/create/', function () use ($app) {
 });
 
 // View room
-$app->get('/:id/', function ($id) use ($app) {
+$app->get('/:id/', $downCheck, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     global $rpPostsPerPage, $rpRootPath, $rpRefreshMillis;
@@ -44,7 +61,7 @@ $app->get('/:id/', function ($id) use ($app) {
 
 
 // Archive
-$app->get('/:id/:page/', function ($id, $page) use ($app) {
+$app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
   try {
     global $rpRootPath, $rpPostsPerPage;
     $room = Room::GetRoom($id);
@@ -66,7 +83,7 @@ $app->get('/:id/:page/', function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get archive page data
-$app->get('/:id/ajax/:page/', function ($id, $page) use ($app) {
+$app->get('/:id/ajax/:page/', $downCheckAjax, function ($id, $page) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $data = array(
@@ -83,7 +100,7 @@ $app->get('/:id/ajax/:page/', function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get latest posts for room
-$app->get('/:id/ajax/latest/', function ($id) use ($app) {
+$app->get('/:id/ajax/latest/', $downCheckAjax, function ($id) use ($app) {
   try {
     global $rpPostsPerPage;
     $room = Room::GetRoom($id);
@@ -104,7 +121,7 @@ $app->get('/:id/ajax/latest/', function ($id) use ($app) {
 });
 
 // Receive room updates
-$app->get('/:id/ajax/updates/', function ($id) use ($app) {
+$app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $data = array(
@@ -121,7 +138,7 @@ $app->get('/:id/ajax/updates/', function ($id) use ($app) {
 });
 
 // Send message to room
-$app->post('/:id/ajax/message/', function ($id) use ($app) {
+$app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     if($app->request()->post('type') == 'Character') {
@@ -149,7 +166,7 @@ $app->post('/:id/ajax/message/', function ($id) use ($app) {
 });
 
 // Add character to room
-$app->post('/:id/ajax/character/', function ($id) use ($app) {
+$app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $room->addCharacter(
@@ -168,7 +185,7 @@ $app->post('/:id/ajax/character/', function ($id) use ($app) {
 });
 
 // Sample room!
-$app->get('/sample/', function () use ($app) {
+$app->get('/sample/', $downCheck, function () use ($app) {
   global $rpRootPath;
   $app->view()->setData(array(
     'title' => 'Sample Roleplay',
@@ -187,7 +204,7 @@ $app->get('/sample/ajax/1/', function () use ($app) {
 });
 
 // Generate some statistics for the room
-$app->get('/:id/stats/', function ($id) use ($app) {
+$app->get('/:id/stats/', $downCheck, function ($id) use ($app) {
   try {
     global $rpRootPath;
     $room = Room::GetRoom($id);
@@ -208,7 +225,7 @@ $app->get('/:id/stats/', function ($id) use ($app) {
 });
 
 // Export room to txt file
-$app->get('/:id/export/', function ($id) use ($app) {
+$app->get('/:id/export/', $downCheck, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
     // .txt download response headers
@@ -242,12 +259,12 @@ $app->get('/:id/export/', function ($id) use ($app) {
 });
 
 // About
-$app->get('/about/', function () use ($app) {
+$app->get('/about/', $downCheck, function () use ($app) {
   $app->render('about.html');
 });
 
 // Terms
-$app->get('/terms/', function () use ($app) {
+$app->get('/terms/', $downCheck, function () use ($app) {
   $app->render('terms.html');
 });
 
@@ -273,6 +290,11 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
 
 // MOTD
 $app->get('/broadcast/', function () use ($app) {
+  global $rpDown;
+  if(isset($rpDown)) {
+    echo $rpDown;
+    $app->stop();
+  }
   global $rpBroadcast;
   if(isset($rpBroadcast)) echo $rpBroadcast;
 });
