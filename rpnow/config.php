@@ -41,12 +41,14 @@ $rpRefreshMillis = 3000;
 ## Admin Broadcast Message
 ## When you need to deliver a message to the entire site,
 ## uncomment the following line and set the message text to
-## what you want it to say. HTML works.
+## what you want it to say.
+## HTML works.
 # $rpBroadcast = "<h3>Admin Broadcast</h3><p>This is your captain speaking.</p>";
 ## Maintenance Message
 ## When taking the site down for maintenance, uncomment the
 ## following line and change the message.
 ## Once maintenance is done, just comment it out again!
-# $rpDownMessage = "Site is down for maintenance!"
+## HTML is allowed, again.
+# $rpDown = "<p>Sorry! RPNow is down for routine maintenance.</p>";
 
 ?>
