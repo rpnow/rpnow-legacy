@@ -1,0 +1,121 @@
+//------------------
+// DB UPDATES
+//------------------
+
+(Message)
+    + Deleted (bit)
+    + TimeUpdated (timestamp)
+
++ MessageUpdates
+    MessageID (int)
+    Action (['Deleted', 'Undeleted'])
+    Time (timestamp)
+    IP (varchar(45))
+    
+(Chara)
+    + Deleted (bit)
+    + TimeUpdated (timestamp)
+
++ CharaUpdates
+    CharaID (int)
+    Action (['Deleted', 'Undeleted'])
+    Time (timestamp)
+    IP (varchar(45))
+
+
+
+//-------------------
+// BACKEND FUNCTIONS
+//-------------------
+
+api/{id}/...
+
+[GET|json] /info
+  id
+  title
+  description
+  creator
+  postsPerPage
+                  
+[GET|json] /page/{n}
+  msgs[]
+
+[GET|file] /export    (format, ooc)
+  (FILE)
+
+[GET|json] /chat
+  msgs[]
+  charas[]
+  msgCounter
+  charaCounter
+  upMsgCounter
+  upCharaCounter
+
+[GET|json] /updates   (msgCounter, charaCounter, upMsgCounter, upCharaCounter)
+  newMsgs[]?
+  newCharas[]?
+  updatedMsgs[]?
+  updatedCharas[]?
+
+[POST] /send-message  (content, type, [name, [color]])
+[POST] /send-chara    (name, color)
+[POST] /del-message   (id)
+[POST] /del-chara     (id)
+[POST] /undel-message (id)
+[POST] /undel-chara   (id)
+
+
+
+//-------------------
+// ROOMJS FUNCTIONS
+//-------------------
+
+RP( 'abcd', ready(rp) );
+
+rp.id
+rp.title
+rp.description
+rp.creator
+rp.charas[]
+
+rp.sendMessage( message, type, [chara, [color]] );
+rp.sendChara( name, color );
+rp.deleteMessage( id );
+rp.deleteChara( id );
+rp.undeleteMessage( id );
+rp.undeleteChara( id );
+
+rp.getPage( pageNum, ready({ msgs[] }) );
+rp.getLatest( ready({ msgs[] }) );
+rp.listenForUpdates( update({ newMsgs[], newCharas[], updatedMsgs[], updatedCharas[] }) );
+
+msg.id
+msg.content
+msg.timeSent
+msg.timeUpdated
+msg.user
+msg.type // in ['Character', 'Narrator', 'OOC']
+msg.chara // for 'Character' type only
+msg.deleted
+msg.element
+
+msgUpdate.id
+msgUpdate.time
+msgUpdate.action // in ['Delete', 'Undelete']
+msgUpdate.user
+
+oocThread.type // always 'OOCString'
+oocThread.msgs[]
+oocThread.element
+
+chara.id
+chara.name
+chara.color
+chara.textColor
+chara.user
+chara.deleted
+chara.button
+
+user.anon
+user.name // for anon=false
+user.colors[] // for anon=true
