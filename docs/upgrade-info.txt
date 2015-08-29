@@ -3,24 +3,31 @@
 //------------------
 
 (Message)
+    * Timestamp -> Time_Created
     + Deleted (bit)
-    + TimeUpdated (timestamp)
+    + Time_Updated (timestamp)
 
 + MessageUpdates
-    MessageID (int)
-    Action (['Deleted', 'Undeleted'])
+    Number (int) PRIMARY KEY
+    Message_Number (int)
+    Action (['Delete', 'Undelete'])
     Time (timestamp)
     IP (varchar(45))
-    
+
 (Chara)
+    * Timestamp -> Time_Created
     + Deleted (bit)
-    + TimeUpdated (timestamp)
+    + Time_Updated (timestamp)
 
 + CharaUpdates
-    CharaID (int)
-    Action (['Deleted', 'Undeleted'])
+    Number (int) PRIMARY KEY
+    Character_Number (int)
+    Action (['Delete', 'Undelete'])
     Time (timestamp)
     IP (varchar(45))
+
+(Room)
+    * Timestamp -> Time_Created
 
 
 
