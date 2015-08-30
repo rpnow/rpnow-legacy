@@ -78,12 +78,13 @@ $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get archive page data
-$app->get('/:id/ajax/:page/', $downCheckAjax, function ($id, $page) use ($app) {
+$app->get('/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $data = array(
-      'messages' => $room->getMessages('page', $page),
-      'characters' => $room->getCharacters()
+      'msgs' => $room->getMessages('page', $page),
+      'charas' => $room->getCharacters(),
+      'numpages' => $room->getNumPages()
     );
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
@@ -95,15 +96,17 @@ $app->get('/:id/ajax/:page/', $downCheckAjax, function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get latest posts for room
-$app->get('/:id/ajax/latest/', $downCheckAjax, function ($id) use ($app) {
+$app->get('/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
   try {
     global $rpPostsPerPage, $rpRefreshMillis;
     $room = Room::GetRoom($id);
     $data = array(
-      'messages' => $room->getMessages('latest'),
-      'characters' => $room->getCharacters(),
-      'messageCount' => $room->getMessageCount(),
-      'characterCount' => $room->getCharacterCount(),
+      'msgs' => $room->getMessages('latest'),
+      'charas' => $room->getCharacters(),
+      'msgCounter' => $room->getMessageCount(),
+      'charaCounter' => $room->getCharacterCount(),
+      'upMsgCounter' => 0,
+      'upCharaCounter' => 0,
       'postsPerPage' => $rpPostsPerPage,
       'refreshMillis' => $rpRefreshMillis
     );
@@ -120,11 +123,13 @@ $app->get('/:id/ajax/latest/', $downCheckAjax, function ($id) use ($app) {
 $app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    $data = array(
-      'messages' => $room->getMessages('after', $app->request()->get('messages')),
-      'characters' => $room->getCharacters($app->request()->get('characters'))
-    );
+    $msgs = $room->getMessages('after', $app->request()->get('messages'));
+    $charas = $room->getCharacters($app->request()->get('characters'));
     $room->close();
+    
+    $data = array();
+    if(count($msgs) != 0) $data['newMsgs'] = $msgs;
+    if(count($charas) != 0) $data['newCharas'] = $charas;
     $app->response->headers->set('Content-Type', 'application/json');
     echo json_encode($data);
   }

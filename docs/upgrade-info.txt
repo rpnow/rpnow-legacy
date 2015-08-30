@@ -35,41 +35,45 @@
 // BACKEND FUNCTIONS
 //-------------------
 
-api/{id}/...
-
-[GET|json] /info
+[GET|html] /
   id
   title
   description
   creator
-  postsPerPage
+
+
+{id}/ajax/...
                   
-[GET|json] /page/{n}
+[GET|json] .../page/{n}
   msgs[]
+  charas[]
+  numPages
 
-[GET|file] /export    (format, ooc)
-  (FILE)
-
-[GET|json] /chat
+[GET|json] .../chat
   msgs[]
   charas[]
   msgCounter
   charaCounter
   upMsgCounter
   upCharaCounter
+  postsPerPage
+  refreshMillis
 
-[GET|json] /updates   (msgCounter, charaCounter, upMsgCounter, upCharaCounter)
+[GET|json] .../updates    (msgCounter, charaCounter, upMsgCounter, upCharaCounter)
   newMsgs[]?
   newCharas[]?
   updatedMsgs[]?
   updatedCharas[]?
 
-[POST] /send-message  (content, type, [name, [color]])
-[POST] /send-chara    (name, color)
-[POST] /del-message   (id)
-[POST] /del-chara     (id)
-[POST] /undel-message (id)
-[POST] /undel-chara   (id)
+[GET|file] .../export     (format, ooc)
+  (FILE)
+
+[POST] .../send-message   (content, type, [name, [color]])
+[POST] .../send-chara     (name, color)
+[POST] .../del-message    (id)
+[POST] .../del-chara      (id)
+[POST] .../undel-message  (id)
+[POST] .../undel-chara    (id)
 
 
 
