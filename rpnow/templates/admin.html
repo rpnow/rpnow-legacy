@@ -21,8 +21,8 @@
           {% if rp.Title is empty %}[{{ rp.ID }}]{% else %}{{ rp.Title }}{% endif %}
         </a></td>
         <td>{{ rp.Num_Msgs }}</td>
-        <td>{{ rp.Created }}</td>
-        <td>{{ rp.Updated }}</td>
+        <td>{{ rp.Time_Created }}</td>
+        <td>{{ rp.Time_Updated }}</td>
         <td>{{ rp.IP }}</td>
       </tr>
       {% endfor %}

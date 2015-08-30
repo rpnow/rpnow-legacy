@@ -70,12 +70,12 @@ class Room {
     return $conn->query("SELECT
     `Title`,
     `ID`,
-    `Timestamp` AS `Created`,
+    `Time_Created`,
     `IP`,
-    (SELECT COALESCE(MAX(`Timestamp`), `Room`.`Timestamp`) FROM `Message` WHERE `Room` = `ID`) AS `Updated`,
+    (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Room` = `ID`) AS `Time_Updated`,
     (SELECT COUNT(*) FROM `Message` WHERE `Room` = `ID`) AS `Num_Msgs`
     FROM `Room`
-    ORDER BY `Updated` DESC");
+    ORDER BY `Time_Updated` DESC");
   }
   
   public function close() {
@@ -108,7 +108,7 @@ class Room {
     // latest (ppp) messages
     if($which == 'latest') {
       $statement = $this->db->prepare("(SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`,
+      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`,
       `Number`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
@@ -117,7 +117,7 @@ class Room {
     // all messages
     else if($which == 'all') {
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC;");
     }
@@ -132,7 +132,7 @@ class Room {
       }
       $start = ($n - 1) * $rpPostsPerPage;
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
@@ -142,7 +142,7 @@ class Room {
         throw new Exception("invalid message request: $n is a bad number.");
       }
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
@@ -204,8 +204,8 @@ class Room {
   
   public function getStatsArray() {
     $dataStatement = $this->db->prepare("SELECT
-      MAX(`Timestamp`) AS `LatestMessageDate`,
-      MIN(`Timestamp`) AS `FirstMessageDate`,
+      MAX(`Time_Created`) AS `LatestMessageDate`,
+      MIN(`Time_Created`) AS `FirstMessageDate`,
       SUM(if(`Type`='Narrator', 1,0)) AS `NarratorMessageCount`,
       SUM(if(`Type`='OOC', 1,0)) AS `OOCMessageCount`,
       SUM(if(`Type`='Narrator', char_length(`Content`),0)) AS `NarratorCharCount`,
