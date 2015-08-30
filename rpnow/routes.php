@@ -47,7 +47,6 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
       'room' => $id,
-      'fullUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}$rpRootPath$id",
       'docroot' => $rpRootPath,
       'refreshMillis' => $rpRefreshMillis
     ));

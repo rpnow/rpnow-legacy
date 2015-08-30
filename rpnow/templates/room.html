@@ -9,7 +9,11 @@
     <div class="info" id="empty-room" style="display:none">
       <p><b>Success!</b></p>
       <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
-      <a href="{{ fullUrl }}">{{ fullUrl }}</a>
+      <a id="friend-link"></a>
+      <script>
+        document.getElementById('friend-link').innerHTML = window.location.href;
+        document.getElementById('friend-link').href = window.location.href;
+      </script>
       <p>Please keep the following things in mind, however:</p>
       <ol>
         <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
