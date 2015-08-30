@@ -136,7 +136,6 @@
       
       // create the room object
       RPRoom('{{ room }}').loadFeed({
-        millis: {{ refreshMillis }},
         onload: function() {
           $('#loading').hide();
           if(RPRoom().messageCount > RPRoom().postsPerPage) {

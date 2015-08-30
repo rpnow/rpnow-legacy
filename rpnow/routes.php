@@ -42,13 +42,11 @@ $app->post('/create/', $downCheck, function () use ($app) {
 $app->get('/:id/', $downCheck, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    global $rpPostsPerPage, $rpRootPath, $rpRefreshMillis;
     $app->view()->setData(array(
+      'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'room' => $id,
-      'docroot' => $rpRootPath,
-      'refreshMillis' => $rpRefreshMillis
+      'docroot' => ''
     ));
     $room->close();
     $app->render('room.html');
@@ -62,16 +60,14 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
 // Archive
 $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
   try {
-    global $rpRootPath, $rpPostsPerPage;
     $room = Room::GetRoom($id);
     $app->view()->setData(array(
+      'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'room' => $id,
-      'numpages' => $room->getNumPages(),
+      'docroot' => '../',
       'page' => $page,
-      'docroot' => $rpRootPath,
-      'postsPerPage' => $rpPostsPerPage
+      'numpages' => $room->getNumPages()
     ));
     $room->close();
     $app->render('archive.html');
@@ -101,14 +97,15 @@ $app->get('/:id/ajax/:page/', $downCheckAjax, function ($id, $page) use ($app) {
 // Get latest posts for room
 $app->get('/:id/ajax/latest/', $downCheckAjax, function ($id) use ($app) {
   try {
-    global $rpPostsPerPage;
+    global $rpPostsPerPage, $rpRefreshMillis;
     $room = Room::GetRoom($id);
     $data = array(
       'messages' => $room->getMessages('latest'),
       'characters' => $room->getCharacters(),
       'messageCount' => $room->getMessageCount(),
       'characterCount' => $room->getCharacterCount(),
-      'postsPerPage' => $rpPostsPerPage
+      'postsPerPage' => $rpPostsPerPage,
+      'refreshMillis' => $rpRefreshMillis
     );
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
@@ -185,7 +182,6 @@ $app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
 
 // Sample room!
 $app->get('/sample/', $downCheck, function () use ($app) {
-  global $rpRootPath;
   $app->view()->setData(array(
     'title' => 'Sample Roleplay',
     'desc' => 'This is what an RP will look like!',
@@ -193,7 +189,7 @@ $app->get('/sample/', $downCheck, function () use ($app) {
     'hidemenu' => true,
     'numpages' => 1,
     'page' => 1,
-    'docroot' => $rpRootPath
+    'docroot' => ''
   ));
   $app->render('archive.html');
 });
@@ -205,14 +201,13 @@ $app->get('/sample/ajax/1/', function () use ($app) {
 // Generate some statistics for the room
 $app->get('/:id/stats/', $downCheck, function ($id) use ($app) {
   try {
-    global $rpRootPath;
     $room = Room::GetRoom($id);
     $app->view()->setData(
       array_merge($room->getStatsArray(), array(
         'title' => $room->getTitle(),
         'desc' => $room->getDesc(),
         'room' => $id,
-        'docroot' => $rpRootPath
+        'docroot' => '../'
       ))
     );
     $room->close();
@@ -277,10 +272,9 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     )
   )));
   $app->get('/admin/', function () use ($app) {
-    global $rpRootPath;
     $data = array(
       'rps' => Room::AuditRooms(),
-      'docroot' => $rpRootPath
+      'docroot' => ''
     );
     $app->view()->setData($data);
     $app->render('admin.html');

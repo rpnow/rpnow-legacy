@@ -53,10 +53,8 @@ function RPRoom(reqUrl) {
         // callback
         if(params.onload) params.onload();
         // start updating
-        if(params.millis) {
-          interval = params.millis;
-          timer = setTimeout(ajaxUpdate, interval);
-        }
+        interval = data.refreshMillis;
+        timer = setTimeout(ajaxUpdate, interval);
         // additionally update the timestamps every so often
         updateTimeAgo();
       }
