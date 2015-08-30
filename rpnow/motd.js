@@ -25,7 +25,7 @@ function updateMOTD() {
   }
   // check the motd
   var req = new XMLHttpRequest();
-  req.open('GET', '/broadcast/');
+  req.open('GET', '/broadcast');
   req.onload = motdLoaded; // (defined below)
   req.send();
   // when the motd is loaded...
