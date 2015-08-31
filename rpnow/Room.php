@@ -101,6 +101,15 @@ class Room {
     return $row[0] == '1';
   }
   
+  private static function getIPColors($ip) {
+    $md5str = md5($ip);
+    return array(
+      '#' . substr($md5str, 0, 6),
+      '#' . substr($md5str, 6, 6),
+      '#' . substr($md5str, 12, 6)
+    );
+  }
+  
   public function getMessages($which, $n = NULL) {
     $room = $this->getID();
     global $rpPostsPerPage;
@@ -108,8 +117,7 @@ class Room {
     // latest (ppp) messages
     if($which == 'latest') {
       $statement = $this->db->prepare("(SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`,
-      `Number`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
       ORDER BY `Number` ASC;");
@@ -117,7 +125,7 @@ class Room {
     // all messages
     else if($which == 'all') {
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC;");
     }
@@ -132,7 +140,7 @@ class Room {
       }
       $start = ($n - 1) * $rpPostsPerPage;
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
@@ -142,7 +150,7 @@ class Room {
         throw new Exception("invalid message request: $n is a bad number.");
       }
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
@@ -154,15 +162,14 @@ class Room {
     return array_map(
       function($x) {
         return array(
-          'Type' => $x['Type'],
+          'Number' => $x['Number'],
           'Content' => $x['Content'],
-          'Timestamp' => $x['Timestamp'],
-          'Name' => $x['Name'],
-          'IPColor' => array(
-            '#' . substr(md5($x['IP']), 0, 6),
-            '#' . substr(md5($x['IP']), 6, 6),
-            '#' . substr(md5($x['IP']), 12, 6)
-          )
+          'Time_Created' => $x['Time_Created'],
+          'Time_Updated' => $x['Time_Updated'],
+          'IPColor' => Room::getIPColors($x['IP']),
+          'Type' => $x['Type'],
+          'Chara_Number' => $x['Chara_Number'],
+          'Deleted' => $x['Deleted'],
         );
       },
       $statement->fetchAll()
@@ -174,7 +181,7 @@ class Room {
       throw new Exception("invalid character request: $after is a bad number.");
     }
     // get the characters
-    $statement = $this->db->prepare("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = ? LIMIT 9999 OFFSET $after");
+    $statement = $this->db->prepare("SELECT `Number`, `Name`, `Color`, `IP`, `Deleted` FROM `Character` WHERE `Room` = ? LIMIT 9999 OFFSET $after");
     $statement->execute(array($this->getID()));
     // calculate the secondary color for each and return in modified array
     return array_map(
@@ -188,9 +195,12 @@ class Room {
         $b = hexdec(substr($x['Color'],1+$prec*2,$prec))*$mult;
         $yiq = (($r*299)+($g*587)+($b*114))/1000;
         return array(
+          'Number' => $x['Number'],
           'Name' => $x['Name'],
           'Color' => $x['Color'],
-          'Contrast' => ($yiq >= 128) ? 'black' : 'white'
+          'Contrast' => ($yiq >= 128) ? 'black' : 'white',
+          'IPColor' => Room::getIPColors($x['IP']),
+          'Deleted' => $x['Deleted']
         );
       },
       $statement->fetchAll()

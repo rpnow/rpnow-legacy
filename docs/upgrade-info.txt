@@ -6,6 +6,9 @@
     * Timestamp -> Time_Created
     + Deleted (bit)
     + Time_Updated (timestamp)
+    - Character_Name
+    + Chara_Number (int)
+        UPDATE `message` SET `Chara_Number` = (SELECT `Number` FROM `character` WHERE `message`.`Room` = `character`.`Room` AND `character`.`Name` = `Character_Name`)
 
 + MessageUpdates
     Number (int) PRIMARY KEY
@@ -106,9 +109,10 @@ msg.timeSent
 msg.timeUpdated
 msg.user
 msg.type // in ['Character', 'Narrator', 'OOC']
+msg.charaId // for 'Character' type only
 msg.chara // for 'Character' type only
 msg.deleted
-msg.element
+msg.createElement(timestampFormat = 'absolute')
 
 msgUpdate.id
 msgUpdate.time
@@ -125,8 +129,9 @@ chara.color
 chara.textColor
 chara.user
 chara.deleted
-chara.button
+chara.createButton(callback)
 
 user.anon
 user.name // for anon=false
 user.colors[] // for anon=true
+user.createIcon()
