@@ -90,18 +90,26 @@ rp.id
 rp.title
 rp.description
 rp.creator
-rp.charas[]
-
-rp.sendMessage( message, type, [chara, [color]] );
-rp.sendChara( name, color );
-rp.deleteMessage( id );
-rp.deleteChara( id );
-rp.undeleteMessage( id );
-rp.undeleteChara( id );
 
 rp.getPage( pageNum, ready({ msgs[] }) );
-rp.getLatest( ready({ msgs[] }) );
-rp.listenForUpdates( update({ newMsgs[], newCharas[], updatedMsgs[], updatedCharas[] }) );
+
+rp.chat();
+chat.id
+chat.charas[]
+chat.msgs[]
+chat.onLoad(callback(msgs, charas))
+chat.onMessage(callback(msg))
+chat.onChara(callback(chara))
+chat.onUpdateMessage(callback(update))
+chat.onUpdateChara(callback(update))
+chat.onUnloadMessage(callback(msg))
+
+chat.sendMessage( message, type, [chara, [color]] );
+chat.sendChara( name, color );
+chat.deleteMessage( id );
+chat.deleteChara( id );
+chat.undeleteMessage( id );
+chat.undeleteChara( id );
 
 msg.id
 msg.content

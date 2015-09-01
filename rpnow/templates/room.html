@@ -72,9 +72,14 @@
   <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.css' />
   <script src='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.js'></script>
-  <script src='{{ docroot }}room.js'></script>
+  <script src='{{ docroot }}rp.js'></script>
   
   <script>
+    // load rp and attach events
+    var rp = new RP('{{ room }}');
+    var chat = rp.chat();
+    
+    
     function clickCharaButton(evt) {
       $('#message-box input[name=name]').val(evt.target.text.trim());
       $('#character-menu').slideUp(250);
@@ -116,52 +121,64 @@
     }
     
     function sendMessage() {
-      // send message
-      var data = { content: $('#message-box textarea').val() };
       var name = $('#message-box input[name=name]').val();
-      if(name === 'Narrator') data.type = 'Narrator';
-      else if(name === 'Out of Character') data.type = 'OOC';
+      var msgType;
+      if(name === 'Narrator') msgType = 'Narrator';
+      else if(name === 'Out of Character') msgType = 'OOC';
       else {
-        data.type = 'Character';
-        data.name = name;
+        msgType = 'Character';
       }
-      RPRoom().addMessage(data);
+      chat.sendMessage(
+        $('#message-box textarea').val(),
+        msgType,
+        name
+      );
       // clear message box
       $('#message-box textarea').val('');
       // scroll to bottom if we're not there
-      $('html, body').animate({scrollTop: $(document).height()}, 250);
+      $('html, body').stop().animate({scrollTop: $(document).height()}, 250);
     }
     
     $(document).ready(function() {
       
-      // create the room object
-      RPRoom('{{ room }}').loadFeed({
-        onload: function() {
-          $('#loading').hide();
-          if(RPRoom().messageCount > RPRoom().postsPerPage) {
-            $('#showing-latest').show();
-          }
-          else if(RPRoom().messageCount === 0) {
-            $('#empty-room').show();
-          }
-          $('#message-box').slideDown(250);
+      chat.onLoad(function(msgs, charas) {
+        $('#loading').hide();
+        for(var i = 0; i < msgs.length; ++i) {
+          $('#messages').append(msgs[i].createElement('relative'));
         }
+        if(chat.msgCount > chat.maxMsgs) {
+          $('#showing-latest').show();
+        }
+        else if(chat.msgCount === 0) {
+          $('#empty-room').show();
+        }
+        $('#message-box').slideDown(250);
       });
+      chat.onMessage(function(msg) {
+        
+      });
+      chat.onChara(function(chara) {
+      });
+      chat.onUpdateMessage(function(update) {
+      });
+      chat.onUpdateChara(function(update) {
+      });
+      chat.load();
       
       // button functions
       $('#special-characters a').click(clickCharaButton);
       $('#message-box button#change-character').click(function(e) {
-        showCharacterSelectMenu();
         e.preventDefault();
+        showCharacterSelectMenu();
       });
       $('#new-character-button').click(showNewCharacterMenu);
       $('#cancel-character').click(function(e) {
-        hideNewCharacterMenu();
         e.preventDefault();
+        hideNewCharacterMenu();
       });
       $('#message-box').submit(function(e) {
-        sendMessage();
         e.preventDefault();
+        sendMessage();
       });
       $('#new-character').submit(function(evt) {
         evt.preventDefault();

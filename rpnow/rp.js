@@ -3,26 +3,6 @@ function RP(id) {
   // properties
   Object.defineProperty(this, 'id', { get: function() { return id; }});
   
-  // POST functions
-  /*this.sendMessage = function(message, msgType, charaId, charaColor) {
-    
-  };
-  this.sendChara = function(name, color) {
-    
-  };
-  this.deleteMessage = function(id) {
-    
-  };
-  this.deleteChara = function(id) {
-    
-  };
-  this.undeleteMessage = function(id) {
-    
-  };
-  this.undeleteChara = function(id) {
-    
-  };*/
-  
   // GET functions
   this.fetchPage = function(pageNum, callback) {
     var msgs = [];
@@ -40,19 +20,138 @@ function RP(id) {
           msgs.push(new Message(e.msgs[i], charas));
         }
         // callback
-        callback({ msgs: msgs, charas: charas});
+        callback({ msgs: msgs, charas: charas });
       }
     });
   };
-  /*this.fetchChat = function(callback) {
+  this.chat = function() {
+    var chat = {};
     // get alert noise if not already there
     if(!RP.alertNoise) RP.alertNoise = new Audio('assets/alert.mp3');
-  };*/
+    // chat variables
+    var msgs = [];
+    var charas = [];
+    var msgCounter;
+    var charaCounter;
+    var upMsgCounter;
+    var upCharaCounter;
+    var maxMsgs;
+    var interval;
+    var isLoaded = false;
+    var timer;
+    // events
+    var onLoad,
+      onMessage, onChara,
+      onUpdateMessage, onUpdateChara,
+      onUnloadMessage;
+    chat.onLoad = function(callback) { onLoad = callback; };
+    chat.onMessage = function(callback) { onMessage = callback; };
+    chat.onChara = function(callback) { onChara = callback; };
+    chat.onUpdateMessage = function(callback) { onUpdateMessage = callback; };
+    chat.onUpdateChara = function(callback) { onUpdateChara = callback; };
+    chat.onUnloadMessage = function(callback) { onUnloadMessage = callback; };
+    // properties
+    Object.defineProperties(chat, {
+      'id': {value: rp.id},
+      'charas': {get: function() { return charas; }},
+      'msgs': {get: function() { return msgs; }},
+      'msgCount': {get: function() { return msgCounter; }},
+      'charaCount': {get: function() { return charaCounter; }},
+      'maxMsgs': {get: function() { return maxMsgs; }}
+    });
+    // for initializing the chat
+    chat.load = function() {
+      // prevent loading twice
+      if(isLoaded) throw new Error('warning: chat was already loaded.');
+      isLoaded = true;
+      // initial load
+      $.ajax({
+        type: 'GET',
+        url: rp.id + '/ajax/chat',
+        success: function(data) {
+          // set variables
+          charas = data.charas.map(function(x){return new Chara(x);});
+          msgs = data.msgs.map(function(x){return new Message(x, charas);});
+          msgCounter = data.msgCounter;
+          charaCounter = data.charaCounter;
+          maxMsgs = data.postsPerPage;
+          interval = data.refreshMillis;
+          // callback
+          if(onLoad) onLoad(msgs, charas);
+          // start updating
+          timer = setTimeout(fetchUpdates, interval);
+        }
+      });
+    };
+    function fetchUpdates() {
+      if(timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      $.ajax({
+        type: 'GET',
+        url: rp.id + '/ajax/updates',
+        data: { characters: charaCounter, messages: msgCounter },
+        success: function(data) {
+          // add new characters
+          if(data.newCharas) {
+            Array.prototype.push.apply(charas, data.newCharas.map(function(x){return new Chara(x);}));
+            charaCounter += data.newCharas.length;
+          }
+          // add new messages
+          if(data.newMsgs) {
+            Array.prototype.push.apply(msgs, data.newMsgs.map(function(x){return new Message(x, charas);}));
+            msgCounter += data.newMsgs.length;
+          }
+          // done. wait and then do this again
+          timer = setTimeout(fetchUpdates, interval);
+        }
+      });
+    }
+    // POST functions
+    chat.sendMessage = function(content, msgType, charaId) {
+      var data = { content: content, 'type': msgType };
+      if(msgType === 'Character') data.charaId = charaId;
+      $.ajax({
+        type: 'POST',
+        url: rp.id + '/ajax/message',
+        data: data,
+        success: function() { fetchUpdates(); }
+      });
+    };
+    chat.sendChara = function(name, color) {
+      $.ajax({
+        type: 'POST',
+        url:  rp.id + '/ajax/character',
+        data: {name: name, color: color},
+        success: function() { fetchUpdates(); }
+      });
+    };
+    /*
+    chat.deleteMessage = function(id) {
+      
+    };
+    chat.deleteChara = function(id) {
+      
+    };
+    chat.undeleteMessage = function(id) {
+      
+    };
+    chat.undeleteChara = function(id) {
+      
+    };*/
+    // to immediately reload new messages
+    function refreshNow() {
+      
+    }
+    // done.
+    return chat;
+  };
   
   // classes
   function Message(data, charas) {
     Object.defineProperties(this, {
-      'id': {value: data.Number},
+      'id': {value: +data.Number},
       'content': {value: data.Content},
       'timeSent': {value: data.Time_Created},
       'timeUpdated': {value: data.Time_Updated},
@@ -102,11 +201,11 @@ function RP(id) {
       }}
     });
     if(this.type==='Character') Object.defineProperties(this, {
-      'charaId': {value: data.Chara_Number},
+      'charaId': {value: +data.Chara_Number},
       'chara': {value: (function() {
         if(charas)
           for(var i = 0; i < charas.length; ++i)
-            if(charas[i].id === data.Chara_Number)
+            if(charas[i].id === +data.Chara_Number)
               return charas[i];
         return undefined;
       })()}
@@ -115,7 +214,7 @@ function RP(id) {
   }
   function Chara(data) {
     Object.defineProperties(this, {
-      'id': {value: data.Number},
+      'id': {value: +data.Number},
       'name': {value: data.Name},
       'color': {value: data.Color},
       'textColor': {value: data.Contrast},
