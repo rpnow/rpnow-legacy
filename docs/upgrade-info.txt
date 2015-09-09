@@ -2,7 +2,7 @@
 // DB UPDATES
 //------------------
 
-(Message)
+(message)
     * Timestamp -> Time_Created
     + Deleted (bit)
     + Time_Updated (timestamp)
@@ -10,26 +10,26 @@
     + Chara_Number (int)
         UPDATE `message` SET `Chara_Number` = (SELECT `Number` FROM `character` WHERE `message`.`Room` = `character`.`Room` AND `character`.`Name` = `Character_Name`)
 
-+ MessageUpdates
++ message_update
     Number (int) PRIMARY KEY
     Message_Number (int)
-    Action (['Delete', 'Undelete'])
+    Action (['delete', 'undelete'])
     Time (timestamp)
     IP (varchar(45))
 
-(Chara)
+(chara)
     * Timestamp -> Time_Created
     + Deleted (bit)
     + Time_Updated (timestamp)
 
-+ CharaUpdates
++ chara_update
     Number (int) PRIMARY KEY
-    Character_Number (int)
-    Action (['Delete', 'Undelete'])
+    Chara_Number (int)
+    Action (['delete', 'undelete'])
     Time (timestamp)
     IP (varchar(45))
 
-(Room)
+(room)
     * Timestamp -> Time_Created
 
 
