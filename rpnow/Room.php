@@ -145,7 +145,8 @@ class Room {
       ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
     // updates
-    else if($which == 'after' && !is_null($n)) {
+    else if($which == 'after') {
+      if(is_null($n)) throw new Exception('value for $n is null.');
       if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
         throw new Exception("invalid message request: $n is a bad number.");
       }
