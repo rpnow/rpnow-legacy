@@ -151,7 +151,7 @@ function RP(id) {
       timer = setTimeout(fetchUpdates, interval);
     }
     // POST functions
-    chat.sendMessage = function(content, voice) {
+    chat.sendMessage = function(content, voice, callback) {
       var data = {
         content: content,
         msgCounter: msgCounter, charaCounter: charaCounter
@@ -163,14 +163,20 @@ function RP(id) {
       else {
         data['type'] = voice;
       }
-      ajax('message', 'POST', data, processUpdates);
+      ajax('message', 'POST', data, function(data) {
+        processUpdates(data);
+        if(callback) callback();
+      });
     };
-    chat.sendChara = function(name, color) {
+    chat.sendChara = function(name, color, callback) {
       var data = {
         name: name, color: color,
         msgCounter: msgCounter, charaCounter: charaCounter
       };
-      ajax('character', 'POST', data, processUpdates);
+      ajax('character', 'POST', data, function(data) {
+        processUpdates(data);
+        if(callback) callback();
+      });
     };
     /*
     chat.deleteMessage = function(id) {
