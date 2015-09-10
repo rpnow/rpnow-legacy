@@ -84,6 +84,11 @@
       Object.defineProperty(window, 'voice', { get: function() { return voice; } });
       setVoice = function(v) {
         voice = v;
+        if(voice === 'Narrator') $('#message-box').attr({'class': 'message-box-narrator', 'style': ''});
+        else if(voice === 'OOC') $('#message-box').attr({'class': 'message-box-ooc', 'style': ''});
+        else $('#message-box').attr({'class': 'message-box-chara', 'style':
+          'background-color:'+v.color
+        });
       }
     })();
     

@@ -406,11 +406,32 @@ header #title-links a {
   position: fixed;
   z-index: 200;
   bottom: 0;
-  background: inherit;
-  border: dotted 1px #222;
-  border-bottom: none;
+  background-color: inherit;
   border-spacing: 10px;
   box-shadow: 0 0 20px #222;
+}
+#message-box.message-box-narrator {
+  background-color: #fff;
+  outline: dotted 1px #999;
+  outline-offset: -6px;
+  padding: 8px;
+  bottom: -6px;
+}
+#message-box.message-box-ooc {
+  background-color: #707070;
+  border: dotted 1px #eee;
+  border-bottom: none;
+}
+#message-box.message-box-ooc #message-text textarea {
+  background-color: #bbb;
+}
+#message-box.message-box-chara {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+#message-box.message-box-chara #message-text textarea {
+  border-radius: 12px;
+  border-bottom-left-radius: 0;
 }
 @media all and (max-width: 750px) {
   #message-box {
