@@ -88,37 +88,44 @@ function RP(id) {
         clearTimeout(timer);
         timer = null;
       }
+      else {
+        return;
+      }
       $.ajax({
         type: 'GET',
         url: rp.id + '/ajax/updates',
-        data: { characters: charaCounter, messages: msgCounter },
-        success: function(data) {
-          // add new characters
-          if(data.newCharas) {
-            var newCharas = data.newCharas.map(function(x){return new Chara(x);})
-            for(var i = 0; i < newCharas.length; ++i) {
-              charas.push(newCharas[i]);
-              onChara(newCharas[i]);
-            }
-            charaCounter += data.newCharas.length;
-          }
-          // add new messages
-          if(data.newMsgs) {
-            var newMsgs = data.newMsgs.map(function(x){return new Message(x, charas);});
-            for(var i = 0; i < newMsgs.length; ++i) {
-              msgs.push(newMsgs[i]);
-              onMessage(newMsgs[i]);
-            }
-            msgCounter += data.newMsgs.length;
-          }
-          // done. wait and then do this again
-          timer = setTimeout(fetchUpdates, interval);
-        }
+        data: { charaCounter: charaCounter, msgCounter: msgCounter },
+        success: processUpdates
       });
+    }
+    function processUpdates(data) {
+      // add new characters
+      if(data.newCharas) {
+        var newCharas = data.newCharas.map(function(x){return new Chara(x);})
+        for(var i = 0; i < newCharas.length; ++i) {
+          charas.push(newCharas[i]);
+          onChara(newCharas[i]);
+        }
+        charaCounter += data.newCharas.length;
+      }
+      // add new messages
+      if(data.newMsgs) {
+        var newMsgs = data.newMsgs.map(function(x){return new Message(x, charas);});
+        for(var i = 0; i < newMsgs.length; ++i) {
+          msgs.push(newMsgs[i]);
+          onMessage(newMsgs[i]);
+        }
+        msgCounter += data.newMsgs.length;
+      }
+      // done. wait and then do this again
+      timer = setTimeout(fetchUpdates, interval);
     }
     // POST functions
     chat.sendMessage = function(content, voice) {
-      var data = { content: content };
+      var data = {
+        content: content,
+        msgCounter: msgCounter, charaCounter: charaCounter
+      };
       if(voice instanceof Chara) {
         data['type'] = 'Character';
         data.charaId = voice.id;
@@ -130,15 +137,18 @@ function RP(id) {
         type: 'POST',
         url: rp.id + '/ajax/message',
         data: data,
-        success: function() { fetchUpdates(); }
+        success: processUpdates
       });
     };
     chat.sendChara = function(name, color) {
       $.ajax({
         type: 'POST',
         url:  rp.id + '/ajax/character',
-        data: {name: name, color: color},
-        success: function() { fetchUpdates(); }
+        data: {
+          name: name, color: color,
+          msgCounter: msgCounter, charaCounter: charaCounter
+        },
+        success: processUpdates
       });
     };
     /*

@@ -120,18 +120,30 @@ $app->get('/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
 });
 
 // Receive room updates
+function echoRoomUpdates($room, $app) {
+  $msgs = null;
+  $charas = null;
+  if($app->request->isGet()) {
+    $msgs = $room->getMessages('after', $app->request()->get('msgCounter'));
+    $charas = $room->getCharacters($app->request()->get('charaCounter'));
+  }
+  else if($app->request->isPost()) {
+    $msgs = $room->getMessages('after', $app->request()->post('msgCounter'));
+    $charas = $room->getCharacters($app->request()->post('charaCounter'));
+  }
+  
+  $data = array();
+  if(count($msgs) != 0) $data['newMsgs'] = $msgs;
+  if(count($charas) != 0) $data['newCharas'] = $charas;
+  
+  $app->response->headers->set('Content-Type', 'application/json');
+  echo json_encode($data);
+}
 $app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    $msgs = $room->getMessages('after', $app->request()->get('messages'));
-    $charas = $room->getCharacters($app->request()->get('characters'));
+    echoRoomUpdates($room, $app);
     $room->close();
-    
-    $data = array();
-    if(count($msgs) != 0) $data['newMsgs'] = $msgs;
-    if(count($charas) != 0) $data['newCharas'] = $charas;
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode($data);
   }
   catch(Exception $e) {
     echo $e->getMessage();
@@ -155,9 +167,8 @@ $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
         $app->request()->post('content')
       );
     }
+    echoRoomUpdates($room, $app);
     $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'OK'));
   }
   catch(Exception $e) {
     $app->response->setStatus(500);
@@ -174,9 +185,8 @@ $app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
       $app->request()->post('name'),
       $app->request()->post('color')
     );
+    echoRoomUpdates($room, $app);
     $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'OK'));
   }
   catch(Exception $e) {
     $app->response->setStatus(500);
