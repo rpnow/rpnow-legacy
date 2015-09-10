@@ -91,7 +91,9 @@ $app->get('/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($a
     echo json_encode($data);
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
@@ -115,7 +117,9 @@ $app->get('/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
     echo json_encode($data);
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
@@ -146,7 +150,9 @@ $app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
     $room->close();
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
@@ -173,7 +179,7 @@ $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
   catch(Exception $e) {
     $app->response->setStatus(500);
     $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
@@ -191,7 +197,7 @@ $app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
   catch(Exception $e) {
     $app->response->setStatus(500);
     $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
