@@ -3,27 +3,61 @@ function RP(id) {
   // properties
   Object.defineProperty(this, 'id', { get: function() { return id; }});
   
-  // GET functions
+  // ajax requests
+  // pieced together from: http://stackoverflow.com/questions/8567114/
+  function ajax(url, method /*, data, callback */) {
+    // variables
+    var req = new XMLHttpRequest();
+    var reqUrl = '/' + rp.id + '/ajax/' + url;
+    var callback = null;
+    var data = null;
+    if(typeof(arguments[arguments.length-1]) === 'function')
+      callback = arguments[arguments.length-1];
+    if(arguments.length >= 3 && typeof(arguments[2]) === 'object')
+      data = arguments[2];
+    // callback function on success
+    if(callback) req.onreadystatechange = function() {
+      if(req.readyState === XMLHttpRequest.DONE && req.status === 200) {
+        callback(JSON.parse(req.responseText));
+      }
+    }
+    // generate query string from data
+    var queryString = null;
+    if(data) {
+      var query = [];
+      for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+      }
+      queryString = query.join('&');
+    }
+    // apply things to request
+    if(method === 'GET' && queryString) reqUrl += '?' + queryString;
+    req.open(method, reqUrl, true)
+    if(method === 'POST') req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // send
+    if(method === 'GET' || !queryString) req.send();
+    else req.send(queryString);
+  }
+  
+  // load a single page
   this.fetchPage = function(pageNum, callback) {
     var msgs = [];
     var charas = [];
-    $.ajax({
-      type: 'GET',
-      url: '/'+ rp.id +'/ajax/page/'+ pageNum,
-      success: function(e) {
-        // add characters
-        for(var i = 0; i < e.charas.length; ++i) {
-          charas.push(new Chara(e.charas[i]));
-        }
-        // add messages
-        for(var i = 0; i < e.msgs.length; ++i) {
-          msgs.push(new Message(e.msgs[i], charas));
-        }
-        // callback
-        callback({ msgs: msgs, charas: charas });
+    ajax('page/'+pageNum, 'GET', function(e) {
+      // add characters
+      for(var i = 0; i < e.charas.length; ++i) {
+        charas.push(new Chara(e.charas[i]));
       }
+      // add messages
+      for(var i = 0; i < e.msgs.length; ++i) {
+        msgs.push(new Message(e.msgs[i], charas));
+      }
+      // callback
+      callback({ msgs: msgs, charas: charas });
     });
   };
+  
+  // load a chat object
   this.chat = function() {
     var chat = {};
     // get alert noise if not already there
@@ -38,6 +72,7 @@ function RP(id) {
     var maxMsgs;
     var interval;
     var isLoaded = false;
+    var isLoading = false;
     var timer;
     // events
     var onLoad,
@@ -62,25 +97,24 @@ function RP(id) {
     // for initializing the chat
     chat.load = function() {
       // prevent loading twice
-      if(isLoaded) throw new Error('warning: chat was already loaded.');
-      isLoaded = true;
+      if(isLoaded) throw new Error('chat.load: chat was already loaded.');
+      if(isLoading) throw new Error('chat.load: chat is already loading.');
+      isLoading = true;
       // initial load
-      $.ajax({
-        type: 'GET',
-        url: rp.id + '/ajax/chat',
-        success: function(data) {
-          // set variables
-          charas = data.charas.map(function(x){return new Chara(x);});
-          msgs = data.msgs.map(function(x){return new Message(x, charas);});
-          msgCounter = data.msgCounter;
-          charaCounter = data.charaCounter;
-          maxMsgs = data.postsPerPage;
-          interval = data.refreshMillis;
-          // callback
-          if(onLoad) onLoad(msgs, charas);
-          // start updating
-          timer = setTimeout(fetchUpdates, interval);
-        }
+      ajax('chat', 'GET', function(data) {
+        // set variables
+        charas = data.charas.map(function(x){return new Chara(x);});
+        msgs = data.msgs.map(function(x){return new Message(x, charas);});
+        msgCounter = data.msgCounter;
+        charaCounter = data.charaCounter;
+        maxMsgs = data.postsPerPage;
+        interval = data.refreshMillis;
+        isLoaded = true;
+        isLoading = false;
+        // callback
+        if(onLoad) onLoad(msgs, charas);
+        // start updating
+        timer = setTimeout(fetchUpdates, interval);
       });
     };
     function fetchUpdates() {
@@ -91,12 +125,8 @@ function RP(id) {
       else {
         return;
       }
-      $.ajax({
-        type: 'GET',
-        url: rp.id + '/ajax/updates',
-        data: { charaCounter: charaCounter, msgCounter: msgCounter },
-        success: processUpdates
-      });
+      var data = { charaCounter: charaCounter, msgCounter: msgCounter };
+      ajax('updates', 'GET', data, processUpdates);
     }
     function processUpdates(data) {
       // add new characters
@@ -133,23 +163,14 @@ function RP(id) {
       else {
         data['type'] = voice;
       }
-      $.ajax({
-        type: 'POST',
-        url: rp.id + '/ajax/message',
-        data: data,
-        success: processUpdates
-      });
+      ajax('message', 'POST', data, processUpdates);
     };
     chat.sendChara = function(name, color) {
-      $.ajax({
-        type: 'POST',
-        url:  rp.id + '/ajax/character',
-        data: {
-          name: name, color: color,
-          msgCounter: msgCounter, charaCounter: charaCounter
-        },
-        success: processUpdates
-      });
+      var data = {
+        name: name, color: color,
+        msgCounter: msgCounter, charaCounter: charaCounter
+      };
+      ajax('character', 'POST', data, processUpdates);
     };
     /*
     chat.deleteMessage = function(id) {
