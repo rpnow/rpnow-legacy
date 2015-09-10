@@ -162,12 +162,13 @@
           $('#empty-room').show();
         }
         for(var i = 0; i < charas.length; ++i) {
-          var c = charas[i];
-          $('#character-menu ul#normal-characters').append(
-            $('<li/>').append(
-              c.createButton(function(evt) { clickVoiceButton(evt, c); })
-            )
-          );
+          (function(c) {
+            $('#character-menu ul#normal-characters').append(
+              $('<li/>').append(
+                c.createButton(function(evt) { clickVoiceButton(evt, c); })
+              )
+            );
+          })(charas[i]);
         }
         if(chat.msgCount > 0) scrollToBottom();
         $('#message-box').slideDown(250);
