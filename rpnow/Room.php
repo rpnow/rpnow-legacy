@@ -227,7 +227,7 @@ class Room {
     );
     $dataStatement->execute(array($this->getID()));
     $data = $dataStatement->fetch();
-    $top5Statement = $this->db->prepare("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room` = ? GROUP BY `Character_Name` ORDER BY `MessageCount` DESC LIMIT 5;");
+    $top5Statement = $this->db->prepare("SELECT `Character`.`Name`, COUNT(*) AS `MessageCount` FROM `Message` LEFT JOIN `Character` ON `Chara_Number`=`Character`.`Number` WHERE `Message`.`Type`='Character' AND `Message`.`Room` = ? GROUP BY `Chara_Number` ORDER BY `MessageCount` DESC LIMIT 5;");
     $top5Statement->execute(array($this->getID()));
     return array(
       'MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount(),
