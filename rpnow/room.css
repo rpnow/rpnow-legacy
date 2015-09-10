@@ -449,7 +449,7 @@ header #title-links a {
   border-collapse: separate;
 }
 #message-bar #message-text,
-#message-bar #message-button {
+#message-bar #message-button-container {
   display: table-cell;
   vertical-align: middle;
   padding: 5px;
@@ -463,7 +463,7 @@ header #title-links a {
   resize: vertical;
   min-height: 60px;
 }
-#message-box input[type=submit] {
+#message-box #send-button {
   min-width: 80px;
   height: 68px;
   margin-left: 5px;

@@ -146,7 +146,7 @@ $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
       $room->addMessage(
         'Character',
         $app->request()->post('content'),
-        $app->request()->post('name')
+        $app->request()->post('charaId')
       );
     }
     else {

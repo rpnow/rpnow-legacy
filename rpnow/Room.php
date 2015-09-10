@@ -244,7 +244,7 @@ class Room {
     );
   }
   
-  public function addMessage($type, $content, $character = null) {
+  public function addMessage($type, $content, $charaNum = null) {
     if(!in_array($type, array('Narrator', 'Character', 'OOC'))) {
       throw new Exception('Invalid type: ' . $type);
     }
@@ -252,8 +252,18 @@ class Room {
     if(!$content) {
       throw new Exception('Message is empty.');
     }
-    $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`, `IP`) VALUES (?, ?, ?, ?, ?)");
-    $statement->execute(array($type, $content, $this->getID(), $character, $_SERVER['REMOTE_ADDR']));
+    $statement = null;
+    if($type == 'Character') {
+      if(!is_int($charaNum) && !ctype_digit($charaNum)) throw new Exception("$charaNum is not an int.");
+      
+      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`, `Chara_Number`) VALUES (?, ?, ?, ?, ?)");
+      $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR'], $charaNum));
+    }
+    else {
+      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`) VALUES (?, ?, ?, ?)");
+      $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR']));
+    }
+    
   }
   
   public function addCharacter($name, $color) {

@@ -35,7 +35,7 @@
       <li id="ooc-button"><a href="#">Out of Character</a></li>
     </ul>
     <ul id="normal-characters"></ul>
-    <button id="new-character-button">New Character...</button>
+    <button type="button" id="new-character-button">New Character...</button>
   </div>
   
   <form id="new-character" class="form-box" autocomplete="off" style="display:none">
@@ -49,23 +49,22 @@
       <div class="input-container"><input type="color" name="color" value="#DDDDDD"></input></div>
     </div>
     <input type="submit" value="Add"></input>
-    <button id="cancel-character">Cancel</button>
+    <button type="button" id="cancel-character">Cancel</button>
   </form>
   
-  <form id="message-box" autocomplete="off" style="display:none">
+  <div id="message-box" autocomplete="off" style="display:none">
     <div id="format-bar">
-      <input type="text" name="name" value="Narrator" readonly="readonly"></input>
-      <button id="change-character">Change...</button>
+      <button type="button" id="change-character">Change...</button>
     </div>
     <div id="message-bar">
       <div id="message-text">
         <textarea name="content"></textarea>
       </div>
-      <div id="message-button">
-        <input type="submit" value="Send"></input>
+      <div id="message-button-container">
+        <button type="button" id="send-button">Send</button>
       </div>
     </div>
-  </form>
+  </div>
   
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -79,18 +78,28 @@
     var rp = new RP('{{ room }}');
     var chat = rp.chat();
     
-    
-    function clickCharaButton(evt) {
-      $('#message-box input[name=name]').val(evt.target.text.trim());
-      $('#character-menu').slideUp(250);
-      $('#message-box').slideDown(250);
-      $('#message-box textarea').focus();
-      evt.preventDefault();
-    }
+    var setVoice;
+    (function() {
+      var voice;
+      Object.defineProperty(window, 'voice', { get: function() { return voice; } });
+      setVoice = function(v) {
+        voice = v;
+      }
+    })();
     
     function showCharacterSelectMenu() {
       $('#character-menu').stop().slideDown(250);
       $('#message-box').slideUp(250);
+    }
+    function hideCharacterSelectMenu() {
+      $('#character-menu').slideUp(250);
+      $('#message-box').slideDown(250);
+      $('#message-box textarea').focus();
+    }
+    function clickVoiceButton(evt, c) {
+      setVoice(c);
+      hideCharacterSelectMenu();
+      evt.preventDefault();
     }
     
     function createOverlay() {
@@ -121,22 +130,17 @@
     }
     
     function sendMessage() {
-      var name = $('#message-box input[name=name]').val();
-      var msgType;
-      if(name === 'Narrator') msgType = 'Narrator';
-      else if(name === 'Out of Character') msgType = 'OOC';
-      else {
-        msgType = 'Character';
-      }
-      chat.sendMessage(
-        $('#message-box textarea').val(),
-        msgType,
-        name
-      );
+      var content = $('#message-box textarea').val().trim();
+      if(content === '') return;
+      
+      chat.sendMessage(content, voice);
+      
       // clear message box
       $('#message-box textarea').val('');
-      // scroll to bottom if we're not there
-      $('html, body').stop().animate({scrollTop: $(document).height()}, 250);
+    }
+    
+    function scrollToBottom() {
+      $('html, body').stop().animate({scrollTop: $(document).height()}, 500);
     }
     
     $(document).ready(function() {
@@ -152,54 +156,57 @@
         else if(chat.msgCount === 0) {
           $('#empty-room').show();
         }
+        for(var i = 0; i < charas.length; ++i) {
+          var c = charas[i];
+          $('#character-menu ul#normal-characters').append(
+            $('<li/>').append(
+              c.createButton(function(evt) { clickVoiceButton(evt, c); })
+            )
+          );
+        }
+        if(chat.msgCount > 0) scrollToBottom();
         $('#message-box').slideDown(250);
       });
       chat.onMessage(function(msg) {
-        
+        $('#messages').append(msg.createElement('relative'));
+        scrollToBottom();
       });
       chat.onChara(function(chara) {
+        $('#character-menu ul#normal-characters').append(
+          $('<li/>').append(
+            chara.createButton(function(evt) { clickVoiceButton(evt, chara); })
+          )
+        );
       });
       chat.onUpdateMessage(function(update) {
       });
       chat.onUpdateChara(function(update) {
       });
-      chat.load();
       
       // button functions
-      $('#special-characters a').click(clickCharaButton);
-      $('#message-box button#change-character').click(function(e) {
-        e.preventDefault();
+      $('#character-menu li#narrator-button a').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
+      $('#character-menu li#ooc-button a').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
+      setVoice('Narrator');
+      $('#message-box button#change-character').click(function(evt) {
+        evt.preventDefault();
         showCharacterSelectMenu();
       });
       $('#new-character-button').click(showNewCharacterMenu);
-      $('#cancel-character').click(function(e) {
-        e.preventDefault();
-        hideNewCharacterMenu();
-      });
-      $('#message-box').submit(function(e) {
-        e.preventDefault();
-        sendMessage();
-      });
+      $('#cancel-character').click(hideNewCharacterMenu);
+      $('#send-button').click(sendMessage);
       $('#new-character').submit(function(evt) {
         evt.preventDefault();
-        // submit form
-        var newName = $('#new-character input[name=name]').val().trim();
-        try {
-          RPRoom().addCharacter({
-            name: newName,
-            color: $('#new-character input[name=color]').val()
-          });
-        }
-        catch(ex) {
-          alert(ex.message);
-          return;
-        }
+        
+        var name = $('#new-character input[name=name]').val().trim();
+        if(!name) throw new Error('Please enter a name.');
+        var color = $('#new-character input[name=color]').val();
+        
+        chat.sendChara(name, color);
+        
         $('#new-character').hide();
         $('#overlay').remove();
-        $('#character-menu').slideUp(250);
-        $('#message-box').slideDown(250);
+        hideCharacterSelectMenu();
         $('#message-box input[name=name]').val(newName);
-        $('#message-box textarea').focus();
         $('#new-character')[0].reset();
       });
       $('#message-box textarea').keypress(function(evt) {
@@ -208,6 +215,8 @@
           sendMessage();
         }
       });
+      
+      chat.load();
     });
   </script>
 {% endblock %}

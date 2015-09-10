@@ -95,12 +95,20 @@ function RP(id) {
         success: function(data) {
           // add new characters
           if(data.newCharas) {
-            Array.prototype.push.apply(charas, data.newCharas.map(function(x){return new Chara(x);}));
+            var newCharas = data.newCharas.map(function(x){return new Chara(x);})
+            for(var i = 0; i < newCharas.length; ++i) {
+              charas.push(newCharas[i]);
+              onChara(newCharas[i]);
+            }
             charaCounter += data.newCharas.length;
           }
           // add new messages
           if(data.newMsgs) {
-            Array.prototype.push.apply(msgs, data.newMsgs.map(function(x){return new Message(x, charas);}));
+            var newMsgs = data.newMsgs.map(function(x){return new Message(x, charas);});
+            for(var i = 0; i < newMsgs.length; ++i) {
+              msgs.push(newMsgs[i]);
+              onMessage(newMsgs[i]);
+            }
             msgCounter += data.newMsgs.length;
           }
           // done. wait and then do this again
@@ -109,9 +117,15 @@ function RP(id) {
       });
     }
     // POST functions
-    chat.sendMessage = function(content, msgType, charaId) {
-      var data = { content: content, 'type': msgType };
-      if(msgType === 'Character') data.charaId = charaId;
+    chat.sendMessage = function(content, voice) {
+      var data = { content: content };
+      if(voice instanceof Chara) {
+        data['type'] = 'Character';
+        data.charaId = voice.id;
+      }
+      else {
+        data['type'] = voice;
+      }
       $.ajax({
         type: 'POST',
         url: rp.id + '/ajax/message',
@@ -221,7 +235,7 @@ function RP(id) {
       'user': {value: new User(data.IPColor)},
       'createButton': {value: function(callback) {
         return $('<a/>', {
-          text: name,
+          text: this.name,
           href: '#',
           'style': 'background-color:' + this.color + ';' + 'color:' + this.textColor
         }).click(callback);
