@@ -184,10 +184,12 @@
           )
         );
       });
+      /*
       chat.onUpdateMessage(function(update) {
       });
       chat.onUpdateChara(function(update) {
       });
+      */
       
       // button functions
       $('#character-menu li#narrator-button a').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
@@ -207,13 +209,12 @@
         if(!name) throw new Error('Please enter a name.');
         var color = $('#new-character input[name=color]').val();
         
-        chat.sendChara(name, color);
-        
         $('#new-character').hide();
-        $('#overlay').remove();
-        hideCharacterSelectMenu();
-        $('#message-box input[name=name]').val(newName);
-        $('#new-character')[0].reset();
+        
+        chat.sendChara(name, color, function() {
+          $('#new-character')[0].reset();
+          $('#overlay').remove();
+        });
       });
       $('#message-box textarea').keypress(function(evt) {
         if((evt.keyCode || evt.which) === 13 && !evt.shiftKey && !evt.ctrlKey) {
