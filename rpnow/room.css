@@ -449,15 +449,43 @@ header #title-links a {
 }
 #format-bar {
   text-align: left;
-  margin-left: 50px;
   padding-top: 5px;
+  margin-left: 6%;
+  margin-right: 16px;
+  background-color: inherit;
 }
-#format-bar input {
+#format-bar #message-voice {
   display: inline-block;
-  margin-right: 0;
+  vertical-align: middle;
+  padding: 2px 4%;
+}
+.message-box-narrator #message-voice {
+  color: #777;
+  border-bottom: solid 1px #ddd;
+  border-left: solid 1px #eee;
+  padding-top: 0;
+  letter-spacing: 2px;
+}
+.message-box-narrator #message-voice::first-letter {
+  font-size: 125%;
+}
+.message-box-ooc #message-voice {
+  font-size: 90%;
+  color: #ccc;
+}
+.message-box-ooc #message-voice::before { content: '[ '; font-size: 125%; }
+.message-box-ooc #message-voice::after { content: ' ]'; font-size: 125%; }
+.message-box-chara #message-voice {
+  box-shadow: 0 1px 4px #555;
+  border-radius: 4px;
+  margin-top: -15px;
+  margin-right: 2%;
+  background-color: inherit;
+  font-size: 115%;
 }
 #format-bar #change-character {
   display: inline-block;
+  vertical-align: middle;
   border-radius: 0;
   padding: 2px 2px;
   font-size: 80%;

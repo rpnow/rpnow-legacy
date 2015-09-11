@@ -54,6 +54,7 @@
   
   <div id="message-box" autocomplete="off" style="display:none">
     <div id="format-bar">
+      <div id="message-voice"></div>
       <button type="button" id="change-character">Change...</button>
     </div>
     <div id="message-bar">
@@ -84,11 +85,21 @@
       Object.defineProperty(window, 'voice', { get: function() { return voice; } });
       setVoice = function(v) {
         voice = v;
-        if(voice === 'Narrator') $('#message-box').attr({'class': 'message-box-narrator', 'style': ''});
-        else if(voice === 'OOC') $('#message-box').attr({'class': 'message-box-ooc', 'style': ''});
-        else $('#message-box').attr({'class': 'message-box-chara', 'style':
-          'background-color:'+v.color
-        });
+        if(voice === 'Narrator') {
+          $('#message-voice').text('Narrator');
+          $('#message-voice').attr('style', '');
+          $('#message-box').attr({'class': 'message-box-narrator', 'style': ''});
+        }
+        else if(voice === 'OOC') {
+          $('#message-voice').text('Out of Character');
+          $('#message-voice').attr('style', '');
+          $('#message-box').attr({'class': 'message-box-ooc', 'style': ''});
+        }
+        else {
+          $('#message-voice').text(voice.name);
+          $('#message-voice').attr('style', 'color:'+v.textColor);
+          $('#message-box').attr({'class': 'message-box-chara', 'style':'background-color:'+voice.color});
+        }
       }
     })();
     
