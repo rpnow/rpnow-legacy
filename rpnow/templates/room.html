@@ -214,6 +214,10 @@
       });
       chat.onMessage(function(msg) {
         $('#messages').append(msg.createElement('relative'));
+        while($('#messages .message').length > chat.maxMsgs) {
+          $('#showing-latest').show();
+          $('#messages .message:first').remove();
+        }
         scrollToBottom();
         // do an alert if the tab isn't in focus
         if(document.visibilityState === 'hidden') {
