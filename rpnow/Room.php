@@ -257,6 +257,12 @@ class Room {
     if($type == 'Character') {
       if(!is_int($charaNum) && !ctype_digit($charaNum)) throw new Exception("$charaNum is not an int.");
       
+      // validate charaNum
+      $statement = $this->db->prepare('SELECT `Room` FROM `Character` WHERE `Number` = ?');
+      $statement->execute(array($charaNum));
+      if($statement->rowCount() != 1 || $statement->fetch()['Room'] != $this->getID())
+        throw new Exception("invalid character number: $charaNum");
+      
       $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`, `Chara_Number`) VALUES (?, ?, ?, ?, ?)");
       $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR'], $charaNum));
     }
