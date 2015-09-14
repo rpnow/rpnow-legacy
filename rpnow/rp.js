@@ -93,6 +93,12 @@ function RP(id) {
       'charaCount': {get: function() { return charaCounter; }},
       'maxMsgs': {get: function() { return maxMsgs; }}
     });
+    chat.getCharaById = function(id) {
+      for(var i = 0; i < charas.length; ++i)
+        if(charas[i].id === +id)
+          return charas[i];
+      throw new Error('invalid character id: ' + id);
+    }
     // for initializing the chat
     chat.load = function() {
       // prevent loading twice

@@ -84,24 +84,36 @@
       var voice;
       Object.defineProperty(window, 'voice', { get: function() { return voice; } });
       setVoice = function(v) {
-        voice = v;
+        if(typeof(v) === 'string' && +v) voice = chat.getCharaById(+v);
+        else if(typeof(v) === 'number') voice = chat.getCharaById(v);
+        else voice = v;
         if(voice === 'Narrator') {
           $('#message-voice').text('Narrator');
-          $('#message-voice').attr('style', '');
-          $('#message-box').attr({'class': 'message-box-narrator', 'style': ''});
+          $('#message-box').removeClass('message-box-ooc message-box-chara').addClass('message-box-narrator');
+          $('#message-box').css('background-color', '');
+          $('#message-voice').css('color', '');
+          localStorage.setItem(localStorageKey('last_voice'), 'Narrator');
         }
         else if(voice === 'OOC') {
           $('#message-voice').text('Out of Character');
-          $('#message-voice').attr('style', '');
-          $('#message-box').attr({'class': 'message-box-ooc', 'style': ''});
+          $('#message-box').removeClass('message-box-narrator message-box-chara').addClass('message-box-ooc');
+          $('#message-box').css('background-color', '');
+          $('#message-voice').css('color', '');
+          localStorage.setItem(localStorageKey('last_voice'), 'OOC');
         }
         else {
           $('#message-voice').text(voice.name);
-          $('#message-voice').attr('style', 'color:'+v.textColor);
-          $('#message-box').attr({'class': 'message-box-chara', 'style':'background-color:'+voice.color});
+          $('#message-box').removeClass('message-box-narrator message-box-ooc').addClass('message-box-chara');
+          $('#message-box').css('background-color', voice.color);
+          $('#message-voice').css('color', voice.textColor);
+          localStorage.setItem(localStorageKey('last_voice'), voice.id);
         }
       }
     })();
+    
+    function localStorageKey(name) {
+      return 'room_' + rp.id + '_' +  name;
+    }
     
     function showCharacterSelectMenu() {
       $('#character-menu').stop().slideDown(250);
@@ -210,6 +222,10 @@
           })(charas[i]);
         }
         if(chat.msgCount > 0) scrollToBottom();
+        setVoice(
+          localStorage.getItem(localStorageKey('last_voice'))
+          || 'Narrator'
+        );
         $('#message-box').slideDown(250);
       });
       chat.onMessage(function(msg) {
@@ -246,7 +262,6 @@
       // button functions
       $('#character-menu li#narrator-button a').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
       $('#character-menu li#ooc-button a').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
-      setVoice('Narrator');
       $('#message-box button#change-character').click(function(evt) {
         evt.preventDefault();
         showCharacterSelectMenu();
