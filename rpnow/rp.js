@@ -130,10 +130,7 @@ function RP(id) {
       else {
         data['type'] = voice;
       }
-      net.queuePost('message', data, function(data) {
-        processUpdates(data);
-        if(callback) callback();
-      });
+      net.queuePost('message', data, callback);
     };
     // send character
     chat.sendChara = function(name, color, callback) {
@@ -141,10 +138,7 @@ function RP(id) {
         name: name, color: color,
         msgCounter: msgCounter, charaCounter: charaCounter
       };
-      net.queuePost('character', data, function(data) {
-        processUpdates(data);
-        if(callback) callback();
-      });
+      net.queuePost('character', data, callback);
     };
     /*
     chat.deleteMessage = function(id) {
@@ -211,6 +205,7 @@ function RP(id) {
         var req = queue.shift();
         ajax(req.url, 'POST', req.data, function(data) {
           processUpdates(data);
+          if(req.callback) req.callback(data);
           doNext();
         });
       }
