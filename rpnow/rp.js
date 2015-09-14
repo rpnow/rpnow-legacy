@@ -65,24 +65,25 @@ function RP(id) {
     var charas = [];
     var msgCounter;
     var charaCounter;
+    /*
     var upMsgCounter;
     var upCharaCounter;
+    */
     var maxMsgs;
     var interval;
     var isLoaded = false;
     var isLoading = false;
     var net;
     // events
-    var onLoad,
-      onMessage, onChara,
-      onUpdateMessage, onUpdateChara,
-      onUnloadMessage;
+    var onLoad, onMessage, onChara; /* onUpdateMessage, onUpdateChara, onUnloadMessage; */
     chat.onLoad = function(callback) { onLoad = callback; };
     chat.onMessage = function(callback) { onMessage = callback; };
     chat.onChara = function(callback) { onChara = callback; };
+    /*
     chat.onUpdateMessage = function(callback) { onUpdateMessage = callback; };
     chat.onUpdateChara = function(callback) { onUpdateChara = callback; };
     chat.onUnloadMessage = function(callback) { onUnloadMessage = callback; };
+    */
     // properties
     Object.defineProperties(chat, {
       'id': {value: rp.id},
