@@ -406,11 +406,32 @@ header #title-links a {
   position: fixed;
   z-index: 200;
   bottom: 0;
-  background: inherit;
-  border: dotted 1px #222;
-  border-bottom: none;
+  background-color: inherit;
   border-spacing: 10px;
   box-shadow: 0 0 20px #222;
+}
+#message-box.message-box-narrator {
+  background-color: #fff;
+  outline: dotted 1px #999;
+  outline-offset: -6px;
+  padding: 8px;
+  bottom: -6px;
+}
+#message-box.message-box-ooc {
+  background-color: #707070;
+  border: dotted 1px #eee;
+  border-bottom: none;
+}
+#message-box.message-box-ooc #message-text textarea {
+  background-color: #bbb;
+}
+#message-box.message-box-chara {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+#message-box.message-box-chara #message-text textarea {
+  border-radius: 12px;
+  border-bottom-left-radius: 0;
 }
 @media all and (max-width: 750px) {
   #message-box {
@@ -428,15 +449,43 @@ header #title-links a {
 }
 #format-bar {
   text-align: left;
-  margin-left: 50px;
   padding-top: 5px;
+  margin-left: 6%;
+  margin-right: 16px;
+  background-color: inherit;
 }
-#format-bar input {
+#format-bar #message-voice {
   display: inline-block;
-  margin-right: 0;
+  vertical-align: middle;
+  padding: 2px 4%;
+}
+.message-box-narrator #message-voice {
+  color: #777;
+  border-bottom: solid 1px #ddd;
+  border-left: solid 1px #eee;
+  padding-top: 0;
+  letter-spacing: 2px;
+}
+.message-box-narrator #message-voice::first-letter {
+  font-size: 125%;
+}
+.message-box-ooc #message-voice {
+  font-size: 90%;
+  color: #ccc;
+}
+.message-box-ooc #message-voice::before { content: '[ '; font-size: 125%; }
+.message-box-ooc #message-voice::after { content: ' ]'; font-size: 125%; }
+.message-box-chara #message-voice {
+  box-shadow: 0 1px 4px #555;
+  border-radius: 4px;
+  margin-top: -15px;
+  margin-right: 2%;
+  background-color: inherit;
+  font-size: 115%;
 }
 #format-bar #change-character {
   display: inline-block;
+  vertical-align: middle;
   border-radius: 0;
   padding: 2px 2px;
   font-size: 80%;
@@ -449,7 +498,7 @@ header #title-links a {
   border-collapse: separate;
 }
 #message-bar #message-text,
-#message-bar #message-button {
+#message-bar #message-button-container {
   display: table-cell;
   vertical-align: middle;
   padding: 5px;
@@ -463,7 +512,7 @@ header #title-links a {
   resize: vertical;
   min-height: 60px;
 }
-#message-box input[type=submit] {
+#message-box #send-button {
   min-width: 80px;
   height: 68px;
   margin-left: 5px;

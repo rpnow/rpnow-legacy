@@ -8,10 +8,6 @@
 # Configuration variables follow.
 # -----
 
-## The URL base path to the directory containing this
-## website. Should probably end in a forward slash.
-$rpRootPath = '/';
-
 ## The server on which the database is located;
 ## if it's one the same server, use 'localhost'
 $rpDBServer = 'localhost';

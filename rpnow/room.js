@@ -31,32 +31,30 @@ function RPRoom(reqUrl) {
   this.loadFeed = function(params) {
     $.ajax({
       type: 'GET',
-      url: reqUrl + '/ajax/latest',
+      url: reqUrl + '/ajax/chat',
       success: function(data) {
         // ppp
         postsPerPage = data.postsPerPage;
         // add messages
-        for(var i = 0; i < data.messages.length; ++i) {
-          addMessageElement(data.messages[i]);
+        for(var i = 0; i < data.msgs.length; ++i) {
+          addMessageElement(data.msgs[i]);
         }
         // add characters
-        for(var i = 0; i < data.characters.length; ++i) {
-          addCharacterElement(data.characters[i]);
-          addCharacterCSS(data.characters[i]);
-          charList.push(data.characters[i].Name);
+        for(var i = 0; i < data.charas.length; ++i) {
+          addCharacterElement(data.charas[i]);
+          addCharacterCSS(data.charas[i]);
+          charList.push(data.charas[i].Name);
         }
         // grab the notification noise
         alertNoise = new Audio('assets/alert.mp3');
         // initialize counters
-        numMsg = data.messageCount;
-        numChar = data.characterCount;
+        numMsg = data.msgCounter;
+        numChar = data.charaCounter;
         // callback
         if(params.onload) params.onload();
         // start updating
-        if(params.millis) {
-          interval = params.millis;
-          timer = setTimeout(ajaxUpdate, interval);
-        }
+        interval = data.refreshMillis;
+        timer = setTimeout(ajaxUpdate, interval);
         // additionally update the timestamps every so often
         updateTimeAgo();
       }
@@ -76,17 +74,17 @@ function RPRoom(reqUrl) {
   this.loadPage = function(params) {
     $.ajax({
       type: 'GET',
-      url: reqUrl + '/ajax/' + params.page,
+      url: reqUrl + '/ajax/page/' + params.page,
       success: function(data) {
         // ppp
         postsPerPage = data.postsPerPage;
         // add messages
-        for(var i = 0; i < data.messages.length; ++i) {
-          addMessageElement(data.messages[i]);
+        for(var i = 0; i < data.msgs.length; ++i) {
+          addMessageElement(data.msgs[i]);
         }
         // add characters
-        for(var i = 0; i < data.characters.length; ++i) {
-          addCharacterCSS(data.characters[i]);
+        for(var i = 0; i < data.charas.length; ++i) {
+          addCharacterCSS(data.charas[i]);
         }
         // callback
         if(params.onload) params.onload();
@@ -104,29 +102,33 @@ function RPRoom(reqUrl) {
       url: reqUrl + '/ajax/updates',
       data: { characters: numChar, messages: numMsg },
       success: function(data) {
-        // update messages
-        if(data.messages.length > 0) {
+        // add new messages
+        if(data.newMsgs && data.newMsgs.length > 0) {
           // check if we're at the bottom of the page
           var isAtBottom = $(window).scrollTop() + $(window).height() >= getDocHeight();
           // add the messages
-          for(var i = 0; i < data.messages.length; ++i) {
-            addMessageElement(data.messages[i]);
+          for(var i = 0; i < data.newMsgs.length; ++i) {
+            addMessageElement(data.newMsgs[i]);
           }
           // if we were at the bottom of the page, scroll down to bottom
           if(isAtBottom) $('html, body').stop().animate({scrollTop: getDocHeight()}, 250);
+          // update msg counter
+          numMsg += data.newMsgs.length;
         }
-        // update characters
-        for(var i = 0; i < data.characters.length; ++i) {
-          addCharacterElement(data.characters[i]);
-          addCharacterCSS(data.characters[i]);
-          charList.push(data.characters[i].Name);
+        // add new characters
+        if(data.newCharas && data.newCharas.length > 0) {
+          // add each
+          for(var i = 0; i < data.newCharas.length; ++i) {
+            addCharacterElement(data.newCharas[i]);
+            addCharacterCSS(data.newCharas[i]);
+            charList.push(data.newCharas[i].Name);
+          }
+          // update chara counter
+          numChar += data.newCharas.length;
         }
-        // update counters
-        numMsg += data.messages.length;
-        numChar += data.characters.length;
         // do an alert if the tab isn't in focus
-        if(data.messages.length > 0 && document.visibilityState === 'hidden') {
-          var lastMsg = data.messages[data.messages.length -1];
+        if(data.newMsgs && data.newMsgs.length > 0 && document.visibilityState === 'hidden') {
+          var lastMsg = data.newMsgs[data.newMsgs.length-1];
           var alertText;
           if(lastMsg.Type === 'Character') alertText = lastMsg.Name + ' says...';
           else if(lastMsg.Type === 'Narrator') alertText = 'The narrator says...';

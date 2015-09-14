@@ -9,7 +9,11 @@
     <div class="info" id="empty-room" style="display:none">
       <p><b>Success!</b></p>
       <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
-      <a href="{{ fullUrl }}">{{ fullUrl }}</a>
+      <a id="friend-link"></a>
+      <script>
+        document.getElementById('friend-link').innerHTML = window.location.href;
+        document.getElementById('friend-link').href = window.location.href;
+      </script>
       <p>Please keep the following things in mind, however:</p>
       <ol>
         <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
@@ -31,7 +35,7 @@
       <li id="ooc-button"><a href="#">Out of Character</a></li>
     </ul>
     <ul id="normal-characters"></ul>
-    <button id="new-character-button">New Character...</button>
+    <button type="button" id="new-character-button">New Character...</button>
   </div>
   
   <form id="new-character" class="form-box" autocomplete="off" style="display:none">
@@ -45,43 +49,73 @@
       <div class="input-container"><input type="color" name="color" value="#DDDDDD"></input></div>
     </div>
     <input type="submit" value="Add"></input>
-    <button id="cancel-character">Cancel</button>
+    <button type="button" id="cancel-character">Cancel</button>
   </form>
   
-  <form id="message-box" autocomplete="off" style="display:none">
+  <div id="message-box" autocomplete="off" style="display:none">
     <div id="format-bar">
-      <input type="text" name="name" value="Narrator" readonly="readonly"></input>
-      <button id="change-character">Change...</button>
+      <div id="message-voice"></div>
+      <button type="button" id="change-character">Change...</button>
     </div>
     <div id="message-bar">
       <div id="message-text">
         <textarea name="content"></textarea>
       </div>
-      <div id="message-button">
-        <input type="submit" value="Send"></input>
+      <div id="message-button-container">
+        <button type="button" id="send-button">Send</button>
       </div>
     </div>
-  </form>
+  </div>
   
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js'></script>
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.css' />
   <script src='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.js'></script>
-  <script src='{{ docroot }}room.js'></script>
+  <script src='{{ docroot }}rp.js'></script>
   
   <script>
-    function clickCharaButton(evt) {
-      $('#message-box input[name=name]').val(evt.target.text.trim());
-      $('#character-menu').slideUp(250);
-      $('#message-box').slideDown(250);
-      $('#message-box textarea').focus();
-      evt.preventDefault();
-    }
+    // load rp and attach events
+    var rp = new RP('{{ room }}');
+    var chat = rp.chat();
+    
+    var setVoice;
+    (function() {
+      var voice;
+      Object.defineProperty(window, 'voice', { get: function() { return voice; } });
+      setVoice = function(v) {
+        voice = v;
+        if(voice === 'Narrator') {
+          $('#message-voice').text('Narrator');
+          $('#message-voice').attr('style', '');
+          $('#message-box').attr({'class': 'message-box-narrator', 'style': ''});
+        }
+        else if(voice === 'OOC') {
+          $('#message-voice').text('Out of Character');
+          $('#message-voice').attr('style', '');
+          $('#message-box').attr({'class': 'message-box-ooc', 'style': ''});
+        }
+        else {
+          $('#message-voice').text(voice.name);
+          $('#message-voice').attr('style', 'color:'+v.textColor);
+          $('#message-box').attr({'class': 'message-box-chara', 'style':'background-color:'+voice.color});
+        }
+      }
+    })();
     
     function showCharacterSelectMenu() {
       $('#character-menu').stop().slideDown(250);
       $('#message-box').slideUp(250);
+    }
+    function hideCharacterSelectMenu() {
+      $('#character-menu').slideUp(250);
+      $('#message-box').slideDown(250);
+      $('#message-box textarea').focus();
+    }
+    function clickVoiceButton(evt, c) {
+      setVoice(c);
+      hideCharacterSelectMenu();
+      evt.preventDefault();
     }
     
     function createOverlay() {
@@ -112,75 +146,86 @@
     }
     
     function sendMessage() {
-      // send message
-      var data = { content: $('#message-box textarea').val() };
-      var name = $('#message-box input[name=name]').val();
-      if(name === 'Narrator') data.type = 'Narrator';
-      else if(name === 'Out of Character') data.type = 'OOC';
-      else {
-        data.type = 'Character';
-        data.name = name;
-      }
-      RPRoom().addMessage(data);
+      var content = $('#message-box textarea').val().trim();
+      if(content === '') return;
+      
+      chat.sendMessage(content, voice);
+      
       // clear message box
       $('#message-box textarea').val('');
-      // scroll to bottom if we're not there
-      $('html, body').animate({scrollTop: $(document).height()}, 250);
+    }
+    
+    function scrollToBottom() {
+      $('html, body').stop().animate({scrollTop: $(document).height()}, 500);
     }
     
     $(document).ready(function() {
       
-      // create the room object
-      RPRoom('{{ room }}').loadFeed({
-        millis: {{ refreshMillis }},
-        onload: function() {
-          $('#loading').hide();
-          if(RPRoom().messageCount > RPRoom().postsPerPage) {
-            $('#showing-latest').show();
-          }
-          else if(RPRoom().messageCount === 0) {
-            $('#empty-room').show();
-          }
-          $('#message-box').slideDown(250);
+      chat.onLoad(function(msgs, charas) {
+        $('#loading').hide();
+        for(var i = 0; i < msgs.length; ++i) {
+          $('#messages').append(msgs[i].createElement('relative'));
         }
+        if(chat.msgCount > chat.maxMsgs) {
+          $('#showing-latest').show();
+        }
+        else if(chat.msgCount === 0) {
+          $('#empty-room').show();
+        }
+        for(var i = 0; i < charas.length; ++i) {
+          (function(c) {
+            $('#character-menu ul#normal-characters').append(
+              $('<li/>').append(
+                c.createButton(function(evt) { clickVoiceButton(evt, c); })
+              )
+            );
+          })(charas[i]);
+        }
+        if(chat.msgCount > 0) scrollToBottom();
+        $('#message-box').slideDown(250);
       });
+      chat.onMessage(function(msg) {
+        $('#messages').append(msg.createElement('relative'));
+        scrollToBottom();
+      });
+      chat.onChara(function(chara) {
+        $('#character-menu ul#normal-characters').append(
+          $('<li/>').append(
+            chara.createButton(function(evt) { clickVoiceButton(evt, chara); })
+          )
+        );
+      });
+      /*
+      chat.onUpdateMessage(function(update) {
+      });
+      chat.onUpdateChara(function(update) {
+      });
+      */
       
       // button functions
-      $('#special-characters a').click(clickCharaButton);
-      $('#message-box button#change-character').click(function(e) {
+      $('#character-menu li#narrator-button a').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
+      $('#character-menu li#ooc-button a').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
+      setVoice('Narrator');
+      $('#message-box button#change-character').click(function(evt) {
+        evt.preventDefault();
         showCharacterSelectMenu();
-        e.preventDefault();
       });
       $('#new-character-button').click(showNewCharacterMenu);
-      $('#cancel-character').click(function(e) {
-        hideNewCharacterMenu();
-        e.preventDefault();
-      });
-      $('#message-box').submit(function(e) {
-        sendMessage();
-        e.preventDefault();
-      });
+      $('#cancel-character').click(hideNewCharacterMenu);
+      $('#send-button').click(sendMessage);
       $('#new-character').submit(function(evt) {
         evt.preventDefault();
-        // submit form
-        var newName = $('#new-character input[name=name]').val().trim();
-        try {
-          RPRoom().addCharacter({
-            name: newName,
-            color: $('#new-character input[name=color]').val()
-          });
-        }
-        catch(ex) {
-          alert(ex.message);
-          return;
-        }
+        
+        var name = $('#new-character input[name=name]').val().trim();
+        if(!name) throw new Error('Please enter a name.');
+        var color = $('#new-character input[name=color]').val();
+        
         $('#new-character').hide();
-        $('#overlay').remove();
-        $('#character-menu').slideUp(250);
-        $('#message-box').slideDown(250);
-        $('#message-box input[name=name]').val(newName);
-        $('#message-box textarea').focus();
-        $('#new-character')[0].reset();
+        
+        chat.sendChara(name, color, function() {
+          $('#new-character')[0].reset();
+          $('#overlay').remove();
+        });
       });
       $('#message-box textarea').keypress(function(evt) {
         if((evt.keyCode || evt.which) === 13 && !evt.shiftKey && !evt.ctrlKey) {
@@ -188,6 +233,8 @@
           sendMessage();
         }
       });
+      
+      chat.load();
     });
   </script>
 {% endblock %}

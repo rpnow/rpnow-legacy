@@ -70,12 +70,12 @@ class Room {
     return $conn->query("SELECT
     `Title`,
     `ID`,
-    `Timestamp` AS `Created`,
+    `Time_Created`,
     `IP`,
-    (SELECT COALESCE(MAX(`Timestamp`), `Room`.`Timestamp`) FROM `Message` WHERE `Room` = `ID`) AS `Updated`,
+    (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Room` = `ID`) AS `Time_Updated`,
     (SELECT COUNT(*) FROM `Message` WHERE `Room` = `ID`) AS `Num_Msgs`
     FROM `Room`
-    ORDER BY `Updated` DESC");
+    ORDER BY `Time_Updated` DESC");
   }
   
   public function close() {
@@ -101,6 +101,15 @@ class Room {
     return $row[0] == '1';
   }
   
+  private static function getIPColors($ip) {
+    $md5str = md5($ip);
+    return array(
+      '#' . substr($md5str, 0, 6),
+      '#' . substr($md5str, 6, 6),
+      '#' . substr($md5str, 12, 6)
+    );
+  }
+  
   public function getMessages($which, $n = NULL) {
     $room = $this->getID();
     global $rpPostsPerPage;
@@ -108,8 +117,7 @@ class Room {
     // latest (ppp) messages
     if($which == 'latest') {
       $statement = $this->db->prepare("(SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`,
-      `Number`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
       ORDER BY `Number` ASC;");
@@ -117,7 +125,7 @@ class Room {
     // all messages
     else if($which == 'all') {
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC;");
     }
@@ -132,17 +140,18 @@ class Room {
       }
       $start = ($n - 1) * $rpPostsPerPage;
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
     }
     // updates
-    else if($which == 'after' && !is_null($n)) {
+    else if($which == 'after') {
+      if(is_null($n)) throw new Exception('value for $n is null.');
       if(intval($n) === false || intval($n) != floatval($n) || intval($n) < 0) {
         throw new Exception("invalid message request: $n is a bad number.");
       }
       $statement = $this->db->prepare("SELECT
-      `Type`, `Content`, UNIX_TIMESTAMP(`Timestamp`) AS `Timestamp`, `Character_Name` AS `Name`, `IP`
+      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room` = '$room'
       ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
     }
@@ -154,15 +163,14 @@ class Room {
     return array_map(
       function($x) {
         return array(
-          'Type' => $x['Type'],
+          'Number' => $x['Number'],
           'Content' => $x['Content'],
-          'Timestamp' => $x['Timestamp'],
-          'Name' => $x['Name'],
-          'IPColor' => array(
-            '#' . substr(md5($x['IP']), 0, 6),
-            '#' . substr(md5($x['IP']), 6, 6),
-            '#' . substr(md5($x['IP']), 12, 6)
-          )
+          'Time_Created' => $x['Time_Created'],
+          'Time_Updated' => $x['Time_Updated'],
+          'IPColor' => Room::getIPColors($x['IP']),
+          'Type' => $x['Type'],
+          'Chara_Number' => $x['Chara_Number'],
+          'Deleted' => $x['Deleted'],
         );
       },
       $statement->fetchAll()
@@ -174,7 +182,7 @@ class Room {
       throw new Exception("invalid character request: $after is a bad number.");
     }
     // get the characters
-    $statement = $this->db->prepare("SELECT `Name`, `Color` FROM `Character` WHERE `Room` = ? LIMIT 9999 OFFSET $after");
+    $statement = $this->db->prepare("SELECT `Number`, `Name`, `Color`, `IP`, `Deleted` FROM `Character` WHERE `Room` = ? LIMIT 9999 OFFSET $after");
     $statement->execute(array($this->getID()));
     // calculate the secondary color for each and return in modified array
     return array_map(
@@ -188,9 +196,12 @@ class Room {
         $b = hexdec(substr($x['Color'],1+$prec*2,$prec))*$mult;
         $yiq = (($r*299)+($g*587)+($b*114))/1000;
         return array(
+          'Number' => $x['Number'],
           'Name' => $x['Name'],
           'Color' => $x['Color'],
-          'Contrast' => ($yiq >= 128) ? 'black' : 'white'
+          'Contrast' => ($yiq >= 128) ? 'black' : 'white',
+          'IPColor' => Room::getIPColors($x['IP']),
+          'Deleted' => $x['Deleted']
         );
       },
       $statement->fetchAll()
@@ -204,8 +215,8 @@ class Room {
   
   public function getStatsArray() {
     $dataStatement = $this->db->prepare("SELECT
-      MAX(`Timestamp`) AS `LatestMessageDate`,
-      MIN(`Timestamp`) AS `FirstMessageDate`,
+      MAX(`Time_Created`) AS `LatestMessageDate`,
+      MIN(`Time_Created`) AS `FirstMessageDate`,
       SUM(if(`Type`='Narrator', 1,0)) AS `NarratorMessageCount`,
       SUM(if(`Type`='OOC', 1,0)) AS `OOCMessageCount`,
       SUM(if(`Type`='Narrator', char_length(`Content`),0)) AS `NarratorCharCount`,
@@ -217,7 +228,7 @@ class Room {
     );
     $dataStatement->execute(array($this->getID()));
     $data = $dataStatement->fetch();
-    $top5Statement = $this->db->prepare("SELECT `Character_Name` AS `Name`, COUNT(*) AS `MessageCount` FROM `Message` WHERE `Type`='Character' AND `Room` = ? GROUP BY `Character_Name` ORDER BY `MessageCount` DESC LIMIT 5;");
+    $top5Statement = $this->db->prepare("SELECT `Character`.`Name`, COUNT(*) AS `MessageCount` FROM `Message` LEFT JOIN `Character` ON `Chara_Number`=`Character`.`Number` WHERE `Message`.`Type`='Character' AND `Message`.`Room` = ? GROUP BY `Chara_Number` ORDER BY `MessageCount` DESC LIMIT 5;");
     $top5Statement->execute(array($this->getID()));
     return array(
       'MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount(),
@@ -234,7 +245,7 @@ class Room {
     );
   }
   
-  public function addMessage($type, $content, $character = null) {
+  public function addMessage($type, $content, $charaNum = null) {
     if(!in_array($type, array('Narrator', 'Character', 'OOC'))) {
       throw new Exception('Invalid type: ' . $type);
     }
@@ -242,8 +253,24 @@ class Room {
     if(!$content) {
       throw new Exception('Message is empty.');
     }
-    $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `Character_Name`, `IP`) VALUES (?, ?, ?, ?, ?)");
-    $statement->execute(array($type, $content, $this->getID(), $character, $_SERVER['REMOTE_ADDR']));
+    $statement = null;
+    if($type == 'Character') {
+      if(!is_int($charaNum) && !ctype_digit($charaNum)) throw new Exception("$charaNum is not an int.");
+      
+      // validate charaNum
+      $statement = $this->db->prepare('SELECT `Room` FROM `Character` WHERE `Number` = ?');
+      $statement->execute(array($charaNum));
+      if($statement->rowCount() != 1 || $statement->fetch()['Room'] != $this->getID())
+        throw new Exception("invalid character number: $charaNum");
+      
+      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`, `Chara_Number`) VALUES (?, ?, ?, ?, ?)");
+      $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR'], $charaNum));
+    }
+    else {
+      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`) VALUES (?, ?, ?, ?)");
+      $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR']));
+    }
+    
   }
   
   public function addCharacter($name, $color) {
