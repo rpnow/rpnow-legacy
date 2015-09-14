@@ -60,8 +60,6 @@ function RP(id) {
   // load a chat object
   this.chat = function() {
     var chat = {};
-    // get alert noise if not already there
-    if(!RP.alertNoise) RP.alertNoise = new Audio('assets/alert.mp3');
     // chat variables
     var msgs = [];
     var charas = [];

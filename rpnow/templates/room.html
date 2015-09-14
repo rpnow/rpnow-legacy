@@ -159,6 +159,34 @@
       $('html, body').stop().animate({scrollTop: $(document).height()}, 500);
     }
     
+    var alertNoise = new Audio('assets/alert.mp3');
+    
+    var flashTitle = (function() {
+      var oldTitle = document.title;
+      var alertMsg = null;
+      var i = 0;
+      var informTimer = null;
+      function timerAction() {
+        if(i%2) document.title = oldTitle;
+        else document.title = alertMsg;
+        --i;
+        if(i >= 0) informTimer = setTimeout(timerAction, 500);
+      }
+      document.addEventListener('visibilitychange', function(evt) {
+        if(document.visibilityState === 'visible') {
+          clearTimeout(informTimer);
+          document.title = oldTitle;
+        }
+      });
+      return function(msg, flashes) {
+        if(document.visibilityState === 'visible') return;
+        i = (flashes===undefined? 1: flashes)*2;
+        if(informTimer) clearTimeout(informTimer);
+        alertMsg = msg;
+        timerAction(msg);
+      };
+    })();
+    
     $(document).ready(function() {
       
       chat.onLoad(function(msgs, charas) {
@@ -187,6 +215,15 @@
       chat.onMessage(function(msg) {
         $('#messages').append(msg.createElement('relative'));
         scrollToBottom();
+        // do an alert if the tab isn't in focus
+        if(document.visibilityState === 'hidden') {
+          var alertText;
+          if(msg.type === 'Character') alertText = '* ' + msg.chara.name + ' says...';
+          else if(msg.type === 'Narrator') alertText = '* The narrator says...';
+          else if(msg.type === 'OOC') alertText = '* OOC message...';
+          flashTitle(alertText, 3);
+          alertNoise.play();
+        }
       });
       chat.onChara(function(chara) {
         $('#character-menu ul#normal-characters').append(
