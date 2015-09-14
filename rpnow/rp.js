@@ -73,7 +73,7 @@ function RP(id) {
     var interval;
     var isLoaded = false;
     var isLoading = false;
-    var timer;
+    var net;
     // events
     var onLoad,
       onMessage, onChara,
@@ -114,20 +114,52 @@ function RP(id) {
         // callback
         if(onLoad) onLoad(msgs, charas);
         // start updating
-        timer = setTimeout(fetchUpdates, interval);
+        net.start();
       });
     };
-    function fetchUpdates() {
-      if(timer) {
-        clearTimeout(timer);
-        timer = null;
+    // send message
+    chat.sendMessage = function(content, voice, callback) {
+      var data = {
+        content: content,
+        msgCounter: msgCounter, charaCounter: charaCounter
+      };
+      if(voice instanceof Chara) {
+        data['type'] = 'Character';
+        data.charaId = voice.id;
       }
       else {
-        return;
+        data['type'] = voice;
       }
-      var data = { charaCounter: charaCounter, msgCounter: msgCounter };
-      ajax('updates', 'GET', data, processUpdates);
-    }
+      net.queuePost('message', data, function(data) {
+        processUpdates(data);
+        if(callback) callback();
+      });
+    };
+    // send character
+    chat.sendChara = function(name, color, callback) {
+      var data = {
+        name: name, color: color,
+        msgCounter: msgCounter, charaCounter: charaCounter
+      };
+      net.queuePost('character', data, function(data) {
+        processUpdates(data);
+        if(callback) callback();
+      });
+    };
+    /*
+    chat.deleteMessage = function(id) {
+      
+    };
+    chat.deleteChara = function(id) {
+      
+    };
+    chat.undeleteMessage = function(id) {
+      
+    };
+    chat.undeleteChara = function(id) {
+      
+    };*/
+    // when an update comes in
     function processUpdates(data) {
       // add new characters
       if(data.newCharas) {
@@ -147,54 +179,63 @@ function RP(id) {
         }
         msgCounter += data.newMsgs.length;
       }
-      // done. wait and then do this again
-      timer = setTimeout(fetchUpdates, interval);
     }
-    // POST functions
-    chat.sendMessage = function(content, voice, callback) {
-      var data = {
-        content: content,
-        msgCounter: msgCounter, charaCounter: charaCounter
-      };
-      if(voice instanceof Chara) {
-        data['type'] = 'Character';
-        data.charaId = voice.id;
+    // flow of communications
+    net = (function() {
+      var timer;
+      var queue = [];
+      var busy = false;
+      var reqCounter = 0;
+      function fetchUpdates() {
+        ++reqCounter;
+        var reqNum = reqCounter;
+        var params = { charaCounter: charaCounter, msgCounter: msgCounter };
+        ajax('updates', 'GET', params, function(data) {
+          if(busy || reqNum !== reqCounter) return;
+          busy = true;
+          processUpdates(data);
+          doNext();
+        });
       }
-      else {
-        data['type'] = voice;
+      function pop() {
+        // block while posting this request
+        busy = true;
+        // nullify any ongoing passive request
+        ++reqCounter;
+        // cancel any delayed passive request
+        if(timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+        // execute
+        var req = queue.shift();
+        ajax(req.url, 'POST', req.data, function(data) {
+          processUpdates(data);
+          doNext();
+        });
       }
-      ajax('message', 'POST', data, function(data) {
-        processUpdates(data);
-        if(callback) callback();
-      });
-    };
-    chat.sendChara = function(name, color, callback) {
-      var data = {
-        name: name, color: color,
-        msgCounter: msgCounter, charaCounter: charaCounter
-      };
-      ajax('character', 'POST', data, function(data) {
-        processUpdates(data);
-        if(callback) callback();
-      });
-    };
-    /*
-    chat.deleteMessage = function(id) {
-      
-    };
-    chat.deleteChara = function(id) {
-      
-    };
-    chat.undeleteMessage = function(id) {
-      
-    };
-    chat.undeleteChara = function(id) {
-      
-    };*/
-    // to immediately reload new messages
-    function refreshNow() {
-      
-    }
+      function doNext() {
+        if(queue.length > 0) {
+          pop();
+        }
+        else {
+          timer = setTimeout(fetchUpdates, interval);
+          busy = false;
+        }
+      }
+      return {
+        start: function(){
+          if(timer || busy) return;
+          timer = setTimeout(fetchUpdates, interval);
+        },
+        queuePost: function(url, data, callback){
+          // add ajax call to queue
+          queue.push({ url: url, data: data, callback: callback });
+          // if we're not busy, then we can execute it now
+          if(!busy) pop();
+        }
+      }
+    })();
     // done.
     return chat;
   };
