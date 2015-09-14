@@ -214,7 +214,7 @@ $app->get('/sample/', $downCheck, function () use ($app) {
   ));
   $app->render('archive.html');
 });
-$app->get('/sample/ajax/1/', function () use ($app) {
+$app->get('/sample/ajax/page/1/', function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   readfile('assets/sample_rp.json');
 });
