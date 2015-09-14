@@ -46,7 +46,7 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
       'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'docroot' => ''
+      'docroot' => './'
     ));
     $room->close();
     $app->render('room.html');
