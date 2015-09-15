@@ -122,13 +122,6 @@ class Room {
       ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
       ORDER BY `Number` ASC;");
     }
-    // all messages
-    else if($which == 'all') {
-      $statement = $this->db->prepare("SELECT
-      `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
-      FROM `Message` WHERE `Room` = '$room'
-      ORDER BY `Number` ASC;");
-    }
     // page of archive
     else if($which == 'page' && !is_null($n)) {
       if(intval($n) == false || intval($n) != floatval($n) || intval($n) < 1) {
@@ -211,6 +204,16 @@ class Room {
   public function getNumPages() {
     global $rpPostsPerPage;
     return ceil($this->getMessageCount() / $rpPostsPerPage);
+  }
+  
+  public function getTranscript() {
+    // all messages
+    $statement = $this->db->prepare('SELECT
+    `Type`, `Content`, `Name`
+    FROM `Message` LEFT JOIN `Character` ON (`Character`.`Number` = `Message`.`Chara_Number`) WHERE `Message`.`Room` = ?
+    ORDER BY `Message`.`Number` ASC;');
+    $statement->execute(array($this->getID()));
+    return $statement->fetchAll();
   }
   
   public function getStatsArray() {

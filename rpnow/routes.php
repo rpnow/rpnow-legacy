@@ -252,7 +252,7 @@ $app->get('/:id/export/', $downCheck, function ($id) use ($app) {
     echo wordwrap($room->getDesc(), 72, "\r\n") . "\r\n";
     echo "--------\r\n\r\n";
     // output each message
-    foreach($room->getMessages('all') as $message) {
+    foreach($room->getTranscript() as $message) {
       if($message['Type'] == 'Character') {
         echo strtoupper($message['Name']) . ":\r\n";
         echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
