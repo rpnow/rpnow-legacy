@@ -42,14 +42,11 @@ $app->post('/create/', $downCheck, function () use ($app) {
 $app->get('/:id/', $downCheck, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    global $rpPostsPerPage, $rpRootPath, $rpRefreshMillis;
     $app->view()->setData(array(
+      'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'room' => $id,
-      'fullUrl' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}$rpRootPath$id",
-      'docroot' => $rpRootPath,
-      'refreshMillis' => $rpRefreshMillis
+      'docroot' => './'
     ));
     $room->close();
     $app->render('room.html');
@@ -63,16 +60,14 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
 // Archive
 $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
   try {
-    global $rpRootPath, $rpPostsPerPage;
     $room = Room::GetRoom($id);
     $app->view()->setData(array(
+      'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'room' => $id,
-      'numpages' => $room->getNumPages(),
+      'docroot' => '../',
       'page' => $page,
-      'docroot' => $rpRootPath,
-      'postsPerPage' => $rpPostsPerPage
+      'numpages' => $room->getNumPages()
     ));
     $room->close();
     $app->render('archive.html');
@@ -83,57 +78,81 @@ $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get archive page data
-$app->get('/:id/ajax/:page/', $downCheckAjax, function ($id, $page) use ($app) {
+$app->get('/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($app) {
   try {
     $room = Room::GetRoom($id);
     $data = array(
-      'messages' => $room->getMessages('page', $page),
-      'characters' => $room->getCharacters()
+      'msgs' => $room->getMessages('page', $page),
+      'charas' => $room->getCharacters(),
+      'numpages' => $room->getNumPages()
     );
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
     echo json_encode($data);
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get latest posts for room
-$app->get('/:id/ajax/latest/', $downCheckAjax, function ($id) use ($app) {
+$app->get('/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
   try {
-    global $rpPostsPerPage;
+    global $rpPostsPerPage, $rpRefreshMillis;
     $room = Room::GetRoom($id);
     $data = array(
-      'messages' => $room->getMessages('latest'),
-      'characters' => $room->getCharacters(),
-      'messageCount' => $room->getMessageCount(),
-      'characterCount' => $room->getCharacterCount(),
-      'postsPerPage' => $rpPostsPerPage
+      'msgs' => $room->getMessages('latest'),
+      'charas' => $room->getCharacters(),
+      'msgCounter' => $room->getMessageCount(),
+      'charaCounter' => $room->getCharacterCount(),
+      'upMsgCounter' => 0,
+      'upCharaCounter' => 0,
+      'postsPerPage' => $rpPostsPerPage,
+      'refreshMillis' => $rpRefreshMillis
     );
     $room->close();
     $app->response->headers->set('Content-Type', 'application/json');
     echo json_encode($data);
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
 // Receive room updates
+function echoRoomUpdates($room, $app) {
+  $msgs = null;
+  $charas = null;
+  if($app->request->isGet()) {
+    $msgs = $room->getMessages('after', $app->request()->get('msgCounter'));
+    $charas = $room->getCharacters($app->request()->get('charaCounter'));
+  }
+  else if($app->request->isPost()) {
+    $msgs = $room->getMessages('after', $app->request()->post('msgCounter'));
+    $charas = $room->getCharacters($app->request()->post('charaCounter'));
+  }
+  
+  $data = array();
+  if(count($msgs) != 0) $data['newMsgs'] = $msgs;
+  if(count($charas) != 0) $data['newCharas'] = $charas;
+  
+  $app->response->headers->set('Content-Type', 'application/json');
+  echo json_encode($data);
+}
 $app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
   try {
     $room = Room::GetRoom($id);
-    $data = array(
-      'messages' => $room->getMessages('after', $app->request()->get('messages')),
-      'characters' => $room->getCharacters($app->request()->get('characters'))
-    );
+    echoRoomUpdates($room, $app);
     $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode($data);
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    $app->response->setStatus(500);
+    $app->response->headers->set('Content-Type', 'application/json');
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
@@ -145,7 +164,7 @@ $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
       $room->addMessage(
         'Character',
         $app->request()->post('content'),
-        $app->request()->post('name')
+        $app->request()->post('charaId')
       );
     }
     else {
@@ -154,14 +173,13 @@ $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
         $app->request()->post('content')
       );
     }
+    echoRoomUpdates($room, $app);
     $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'OK'));
   }
   catch(Exception $e) {
     $app->response->setStatus(500);
     $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
@@ -173,20 +191,18 @@ $app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
       $app->request()->post('name'),
       $app->request()->post('color')
     );
+    echoRoomUpdates($room, $app);
     $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'OK'));
   }
   catch(Exception $e) {
     $app->response->setStatus(500);
     $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('status'=>'ERROR', 'message'=>$e->getMessage()));
+    echo json_encode(array('error'=>$e->getMessage()));
   }
 });
 
 // Sample room!
 $app->get('/sample/', $downCheck, function () use ($app) {
-  global $rpRootPath;
   $app->view()->setData(array(
     'title' => 'Sample Roleplay',
     'desc' => 'This is what an RP will look like!',
@@ -194,11 +210,11 @@ $app->get('/sample/', $downCheck, function () use ($app) {
     'hidemenu' => true,
     'numpages' => 1,
     'page' => 1,
-    'docroot' => $rpRootPath
+    'docroot' => ''
   ));
   $app->render('archive.html');
 });
-$app->get('/sample/ajax/1/', function () use ($app) {
+$app->get('/sample/ajax/page/1/', function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   readfile('assets/sample_rp.json');
 });
@@ -206,14 +222,13 @@ $app->get('/sample/ajax/1/', function () use ($app) {
 // Generate some statistics for the room
 $app->get('/:id/stats/', $downCheck, function ($id) use ($app) {
   try {
-    global $rpRootPath;
     $room = Room::GetRoom($id);
     $app->view()->setData(
       array_merge($room->getStatsArray(), array(
         'title' => $room->getTitle(),
         'desc' => $room->getDesc(),
         'room' => $id,
-        'docroot' => $rpRootPath
+        'docroot' => '../'
       ))
     );
     $room->close();
@@ -237,7 +252,7 @@ $app->get('/:id/export/', $downCheck, function ($id) use ($app) {
     echo wordwrap($room->getDesc(), 72, "\r\n") . "\r\n";
     echo "--------\r\n\r\n";
     // output each message
-    foreach($room->getMessages('all') as $message) {
+    foreach($room->getTranscript() as $message) {
       if($message['Type'] == 'Character') {
         echo strtoupper($message['Name']) . ":\r\n";
         echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
@@ -278,10 +293,9 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     )
   )));
   $app->get('/admin/', function () use ($app) {
-    global $rpRootPath;
     $data = array(
       'rps' => Room::AuditRooms(),
-      'docroot' => $rpRootPath
+      'docroot' => ''
     );
     $app->view()->setData($data);
     $app->render('admin.html');
