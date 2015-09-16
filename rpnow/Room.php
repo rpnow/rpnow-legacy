@@ -2,7 +2,22 @@
 require_once 'config.php';
 
 class Room {
-  private static $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  private static function GenerateID() {
+    global $rpIDLength, $rpIDChars;
+    $id = '';
+    for ($i = 0; $i < $rpIDLength; $i++) {
+      $id .= $rpIDChars[rand(0, strlen($rpIDChars) - 1)];
+    }
+    return $id;
+  }
+  
+  public static function IsValidID($id) {
+    global $rpIDLength, $rpIDChars;
+    return preg_match(
+      '/^['.preg_quote($rpIDChars).']{'.$rpIDLength.'}/',
+      $id
+    );
+  }
   
   private static function createConnection() {
     global $rpDBServer, $rpDBUser, $rpDBPass, $rpDBName;
@@ -30,13 +45,9 @@ class Room {
   }
   
   public static function CreateRoom($title, $desc) {
-    global $rpIDLength;
     $conn = self::createConnection();
     do {
-      $id = '';
-      for ($i = 0; $i < $rpIDLength; $i++) {
-        $id .= self::$characters[rand(0, strlen(self::$characters) - 1)];
-      }
+      $id = Room::GenerateID();
     } while(Room::IDExists($id, $conn));
     $conn
       ->prepare("INSERT INTO `Room` (`ID`, `Title`, `Description`, `IP`) VALUES (?, ?, ?, ?)")
@@ -88,11 +99,6 @@ class Room {
   public function getDesc() { return $this->desc; }
   public function getMessageCount() { return $this->numMsgs; }
   public function getCharacterCount() { return $this->numChars; }
-  
-  private static function IsValidID($id) {
-    global $rpIDLength;
-    return ctype_alnum($id) && strlen($id) == $rpIDLength;
-  }
   
   private static function IDExists($id, $conn) {
     $statement = $conn->prepare("SELECT COUNT(*) FROM `Room` WHERE `ID` = ? LIMIT 1");

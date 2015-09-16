@@ -2,7 +2,7 @@
 
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
-  'id' => '[a-zA-Z0-9]{'.$rpIDLength.'}'
+  'id' => '['.preg_quote($rpIDChars).']{'.$rpIDLength.'}'
 ));
 
 // Maintenance Mode Middleware

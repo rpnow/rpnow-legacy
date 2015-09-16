@@ -27,6 +27,8 @@ $rpDBPass   = 'abc123';
 
 ## The length of the auto-generated URL for each RP room.
 $rpIDLength = 4;
+## The characters to be used in that URL.
+$rpIDChars = 'abcdefghijklmnopqrstuvwxyz0123456789';
 ## How many posts should show up on the main RP page.
 ## Also how many should be on each page of the archive.
 $rpPostsPerPage = 20;
