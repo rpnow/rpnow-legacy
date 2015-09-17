@@ -23,7 +23,7 @@ Noteworthy features of RPNow include:
 2. Place the contents of the /rpnow/ directory somewhere on the target web server
 3. Import the MySQL database from /docs/rpnow.sql
 4. Give a user SELECT and INSERT permissions on that database
-5. Update config.php with the correct database information, as well as the path to the main folder
+5. Update config.php with the appropriate database credentials
 6. If you have an SSL certificate for your site, uncomment the HTTPS segment in the .htaccess file
 7. To enable the admin panel, uncomment the appropriate lines in the config.php file. _Be sure to change the admin username and password!_
 

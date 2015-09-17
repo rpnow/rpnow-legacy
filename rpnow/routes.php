@@ -2,7 +2,7 @@
 
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
-  'id' => '[a-zA-Z0-9]{'.$rpIDLength.'}'
+  'id' => '['.preg_quote($rpIDChars).']{'.$rpIDLength.'}'
 ));
 
 // Maintenance Mode Middleware
@@ -52,7 +52,14 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
     $app->render('room.html');
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    if($e->getCode() == Room::ROOM_NOT_FOUND_EXCEPTION) {
+      $app->view()->setData(array('room'=>$id));
+      $app->render('404.html');
+    }
+    else {
+      echo $e->getMessage();
+    }
+    
   }
 });
 

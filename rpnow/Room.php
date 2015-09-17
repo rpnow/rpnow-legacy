@@ -2,7 +2,25 @@
 require_once 'config.php';
 
 class Room {
-  private static $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const ROOM_NOT_FOUND_EXCEPTION = 404;
+  const INVALID_ROOM_ID_EXCEPTION = -1;
+  
+  private static function GenerateID() {
+    global $rpIDLength, $rpIDChars;
+    $id = '';
+    for ($i = 0; $i < $rpIDLength; $i++) {
+      $id .= $rpIDChars[rand(0, strlen($rpIDChars) - 1)];
+    }
+    return $id;
+  }
+  
+  public static function IsValidID($id) {
+    global $rpIDLength, $rpIDChars;
+    return preg_match(
+      '/^['.preg_quote($rpIDChars).']{'.$rpIDLength.'}/',
+      $id
+    );
+  }
   
   private static function createConnection() {
     global $rpDBServer, $rpDBUser, $rpDBPass, $rpDBName;
@@ -30,13 +48,9 @@ class Room {
   }
   
   public static function CreateRoom($title, $desc) {
-    global $rpIDLength;
     $conn = self::createConnection();
     do {
-      $id = '';
-      for ($i = 0; $i < $rpIDLength; $i++) {
-        $id .= self::$characters[rand(0, strlen(self::$characters) - 1)];
-      }
+      $id = Room::GenerateID();
     } while(Room::IDExists($id, $conn));
     $conn
       ->prepare("INSERT INTO `Room` (`ID`, `Title`, `Description`, `IP`) VALUES (?, ?, ?, ?)")
@@ -46,11 +60,11 @@ class Room {
   
   public static function GetRoom($id) {
     if(!Room::IsValidID($id)) {
-      throw new Exception('Malformed Room ID.');
+      throw new Exception("Malformed Room ID: '$id'", Room::INVALID_ROOM_ID_EXCEPTION);
     }
     $conn = self::createConnection();
     if(!Room::IDExists($id, $conn)) {
-      throw new Exception('Room does not exist!');
+      throw new Exception("Room '$id' does not exist.", Room::ROOM_NOT_FOUND_EXCEPTION);
     }
     $statement = $conn->prepare("SELECT
       (SELECT `Title` FROM `Room` WHERE `ID` = :id) AS `Title`,
@@ -59,7 +73,7 @@ class Room {
       (SELECT COUNT(*) FROM `Message` WHERE `Room` = :id) AS `MessageCount`");
     $statement->execute(array('id'=>$id));
     if($statement->rowCount() == 0) {
-      throw new Exception("Room '$id' does not exist.");
+      throw new Exception("Room '$id' expected but not found.");
     }
     $row = $statement->fetch();
     return new Room($conn, $id, $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
@@ -88,11 +102,6 @@ class Room {
   public function getDesc() { return $this->desc; }
   public function getMessageCount() { return $this->numMsgs; }
   public function getCharacterCount() { return $this->numChars; }
-  
-  private static function IsValidID($id) {
-    global $rpIDLength;
-    return ctype_alnum($id) && strlen($id) == $rpIDLength;
-  }
   
   private static function IDExists($id, $conn) {
     $statement = $conn->prepare("SELECT COUNT(*) FROM `Room` WHERE `ID` = ? LIMIT 1");
@@ -286,6 +295,12 @@ class Room {
     }
     $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`, `IP`) VALUES (?, ?, ?, ?)");
     $statement->execute(array($name, $this->getID(), $color, $_SERVER['REMOTE_ADDR']));
+  }
+}
+
+class RoomNotFoundException extends Exception {
+  public function __construct($message, $code = 0, Exception $previous = null) {
+    
   }
 }
 
