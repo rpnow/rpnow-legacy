@@ -2,6 +2,9 @@
 require_once 'config.php';
 
 class Room {
+  const ROOM_NOT_FOUND_EXCEPTION = 404;
+  const INVALID_ROOM_ID_EXCEPTION = -1;
+  
   private static function GenerateID() {
     global $rpIDLength, $rpIDChars;
     $id = '';
@@ -57,11 +60,11 @@ class Room {
   
   public static function GetRoom($id) {
     if(!Room::IsValidID($id)) {
-      throw new Exception('Malformed Room ID.');
+      throw new Exception("Malformed Room ID: '$id'", Room::INVALID_ROOM_ID_EXCEPTION);
     }
     $conn = self::createConnection();
     if(!Room::IDExists($id, $conn)) {
-      throw new Exception('Room does not exist!');
+      throw new Exception("Room '$id' does not exist.", Room::ROOM_NOT_FOUND_EXCEPTION);
     }
     $statement = $conn->prepare("SELECT
       (SELECT `Title` FROM `Room` WHERE `ID` = :id) AS `Title`,
@@ -70,7 +73,7 @@ class Room {
       (SELECT COUNT(*) FROM `Message` WHERE `Room` = :id) AS `MessageCount`");
     $statement->execute(array('id'=>$id));
     if($statement->rowCount() == 0) {
-      throw new Exception("Room '$id' does not exist.");
+      throw new Exception("Room '$id' expected but not found.");
     }
     $row = $statement->fetch();
     return new Room($conn, $id, $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
@@ -292,6 +295,12 @@ class Room {
     }
     $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`, `IP`) VALUES (?, ?, ?, ?)");
     $statement->execute(array($name, $this->getID(), $color, $_SERVER['REMOTE_ADDR']));
+  }
+}
+
+class RoomNotFoundException extends Exception {
+  public function __construct($message, $code = 0, Exception $previous = null) {
+    
   }
 }
 

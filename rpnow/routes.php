@@ -52,7 +52,14 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
     $app->render('room.html');
   }
   catch(Exception $e) {
-    echo $e->getMessage();
+    if($e->getCode() == Room::ROOM_NOT_FOUND_EXCEPTION) {
+      $app->view()->setData(array('room'=>$id));
+      $app->render('404.html');
+    }
+    else {
+      echo $e->getMessage();
+    }
+    
   }
 });
 
