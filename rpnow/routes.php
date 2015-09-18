@@ -22,6 +22,41 @@ $downCheckAjax = function () use ($app) {
   }
 };
 
+// Error pages
+$app->notFound(function () use ($app) {
+  $app->view()->setData(array(
+    'docroot'=> $app->request->getRootUri() . '/',
+    'uri'=> $app->request->getResourceUri(),
+  ));
+  $app->render('404.html');
+});
+$app->error(function (Exception $e) use ($app) {
+  if($app->response->headers->get('Content-Type') == 'application/json') {
+    $app->response->setStatus(500);
+    echo json_encode(array('error'=>$e->getMessage()));
+  }
+  else if($e->getCode() == Room::ROOM_NOT_FOUND_EXCEPTION) {
+    $app->response->setStatus(404);
+    $id = $app->request->getResourceUri();
+    $id = substr($id, 1);
+    if(strpos($id, '/')) $id = substr($id, 0, strpos($id, '/'));
+    $app->view()->setData(array(
+      'docroot'=> $app->request->getRootUri() . '/',
+      'room'=> $id
+    ));
+    $app->render('404rp.html');
+  }
+  else {
+    $app->response->setStatus(500);
+    $app->view()->setData(array(
+      'docroot'=> $app->request->getRootUri() . '/',
+      'uri'=> $app->request->getResourceUri(),
+      'message'=> $e->getMessage()
+    ));
+    $app->render('5xx.html');
+  }
+});
+
 // Home page
 $app->get('/', $downCheck, function () {
   readfile('templates/home.html');
@@ -40,94 +75,66 @@ $app->post('/create/', $downCheck, function () use ($app) {
 
 // View room
 $app->get('/:id/', $downCheck, function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $app->view()->setData(array(
-      'room' => $id,
-      'title' => $room->getTitle(),
-      'desc' => $room->getDesc(),
-      'docroot' => './'
-    ));
-    $room->close();
-    $app->render('room.html');
-  }
-  catch(Exception $e) {
-    if($e->getCode() == Room::ROOM_NOT_FOUND_EXCEPTION) {
-      $app->view()->setData(array('room'=>$id));
-      $app->render('404.html');
-    }
-    else {
-      echo $e->getMessage();
-    }
-    
-  }
+  $room = Room::GetRoom($id);
+  $app->view()->setData(array(
+    'room' => $id,
+    'title' => $room->getTitle(),
+    'desc' => $room->getDesc(),
+    'docroot' => './'
+  ));
+  $room->close();
+  $app->render('room.html');
 });
 
 
 // Archive
 $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $app->view()->setData(array(
-      'room' => $id,
-      'title' => $room->getTitle(),
-      'desc' => $room->getDesc(),
-      'docroot' => '../',
-      'page' => $page,
-      'numpages' => $room->getNumPages()
-    ));
-    $room->close();
-    $app->render('archive.html');
+  $room = Room::GetRoom($id);
+  if($page > $room->getNumPages() && $page > 1) {
+    throw new Exception("Page $page does not yet exist.");
   }
-  catch(Exception $e) {
-    echo $e->getMessage();
-  }
+  $app->view()->setData(array(
+    'room' => $id,
+    'title' => $room->getTitle(),
+    'desc' => $room->getDesc(),
+    'docroot' => '../',
+    'page' => $page,
+    'numpages' => $room->getNumPages()
+  ));
+  $room->close();
+  $app->render('archive.html');
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get archive page data
 $app->get('/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $data = array(
-      'msgs' => $room->getMessages('page', $page),
-      'charas' => $room->getCharacters(),
-      'numpages' => $room->getNumPages()
-    );
-    $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode($data);
-  }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('error'=>$e->getMessage()));
-  }
+  $app->response->headers->set('Content-Type', 'application/json');
+  $room = Room::GetRoom($id);
+  $data = array(
+    'msgs' => $room->getMessages('page', $page),
+    'charas' => $room->getCharacters(),
+    'numpages' => $room->getNumPages()
+  );
+  $room->close();
+  echo json_encode($data);
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get latest posts for room
 $app->get('/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
-  try {
-    global $rpPostsPerPage, $rpRefreshMillis;
-    $room = Room::GetRoom($id);
-    $data = array(
-      'msgs' => $room->getMessages('latest'),
-      'charas' => $room->getCharacters(),
-      'msgCounter' => $room->getMessageCount(),
-      'charaCounter' => $room->getCharacterCount(),
-      'upMsgCounter' => 0,
-      'upCharaCounter' => 0,
-      'postsPerPage' => $rpPostsPerPage,
-      'refreshMillis' => $rpRefreshMillis
-    );
-    $room->close();
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode($data);
-  }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('error'=>$e->getMessage()));
-  }
+  $app->response->headers->set('Content-Type', 'application/json');
+  global $rpPostsPerPage, $rpRefreshMillis;
+  $room = Room::GetRoom($id);
+  $data = array(
+    'msgs' => $room->getMessages('latest'),
+    'charas' => $room->getCharacters(),
+    'msgCounter' => $room->getMessageCount(),
+    'charaCounter' => $room->getCharacterCount(),
+    'upMsgCounter' => 0,
+    'upCharaCounter' => 0,
+    'postsPerPage' => $rpPostsPerPage,
+    'refreshMillis' => $rpRefreshMillis
+  );
+  $room->close();
+  echo json_encode($data);
 });
 
 // Receive room updates
@@ -147,65 +154,46 @@ function echoRoomUpdates($room, $app) {
   if(count($msgs) != 0) $data['newMsgs'] = $msgs;
   if(count($charas) != 0) $data['newCharas'] = $charas;
   
-  $app->response->headers->set('Content-Type', 'application/json');
   echo json_encode($data);
 }
 $app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    echoRoomUpdates($room, $app);
-    $room->close();
-  }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('error'=>$e->getMessage()));
-  }
+  $app->response->headers->set('Content-Type', 'application/json');
+  $room = Room::GetRoom($id);
+  echoRoomUpdates($room, $app);
+  $room->close();
 });
 
 // Send message to room
 $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    if($app->request()->post('type') == 'Character') {
-      $room->addMessage(
-        'Character',
-        $app->request()->post('content'),
-        $app->request()->post('charaId')
-      );
-    }
-    else {
-      $room->addMessage(
-        $app->request()->post('type'),
-        $app->request()->post('content')
-      );
-    }
-    echoRoomUpdates($room, $app);
-    $room->close();
+  $app->response->headers->set('Content-Type', 'application/json');
+  $room = Room::GetRoom($id);
+  if($app->request()->post('type') == 'Character') {
+    $room->addMessage(
+      'Character',
+      $app->request()->post('content'),
+      $app->request()->post('charaId')
+    );
   }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('error'=>$e->getMessage()));
+  else {
+    $room->addMessage(
+      $app->request()->post('type'),
+      $app->request()->post('content')
+    );
   }
+  echoRoomUpdates($room, $app);
+  $room->close();
 });
 
 // Add character to room
 $app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $room->addCharacter(
-      $app->request()->post('name'),
-      $app->request()->post('color')
-    );
-    echoRoomUpdates($room, $app);
-    $room->close();
-  }
-  catch(Exception $e) {
-    $app->response->setStatus(500);
-    $app->response->headers->set('Content-Type', 'application/json');
-    echo json_encode(array('error'=>$e->getMessage()));
-  }
+  $app->response->headers->set('Content-Type', 'application/json');
+  $room = Room::GetRoom($id);
+  $room->addCharacter(
+    $app->request()->post('name'),
+    $app->request()->post('color')
+  );
+  echoRoomUpdates($room, $app);
+  $room->close();
 });
 
 // Sample room!
@@ -228,56 +216,46 @@ $app->get('/sample/ajax/page/1/', function () use ($app) {
 
 // Generate some statistics for the room
 $app->get('/:id/stats/', $downCheck, function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    $app->view()->setData(
-      array_merge($room->getStatsArray(), array(
-        'title' => $room->getTitle(),
-        'desc' => $room->getDesc(),
-        'room' => $id,
-        'docroot' => '../'
-      ))
-    );
-    $room->close();
-    $app->render('stats.html');
-  }
-  catch(Exception $e) {
-    echo $e->getMessage();
-  }
+  $room = Room::GetRoom($id);
+  $app->view()->setData(
+    array_merge($room->getStatsArray(), array(
+      'title' => $room->getTitle(),
+      'desc' => $room->getDesc(),
+      'room' => $id,
+      'docroot' => '../'
+    ))
+  );
+  $room->close();
+  $app->render('stats.html');
 });
 
 // Export room to txt file
 $app->get('/:id/export/', $downCheck, function ($id) use ($app) {
-  try {
-    $room = Room::GetRoom($id);
-    // .txt download response headers
-    $app->response->headers->set('Content-Type', 'text/plain');
-    $app->response->headers->set('Content-disposition', 'attachment; filename="'.$room->getTitle().'.txt"');
-    // output text
-    // generate title text
-    echo strtoupper($room->getTitle()) . "\r\n";
-    echo wordwrap($room->getDesc(), 72, "\r\n") . "\r\n";
-    echo "--------\r\n\r\n";
-    // output each message
-    foreach($room->getTranscript() as $message) {
-      if($message['Type'] == 'Character') {
-        echo strtoupper($message['Name']) . ":\r\n";
-        echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
-      }
-      else if($message['Type'] == 'OOC') {
-        echo str_replace("\n", "\r\n", wordwrap('(( OOC: ' . $message['Content'] . ' ))', 72, "\n"));
-      }
-      else {
-        echo str_replace("\n", "\r\n", wordwrap($message['Content'], 72, "\n"));
-      }
-      
-      echo "\r\n\r\n";
+  $room = Room::GetRoom($id);
+  // .txt download response headers
+  $app->response->headers->set('Content-Type', 'text/plain');
+  $app->response->headers->set('Content-disposition', 'attachment; filename="'.$room->getTitle().'.txt"');
+  // output text
+  // generate title text
+  echo strtoupper($room->getTitle()) . "\r\n";
+  echo wordwrap($room->getDesc(), 72, "\r\n") . "\r\n";
+  echo "--------\r\n\r\n";
+  // output each message
+  foreach($room->getTranscript() as $message) {
+    if($message['Type'] == 'Character') {
+      echo strtoupper($message['Name']) . ":\r\n";
+      echo '  ' . str_replace("\n", "\r\n  ", wordwrap($message['Content'], 70, "\n"));
     }
-    $room->close();
+    else if($message['Type'] == 'OOC') {
+      echo str_replace("\n", "\r\n", wordwrap('(( OOC: ' . $message['Content'] . ' ))', 72, "\n"));
+    }
+    else {
+      echo str_replace("\n", "\r\n", wordwrap($message['Content'], 72, "\n"));
+    }
+    
+    echo "\r\n\r\n";
   }
-  catch(Exception $e) {
-    echo $e->getMessage();
-  }
+  $room->close();
 });
 
 // About

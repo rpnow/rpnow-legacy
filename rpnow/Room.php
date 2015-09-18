@@ -2,8 +2,9 @@
 require_once 'config.php';
 
 class Room {
-  const ROOM_NOT_FOUND_EXCEPTION = 404;
-  const INVALID_ROOM_ID_EXCEPTION = -1;
+  const GENERIC_EXCEPTION = 776690000;
+  const ROOM_NOT_FOUND_EXCEPTION = 776690001;
+  const INVALID_ROOM_ID_EXCEPTION = 776690002;
   
   private static function GenerateID() {
     global $rpIDLength, $rpIDChars;
@@ -295,12 +296,6 @@ class Room {
     }
     $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`, `IP`) VALUES (?, ?, ?, ?)");
     $statement->execute(array($name, $this->getID(), $color, $_SERVER['REMOTE_ADDR']));
-  }
-}
-
-class RoomNotFoundException extends Exception {
-  public function __construct($message, $code = 0, Exception $previous = null) {
-    
   }
 }
 

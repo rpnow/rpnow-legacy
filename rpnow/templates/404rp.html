@@ -1,0 +1,11 @@
+{% extends "article.layout.html" %}
+
+{% block title %}Not Found{% endblock %}
+
+{% block content %}
+  <h1>RP Not Found: <code>{{ room }}</code></h1>
+  <p>Sorry, we could not find an RP with the identifier <code>{{ room }}</code>.</p>
+  <p>If you were expecting an RP to be here, <strong>don't panic!</strong> RPNow.net recently started using <strong>case-sensitive URLs</strong>. So, if you're trying to access an RP using a URL that isn't capitalized like it's supposed to be, you'll see this error.</p>
+  <p>Please ensure that the URL is spelled correctly, as well as capitalized correctly.</p>
+  <p><a href="{{ docroot }}">Return to RPNow</a></p>
+{% endblock %}
