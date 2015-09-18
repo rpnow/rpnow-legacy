@@ -1,0 +1,8 @@
+{% extends "article.layout.html" %}
+
+{% block title %}Not Found{% endblock %}
+
+{% block content %}
+  <h1>Page Not Found: <code>{{ uri }}</code></h1>
+  <p>Sorry, we could not find the page <code>{{ uri }}</code>. Please check that the URL is spelled correctly, or <a href="{{ docroot }}">return to the RPNow homepage.</a></p>
+{% endblock %}

@@ -23,6 +23,13 @@ $downCheckAjax = function () use ($app) {
 };
 
 // Error pages
+$app->notFound(function () use ($app) {
+  $app->view()->setData(array(
+    'docroot'=> $app->request->getRootUri() . '/',
+    'uri'=> $app->request->getResourceUri(),
+  ));
+  $app->render('404.html');
+});
 $app->error(function (Exception $e) use ($app) {
   if($app->response->headers->get('Content-Type') == 'application/json') {
     $app->response->setStatus(500);
