@@ -37,7 +37,7 @@ $app->error(function (Exception $e) use ($app) {
       'docroot'=> $app->request->getRootUri() . '/',
       'room'=> $id
     ));
-    $app->render('404.html');
+    $app->render('404rp.html');
   }
   else {
     $app->response->setStatus(500);
