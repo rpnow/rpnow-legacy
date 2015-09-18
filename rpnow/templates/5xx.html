@@ -1,0 +1,10 @@
+{% extends "article.layout.html" %}
+
+{% block title %}Not Found{% endblock %}
+
+{% block content %}
+  <h1>Server Error</h1>
+  <p>There was an error handling your request for <code>{{ uri }}</code>.</p>
+  <p>Error message given was: <code>{{ message }}</code></p>
+  <a href="{{ docroot }}">Return to RPNow</a>
+{% endblock %}

@@ -19,7 +19,10 @@ require_once 'lib/Slim-Basic-Auth/src/HttpBasicAuthentication/RequestPathRule.ph
 require_once 'lib/Twig/lib/Twig/Autoloader.php';
 
 // Create the application
-$app = new \Slim\Slim(array('view' => new \Slim\Views\Twig()));
+$app = new \Slim\Slim(array(
+  'view' => new \Slim\Views\Twig(),
+  'debug' => false
+));
 
 // Routes are specified in another file
 require 'routes.php';
