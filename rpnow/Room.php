@@ -2,8 +2,9 @@
 require_once 'config.php';
 
 class Room {
-  const ROOM_NOT_FOUND_EXCEPTION = 404;
-  const INVALID_ROOM_ID_EXCEPTION = -1;
+  const GENERIC_EXCEPTION = 776690000;
+  const ROOM_NOT_FOUND_EXCEPTION = 776690001;
+  const INVALID_ROOM_ID_EXCEPTION = 776690002;
   
   private static function GenerateID() {
     global $rpIDLength, $rpIDChars;
