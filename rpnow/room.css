@@ -49,16 +49,28 @@ textarea {
 }
 input[type=submit], button {
   font-size:18px;
-  background-color: #fff;
   color: #222;
-  border: solid 1px #3c3c3c;
   font-weight: bold;
+}
+input[type=submit]:not(.btn-margin), button:not(.btn-margin),
+input[type=submit].btn-margin > span, button.btn-margin > span {
+  background-color: #fff;
+  border: solid 1px #3c3c3c;
   box-shadow: 0 1px 2px #888;
   padding: 6px 12px;
   border-radius: 8px;
 }
+input[type=submit].btn-margin, button.btn-margin {
+  margin: -15px -15px;
+  padding: 15px 15px;
+  background: none;
+  border: none;
+}
 input[type=submit]:hover, button:hover {
   cursor: pointer;
+}
+input[type=submit]:not(.btn-margin):hover, button:not(.btn-margin):hover,
+input[type=submit].btn-margin:hover > span, button.btn-margin:hover > span {
   background-color: #3c3c3c;
   box-shadow: 0 1px 10px #555;
   color: #fafafa;
@@ -483,11 +495,11 @@ header #title-links a {
   background-color: inherit;
   font-size: 115%;
 }
-#format-bar #change-character {
+#format-bar #change-character span {
   display: inline-block;
   vertical-align: middle;
   border-radius: 0;
-  padding: 2px 2px;
+  padding: 2px 4px;
   font-size: 80%;
   letter-spacing: -1px;
   margin-left: 0;
