@@ -268,6 +268,11 @@ $app->get('/terms/', $downCheck, function () use ($app) {
   $app->render('terms.html');
 });
 
+// Formatting
+$app->get('/format/', $downCheck, function () use ($app) {
+  $app->render('format.html');
+});
+
 // Admin panel!
 if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(

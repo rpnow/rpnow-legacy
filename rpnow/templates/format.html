@@ -1,0 +1,23 @@
+{% extends "article.layout.html" %}
+
+{% block title %}Format Guide{% endblock %}
+{% block description %}A guide on how to format pages on RPNow{% endblock %}
+
+{% block content %}
+  <h1>RP Formatting</h1>
+  <p>Here's how to do bold, italics, and other things.</p>
+  
+  <ul>
+    <li>Use _underscores_ or /slashes/ to <i>italicize text.</i></li>
+    <li>Use __two underscores__ to <b>bold text.</b></li>
+    <li>Use ___three underscores___ to <b><i>do both.</i></b>
+    <li>*Asterisks* denote an action done by a character.</li>
+    <li>Pressing <code>Enter</code> will send your message. In order to insert a paragraph break, you must press <code>Shift + Enter</code>.
+    <ul>
+      <li>On mobile devices, there's no way to press <code>Shift + Enter</code>, so as a temporary workaround, typing <code>\n</code> in the textbox will translate to a paragraph break.</li>
+    </ul>
+    </li>
+  </ul>
+  
+  <p>Have fun with your newfound knowledge!</p>
+{% endblock %}
