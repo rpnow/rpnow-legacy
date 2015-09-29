@@ -7,10 +7,12 @@ class Room {
   const INVALID_ROOM_ID_EXCEPTION = 776690002;
   
   private static function GenerateID() {
+    require_once 'lib/random_compat/lib/random.php';
+    
     global $rpIDLength, $rpIDChars;
     $id = '';
     for ($i = 0; $i < $rpIDLength; $i++) {
-      $id .= $rpIDChars[rand(0, strlen($rpIDChars) - 1)];
+      $id .= $rpIDChars[random_int(0, strlen($rpIDChars) - 1)];
     }
     return $id;
   }
