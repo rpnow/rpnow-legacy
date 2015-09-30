@@ -6,17 +6,24 @@ function RP(id) {
   // ajax requests
   // pieced together from: http://stackoverflow.com/questions/8567114/
   function ajax(url, method /*, data, callback */) {
-    // variables
-    var req = new XMLHttpRequest();
-    var reqUrl;
-    if(rp.id === RP.SAMPLE) reqUrl = RP.path + '/sample/ajax/' + url;
-    else reqUrl = RP.path + '/rp/' + rp.id + '/ajax/' + url;
+    // get optional args
     var callback = null;
     var data = null;
     if(typeof(arguments[arguments.length-1]) === 'function')
       callback = arguments[arguments.length-1];
     if(arguments.length >= 3 && typeof(arguments[2]) === 'object')
       data = arguments[2];
+    // request URL
+    var reqUrl;
+    if(rp.id === RP.SAMPLE) {
+      reqUrl = RP.path + '/sample/' + url;
+    }
+    else {
+      reqUrl = RP.path + '/api/' + url;
+      data = data || {};
+      data.id = rp.id;
+    }
+    var req = new XMLHttpRequest();
     // callback function on success
     if(callback) req.onreadystatechange = function() {
       if(req.readyState === XMLHttpRequest.DONE && req.status === 200) {
@@ -45,7 +52,7 @@ function RP(id) {
   this.fetchPage = function(pageNum, callback) {
     var msgs = [];
     var charas = [];
-    ajax('page/'+pageNum, 'GET', function(e) {
+    ajax('archive', 'GET', { page: 1 }, function(e) {
       // add characters
       for(var i = 0; i < e.charas.length; ++i) {
         charas.push(new Chara(e.charas[i]));

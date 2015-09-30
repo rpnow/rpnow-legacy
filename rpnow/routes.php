@@ -106,11 +106,12 @@ $app->get('/rp/:id/:page/', $downCheck, function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get archive page data
-$app->get('/rp/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($app) {
+$app->get('/api/archive/', $downCheckAjax, function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
+  $id = $app->request->get('id');
   $room = Room::GetRoom($id);
   $data = array(
-    'msgs' => $room->getMessages('page', $page),
+    'msgs' => $room->getMessages('page', $app->request->get('page')),
     'charas' => $room->getCharacters(),
     'numpages' => $room->getNumPages()
   );
@@ -119,9 +120,10 @@ $app->get('/rp/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use 
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get latest posts for room
-$app->get('/rp/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
+$app->get('/api/chat/', $downCheckAjax, function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   global $rpPostsPerPage, $rpRefreshMillis;
+  $id = $app->request->get('id');
   $room = Room::GetRoom($id);
   $data = array(
     'msgs' => $room->getMessages('latest'),
@@ -156,16 +158,18 @@ function echoRoomUpdates($room, $app) {
   
   echo json_encode($data);
 }
-$app->get('/rp/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
+$app->get('/api/updates/', $downCheckAjax, function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
+  $id = $app->request->get('id');
   $room = Room::GetRoom($id);
   echoRoomUpdates($room, $app);
   $room->close();
 });
 
 // Send message to room
-$app->post('/rp/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
+$app->post('/api/message/', $downCheckAjax, function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
+  $id = $app->request->post('id');
   $room = Room::GetRoom($id);
   if($app->request()->post('type') == 'Character') {
     $room->addMessage(
@@ -185,8 +189,9 @@ $app->post('/rp/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
 });
 
 // Add character to room
-$app->post('/rp/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
+$app->post('/api/character/', $downCheckAjax, function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
+  $id = $app->request->post('id');
   $room = Room::GetRoom($id);
   $room->addCharacter(
     $app->request()->post('name'),
@@ -208,7 +213,7 @@ $app->get('/sample/', $downCheck, function () use ($app) {
   ));
   $app->render('archive.html');
 });
-$app->get('/sample/ajax/page/1/', function () use ($app) {
+$app->get('/sample/archive/', function () use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   readfile('assets/sample_rp.json');
 });
