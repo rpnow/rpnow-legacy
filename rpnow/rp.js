@@ -8,7 +8,7 @@ function RP(id) {
   function ajax(url, method /*, data, callback */) {
     // variables
     var req = new XMLHttpRequest();
-    var reqUrl = RP.path + '/' + rp.id + '/ajax/' + url;
+    var reqUrl = RP.path + '/rp/' + rp.id + '/ajax/' + url;
     var callback = null;
     var data = null;
     if(typeof(arguments[arguments.length-1]) === 'function')

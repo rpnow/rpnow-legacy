@@ -4,7 +4,7 @@
   <div id="messages" class="room-feed">
     <div class="info" id="showing-latest" style="display:none">
       <p>These are the latest {{ postsPerPage }} posts.
-      To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
+      To view earlier messages, check the <a href="{{ docroot }}rp/{{ room }}/1">archive</a>.</p>
     </div>
     <div class="info" id="empty-room" style="display:none">
       <p><b>Success!</b></p>
@@ -170,7 +170,7 @@
       $('html, body').stop().animate({scrollTop: $(document).height()}, 500);
     }
     
-    var alertNoise = new Audio('assets/alert.mp3');
+    var alertNoise = new Audio('../assets/alert.mp3');
     
     var flashTitle = (function() {
       var oldTitle = document.title;

@@ -70,17 +70,17 @@ $app->post('/create/', $downCheck, function () use ($app) {
   );
   $id = $room->getID();
   $room->close();
-  $app->redirect($id);
+  $app->redirect('rp/' . $id);
 });
 
 // View room
-$app->get('/:id/', $downCheck, function ($id) use ($app) {
+$app->get('/rp/:id/', $downCheck, function ($id) use ($app) {
   $room = Room::GetRoom($id);
   $app->view()->setData(array(
     'room' => $id,
     'title' => $room->getTitle(),
     'desc' => $room->getDesc(),
-    'docroot' => './'
+    'docroot' => '../'
   ));
   $room->close();
   $app->render('room.html');
@@ -88,7 +88,7 @@ $app->get('/:id/', $downCheck, function ($id) use ($app) {
 
 
 // Archive
-$app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
+$app->get('/rp/:id/:page/', $downCheck, function ($id, $page) use ($app) {
   $room = Room::GetRoom($id);
   if($page > $room->getNumPages() && $page > 1) {
     throw new Exception("Page $page does not yet exist.");
@@ -97,7 +97,7 @@ $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
     'room' => $id,
     'title' => $room->getTitle(),
     'desc' => $room->getDesc(),
-    'docroot' => '../',
+    'docroot' => '../../',
     'page' => $page,
     'numpages' => $room->getNumPages()
   ));
@@ -106,7 +106,7 @@ $app->get('/:id/:page/', $downCheck, function ($id, $page) use ($app) {
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get archive page data
-$app->get('/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($app) {
+$app->get('/rp/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   $room = Room::GetRoom($id);
   $data = array(
@@ -119,7 +119,7 @@ $app->get('/:id/ajax/page/:page/', $downCheckAjax, function ($id, $page) use ($a
 })->conditions(array('page' => '[1-9][0-9]{0,}'));
 
 // Get latest posts for room
-$app->get('/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
+$app->get('/rp/:id/ajax/chat/', $downCheckAjax, function ($id) use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   global $rpPostsPerPage, $rpRefreshMillis;
   $room = Room::GetRoom($id);
@@ -156,7 +156,7 @@ function echoRoomUpdates($room, $app) {
   
   echo json_encode($data);
 }
-$app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
+$app->get('/rp/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   $room = Room::GetRoom($id);
   echoRoomUpdates($room, $app);
@@ -164,7 +164,7 @@ $app->get('/:id/ajax/updates/', $downCheckAjax, function ($id) use ($app) {
 });
 
 // Send message to room
-$app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
+$app->post('/rp/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   $room = Room::GetRoom($id);
   if($app->request()->post('type') == 'Character') {
@@ -185,7 +185,7 @@ $app->post('/:id/ajax/message/', $downCheckAjax, function ($id) use ($app) {
 });
 
 // Add character to room
-$app->post('/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
+$app->post('/rp/:id/ajax/character/', $downCheckAjax, function ($id) use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   $room = Room::GetRoom($id);
   $room->addCharacter(
@@ -215,14 +215,14 @@ $app->get('/sample/ajax/page/1/', function () use ($app) {
 });
 
 // Generate some statistics for the room
-$app->get('/:id/stats/', $downCheck, function ($id) use ($app) {
+$app->get('/rp/:id/stats/', $downCheck, function ($id) use ($app) {
   $room = Room::GetRoom($id);
   $app->view()->setData(
     array_merge($room->getStatsArray(), array(
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
       'room' => $id,
-      'docroot' => '../'
+      'docroot' => '../../'
     ))
   );
   $room->close();
@@ -230,7 +230,7 @@ $app->get('/:id/stats/', $downCheck, function ($id) use ($app) {
 });
 
 // Export room to txt file
-$app->get('/:id/export/', $downCheck, function ($id) use ($app) {
+$app->get('/rp/:id/export/', $downCheck, function ($id) use ($app) {
   $room = Room::GetRoom($id);
   // .txt download response headers
   $app->response->headers->set('Content-Type', 'text/plain');
