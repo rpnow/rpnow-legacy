@@ -38,7 +38,7 @@ $app->error(function (Exception $e) use ($app) {
   else if($e->getCode() == Room::ROOM_NOT_FOUND_EXCEPTION) {
     $app->response->setStatus(404);
     $id = $app->request->getResourceUri();
-    $id = substr($id, 1);
+    $id = substr($id, 4);
     if(strpos($id, '/')) $id = substr($id, 0, strpos($id, '/'));
     $app->view()->setData(array(
       'docroot'=> $app->request->getRootUri() . '/',
