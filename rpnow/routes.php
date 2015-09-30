@@ -201,11 +201,10 @@ $app->get('/sample/', $downCheck, function () use ($app) {
   $app->view()->setData(array(
     'title' => 'Sample Roleplay',
     'desc' => 'This is what an RP will look like!',
-    'room' => 'sample',
-    'hidemenu' => true,
+    'sample' => true,
     'numpages' => 1,
     'page' => 1,
-    'docroot' => ''
+    'docroot' => './'
   ));
   $app->render('archive.html');
 });
