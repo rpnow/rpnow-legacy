@@ -11,7 +11,7 @@ CREATE TABLE `Character` (
   `Number` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(30) NOT NULL,
   `Color` tinytext NOT NULL,
-  `Room` char(4) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Room` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Time_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Time_Updated` timestamp NULL DEFAULT NULL,
   `IP` varchar(45) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `Message` (
   `Number` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Type` enum('Narrator','Character','OOC') NOT NULL,
   `Content` text NOT NULL,
-  `Room` char(4) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Room` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Time_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Time_Updated` timestamp NULL DEFAULT NULL,
   `Chara_Number` int(11) DEFAULT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `Message_Update` (
 --
 
 CREATE TABLE `Room` (
-  `ID` char(4) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `ID` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Title` tinytext NOT NULL,
   `Description` tinytext NOT NULL,
   `Time_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
