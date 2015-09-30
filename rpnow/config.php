@@ -26,9 +26,12 @@ $rpDBPass   = 'abc123';
 # $rpAdminPanelPass = 'admin';
 
 ## The length of the auto-generated URL for each RP room.
-$rpIDLength = 4;
+## Minimum recommended for a live website is 4.
+## Maximum allowed is 20.
+$rpIDLength = 7;
 ## The characters to be used in that URL.
-$rpIDChars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+## By default ambiguous characters (such as O and 0) are excluded.
+$rpIDChars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
 ## How many posts should show up on the main RP page.
 ## Also how many should be on each page of the archive.
 $rpPostsPerPage = 20;
