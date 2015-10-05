@@ -296,7 +296,7 @@ function RP(id) {
         // message body
         el.append($('<div/>', {
           'class': 'content',
-          html: formatMessage(this.content, this.chara)
+          html: Message.formatContentReceived(this.content, this.chara)
         }));
         return el;
       }}
@@ -341,60 +341,57 @@ function RP(id) {
       }}
     });
   }
+  
+  // format message content
+  Message.formatContentReceived = function(text, chara) {
+    // escape special characters
+    var str = escapeHtml(text);
+    // urls
+    // http://stackoverflow.com/a/3890175
+    str = str.replace(
+      /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim,
+      '<a href="$1" target="_blank">$1</a>'
+    );
+    // actions
+    if(chara) {
+      str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action" style="background-color:' + chara.color + ';' + 'color:' + chara.textColor + '">*$1*</span>');
+    }
+    // bold
+    str = str.replace(/(^|\s|(?:&quot;))__([^\r\n_]+)__([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b>$2</b>$3');
+    // italix
+    str = str.replace(/(^|\s|(?:&quot;))_([^\r\n_]+)_([\s,\.\?!]|(?:&quot;)|$)/g, '$1<i>$2</i>$3');
+    str = str.replace(/(^|\s|(?:&quot;))\/([^\r\n\/>]+)\/([\s,\.\?!]|(?:&quot;)|$)/g, '$1<i>$2</i>$3');
+    // both!
+    str = str.replace(/(^|\s|(?:&quot;))___([^\r\n_]+)___([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b><i>$2</i></b>$3');
+    // line breaks
+    // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
+    str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+    // fake line breaks
+    str = str.replace(/(\\r\\n|\\n\\r|\\r|\\n|\&lt;br(?: ?\/)?\&gt;)/g, '<br />');
+    // mdash
+    str = str.replace(/--/g, '&mdash;');
+    
+    // done.
+    return str;
+  };
+  
+  // escape html special chars from AJAX updates
+  //  http://stackoverflow.com/questions/1787322/
+  function escapeHtml(text) {
+    var map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+  }
 }
+
 RP.path = (function() {
   var scripts = document.getElementsByTagName("script"),
     src = scripts[scripts.length-1].src;
   return src.substring(0, src.lastIndexOf('/'));
 })();
 RP.SAMPLE = { isSample: true };
-
-
-
-// legacy methods
-
-//escape html special chars from AJAX updates
-// http://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
-function escapeHtml(text) {
-  var map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-}
-
-
-function formatMessage(text, chara) {
-  // escape special characters
-  var str = escapeHtml(text);
-  // urls
-  // http://stackoverflow.com/a/3890175
-  str = str.replace(
-    /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim,
-    '<a href="$1" target="_blank">$1</a>'
-  );
-  // actions
-  if(chara) {
-    str = str.replace(/\*([^\r\n\*_]+)\*/g, '<span class="action" style="background-color:' + chara.color + ';' + 'color:' + chara.textColor + '">*$1*</span>');
-  }
-  // bold
-  str = str.replace(/(^|\s|(?:&quot;))__([^\r\n_]+)__([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b>$2</b>$3');
-  // italix
-  str = str.replace(/(^|\s|(?:&quot;))_([^\r\n_]+)_([\s,\.\?!]|(?:&quot;)|$)/g, '$1<i>$2</i>$3');
-  str = str.replace(/(^|\s|(?:&quot;))\/([^\r\n\/>]+)\/([\s,\.\?!]|(?:&quot;)|$)/g, '$1<i>$2</i>$3');
-  // both!
-  str = str.replace(/(^|\s|(?:&quot;))___([^\r\n_]+)___([\s,\.\?!]|(?:&quot;)|$)/g, '$1<b><i>$2</i></b>$3');
-  // line breaks
-  // http://stackoverflow.com/questions/2919337/jquery-convert-line-breaks-to-br-nl2br-equivalent
-  str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
-  // fake line breaks
-  str = str.replace(/(\\r\\n|\\n\\r|\\r|\\n|\&lt;br(?: ?\/)?\&gt;)/g, '<br />');
-  // mdash
-  str = str.replace(/--/g, '&mdash;');
-  
-  // done.
-  return str;
-}
