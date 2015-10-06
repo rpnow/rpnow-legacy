@@ -10,3 +10,6 @@
 [submodule "rpnow/lib/Slim-Basic-Auth"]
 	path = rpnow/lib/Slim-Basic-Auth
 	url = https://github.com/tuupola/slim-basic-auth.git
+[submodule "rpnow/lib/random_compat"]
+	path = rpnow/lib/random_compat
+	url = https://github.com/paragonie/random_compat.git

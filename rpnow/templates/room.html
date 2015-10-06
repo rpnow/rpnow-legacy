@@ -4,7 +4,7 @@
   <div id="messages" class="room-feed">
     <div class="info" id="showing-latest" style="display:none">
       <p>These are the latest {{ postsPerPage }} posts.
-      To view earlier messages, check the <a href="{{ docroot }}{{ room }}/1">archive</a>.</p>
+      To view earlier messages, check the <a href="{{ docroot }}rp/{{ room }}/1">archive</a>.</p>
     </div>
     <div class="info" id="empty-room" style="display:none">
       <p><b>Success!</b></p>
@@ -156,11 +156,39 @@
       $('#new-character').hide();
     }
     
-    function sendMessage() {
-      var content = $('#message-box textarea').val().trim();
-      if(content === '') return;
+    function formatSentMessage(content, voice) {
+      content = content.trim();
       
-      chat.sendMessage(content, voice);
+      var oocRegex = [
+        /^\(\(\s*(.*[^\s])\s*\)\)$/g, // (( stuff ))
+        /^\{+\s*(.*?[^\s])\s*\}+$/g, // { stuff }, {{ stuff }}, ...
+        /^\/\/\s*(.*[^\s])\s*$/g // //stuff
+      ];
+      for(var i = 0; i < oocRegex.length; ++i) {
+        var r = oocRegex[i];
+        var match = r.exec(content);
+        if(match) {
+          content = match[1];
+          voice = 'OOC';
+          break;
+        }
+      }
+      
+      // replace linebreak codes with actual linebreak
+      content = content.replace(/(\\r\\n|\\n\\r|\\r|\\n|\&lt;br(?: ?\/)?\&gt;)/g, '\n');
+      
+      if(!content) return;
+      return { content: content, voice: voice };
+    }
+    
+    function sendMessage() {
+      var msgData = formatSentMessage(
+        $('#message-box textarea').val(),
+        voice
+      );
+      
+      if(!msgData) return;
+      chat.sendMessage(msgData.content, msgData.voice);
       
       // clear message box
       $('#message-box textarea').val('');
@@ -170,7 +198,7 @@
       $('html, body').stop().animate({scrollTop: $(document).height()}, 500);
     }
     
-    var alertNoise = new Audio('assets/alert.mp3');
+    var alertNoise = new Audio('../assets/alert.mp3');
     
     var flashTitle = (function() {
       var oldTitle = document.title;

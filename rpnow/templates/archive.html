@@ -17,28 +17,30 @@
 
 {% block content %}
   {% if numpages == 0 %}
-    <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
+  <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
   {% else %}
-    {{ _self.pages(docroot, room, page, numpages) }}
-    <div id="messages">
-      <div class="info" id="loading">
-        <p>Loading...</p>
-      </div>
+  {{ _self.pages(docroot, room, page, numpages) }}
+  <div id="messages">
+    <div class="info" id="loading">
+      <p>Loading...</p>
     </div>
-    {{ _self.pages(docroot, room, page, numpages) }}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
-    <script src='{{ docroot }}rp.js'></script>
-    <script>
-      $(document).ready(function() {
-        var rp = new RP('{{ room }}');
-        rp.fetchPage({{ page }}, function(e) {
-          $('#loading').hide();
-          for(var i = 0; i < e.msgs.length; ++i) {
-            $('#messages').append(e.msgs[i].createElement('absolute'));
-          }
-        });
-      });
-    </script>
+  </div>
+  {{ _self.pages(docroot, room, page, numpages) }}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+  <script src='{{ docroot }}rp.js'></script>
+  <script>
+    {% if sample %}
+    var rp = new RP(RP.SAMPLE);
+    {% else %}
+    var rp = new RP('{{ room }}');
+    {% endif %}
+    rp.fetchPage({{ page }}, function(e) {
+      $('#loading').hide();
+      for(var i = 0; i < e.msgs.length; ++i) {
+        $('#messages').append(e.msgs[i].createElement('absolute'));
+      }
+    });
+  </script>
   {% endif %}
 {% endblock %}
