@@ -116,6 +116,16 @@ class Room {
     $conn->close();
   }
   
+  public static function GetNewId($oldId) {
+    $conn = self::createConnection();
+    
+    $statement = $conn->prepare('SELECT `New_Id` FROM `Room_Migration` WHERE `Old_Id` = ?');
+    $statement->execute(array($oldId));
+    $row = $statement->fetch();
+    if(!$row[0]) return null;
+    else return $row[0];
+  }
+  
   public function close() {
     $this->db->commit();
     $this->db = null;
