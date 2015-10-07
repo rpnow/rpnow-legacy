@@ -17,7 +17,7 @@
     <tbody>
       {% for rp in rps %}
       <tr>
-        <td><a href="{{ docroot }}{{ rp.ID }}">
+        <td><a href="{{ docroot }}rp/{{ rp.ID }}">
           {% if rp.Title is empty %}[{{ rp.ID }}]{% else %}{{ rp.Title }}{% endif %}
         </a></td>
         <td>{{ rp.Num_Msgs }}</td>
