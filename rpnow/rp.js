@@ -52,7 +52,7 @@ function RP(id) {
   this.fetchPage = function(pageNum, callback) {
     var msgs = [];
     var charas = [];
-    ajax('archive', 'GET', { page: 1 }, function(e) {
+    ajax('archive', 'GET', { page: pageNum }, function(e) {
       // add characters
       for(var i = 0; i < e.charas.length; ++i) {
         charas.push(new Chara(e.charas[i]));
