@@ -8,3 +8,4 @@ ALTER TABLE `Room_Migration`
 
 /* RUN PHP MIGRATION FUNCTION */
 
+UPDATE `Room` RIGHT JOIN `Room_Migration` ON (`Room`.`ID` = `Room_Migration`.`Old_Id`) SET `Room`.`ID` = `Room_Migration`.`New_Id`;
