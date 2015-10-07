@@ -8,7 +8,7 @@
       Page: 
       {% for i in 1..numpages %}
         {% if i == page %}<b>{{ i }}</b>
-        {% else %}<a href="{{ docroot }}{{ room }}/{{ i }}">{{ i }}</a>{% endif %}
+        {% else %}<a href="{{ docroot }}rp/{{ room }}/{{ i }}">{{ i }}</a>{% endif %}
         {% if i != numpages %} | {% endif %}
       {% endfor %}
     </div>
