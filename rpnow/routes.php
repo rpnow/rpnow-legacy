@@ -79,13 +79,11 @@ $app->get('/format/', $downCheck, function () use ($app) {
 
 // Create room
 $app->post('/create/', $downCheck, function () use ($app) {
-  $room = Room::CreateRoom(
+  $roomId = Room::CreateRoom(
     $app->request()->post('title'),
     $app->request()->post('desc')
   );
-  $id = $room->getID();
-  $room->close();
-  $app->redirect('rp/' . $id);
+  $app->redirect('rp/' . $roomId);
 });
 
 // RP Pages

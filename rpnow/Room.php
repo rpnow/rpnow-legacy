@@ -36,14 +36,16 @@ class Room {
   
   private $db;
   private $id;
+  private $roomNum;
   private $title;
   private $desc;
   private $numMsgs;
   private $numChars;
   
-  private function __construct($db, $id, $title, $desc, $numChars, $numMsgs) {
+  private function __construct($db, $id, $roomNum, $title, $desc, $numChars, $numMsgs) {
     $this->db = $db;
     $this->id = $id;
+    $this->roomNum = $roomNum;
     $this->title = $title;
     $this->desc = $desc;
     $this->numMsgs = $numMsgs;
@@ -58,7 +60,9 @@ class Room {
     $conn
       ->prepare("INSERT INTO `Room` (`ID`, `Title`, `Description`, `IP`) VALUES (?, ?, ?, ?)")
       ->execute(array($id, $title, $desc, $_SERVER['REMOTE_ADDR']));
-    return new Room($conn, $id, $title, $desc, 1, 0);
+    $conn->commit();
+    $conn = null;
+    return $id;
   }
   
   public static function GetRoom($id) {
@@ -69,17 +73,18 @@ class Room {
     if(!Room::IDExists($id, $conn)) {
       throw new Exception("Room '$id' does not exist.", Room::ROOM_NOT_FOUND_EXCEPTION);
     }
-    $statement = $conn->prepare("SELECT
-      (SELECT `Title` FROM `Room` WHERE `ID` = :id) AS `Title`,
-      (SELECT `Description` FROM `Room` WHERE `ID` = :id) AS `Description`,
-      (SELECT COUNT(*) FROM `Character` WHERE `Room` = :id) AS `CharacterCount`,
-      (SELECT COUNT(*) FROM `Message` WHERE `Room` = :id) AS `MessageCount`");
-    $statement->execute(array('id'=>$id));
+    $statement = $conn->prepare('
+      SELECT `Number`, `Title`, `Description`,
+      (SELECT COUNT(*) FROM `Character` WHERE `Character`.`Room_Number` = `Room`.`Number`) AS `CharacterCount`,
+      (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `MessageCount`
+      FROM `Room` WHERE `ID` = ?
+    ');
+    $statement->execute(array($id));
     if($statement->rowCount() == 0) {
       throw new Exception("Room '$id' expected but not found.");
     }
     $row = $statement->fetch();
-    return new Room($conn, $id, $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
+    return new Room($conn, $id, $row['Number'], $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
   }
   
   public static function AuditRooms() {
@@ -89,8 +94,8 @@ class Room {
     `ID`,
     `Time_Created`,
     `IP`,
-    (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Room` = `ID`) AS `Time_Updated`,
-    (SELECT COUNT(*) FROM `Message` WHERE `Room` = `ID`) AS `Num_Msgs`
+    (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
+    (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`
     FROM `Room`
     ORDER BY `Time_Updated` DESC");
   }
@@ -130,9 +135,10 @@ class Room {
     if($which == 'latest') {
       $statement = $this->db->prepare("(SELECT
       `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
-      FROM `Message` WHERE `Room` = '$room'
-      ORDER BY `Number` DESC LIMIT $rpPostsPerPage)
+      FROM `Message` WHERE `Room_Number` = :room
+      ORDER BY `Number` DESC LIMIT :posts)
       ORDER BY `Number` ASC;");
+      $statement->bindParam(':posts', $rpPostsPerPage, PDO::PARAM_INT);
     }
     // page of archive
     else if($which == 'page' && !is_null($n)) {
@@ -146,8 +152,10 @@ class Room {
       $start = ($n - 1) * $rpPostsPerPage;
       $statement = $this->db->prepare("SELECT
       `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
-      FROM `Message` WHERE `Room` = '$room'
-      ORDER BY `Number` ASC LIMIT $start, $rpPostsPerPage;");
+      FROM `Message` WHERE `Room_Number` = :room
+      ORDER BY `Number` ASC LIMIT :start, :posts;");
+      $statement->bindParam(':start', $start, PDO::PARAM_INT);
+      $statement->bindParam(':posts', $rpPostsPerPage, PDO::PARAM_INT);
     }
     // updates
     else if($which == 'after') {
@@ -157,12 +165,15 @@ class Room {
       }
       $statement = $this->db->prepare("SELECT
       `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
-      FROM `Message` WHERE `Room` = '$room'
-      ORDER BY `Number` ASC LIMIT 9999 OFFSET $n");
+      FROM `Message` WHERE `Room_Number` = :room
+      ORDER BY `Number` ASC LIMIT 9999 OFFSET :n");
+      $statement->bindParam(':n', intval($n), PDO::PARAM_INT);
     }
     else {
       throw new Exception('unknown message request!');
     }
+    // execute the statement selected
+    $statement->bindParam(':room', $this->roomNum);
     $statement->execute();
     // also retrieve IP color mapping
     return array_map(
@@ -187,8 +198,8 @@ class Room {
       throw new Exception("invalid character request: $after is a bad number.");
     }
     // get the characters
-    $statement = $this->db->prepare("SELECT `Number`, `Name`, `Color`, `IP`, `Deleted` FROM `Character` WHERE `Room` = ? LIMIT 9999 OFFSET $after");
-    $statement->execute(array($this->getID()));
+    $statement = $this->db->prepare("SELECT `Number`, `Name`, `Color`, `IP`, `Deleted` FROM `Character` WHERE `Room_Number` = ? LIMIT 9999 OFFSET $after");
+    $statement->execute(array($this->roomNum));
     // calculate the secondary color for each and return in modified array
     return array_map(
       function($x) {
@@ -222,9 +233,9 @@ class Room {
     // all messages
     $statement = $this->db->prepare('SELECT
     `Type`, `Content`, `Name`
-    FROM `Message` LEFT JOIN `Character` ON (`Character`.`Number` = `Message`.`Chara_Number`) WHERE `Message`.`Room` = ?
+    FROM `Message` LEFT JOIN `Character` ON (`Character`.`Number` = `Message`.`Chara_Number`) WHERE `Message`.`Room_Number` = ?
     ORDER BY `Message`.`Number` ASC;');
-    $statement->execute(array($this->getID()));
+    $statement->execute(array($this->roomNum));
     return $statement->fetchAll();
   }
   
@@ -239,12 +250,12 @@ class Room {
       SUM(if(`Type`='OOC', char_length(`Content`),0)) AS `OOCCharCount`
       
       FROM `Message`
-      WHERE `Room` = ?"
+      WHERE `Room_Number` = ?"
     );
-    $dataStatement->execute(array($this->getID()));
+    $dataStatement->execute(array($this->roomNum));
     $data = $dataStatement->fetch();
-    $top5Statement = $this->db->prepare("SELECT `Character`.`Name`, COUNT(*) AS `MessageCount` FROM `Message` LEFT JOIN `Character` ON `Chara_Number`=`Character`.`Number` WHERE `Message`.`Type`='Character' AND `Message`.`Room` = ? GROUP BY `Chara_Number` ORDER BY `MessageCount` DESC LIMIT 5;");
-    $top5Statement->execute(array($this->getID()));
+    $top5Statement = $this->db->prepare("SELECT `Character`.`Name`, COUNT(*) AS `MessageCount` FROM `Message` LEFT JOIN `Character` ON `Chara_Number`=`Character`.`Number` WHERE `Message`.`Type`='Character' AND `Message`.`Room_Number` = ? GROUP BY `Chara_Number` ORDER BY `MessageCount` DESC LIMIT 5;");
+    $top5Statement->execute(array($this->roomNum));
     return array(
       'MessageCount' => $this->getMessageCount(), 'CharacterCount' => $this->getCharacterCount(),
       'FirstMessageDate' => $data['FirstMessageDate'],
@@ -273,17 +284,17 @@ class Room {
       if(!is_int($charaNum) && !ctype_digit($charaNum)) throw new Exception("$charaNum is not an int.");
       
       // validate charaNum
-      $statement = $this->db->prepare('SELECT `Room` FROM `Character` WHERE `Number` = ?');
+      $statement = $this->db->prepare('SELECT `Room_Number` FROM `Character` WHERE `Number` = ?');
       $statement->execute(array($charaNum));
-      if($statement->rowCount() != 1 || $statement->fetch()['Room'] != $this->getID())
+      if($statement->rowCount() != 1 || $statement->fetch()['Room_Number'] != $this->roomNum)
         throw new Exception("invalid character number: $charaNum");
       
-      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`, `Chara_Number`) VALUES (?, ?, ?, ?, ?)");
-      $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR'], $charaNum));
+      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room_Number`, `IP`, `Chara_Number`) VALUES (?, ?, ?, ?, ?)");
+      $statement->execute(array($type, $content, $this->roomNum, $_SERVER['REMOTE_ADDR'], $charaNum));
     }
     else {
-      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room`, `IP`) VALUES (?, ?, ?, ?)");
-      $statement->execute(array($type, $content, $this->getID(), $_SERVER['REMOTE_ADDR']));
+      $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room_Number`, `IP`) VALUES (?, ?, ?, ?)");
+      $statement->execute(array($type, $content, $this->roomNum, $_SERVER['REMOTE_ADDR']));
     }
     
   }
@@ -296,8 +307,8 @@ class Room {
     if(!preg_match_all('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color)) {
       throw new Exception("$color is not a valid hex color.");
     }
-    $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room`, `Color`, `IP`) VALUES (?, ?, ?, ?)");
-    $statement->execute(array($name, $this->getID(), $color, $_SERVER['REMOTE_ADDR']));
+    $statement = $this->db->prepare("INSERT INTO `Character` (`Name`, `Room_Number`, `Color`, `IP`) VALUES (?, ?, ?, ?)");
+    $statement->execute(array($name, $this->roomNum, $color, $_SERVER['REMOTE_ADDR']));
   }
 }
 
