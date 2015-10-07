@@ -316,4 +316,10 @@ $app->get('/broadcast/', function () use ($app) {
   if(isset($rpBroadcast)) echo $rpBroadcast;
 });
 
+// MIGRATE MAGIC DONT KEEP THIS FOR LONG
+$app->get('/popmigrate/', function() use ($app) {
+  Room::PopulateMigrationTable();
+  echo ':)';
+})
+
 ?>

@@ -95,6 +95,22 @@ class Room {
     ORDER BY `Time_Updated` DESC");
   }
   
+  public static function PopulateMigrationTable() {
+    $conn = self::createConnection();
+    
+    $statement = $conn->query('SELECT `ID` FROM `Room`');
+    while($row = $statement->fetch()) {
+      $oldId = $row['ID'];
+      $newId = Room::GenerateID();
+      $stmt = $conn->prepare("INSERT INTO `Room_Migration` (`Old_Id`, `New_Id`) VALUES (?, ?)");
+      $stmt->execute(array($oldId, $newId));
+      echo "$oldId =&gt; $newId<br />";
+    }
+    
+    $conn->commit();
+    $conn->close();
+  }
+  
   public function close() {
     $this->db->commit();
     $this->db = null;
