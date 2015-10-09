@@ -1,4 +1,7 @@
 <?php
+// RPNow Version Number
+$rpVersion = '0.10.0';
+
 // Require source files
 require_once 'config.php';
 require_once 'Room.php';
@@ -21,7 +24,7 @@ require_once 'lib/Twig/lib/Twig/Autoloader.php';
 // Create the application
 $app = new \Slim\Slim(array(
   'view' => new \Slim\Views\Twig(),
-  'debug' => false
+  'debug' => true
 ));
 
 // Routes are specified in another file
