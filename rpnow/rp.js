@@ -133,10 +133,7 @@ function RP(id) {
     };
     // send message
     chat.sendMessage = function(content, voice, callback) {
-      var data = {
-        content: content,
-        msgCounter: msgCounter, charaCounter: charaCounter
-      };
+      var data = { content: content };
       if(voice instanceof Chara) {
         data['type'] = 'Character';
         data.charaId = voice.id;
@@ -148,10 +145,7 @@ function RP(id) {
     };
     // send character
     chat.sendChara = function(name, color, callback) {
-      var data = {
-        name: name, color: color,
-        msgCounter: msgCounter, charaCounter: charaCounter
-      };
+      var data = { name: name, color: color };
       net.queuePost('character', data, callback);
     };
     /*
@@ -215,8 +209,12 @@ function RP(id) {
           clearTimeout(timer);
           timer = null;
         }
-        // execute
+        // pop new request off front of queue
         var req = queue.shift();
+        // add current counter values to request
+        req.data.msgCounter = msgCounter;
+        req.data.charaCounter = charaCounter;
+        // execute
         ajax(req.url, 'POST', req.data, function(data) {
           processUpdates(data);
           if(req.callback) req.callback(data);
