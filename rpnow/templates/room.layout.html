@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{{ title }}{% endblock %} - RP Now</title>
-  <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css">
+  <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css?v={{ version }}">
 </head>
 <body>
   <header>
@@ -23,6 +23,6 @@
     
   {% block content %}
   {% endblock %}
-  <script src="{{ docroot }}motd.js"></script>
+  <script src="{{ docroot }}motd.js?v={{ version }}"></script>
 </body>
 </html>

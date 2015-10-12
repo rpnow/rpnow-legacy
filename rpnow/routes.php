@@ -1,5 +1,8 @@
 <?php
 
+// globally set version number
+$app->view()->setData(array('version'=>$rpVersion));
+
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
   'id' => '['.preg_quote($rpIDChars).']{'.$rpIDLength.'}'
@@ -58,8 +61,8 @@ $app->error(function (Exception $e) use ($app) {
 });
 
 // Home page
-$app->get('/', $downCheck, function () {
-  readfile('templates/home.html');
+$app->get('/', $downCheck, function () use ($app) {
+  $app->render('home.html');
 });
 
 // About
