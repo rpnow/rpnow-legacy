@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADMIN - RP Now</title>
+  <link rel="stylesheet" type="text/css" href="room.css?v={{ version }}">
+</head>
+<body class="article">
+  <h1>RPNow Admin Dashboard</h1>
+  <h2>Text Search</h2>
+  <form action="admin/search" method="get">
+    <input type="text" name="query" id="search-field">
+    <button type="submit" id="search-button">Search</button>
+    <br />
+    <input type="radio" name="type" value="title" id="type-button-title" checked><label for="type-button-title">Title only</label>
+    <input type="radio" name="type" value="fulltext" id="type-button-fulltext"><label for="type-button-fulltext">Full-text</label>
+    <script>
+      document.getElementById("search-button").addEventListener('click', function(evt) {
+        evt.preventDefault();
+        var searchType = document.querySelector('input[name="type"]:checked').value;
+        var query = document.getElementById("search-field").value;
+        window.location.href = '{{docroot}}admin/search/'
+          + searchType + '/'
+          + encodeURIComponent(query).replace(/%20/g, "+");
+      });
+    </script>
+  </form>
+  <h2>Reports</h2>
+  <p>Note: As the RPNow database grows larger, generating these reports may consume significant amounts of server resources. Don't go too crazy!</p>
+  <ul>
+    <li><a href="admin/activity">Recent Activity</a></li>
+    <li><a href="admin/newest">Newest Created RPs</a></li>
+    <li><a href="admin/top/day">Top RPs in the Last 24 Hours</a></li>
+    <li><a href="admin/top/all-time">Top RPs of All Time</a></li>
+    <li><a href="admin/duration">RPs with the Longest Duration</a></li>
+  </ul>
+</body>
+</html>
