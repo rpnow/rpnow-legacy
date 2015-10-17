@@ -291,15 +291,13 @@ $app->get('/sample/archive/', function () use ($app) {
 });
 
 // Admin panel!
-if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
+if(isset($rpAdminCredentials)) {
   require_once 'backend/Admin.php';
   
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     'path' => '/admin/',
     'realm' => 'RPNow Admin Panel',
-    'users' => array(
-      $rpAdminPanelUser => $rpAdminPanelPass
-    )
+    'users' => $rpAdminCredentials
   )));
   
   $app->group('/admin', function() use ($app) {
