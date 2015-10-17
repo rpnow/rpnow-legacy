@@ -1,4 +1,7 @@
 <?php
+
+if(!isset($rpVersion)) die();
+
 require_once 'config.php';
 
 class Room {

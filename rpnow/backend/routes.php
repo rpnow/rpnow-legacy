@@ -1,5 +1,7 @@
 <?php
 
+if(!isset($rpVersion)) die();
+
 // globally set version number
 $app->view()->setData(array('version'=>$rpVersion));
 
