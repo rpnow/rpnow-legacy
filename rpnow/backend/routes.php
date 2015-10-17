@@ -382,11 +382,28 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     });
     
     // search for keywords in titles, or in fulltext
-    $app->get('/search/', function () use ($app) {
-      echo "Search for a keyword in a title, or in fulltext";
-    });
     $app->get('/search/:type/:keyword/', function ($type, $keyword) use ($app) {
-      echo "Search results page";
+      // convert '+' back to a space and decode other uri elements
+      $keyword = urldecode($keyword);
+      // search
+      $rps = null;
+      if($type == 'title') {
+        $rps = Admin::SearchTitles($keyword, 30);
+        $description = 'Showing most recent ' . count($rps) . ' RPs with "' . $keyword . '" in the title.';
+      }
+      else if($type == 'fulltext') {
+        $rps = Admin::SearchFull($keyword, 30);
+        $description = 'Showing most recent ' . count($rps) . ' RPs where "' . $keyword . '" was sent in some message.';
+      }
+      else {
+        throw new Exception("Unknown search type: $type");
+      }
+      $app->view()->setData(array(
+        'title' => 'Search Results',
+        'description' => $description,
+        'rps' => $rps
+      ));
+      $app->render('admin/rptable.html');
     });
   });
 }

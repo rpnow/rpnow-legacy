@@ -82,6 +82,45 @@ class Admin {
       ORDER BY `Timespan` DESC LIMIT $maxRows"
     )->fetchAll();
   }
+  
+  public static function SearchTitles($query, $maxRows) {
+    $conn = RPDatabase::createConnection();
+    $query = "%$query%";
+    $statement = $conn->prepare("SELECT
+      `Title`,
+      `ID`,
+      `Time_Created`,
+      `IP`,
+      (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
+      (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`
+      FROM `Room`
+      WHERE `Title` LIKE ?
+      ORDER BY `Time_Created` DESC LIMIT $maxRows"
+    );
+    $statement->execute(array($query));
+    return $statement->fetchAll();
+  }
+  
+  public static function SearchFull($query, $maxRows) {
+    $conn = RPDatabase::createConnection();
+    $query = "%$query%";
+    $statement = $conn->prepare("SELECT
+      `Room`.`Title`,
+      `Room`.`ID`,
+      `Room`.`Time_Created`,
+      `Room`.`IP`,
+      `Room`.`ID`,
+      `Room`.`Number`,
+      COUNT(*) AS `Found_Count`
+      FROM `Message` LEFT JOIN `Room` ON (
+        `Room`.`Number` = `Message`.`Room_Number`
+      ) WHERE `Message`.`Content` LIKE ?
+      GROUP BY `Room`.`ID`
+      ORDER BY `Found_Count` DESC LIMIT $maxRows"
+    );
+    $statement->execute(array($query));
+    return $statement->fetchAll();
+  }
 }
 
 ?>
