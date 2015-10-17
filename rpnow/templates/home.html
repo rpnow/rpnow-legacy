@@ -1,37 +1,37 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Roleplay Now</title>
-    <meta name="description" content="Roleplay Now is a site where small groups of friends can instantly create private roleplaying chatrooms.">
-    <link rel="stylesheet" type="text/css" href="room.css?v={{ version }}">
-  </head>
-  <body class="centered">
-    <h1>Roleplay Now</h1>
-    <p>Welcome to <b>Roleplay Now</b>, a site where anyone can instantly create a <b>free, private roleplay chatroom</b> for small groups of friends. No registration required!</p>
-    <p><a href="sample">Click here to see an example RP!</a></p> 
-    <p>Just type a title (and optionally a description) for the RP and you're ready to start your adventures...</p>
-    <form id="new-rp" class="form-box" action="create" method="post">
-      <div class="input-section">
-        <div class="input-name">Title</div>
-        <div class="input-container"><input type="text" name="title" maxlength="30" placeholder="My Adventures" required></div>
-        <div class="input-button"><button type="button" class="dice" onclick="document.querySelector('input[name=title]').value = RPRandom.shortTitle(30)">Random</button></div>
-      </div>
-      <div class="input-section">
-        <div class="input-name">Description (optional)</div>
-        <div class="input-container"><textarea name="desc" maxlength="255"></textarea></div>
-      </div>
-      <input type="submit" value="Begin">
-    </form>
-    <div id="info">
-      <a href="about">About</a> |
-      <a href="http://blog.rpnow.net/" target="_blank">Blog</a> |
-      <a href="https://github.com/shamblesides/rpnow" target="_blank">GitHub</a> |
-      <a href="terms" target="_blank">Terms</a> |
-      <a href="https://www.gnu.org/licenses/gpl-3.0-standalone.html" target="_blank">License</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roleplay Now</title>
+  <meta name="description" content="Roleplay Now is a site where small groups of friends can instantly create private roleplaying chatrooms.">
+  <link rel="stylesheet" type="text/css" href="room.css?v={{ version }}">
+</head>
+<body class="centered">
+  <h1>Roleplay Now</h1>
+  <p>Welcome to <b>Roleplay Now</b>, a site where anyone can instantly create a <b>free, private roleplay chatroom</b> for small groups of friends. No registration required!</p>
+  <p><a href="sample">Click here to see an example RP!</a></p> 
+  <p>Just type a title (and optionally a description) for the RP and you're ready to start your adventures...</p>
+  <form id="new-rp" class="form-box" action="create" method="post">
+    <div class="input-section">
+      <div class="input-name">Title</div>
+      <div class="input-container"><input type="text" name="title" maxlength="30" placeholder="My Adventures" required></div>
+      <div class="input-button"><button type="button" class="dice" onclick="document.querySelector('input[name=title]').value = RPRandom.shortTitle(30)">Random</button></div>
     </div>
-    <script src="rprandom.js?v={{ version }}"></script>
-    <script src="motd.js?v={{ version }}"></script>
-  </body>
+    <div class="input-section">
+      <div class="input-name">Description (optional)</div>
+      <div class="input-container"><textarea name="desc" maxlength="255"></textarea></div>
+    </div>
+    <input type="submit" value="Begin">
+  </form>
+  <div id="info">
+    <a href="about">About</a> |
+    <a href="http://blog.rpnow.net/" target="_blank">Blog</a> |
+    <a href="https://github.com/shamblesides/rpnow" target="_blank">GitHub</a> |
+    <a href="terms" target="_blank">Terms</a> |
+    <a href="https://www.gnu.org/licenses/gpl-3.0-standalone.html" target="_blank">License</a>
+  </div>
+  <script src="rprandom.js?v={{ version }}"></script>
+  <script src="motd.js?v={{ version }}"></script>
+</body>
 </html>
