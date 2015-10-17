@@ -296,13 +296,51 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       $rpAdminPanelUser => $rpAdminPanelPass
     )
   )));
-  $app->get('/admin/', function () use ($app) {
-    $data = array(
-      'rps' => Room::AuditRooms(),
-      'docroot' => ''
-    );
-    $app->view()->setData($data);
-    $app->render('admin.html');
+  
+  $app->group('/admin', function() use ($app) {
+    
+    // admin home
+    $app->get('/', function () use ($app) {
+      $data = array(
+        'rps' => Room::AuditRooms(),
+        'docroot' => ''
+      );
+      $app->view()->setData($data);
+      $app->render('admin.html');
+    });
+    
+    // RPs that were most recently active
+    $app->get('/recent-activity/', function () use ($app) {
+      echo "Recently active RPs";
+    });
+    
+    // top rps in the last (hour, day, week, month, all-time)
+    $app->get('/most-posts/:scale/', function ($scale) use ($app) {
+      echo "Top RPs in the last " . $scale;
+    });
+    
+    // RPs ordered by most recently created
+    $app->get('/new-rooms/', function () use ($app) {
+      echo "Recently created RPs";
+    });
+    
+    // RPs with the most time between their start and their most recent post
+    $app->get('/longest-duration/', function () use ($app) {
+      echo "RPs with the most time between their start and their most recent post";
+    });
+    
+    // streams messages from all RPs into one channel
+    $app->get('/activity-stream/', function () use ($app) {
+      echo "Stream of all messages from all RPs";
+    });
+    
+    // search for keywords in titles, or in fulltext
+    $app->get('/search/', function () use ($app) {
+      echo "Search for a keyword in a title, or in fulltext";
+    });
+    $app->get('/search/:type/:keyword/', function ($type, $keyword) use ($app) {
+      echo "Search results page";
+    });
   });
 }
 
