@@ -363,7 +363,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       }
       // render
       $app->view()->setData(array(
-        'title' => 'Top RPs',
+        'title' => "Top RPs ($scale)",
         'description' => $description,
         'rps' => $rps,
         'docroot' => $app->request->getRootUri() . '/'
@@ -372,9 +372,16 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     });
     
     // RPs with the most time between their start and their most recent post
-    $app->get('/longest-duration/', function () use ($app) {
-      echo "RPs with the most time between their start and their most recent post";
-    });
+    $app->get('/duration(/:num)/', function ($num = 30) use ($app) {
+      $rps = Admin::LongestDuration($num);
+      $app->view()->setData(array(
+        'title' => 'Longest Duration RPs',
+        'description' => 'Showing the ' . count($rps) . ' RPs with the longest amount of time between the first and last post.',
+        'rps' => $rps,
+        'docroot' => $app->request->getRootUri() . '/'
+      ));
+      $app->render('admin/rptable.html');
+    })->conditions(array('num' => $numericRouteCondition));
     
     // streams messages from all RPs into one channel
     $app->get('/activity-stream/', function () use ($app) {

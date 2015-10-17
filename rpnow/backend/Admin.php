@@ -67,6 +67,21 @@ class Admin {
       ORDER BY `Num_Msgs` DESC LIMIT $maxRows"
     )->fetchAll();
   }
+  
+  public static function LongestDuration($maxRows) {
+    $conn = RPDatabase::createConnection();
+    return $conn->query("SELECT
+      `Title`,
+      `ID`,
+      `Time_Created`,
+      `IP`,
+      (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
+      (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`,
+      (SELECT TIMESTAMPDIFF(SECOND, `Time_Created`,`Time_Updated`)) AS `Timespan`
+      FROM `Room`
+      ORDER BY `Timespan` DESC LIMIT $maxRows"
+    )->fetchAll();
+  }
 }
 
 ?>
