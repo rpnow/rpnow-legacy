@@ -3,6 +3,7 @@
 if(!isset($rpVersion)) die();
 
 require_once 'config.php';
+require_once 'Connection.php';
 
 class Room {
   const GENERIC_EXCEPTION = 776690000;
@@ -28,15 +29,6 @@ class Room {
     );
   }
   
-  private static function createConnection() {
-    global $rpDBServer, $rpDBUser, $rpDBPass, $rpDBName;
-    $dsn = 'mysql:host=' . $rpDBServer . ';dbname=' . $rpDBName;
-    $myConn = new PDO($dsn, $rpDBUser, $rpDBPass);
-    $myConn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    $myConn->beginTransaction();
-    return $myConn;
-  }
-  
   private $db;
   private $id;
   private $roomNum;
@@ -56,7 +48,7 @@ class Room {
   }
   
   public static function CreateRoom($title, $desc) {
-    $conn = self::createConnection();
+    $conn = RPDatabase::createConnection();
     do {
       $id = Room::GenerateID();
     } while(Room::IDExists($id, $conn));
@@ -72,7 +64,7 @@ class Room {
     if(!Room::IsValidID($id)) {
       throw new Exception("Malformed Room ID: '$id'", Room::INVALID_ROOM_ID_EXCEPTION);
     }
-    $conn = self::createConnection();
+    $conn = RPDatabase::createConnection();
     if(!Room::IDExists($id, $conn)) {
       throw new Exception("Room '$id' does not exist.", Room::ROOM_NOT_FOUND_EXCEPTION);
     }
@@ -90,22 +82,8 @@ class Room {
     return new Room($conn, $id, $row['Number'], $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
   }
   
-  public static function AuditRooms() {
-    $conn = self::createConnection();
-    return $conn->query("SELECT
-    `Title`,
-    `ID`,
-    `Time_Created`,
-    `IP`,
-    (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
-    (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`
-    FROM `Room`
-    ORDER BY `Time_Updated` DESC");
-  }
-  
   public function close() {
-    $this->db->commit();
-    $this->db = null;
+    RPDatabase::closeGracefully($this->db);
   }
   
   public function getID() { return $this->id; }

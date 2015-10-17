@@ -291,6 +291,8 @@ $app->get('/sample/archive/', function () use ($app) {
 
 // Admin panel!
 if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
+  require_once 'backend/Admin.php';
+  
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     'path' => '/admin/',
     'realm' => 'RPNow Admin Panel',
@@ -304,7 +306,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     // admin home
     $app->get('/', function () use ($app) {
       $data = array(
-        'rps' => Room::AuditRooms(),
+        'rps' => Admin::AuditRooms(),
         'docroot' => ''
       );
       $app->view()->setData($data);
