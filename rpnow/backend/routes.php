@@ -317,20 +317,29 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     $app->get('/activity(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::RecentActivity($num);
       $app->view()->setData(array(
+        'title' => 'Recent Activity',
+        'description' => 'Showing the ' . count($rps) . ' most recently active RPs.',
         'rps' => $rps,
         'docroot' => $app->request->getRootUri() . '/'
       ));
-      $app->render('admin/activity.html');
+      $app->render('admin/rptable.html');
+    })->conditions(array('num' => $numericRouteCondition));
+    
+    // RPs ordered by most recently created
+    $app->get('/newest(/:num)/', function ($num = 30) use ($app) {
+      $rps = Admin::NewestRooms($num);
+      $app->view()->setData(array(
+        'title' => 'Newest RPs',
+        'description' => 'Showing the ' . count($rps) . ' most recently created RPs.',
+        'rps' => $rps,
+        'docroot' => $app->request->getRootUri() . '/'
+      ));
+      $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
     
     // top rps in the last (hour, day, week, month, all-time)
     $app->get('/most-posts/:scale/', function ($scale) use ($app) {
       echo "Top RPs in the last " . $scale;
-    });
-    
-    // RPs ordered by most recently created
-    $app->get('/new-rooms/', function () use ($app) {
-      echo "Recently created RPs";
     });
     
     // RPs with the most time between their start and their most recent post
