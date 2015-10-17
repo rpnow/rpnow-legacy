@@ -24,7 +24,7 @@ require_once 'lib/Twig/lib/Twig/Autoloader.php';
 // Create the application
 $app = new \Slim\Slim(array(
   'view' => new \Slim\Views\Twig(),
-  'debug' => true
+  'debug' => false
 ));
 
 // Routes are specified in another file
