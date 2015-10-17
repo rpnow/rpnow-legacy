@@ -25,12 +25,14 @@ $rpDBUser   = 'rp_db_user';
 ## Password for that user; PLEASE make it long and random!
 $rpDBPass   = 'abc123';
 
-## Uncomment the following line to enable the admin panel.
-$rpAdminPanelEnabled = true;
-## Admin panel username and password.
-## Uncomment and ***CHANGE*** these when you enable the panel!
-$rpAdminPanelUser = 'admin';
-$rpAdminPanelPass = 'admin';
+## Admin credentials array.
+##  To enable the admin panel, uncomment and **CHANGE** the
+##  values in this array! You may have as many or as few admin
+##  users as you wish.
+$rpAdminCredentials = array(
+  'admin' => 'password',
+  'alice' => 'p@ssw0rd'
+);
 
 ## The length of the auto-generated URL for each RP room.
 ##  Minimum recommended for a live website is 4.
