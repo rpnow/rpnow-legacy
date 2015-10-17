@@ -2,8 +2,11 @@
 
 if(!isset($rpVersion)) die();
 
-// globally set version number
-$app->view()->setData(array('version'=>$rpVersion));
+// globally set some Twig variables
+$app->view()->setData(array(
+  'docroot'=> $app->request->getRootUri() . '/',
+  'version' => $rpVersion
+));
 
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
@@ -33,8 +36,7 @@ $downCheckAjax = function () use ($app) {
 // Error pages
 $app->notFound(function () use ($app) {
   $app->view()->setData(array(
-    'docroot'=> $app->request->getRootUri() . '/',
-    'uri'=> $app->request->getResourceUri(),
+    'uri'=> $app->request->getResourceUri()
   ));
   $app->render('404.html');
 });
@@ -49,7 +51,6 @@ $app->error(function (Exception $e) use ($app) {
     $id = substr($id, 4);
     if(strpos($id, '/')) $id = substr($id, 0, strpos($id, '/'));
     $app->view()->setData(array(
-      'docroot'=> $app->request->getRootUri() . '/',
       'room'=> $id
     ));
     $app->render('404rp.html');
@@ -57,7 +58,6 @@ $app->error(function (Exception $e) use ($app) {
   else {
     $app->response->setStatus(500);
     $app->view()->setData(array(
-      'docroot'=> $app->request->getRootUri() . '/',
       'uri'=> $app->request->getResourceUri(),
       'message'=> $e->getMessage()
     ));
@@ -104,8 +104,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $app->view()->setData(array(
       'room' => $id,
       'title' => $room->getTitle(),
-      'desc' => $room->getDesc(),
-      'docroot' => '../'
+      'desc' => $room->getDesc()
     ));
     $room->close();
     $app->render('room.html');
@@ -121,7 +120,6 @@ $app->group('/rp', $downCheck, function() use ($app) {
       'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'docroot' => '../../',
       'page' => $page,
       'numpages' => $room->getNumPages()
     ));
@@ -137,7 +135,6 @@ $app->group('/rp', $downCheck, function() use ($app) {
         'title' => $room->getTitle(),
         'desc' => $room->getDesc(),
         'room' => $id,
-        'docroot' => '../../'
       ))
     );
     $room->close();
@@ -284,8 +281,7 @@ $app->get('/sample/', $downCheck, function () use ($app) {
     'desc' => 'This is what an RP will look like!',
     'sample' => true,
     'numpages' => 1,
-    'page' => 1,
-    'docroot' => './'
+    'page' => 1
   ));
   $app->render('archive.html');
 });
@@ -319,8 +315,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       $app->view()->setData(array(
         'title' => 'Recent Activity',
         'description' => 'Showing the ' . count($rps) . ' most recently active RPs.',
-        'rps' => $rps,
-        'docroot' => $app->request->getRootUri() . '/'
+        'rps' => $rps
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
@@ -331,8 +326,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       $app->view()->setData(array(
         'title' => 'Newest RPs',
         'description' => 'Showing the ' . count($rps) . ' most recently created RPs.',
-        'rps' => $rps,
-        'docroot' => $app->request->getRootUri() . '/'
+        'rps' => $rps
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
@@ -365,8 +359,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       $app->view()->setData(array(
         'title' => "Top RPs ($scale)",
         'description' => $description,
-        'rps' => $rps,
-        'docroot' => $app->request->getRootUri() . '/'
+        'rps' => $rps
       ));
       $app->render('admin/rptable.html');
     });
@@ -377,8 +370,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       $app->view()->setData(array(
         'title' => 'Longest Duration RPs',
         'description' => 'Showing the ' . count($rps) . ' RPs with the longest amount of time between the first and last post.',
-        'rps' => $rps,
-        'docroot' => $app->request->getRootUri() . '/'
+        'rps' => $rps
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
