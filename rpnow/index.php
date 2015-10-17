@@ -4,7 +4,7 @@ $rpVersion = '0.10.0';
 
 // Require source files
 require_once 'config.php';
-require_once 'Room.php';
+require_once 'backend/Room.php';
 require_once 'lib/Slim/Slim/Slim.php';
 
 // Autoloader gets some other files
@@ -28,7 +28,7 @@ $app = new \Slim\Slim(array(
 ));
 
 // Routes are specified in another file
-require 'routes.php';
+require 'backend/routes.php';
 
 // Run
 $app->run();
