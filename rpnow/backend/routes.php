@@ -338,8 +338,37 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     })->conditions(array('num' => $numericRouteCondition));
     
     // top rps in the last (hour, day, week, month, all-time)
-    $app->get('/most-posts/:scale/', function ($scale) use ($app) {
-      echo "Top RPs in the last " . $scale;
+    $app->get('/top(/:scale(/:num))/', function ($scale = 'day', $num = 30) use ($app) {
+      // get relevent RPs
+      $rps = null;
+      $description = null;
+      // all-time top...
+      if($scale == 'all-time') {
+        $rps = Admin::AllTimeTopRPs($num);
+        $description = "Showing the " . count($rps) . " RPs with the all-time highest number of posts.";
+      }
+      // ...or top within certain scale
+      else {
+        $hour = 60 * 60;
+        $scales = array(
+          'hour' => 1 * $hour,
+          'day' => 24 * $hour,
+          'week' => 7 * 24 * $hour,
+          'month' => 28 * 24 * $hour
+        );
+        if(!isset($scales[$scale])) throw new Exception('Invalid timescale.');
+        $secs = $scales[$scale];
+        $rps = Admin::TopRPs($secs, $num);
+        $description = "Showing the top " . count($rps) . " RPs with the most posts in the last $scale.";
+      }
+      // render
+      $app->view()->setData(array(
+        'title' => 'Top RPs',
+        'description' => $description,
+        'rps' => $rps,
+        'docroot' => $app->request->getRootUri() . '/'
+      ));
+      $app->render('admin/rptable.html');
     });
     
     // RPs with the most time between their start and their most recent post
