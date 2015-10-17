@@ -307,6 +307,7 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
     
     // admin home
     $app->get('/', function () use ($app) {
+      $app->render('admin/dash.html');
     });
     
     // RPs that were most recently active
