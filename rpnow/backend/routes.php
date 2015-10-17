@@ -1,12 +1,20 @@
 <?php
 
-// globally set version number
-$app->view()->setData(array('version'=>$rpVersion));
+if(!isset($rpVersion)) die();
+
+// globally set some Twig variables
+$app->view()->setData(array(
+  'docroot'=> $app->request->getRootUri() . '/',
+  'version' => $rpVersion
+));
 
 // All room ID's must be alphanumeric and N characters
 \Slim\Route::setDefaultConditions(array(
   'id' => '['.preg_quote($rpIDChars).']{'.$rpIDLength.'}'
 ));
+
+// numeric routes use this regex
+$numericRouteCondition = '[1-9][0-9]{0,}';
 
 // Maintenance Mode Middleware
 $downCheck = function () use ($app) {
@@ -28,8 +36,7 @@ $downCheckAjax = function () use ($app) {
 // Error pages
 $app->notFound(function () use ($app) {
   $app->view()->setData(array(
-    'docroot'=> $app->request->getRootUri() . '/',
-    'uri'=> $app->request->getResourceUri(),
+    'uri'=> $app->request->getResourceUri()
   ));
   $app->render('404.html');
 });
@@ -44,7 +51,6 @@ $app->error(function (Exception $e) use ($app) {
     $id = substr($id, 4);
     if(strpos($id, '/')) $id = substr($id, 0, strpos($id, '/'));
     $app->view()->setData(array(
-      'docroot'=> $app->request->getRootUri() . '/',
       'room'=> $id
     ));
     $app->render('404rp.html');
@@ -52,7 +58,6 @@ $app->error(function (Exception $e) use ($app) {
   else {
     $app->response->setStatus(500);
     $app->view()->setData(array(
-      'docroot'=> $app->request->getRootUri() . '/',
       'uri'=> $app->request->getResourceUri(),
       'message'=> $e->getMessage()
     ));
@@ -91,15 +96,15 @@ $app->post('/create/', $downCheck, function () use ($app) {
 
 // RP Pages
 $app->group('/rp', $downCheck, function() use ($app) {
-
+  global $numericRouteCondition;
+  
   // Main room chat
   $app->get('/:id/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
     $app->view()->setData(array(
       'room' => $id,
       'title' => $room->getTitle(),
-      'desc' => $room->getDesc(),
-      'docroot' => '../'
+      'desc' => $room->getDesc()
     ));
     $room->close();
     $app->render('room.html');
@@ -115,13 +120,12 @@ $app->group('/rp', $downCheck, function() use ($app) {
       'room' => $id,
       'title' => $room->getTitle(),
       'desc' => $room->getDesc(),
-      'docroot' => '../../',
       'page' => $page,
       'numpages' => $room->getNumPages()
     ));
     $room->close();
     $app->render('archive.html');
-  })->conditions(array('page' => '[1-9][0-9]{0,}'));
+  })->conditions(array('page' => $numericRouteCondition));
   
   // Generate some statistics for the room
   $app->get('/:id/stats/', function ($id) use ($app) {
@@ -131,7 +135,6 @@ $app->group('/rp', $downCheck, function() use ($app) {
         'title' => $room->getTitle(),
         'desc' => $room->getDesc(),
         'room' => $id,
-        'docroot' => '../../'
       ))
     );
     $room->close();
@@ -171,6 +174,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
 
 // API
 $app->group('/api', $downCheckAjax, function() use ($app) {
+  global $numericRouteCondition;
   
   // Get archive page data
   $app->get('/archive/', function () use ($app) {
@@ -184,7 +188,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     );
     $room->close();
     echo json_encode($data);
-  })->conditions(array('page' => '[1-9][0-9]{0,}'));
+  })->conditions(array('page' => $numericRouteCondition));
   
   // Get latest posts for room
   $app->get('/chat/', function () use ($app) {
@@ -277,8 +281,7 @@ $app->get('/sample/', $downCheck, function () use ($app) {
     'desc' => 'This is what an RP will look like!',
     'sample' => true,
     'numpages' => 1,
-    'page' => 1,
-    'docroot' => './'
+    'page' => 1
   ));
   $app->render('archive.html');
 });
@@ -289,6 +292,8 @@ $app->get('/sample/archive/', function () use ($app) {
 
 // Admin panel!
 if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
+  require_once 'backend/Admin.php';
+  
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     'path' => '/admin/',
     'realm' => 'RPNow Admin Panel',
@@ -296,13 +301,110 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
       $rpAdminPanelUser => $rpAdminPanelPass
     )
   )));
-  $app->get('/admin/', function () use ($app) {
-    $data = array(
-      'rps' => Room::AuditRooms(),
-      'docroot' => ''
-    );
-    $app->view()->setData($data);
-    $app->render('admin.html');
+  
+  $app->group('/admin', function() use ($app) {
+    global $numericRouteCondition;
+    
+    // admin home
+    $app->get('/', function () use ($app) {
+      $app->render('admin/dash.html');
+    });
+    
+    // RPs that were most recently active
+    $app->get('/activity(/:num)/', function ($num = 30) use ($app) {
+      $rps = Admin::RecentActivity($num);
+      $app->view()->setData(array(
+        'title' => 'Recent Activity',
+        'description' => 'Showing the ' . count($rps) . ' most recently active RPs.',
+        'rps' => $rps
+      ));
+      $app->render('admin/rptable.html');
+    })->conditions(array('num' => $numericRouteCondition));
+    
+    // RPs ordered by most recently created
+    $app->get('/newest(/:num)/', function ($num = 30) use ($app) {
+      $rps = Admin::NewestRooms($num);
+      $app->view()->setData(array(
+        'title' => 'Newest RPs',
+        'description' => 'Showing the ' . count($rps) . ' most recently created RPs.',
+        'rps' => $rps
+      ));
+      $app->render('admin/rptable.html');
+    })->conditions(array('num' => $numericRouteCondition));
+    
+    // top rps in the last (hour, day, week, month, all-time)
+    $app->get('/top(/:scale(/:num))/', function ($scale = 'day', $num = 30) use ($app) {
+      // get relevent RPs
+      $rps = null;
+      $description = null;
+      // all-time top...
+      if($scale == 'all-time') {
+        $rps = Admin::AllTimeTopRPs($num);
+        $description = "Showing the " . count($rps) . " RPs with the all-time highest number of posts.";
+      }
+      // ...or top within certain scale
+      else {
+        $hour = 60 * 60;
+        $scales = array(
+          'hour' => 1 * $hour,
+          'day' => 24 * $hour,
+          'week' => 7 * 24 * $hour,
+          'month' => 28 * 24 * $hour
+        );
+        if(!isset($scales[$scale])) throw new Exception('Invalid timescale.');
+        $secs = $scales[$scale];
+        $rps = Admin::TopRPs($secs, $num);
+        $description = "Showing the top " . count($rps) . " RPs with the most posts in the last $scale.";
+      }
+      // render
+      $app->view()->setData(array(
+        'title' => "Top RPs ($scale)",
+        'description' => $description,
+        'rps' => $rps
+      ));
+      $app->render('admin/rptable.html');
+    });
+    
+    // RPs with the most time between their start and their most recent post
+    $app->get('/duration(/:num)/', function ($num = 30) use ($app) {
+      $rps = Admin::LongestDuration($num);
+      $app->view()->setData(array(
+        'title' => 'Longest Duration RPs',
+        'description' => 'Showing the ' . count($rps) . ' RPs with the longest amount of time between the first and last post.',
+        'rps' => $rps
+      ));
+      $app->render('admin/rptable.html');
+    })->conditions(array('num' => $numericRouteCondition));
+    
+    // streams messages from all RPs into one channel
+    $app->get('/activity-stream/', function () use ($app) {
+      echo "Stream of all messages from all RPs";
+    });
+    
+    // search for keywords in titles, or in fulltext
+    $app->get('/search/:type/:keyword/', function ($type, $keyword) use ($app) {
+      // convert '+' back to a space and decode other uri elements
+      $keyword = urldecode($keyword);
+      // search
+      $rps = null;
+      if($type == 'title') {
+        $rps = Admin::SearchTitles($keyword, 30);
+        $description = 'Showing most recent ' . count($rps) . ' RPs with "' . $keyword . '" in the title.';
+      }
+      else if($type == 'fulltext') {
+        $rps = Admin::SearchFull($keyword, 30);
+        $description = 'Showing most recent ' . count($rps) . ' RPs where "' . $keyword . '" was sent in some message.';
+      }
+      else {
+        throw new Exception("Unknown search type: $type");
+      }
+      $app->view()->setData(array(
+        'title' => 'Search Results',
+        'description' => $description,
+        'rps' => $rps
+      ));
+      $app->render('admin/rptable.html');
+    });
   });
 }
 
