@@ -1,9 +1,10 @@
 {% extends "article.layout.html" %}
 
-{% block title %}ADMIN{% endblock %}
+{% block title %}[ADMIN] Recent RPs{% endblock %}
 
 {% block content %}
-  <h1>ADMIN</h1>
+  <h1>Recent Activity</h1>
+  <p>Showing {{ rps|length }} most recent RPs.</p>
   <table>
     <thead>
       <tr>

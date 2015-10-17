@@ -10,6 +10,9 @@ $app->view()->setData(array('version'=>$rpVersion));
   'id' => '['.preg_quote($rpIDChars).']{'.$rpIDLength.'}'
 ));
 
+// numeric routes use this regex
+$numericRouteCondition = '[1-9][0-9]{0,}';
+
 // Maintenance Mode Middleware
 $downCheck = function () use ($app) {
   global $rpDown;
@@ -93,7 +96,8 @@ $app->post('/create/', $downCheck, function () use ($app) {
 
 // RP Pages
 $app->group('/rp', $downCheck, function() use ($app) {
-
+  global $numericRouteCondition;
+  
   // Main room chat
   $app->get('/:id/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -123,7 +127,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     ));
     $room->close();
     $app->render('archive.html');
-  })->conditions(array('page' => '[1-9][0-9]{0,}'));
+  })->conditions(array('page' => $numericRouteCondition));
   
   // Generate some statistics for the room
   $app->get('/:id/stats/', function ($id) use ($app) {
@@ -173,6 +177,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
 
 // API
 $app->group('/api', $downCheckAjax, function() use ($app) {
+  global $numericRouteCondition;
   
   // Get archive page data
   $app->get('/archive/', function () use ($app) {
@@ -186,7 +191,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     );
     $room->close();
     echo json_encode($data);
-  })->conditions(array('page' => '[1-9][0-9]{0,}'));
+  })->conditions(array('page' => $numericRouteCondition));
   
   // Get latest posts for room
   $app->get('/chat/', function () use ($app) {
@@ -302,21 +307,21 @@ if(isset($rpAdminPanelEnabled) && $rpAdminPanelEnabled) {
   )));
   
   $app->group('/admin', function() use ($app) {
+    global $numericRouteCondition;
     
     // admin home
     $app->get('/', function () use ($app) {
-      $data = array(
-        'rps' => Admin::AuditRooms(),
-        'docroot' => ''
-      );
-      $app->view()->setData($data);
-      $app->render('admin.html');
     });
     
     // RPs that were most recently active
-    $app->get('/recent-activity/', function () use ($app) {
-      echo "Recently active RPs";
-    });
+    $app->get('/activity(/:num)/', function ($num = 30) use ($app) {
+      $rps = Admin::RecentActivity($num);
+      $app->view()->setData(array(
+        'rps' => $rps,
+        'docroot' => $app->request->getRootUri() . '/'
+      ));
+      $app->render('admin/activity.html');
+    })->conditions(array('num' => $numericRouteCondition));
     
     // top rps in the last (hour, day, week, month, all-time)
     $app->get('/most-posts/:scale/', function ($scale) use ($app) {
