@@ -117,8 +117,8 @@ class Admin {
       `Room`.`ID`,
       `Room`.`Time_Created`,
       `Room`.`IP`,
-      `Room`.`ID`,
-      `Room`.`Number`,
+      (SELECT COALESCE(MAX(`Message`.`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
+      (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`,
       COUNT(*) AS `Found_Count`
       FROM `Message` LEFT JOIN `Room` ON (
         `Room`.`Number` = `Message`.`Room_Number`
