@@ -306,7 +306,7 @@ header #title-links a {
 #messages > .message-narrator > .content {
   border: dotted 1px #bbb;
   padding: 5px;
-  text-align: center;
+  text-align: left;
 }
 #messages > .message-narrator > .content::first-letter {
   font-size: 125%;
