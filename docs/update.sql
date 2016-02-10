@@ -1,3 +1,4 @@
+/* legacy - ignore me if you're setting things up for the first time */
 /* rp.js update */
 
 ALTER TABLE `Message` CHANGE `Timestamp` `Time_Created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
