@@ -9,10 +9,10 @@ class Room {
   const GENERIC_EXCEPTION = 776690000;
   const ROOM_NOT_FOUND_EXCEPTION = 776690001;
   const INVALID_ROOM_ID_EXCEPTION = 776690002;
-  
+
   private static function GenerateID() {
     require_once 'lib/random_compat/lib/random.php';
-    
+
     global $rpIDLength, $rpIDChars;
     $id = '';
     for ($i = 0; $i < $rpIDLength; $i++) {
@@ -20,7 +20,7 @@ class Room {
     }
     return $id;
   }
-  
+
   public static function IsValidID($id) {
     global $rpIDLength, $rpIDChars;
     return preg_match(
@@ -28,7 +28,7 @@ class Room {
       $id
     );
   }
-  
+
   private $db;
   private $id;
   private $roomNum;
@@ -36,7 +36,7 @@ class Room {
   private $desc;
   private $numMsgs;
   private $numChars;
-  
+
   private function __construct($db, $id, $roomNum, $title, $desc, $numChars, $numMsgs) {
     $this->db = $db;
     $this->id = $id;
@@ -46,7 +46,7 @@ class Room {
     $this->numMsgs = $numMsgs;
     $this->numChars = $numChars;
   }
-  
+
   public static function CreateRoom($title, $desc) {
     $conn = RPDatabase::createConnection();
     do {
@@ -59,7 +59,7 @@ class Room {
     $conn = null;
     return $id;
   }
-  
+
   public static function GetRoom($id) {
     if(!Room::IsValidID($id)) {
       throw new Exception("Malformed Room ID: '$id'", Room::INVALID_ROOM_ID_EXCEPTION);
@@ -81,34 +81,24 @@ class Room {
     $row = $statement->fetch();
     return new Room($conn, $id, $row['Number'], $row['Title'], $row['Description'], +$row['CharacterCount'], +$row['MessageCount']);
   }
-  
-  public static function GetNewId($oldId) {
-    $conn = RPDatabase::createConnection();
-    
-    $statement = $conn->prepare('SELECT `New_Id` FROM `Room_Migration` WHERE `Old_Id` = ?');
-    $statement->execute(array($oldId));
-    $row = $statement->fetch();
-    if(!$row[0]) return null;
-    else return $row[0];
-  }
-  
+
   public function close() {
     RPDatabase::closeGracefully($this->db);
   }
-  
+
   public function getID() { return $this->id; }
   public function getTitle() { return $this->title; }
   public function getDesc() { return $this->desc; }
   public function getMessageCount() { return $this->numMsgs; }
   public function getCharacterCount() { return $this->numChars; }
-  
+
   private static function IDExists($id, $conn) {
     $statement = $conn->prepare("SELECT COUNT(*) FROM `Room` WHERE `ID` = ? LIMIT 1");
     $statement->execute(array($id));
     $row = $statement->fetch();
     return $row[0] == '1';
   }
-  
+
   private static function getIPColors($ip) {
     $md5str = md5($ip);
     return array(
@@ -117,7 +107,7 @@ class Room {
       '#' . substr($md5str, 12, 6)
     );
   }
-  
+
   public function getMessages($which, $n = NULL) {
     $room = $this->getID();
     global $rpPostsPerPage;
@@ -183,7 +173,7 @@ class Room {
       $statement->fetchAll()
     );
   }
-  
+
   public function getCharacters($after = 0) {
     if(intval($after) === false || intval($after) != floatval($after) || intval($after) < 0) {
       throw new Exception("invalid character request: $after is a bad number.");
@@ -214,12 +204,12 @@ class Room {
       $statement->fetchAll()
     );
   }
-  
+
   public function getNumPages() {
     global $rpPostsPerPage;
     return ceil($this->getMessageCount() / $rpPostsPerPage);
   }
-  
+
   public function getTranscript() {
     // all messages
     $statement = $this->db->prepare('SELECT
@@ -229,7 +219,7 @@ class Room {
     $statement->execute(array($this->roomNum));
     return $statement->fetchAll();
   }
-  
+
   public function getStatsArray() {
     $dataStatement = $this->db->prepare("SELECT
       MAX(`Time_Created`) AS `LatestMessageDate`,
@@ -239,7 +229,7 @@ class Room {
       SUM(if(`Type`='Narrator', char_length(`Content`),0)) AS `NarratorCharCount`,
       SUM(if(`Type`='Character', char_length(`Content`),0)) AS `CharacterCharCount`,
       SUM(if(`Type`='OOC', char_length(`Content`),0)) AS `OOCCharCount`
-      
+
       FROM `Message`
       WHERE `Room_Number` = ?"
     );
@@ -261,7 +251,7 @@ class Room {
       'TopCharacters' => $top5Statement->fetchAll()
     );
   }
-  
+
   public function addMessage($type, $content, $charaNum = null) {
     if(!in_array($type, array('Narrator', 'Character', 'OOC'))) {
       throw new Exception('Invalid type: ' . $type);
@@ -273,13 +263,13 @@ class Room {
     $statement = null;
     if($type == 'Character') {
       if(!is_int($charaNum) && !ctype_digit($charaNum)) throw new Exception("$charaNum is not an int.");
-      
+
       // validate charaNum
       $statement = $this->db->prepare('SELECT `Room_Number` FROM `Character` WHERE `Number` = ?');
       $statement->execute(array($charaNum));
       if($statement->rowCount() != 1 || $statement->fetch()['Room_Number'] != $this->roomNum)
         throw new Exception("invalid character number: $charaNum");
-      
+
       $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room_Number`, `IP`, `Chara_Number`) VALUES (?, ?, ?, ?, ?)");
       $statement->execute(array($type, $content, $this->roomNum, $_SERVER['REMOTE_ADDR'], $charaNum));
     }
@@ -287,9 +277,9 @@ class Room {
       $statement = $this->db->prepare("INSERT INTO `Message` (`Type`, `Content`, `Room_Number`, `IP`) VALUES (?, ?, ?, ?)");
       $statement->execute(array($type, $content, $this->roomNum, $_SERVER['REMOTE_ADDR']));
     }
-    
+
   }
-  
+
   public function addCharacter($name, $color) {
     $name = trim($name);
     if(!$name) {

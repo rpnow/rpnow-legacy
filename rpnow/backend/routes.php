@@ -94,38 +94,6 @@ $app->post('/create/', $downCheck, function () use ($app) {
   $app->redirect('rp/' . $roomId);
 });
 
-// Old RP Pages
-$app->get('/:oldid/', $downCheck, function ($oldId) use ($app) {
-  $newId = Room::GetNewId($oldId);
-  if($newId) {
-    $app->view()->setData(array(
-      'docroot'=> $app->request->getRootUri() . '/',
-      'oldId' => $oldId,
-      'newId' => $newId,
-      'baseUrl' => $_SERVER['HTTP_HOST'] . '/' . $app->request()->getRootUri()
-    ));
-    $app->render('moved.html');
-  }
-  else {
-    $app->pass();
-  }
-})->conditions(array('oldid' => '[0-9a-zA-Z]{4}'));
-$app->get('/:oldid/:p', $downCheck, function ($oldId, $p) use ($app) {
-  $newId = Room::GetNewId($oldId);
-  if($newId) {
-    $app->view()->setData(array(
-      'docroot'=> $app->request->getRootUri() . '/',
-      'oldId' => $oldId,
-      'newId' => $newId,
-      'baseUrl' => $_SERVER['HTTP_HOST'] . '/' . $app->request()->getRootUri()
-    ));
-    $app->render('moved.html');
-  }
-  else {
-    $app->pass();
-  }
-})->conditions(array('oldid' => '[0-9a-zA-Z]{4}'));
-
 // RP Pages
 $app->group('/rp', $downCheck, function() use ($app) {
   global $numericRouteCondition;
