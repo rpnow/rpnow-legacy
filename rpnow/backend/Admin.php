@@ -8,14 +8,22 @@ class Admin {
   public static function RecentActivity($maxRows) {
     $conn = RPDatabase::createConnection();
     return $conn->query("SELECT
-      `Title`,
-      `ID`,
-      `Time_Created`,
-      `IP`,
-      (SELECT COALESCE(MAX(`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
-      (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`
-      FROM `Room`
-      ORDER BY `Time_Updated` DESC LIMIT $maxRows"
+      `Room`.`Title`,
+      `Room`.`ID`,
+      `Room`.`Time_Created`,
+      `Room`.`IP`,
+      `Sub_Query`.`Num_Msgs`,
+      (SELECT `Time_Created` FROM `Message` WHERE `Number` = `Sub_Query`.`Latest_Msg`) AS `Time_Updated`
+      FROM (SELECT
+        `Room`.`Number` AS `Room_Number`,
+        MAX( `Message`.`Number` ) AS `Latest_Msg`,
+        COUNT( * ) AS `Num_Msgs`
+        FROM `Message`
+        LEFT JOIN `Room` ON `Room_Number` = `Room`.`Number`
+        GROUP BY `Room_Number`
+        ORDER BY `Latest_Msg` DESC LIMIT $maxRows
+      ) AS `Sub_Query`
+      LEFT JOIN `Room` ON `Sub_Query`.`Room_Number` = `Room`.`Number`"
     )->fetchAll();
   }
   
@@ -109,8 +117,8 @@ class Admin {
       `Room`.`ID`,
       `Room`.`Time_Created`,
       `Room`.`IP`,
-      `Room`.`ID`,
-      `Room`.`Number`,
+      (SELECT COALESCE(MAX(`Message`.`Time_Created`), `Room`.`Time_Created`) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Time_Updated`,
+      (SELECT COUNT(*) FROM `Message` WHERE `Message`.`Room_Number` = `Room`.`Number`) AS `Num_Msgs`,
       COUNT(*) AS `Found_Count`
       FROM `Message` LEFT JOIN `Room` ON (
         `Room`.`Number` = `Message`.`Room_Number`
