@@ -88,9 +88,9 @@ var RPRandom = (function() {
       "Queen",
       "Reason", "Reflection", "Ring", "Ridge", "Rock",
       "Sailboat", "Seed", "Shade", "Shadow", "Ship", "Skull", "Sky", "Smile", "Something", "Someone", "Sound", "Soul", "Spider", "Spike", "Spoon", "Spout", "Spring", "Stable", "Stair", "Star", "Stone", "Stranger", "String", "Sugar",
-      "Tear", "Theme", "Theory", "Throne", "Time", "Touch", "Tree",
+      "Taste", "Tear", "Theme", "Theory", "Throne", "Time", "Touch", "Tree",
       "Ultimatum", "Umbrella",
-      "Vinegar", "Void", "Voyage",
+      "Victory", "Vinegar", "Void", "Voyage",
       "Wand", "Wanderer", "Water", "Wedding", "Wind", "Wing", "Winter", "Wolf", "Word", "Worth", "Wraith", "Wrath", "Wrinkle",
       "Zone", "Zoo"
     ],
@@ -113,9 +113,9 @@ var RPRandom = (function() {
       "Queens",
       "Reasons", "Reflections", "Rings", "Ridges", "Rocks",
       "Sailboats", "Seeds", "Shades", "Shadows", "Ships", "Skulls", "Skies", "Smiles", "Somethings", "Sounds", "Souls", "Spiders", "Spikes", "Spoons", "Spouts", "Springs", "Stables", "Stairs", "Stars", "Stones", "Strangers", "Strings", "Sugars",
-      "Tears", "Themes", "Theories", "Thrones", "Times", "Touches", "Trees",
+      "Tastes", "Tears", "Themes", "Theories", "Thrones", "Times", "Touches", "Trees",
       "Ultimatums", "Umbrellas",
-      "Voyages",
+      "Victories", "Voyages",
       "Wands", "Wanderers", "Waters", "Weddings", "Winds", "Wings", "Winters", "Wolves", "Words", "Wraiths", "Wrinkles",
       "Zones", "Zoos"
     ],
@@ -146,7 +146,7 @@ var RPRandom = (function() {
       "Enormous", "Envious",
       "Fallen", "First", "Formal",
       "Green",
-      "Haunted", "Hectic", "Hidden", "Hot", "Humble", "Hungry",
+      "Haunted", "Hectic", "Hidden", "Horrible", "Hot", "Humble", "Hungry",
       "Littlest", "Light", "Locked", "Lost",
       "Old",
       "Peculiar", "Periwinkle",
@@ -207,7 +207,7 @@ var RPRandom = (function() {
       "Waking", "Wearing", "Wishing",
     ],
   };
-  
+
   // function for replacing individual terms in a string
   function dictRep(match, inner) {
     var x = dictionary[inner];
