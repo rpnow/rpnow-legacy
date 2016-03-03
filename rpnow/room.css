@@ -8,6 +8,9 @@
     -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
   }
 }
+html {
+  height: 100%;
+}
 body {
   background-color: #fafafa;
   color: #3c3c3c;
@@ -38,26 +41,30 @@ li {
 input, textarea, button {
   font-family: serif;
   vertical-align: middle;
+  -webkit-appearance: none;
 }
 input[type=text],
 textarea {
   background-color: white;
-  border: solid 1px #555;
-  box-shadow: 0 1px 1px #555 inset;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px #aaa inset;
   font-size: 16px;
   padding: 3px;
 }
 input[type=submit], button {
   font-size:18px;
-  color: #222;
+  color: #43033B;
   font-weight: bold;
+  display: inline-block;
+  background-color: inherit;
 }
 input[type=submit]:not(.btn-margin), button:not(.btn-margin),
 .btn-margin > span {
-  background-color: #fff;
-  border: solid 1px #3c3c3c;
-  box-shadow: 0 1px 2px #888;
+  border: solid 1px #555;
+  color: #555;
   padding: 6px 12px;
+  background-color: inherit;
   border-radius: 8px;
 }
 .btn-margin {
@@ -75,8 +82,8 @@ input[type=submit]:hover, button:hover {
 }
 input[type=submit]:not(.btn-margin):hover, button:not(.btn-margin):hover,
 .btn-margin:hover > span {
-  background-color: #3c3c3c;
-  box-shadow: 0 1px 10px #555;
+  border: 1px solid #3c3c3c;
+  background-color: #555;
   color: #fafafa;
 }
 table, th, td {
@@ -85,6 +92,7 @@ table, th, td {
 td {
   padding: 4px;
 }
+.hidden { display: none; }
 
 
 
@@ -115,7 +123,8 @@ form.form-box .input-name {
 form.form-box .input-name::after {
   content: ":";
 }
-form.form-box input[type=submit] {
+form.form-box input[type=submit],
+form.form-box button.btn-submit {
   font-size: 18px;
   margin-top: 20px;
   background-color: #fff;
@@ -206,6 +215,142 @@ form.form-box .input-button button {
   color: white;
 }
 
+
+
+/**********************************************************
+ * homepage:
+ *   HOMEPAGE
+ *
+ **********************************************************/
+body.home {
+  margin: 0;
+  padding: 5px;
+  min-height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding-bottom: 100px;
+}
+h1#home-title {
+  font-size: 80px;
+  margin: 10vmin 0;
+}
+form#new-rp {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+form#new-rp fieldset {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  position: relative;
+}
+form#new-rp input,
+form#new-rp textarea,
+form#new-rp button.btn-submit {
+  font-size: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 6px 0;
+  padding: 10px;
+}
+form#new-rp input:not([type=submit])
+form#new-rp textarea {
+
+}
+form#new-rp #rp-name {
+  font-size: 28px;
+}
+form#new-rp input:focus,
+form#new-rp textarea:focus {
+  box-shadow: 0 2px 2px #AF4FA3 inset;
+}
+
+
+
+form#new-rp input.input-with-button {
+  padding-right: 25%;
+}
+form#new-rp input.input-with-button + button {
+  color: #aaa;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top:0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+form#new-rp input.input-with-button + button:hover {
+  color: #DC22C3;
+}
+
+
+form#new-rp input[type=submit] {
+  width: 49%;
+  margin-right: 1%;
+  color: #DC22C3;
+  border-color: #DC22C3;
+}
+form#new-rp input[type=submit]:hover {
+  background-color: #DC22C3;
+  color:white;
+}
+form#new-rp button.btn-submit {
+  width: 49%;
+  margin-left: 1%;
+}
+
+
+@media all and (max-width: 480px) {
+  h1#home-title {
+    font-size: 22vmin;
+  }
+  form#new-rp #rp-name {
+    font-size: 6vw;
+  }
+  form#new-rp textarea {
+    font-size: 16px;
+  }
+  form#new-rp input.input-with-button + button {
+    font-size: 5vw;
+  }
+  form#new-rp input[type=submit],
+  form#new-rp button.btn-submit {
+      font-size: 5vw;
+  }
+
+}
+
+p#terms-info {
+  opacity: 0.5;
+}
+p#terms-info:hover {
+  opacity: 1;
+}
+
+body.home footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 25px;
+  opacity: 0.5;
+}
+body.home footer:hover {
+  opacity: 1;
+}
+body.home footer ul { padding: 0; }
+body.home footer li {
+  display: inline-block;
+  padding: 0;
+}
+body.home footer li + li {
+  border-left: dotted 1px #444;
+  margin-left: 8px;
+  padding-left: 10px;
+}
 
 
 /**********************************************************
