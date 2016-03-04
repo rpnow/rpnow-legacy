@@ -97,7 +97,7 @@ $app->post('/create/', $downCheck, function () use ($app) {
 // RP Pages
 $app->group('/rp', $downCheck, function() use ($app) {
   global $numericRouteCondition;
-  
+
   // Main room chat
   $app->get('/:id/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -109,7 +109,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $room->close();
     $app->render('room.html');
   });
-  
+
   // Archive pages
   $app->get('/:id/:page/', function ($id, $page) use ($app) {
     $room = Room::GetRoom($id);
@@ -126,7 +126,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $room->close();
     $app->render('archive.html');
   })->conditions(array('page' => $numericRouteCondition));
-  
+
   // Generate some statistics for the room
   $app->get('/:id/stats/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -140,7 +140,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $room->close();
     $app->render('stats.html');
   });
-  
+
   // Export room to txt file
   $app->get('/:id/export/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -164,7 +164,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
       else {
         echo str_replace("\n", "\r\n", wordwrap($message['Content'], 72, "\n"));
       }
-      
+
       echo "\r\n\r\n";
     }
     $room->close();
@@ -175,7 +175,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
 // API
 $app->group('/api', $downCheckAjax, function() use ($app) {
   global $numericRouteCondition;
-  
+
   // Get archive page data
   $app->get('/archive/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -189,7 +189,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     $room->close();
     echo json_encode($data);
   })->conditions(array('page' => $numericRouteCondition));
-  
+
   // Get latest posts for room
   $app->get('/chat/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -209,7 +209,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     $room->close();
     echo json_encode($data);
   });
-  
+
   // Receive room updates
   function echoRoomUpdates($room, $app) {
     $msgs = null;
@@ -222,11 +222,11 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
       $msgs = $room->getMessages('after', $app->request()->post('msgCounter'));
       $charas = $room->getCharacters($app->request()->post('charaCounter'));
     }
-    
+
     $data = array();
     if(count($msgs) != 0) $data['newMsgs'] = $msgs;
     if(count($charas) != 0) $data['newCharas'] = $charas;
-    
+
     echo json_encode($data);
   }
   $app->get('/updates/', function () use ($app) {
@@ -236,7 +236,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     echoRoomUpdates($room, $app);
     $room->close();
   });
-  
+
   // Send message to room
   $app->post('/message/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -258,7 +258,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     echoRoomUpdates($room, $app);
     $room->close();
   });
-  
+
   // Add character to room
   $app->post('/character/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -274,40 +274,24 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
 
 });
 
-// Sample room!
-$app->get('/sample/', $downCheck, function () use ($app) {
-  $app->view()->setData(array(
-    'title' => 'Sample Roleplay',
-    'desc' => 'This is what an RP will look like!',
-    'sample' => true,
-    'numpages' => 1,
-    'page' => 1
-  ));
-  $app->render('archive.html');
-});
-$app->get('/sample/archive/', function () use ($app) {
-  $app->response->headers->set('Content-Type', 'application/json');
-  readfile('assets/sample_rp.json');
-});
-
 // Admin panel!
 if(isset($rpAdminCredentials)) {
   require_once 'backend/Admin.php';
-  
+
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     'path' => '/admin/',
     'realm' => 'RPNow Admin Panel',
     'users' => $rpAdminCredentials
   )));
-  
+
   $app->group('/admin', function() use ($app) {
     global $numericRouteCondition;
-    
+
     // admin home
     $app->get('/', function () use ($app) {
       $app->render('admin/dash.html');
     });
-    
+
     // RPs that were most recently active
     $app->get('/activity(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::RecentActivity($num);
@@ -318,7 +302,7 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
-    
+
     // RPs ordered by most recently created
     $app->get('/newest(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::NewestRooms($num);
@@ -329,7 +313,7 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
-    
+
     // top rps in the last (hour, day, week, month, all-time)
     $app->get('/top(/:scale(/:num))/', function ($scale = 'day', $num = 30) use ($app) {
       // get relevent RPs
@@ -362,7 +346,7 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     });
-    
+
     // RPs with the most time between their start and their most recent post
     $app->get('/duration(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::LongestDuration($num);
@@ -373,12 +357,12 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
-    
+
     // streams messages from all RPs into one channel
     $app->get('/activity-stream/', function () use ($app) {
       echo "Stream of all messages from all RPs";
     });
-    
+
     // search for keywords in titles, or in fulltext
     $app->get('/search/:type/:keyword/', function ($type, $keyword) use ($app) {
       // convert '+' back to a space and decode other uri elements

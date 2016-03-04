@@ -5,7 +5,7 @@
 {% macro pages(docroot, room, page, numpages) %}
   {% if numpages > 1 %}
     <div class="pages">
-      Page: 
+      Page:
       {% for i in 1..numpages %}
         {% if i == page %}<b>{{ i }}</b>
         {% else %}<a href="{{ docroot }}rp/{{ room }}/{{ i }}">{{ i }}</a>{% endif %}
@@ -30,11 +30,7 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
   <script src='{{ docroot }}rp.js'></script>
   <script>
-    {% if sample %}
-    var rp = new RP(RP.SAMPLE);
-    {% else %}
     var rp = new RP('{{ room }}');
-    {% endif %}
     rp.fetchPage({{ page }}, function(e) {
       $('#loading').hide();
       for(var i = 0; i < e.msgs.length; ++i) {

@@ -10,7 +10,6 @@
   <header>
     <h2>{{ title }}</h2>
     <p>{{ desc }}</p>
-    {% if not sample %}
     <div id="title-links">
       <a href="{{ docroot }}rp/{{ room }}">Home</a> |
       <a href="{{ docroot }}rp/{{ room }}/1">Archive</a> |
@@ -18,9 +17,8 @@
       <a href="{{ docroot }}rp/{{ room }}/stats">Stats</a> |
       <a href="{{ docroot }}">New RP</a>
     </div>
-    {% endif %}
   </header>
-    
+
   {% block content %}
   {% endblock %}
   <script src="{{ docroot }}motd.js?v={{ version }}"></script>

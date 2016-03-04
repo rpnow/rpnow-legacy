@@ -2,7 +2,7 @@ function RP(id) {
   var rp = this;
   // properties
   Object.defineProperty(this, 'id', { get: function() { return id; }});
-  
+
   // ajax requests
   // pieced together from: http://stackoverflow.com/questions/8567114/
   function ajax(url, method /*, data, callback */) {
@@ -14,15 +14,9 @@ function RP(id) {
     if(arguments.length >= 3 && typeof(arguments[2]) === 'object')
       data = arguments[2];
     // request URL
-    var reqUrl;
-    if(rp.id === RP.SAMPLE) {
-      reqUrl = RP.path + '/sample/' + url;
-    }
-    else {
-      reqUrl = RP.path + '/api/' + url;
-      data = data || {};
-      data.id = rp.id;
-    }
+    var reqUrl = RP.path + '/api/' + url;
+    data = data || {};
+    data.id = rp.id;
     var req = new XMLHttpRequest();
     // callback function on success
     if(callback) req.onreadystatechange = function() {
@@ -47,7 +41,7 @@ function RP(id) {
     if(method === 'GET' || !queryString) req.send();
     else req.send(queryString);
   }
-  
+
   // load a single page
   this.fetchPage = function(pageNum, callback) {
     var msgs = [];
@@ -65,7 +59,7 @@ function RP(id) {
       callback({ msgs: msgs, charas: charas });
     });
   };
-  
+
   // load a chat object
   this.chat = function() {
     var chat = {};
@@ -150,16 +144,16 @@ function RP(id) {
     };
     /*
     chat.deleteMessage = function(id) {
-      
+
     };
     chat.deleteChara = function(id) {
-      
+
     };
     chat.undeleteMessage = function(id) {
-      
+
     };
     chat.undeleteChara = function(id) {
-      
+
     };*/
     // when an update comes in
     function processUpdates(data) {
@@ -246,7 +240,7 @@ function RP(id) {
     // done.
     return chat;
   };
-  
+
   // classes
   function Message(data, charas) {
     Object.defineProperties(this, {
@@ -309,7 +303,7 @@ function RP(id) {
         return undefined;
       })()}
     });
-    
+
   }
   function Chara(data) {
     Object.defineProperties(this, {
@@ -339,7 +333,7 @@ function RP(id) {
       }}
     });
   }
-  
+
   // format message content
   Message.formatContentReceived = function(text, chara) {
     // escape special characters
@@ -366,11 +360,11 @@ function RP(id) {
     str = str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
     // mdash
     str = str.replace(/--/g, '&mdash;');
-    
+
     // done.
     return str;
   };
-  
+
   // escape html special chars from AJAX updates
   //  http://stackoverflow.com/questions/1787322/
   function escapeHtml(text) {
@@ -390,4 +384,3 @@ RP.path = (function() {
     src = scripts[scripts.length-1].src;
   return src.substring(0, src.lastIndexOf('/'));
 })();
-RP.SAMPLE = { isSample: true };
