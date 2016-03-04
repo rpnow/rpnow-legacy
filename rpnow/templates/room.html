@@ -19,7 +19,7 @@
         <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
         <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
         <li><b>Don't post any sensitive information here!</b> In the event of a database breach, we would not want anything confidential to be lost.</li>
-        <li>RP Now is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
+        <li>RPNow is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
       </ol>
       <p>Have fun!</p>
     </div>
@@ -27,7 +27,7 @@
       <p>Loading...</p>
     </div>
   </div>
-  
+
   <div id="character-menu" style="display:none">
     <h3>Characters</h3>
     <ul id="special-characters">
@@ -37,7 +37,7 @@
     <ul id="normal-characters"></ul>
     <button type="button" id="new-character-button">New Character...</button>
   </div>
-  
+
   <form id="new-character" class="form-box" autocomplete="off" style="display:none">
     <h3>New Character</h3>
     <div class="input-section">
@@ -51,7 +51,7 @@
     <input type="submit" value="Add"></input>
     <button type="button" id="cancel-character">Cancel</button>
   </form>
-  
+
   <div id="message-box" autocomplete="off" style="display:none">
     <div id="format-bar">
       <div id="message-voice"></div>
@@ -67,19 +67,19 @@
       </div>
     </div>
   </div>
-  
-  
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js'></script>
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.css' />
   <script src='//cdnjs.cloudflare.com/ajax/libs/spectrum/1.6.1/spectrum.min.js'></script>
   <script src='{{ docroot }}rp.js?v={{ version }}'></script>
-  
+
   <script>
     // load rp and attach events
     var rp = new RP('{{ room }}');
     var chat = rp.chat();
-    
+
     var setVoice;
     (function() {
       var voice;
@@ -111,11 +111,11 @@
         }
       }
     })();
-    
+
     function localStorageKey(name) {
       return 'room_' + rp.id + '_' +  name;
     }
-    
+
     function showCharacterSelectMenu() {
       $('#character-menu').stop().slideDown(250);
     }
@@ -128,7 +128,7 @@
       hideCharacterSelectMenu();
       evt.preventDefault();
     }
-    
+
     function createOverlay() {
       $('<div/>', { id:'overlay' }).appendTo('body');
       $('#overlay').css({
@@ -144,21 +144,21 @@
     function destroyOverlay() {
       $('#overlay').remove();
     }
-    
+
     function showNewCharacterMenu() {
       createOverlay();
       $('#new-character').show();
       $('#new-character input[name=name]').focus();
     }
-    
+
     function hideNewCharacterMenu() {
       destroyOverlay();
       $('#new-character').hide();
     }
-    
+
     function formatSentMessage(content, voice) {
       content = content.trim();
-      
+
       var oocRegex = [
         /^\(\(\s*(.*[^\s])\s*\)\)$/g, // (( stuff ))
         /^\{+\s*(.*?[^\s])\s*\}+$/g, // { stuff }, {{ stuff }}, ...
@@ -173,33 +173,33 @@
           break;
         }
       }
-      
+
       // replace linebreak codes with actual linebreak
       content = content.replace(/(\\r\\n|\\n\\r|\\r|\\n|\&lt;br(?: ?\/)?\&gt;)/g, '\n');
-      
+
       if(!content) return;
       return { content: content, voice: voice };
     }
-    
+
     function sendMessage() {
       var msgData = formatSentMessage(
         $('#message-box textarea').val(),
         voice
       );
-      
+
       if(!msgData) return;
       chat.sendMessage(msgData.content, msgData.voice);
-      
+
       // clear message box
       $('#message-box textarea').val('');
     }
-    
+
     function scrollToBottom() {
       $('html, body').stop().animate({scrollTop: $(document).height()}, 500);
     }
-    
+
     var alertNoise = new Audio('../assets/alert.mp3');
-    
+
     var flashTitle = (function() {
       var oldTitle = document.title;
       var alertMsg = null;
@@ -225,9 +225,9 @@
         timerAction(msg);
       };
     })();
-    
+
     $(document).ready(function() {
-      
+
       chat.onLoad(function(msgs, charas) {
         $('#loading').hide();
         for(var i = 0; i < msgs.length; ++i) {
@@ -284,7 +284,7 @@
       chat.onUpdateChara(function(update) {
       });
       */
-      
+
       // button functions
       $('#character-menu li#narrator-button a').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
       $('#character-menu li#ooc-button a').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
@@ -297,13 +297,13 @@
       $('#send-button').click(sendMessage);
       $('#new-character').submit(function(evt) {
         evt.preventDefault();
-        
+
         var name = $('#new-character input[name=name]').val().trim();
         if(!name) throw new Error('Please enter a name.');
         var color = $('#new-character input[name=color]').val();
-        
+
         $('#new-character').hide();
-        
+
         chat.sendChara(name, color, function() {
           $('#new-character')[0].reset();
           $('#overlay').remove();
@@ -315,7 +315,7 @@
           sendMessage();
         }
       });
-      
+
       chat.load();
     });
   </script>
