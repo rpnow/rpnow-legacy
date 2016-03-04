@@ -12,7 +12,14 @@
     <h1 id="home-title">RPNow</h1>
     <fieldset>
       <input type="text" id="rp-name" class="input-with-button" name="title" maxlength="30" placeholder="Type a Title..." required autocomplete=off>
-      <button type="button" class="dice" onclick="document.querySelector('input[name=title]').value = RPRandom.shortTitle(25)">Random</button>
+      <button type="button" id="random-title-button" class="dice">Random</button>
+      <script>
+        function randoo(time) {
+          document.getElementById('rp-name').value = RPRandom.shortTitle(25);
+          if(time < 200.0) setTimeout(function() { randoo(time*1.2); }, time);
+        }
+        document.getElementById('random-title-button').addEventListener('click', function() { randoo(1.0); });
+      </script>
       </div>
     </fieldset>
     <fieldset class="hidden">
