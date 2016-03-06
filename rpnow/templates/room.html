@@ -258,6 +258,7 @@
         $('#messages').append(msg.createElement('relative'));
         while($('#messages .message').length > chat.maxMsgs) {
           $('#showing-latest').show();
+          $('#empty-room').hide();
           $('#messages .message:first').remove();
         }
         scrollToBottom();
