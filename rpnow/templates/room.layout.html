@@ -6,19 +6,24 @@
   <title>{% block title %}{{ title }}{% endblock %} - RPNow</title>
   <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css?v={{ version }}">
 </head>
-<body>
-  <header>
-    <h2>{{ title }}</h2>
-    <p>{{ desc }}</p>
-    <div id="title-links">
-      <a href="{{ docroot }}rp/{{ room }}">Home</a> |
-      <a href="{{ docroot }}rp/{{ room }}/1">Archive</a> |
-      <a href="{{ docroot }}rp/{{ room }}/export">Export</a> |
-      <a href="{{ docroot }}rp/{{ room }}/stats">Stats</a> |
-      <a href="{{ docroot }}">New RP</a>
+<body class="rp">
+  <header class="rp-titlebar">
+    <div>
+      <a class="logo" href="{{ docroot }}">RPNow</a>
+      <a href="{{ docroot }}rp/{{ room }}"><h2>{{ title }}</h2></a>
+      <ul id="title-links">
+        <li{% if pageSelected == 'home' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}">Roleplay</a></li>
+        <li{% if pageSelected == 'archive' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/1">Archive</a></li>
+        <li{% if pageSelected == 'stats' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/stats">Stats</a></li>
+        <li{% if pageSelected == 'export' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/export">Export</a></li>
+      </ul>
     </div>
   </header>
-
+  {% if desc %}
+  <div id="rp-description">
+    <p>{{ desc }}</p>
+  </div>
+  {% endif %}
   {% block content %}
   {% endblock %}
   <script src="{{ docroot }}motd.js?v={{ version }}"></script>

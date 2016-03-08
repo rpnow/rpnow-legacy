@@ -16,6 +16,7 @@ body {
   color: #3c3c3c;
   font-size: 18px;
   text-align: center;
+  margin: 0;
 }
 body.article {
   margin: 40px auto;
@@ -191,7 +192,7 @@ form.form-box .input-button button {
   padding: 20px 10px 10px;
   border: 2px solid #9AB3DC;
   animation: fadein 0.2s;
-  z-index: 900;
+  z-index: 2000;
 }
 @keyframes fadein {
   from { opacity: 0; }
@@ -358,46 +359,83 @@ body.home footer li + li {
  *   HEADER
  *
  **********************************************************/
-header{
-  border-bottom: ridge;
-  margin-bottom: 20px;
-  font-size:20px;
+body.rp {
+  padding-top: 85px;
 }
-header h2{
-  line-height:1;
+header.rp-titlebar {
+  z-index: 1000;
+  background-color: inherit;
+  background-color: #3c3c3c;
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 22px;
+  color: #F5DFF5;
+  box-shadow: 0 0px 10px rgba(104,52,120,0.5);
+  text-align: left;
+  height: 45px;
+  line-height: 45px;
+  vertical-align: middle;
+  padding: 5px 0;
 }
-header p {
-  margin: 0 auto 15px;
+header.rp-titlebar > div {
+  width: 100%;
+  height: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
-header #title-links a {
+header.rp-titlebar .logo {
+  border-right: solid 2px white;
+  padding-right: 5px;
   display: inline-block;
 }
+header.rp-titlebar h2 {
+  font-weight: bold;
+  display: inline-block;
+  font-size: inherit;
+  margin: 0;
+  color: white;
+}
+header.rp-titlebar ul {
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+header.rp-titlebar li {
+  display: inline-block;
+  height: 100%;
+  padding: 0 5px;
+}
+header.rp-titlebar #title-links a {
+  display: inline-block;
+}
+header.rp-titlebar #title-links .selected a {
+  color: white;
+  font-weight: bold;
+}
+header.rp-titlebar a {
+  color: #120B13;
+  color: #F5DFF5;
+  text-decoration: none;
+}
+header.rp-titlebar a:hover {
+  color: rgb(190,84,190);
+}
 @media all and (max-width: 750px) {
-  header h2{
-    margin: 25px auto 5px;
-  }
-  header #title-links {
-    padding-bottom: 5px;
-  }
 }
-@media not all and (max-width: 750px) {
-  header {
-    display: table;
-    width: 100%;
-    padding-bottom: 5px;
-  }
-  header h2 {
-    margin: 10px auto;
-  }
-  header #title-links {
-    display: table-header-group;
-    text-align: right;
-  }
+#rp-description {
+  font-style: italic;
+  margin: -30px 0 30px;
+  padding: 40px 5px;
+  color: #3c3c3c;
+  box-shadow: 0 0px 10px rgba(104,52,120,0.5);
 }
-@media not all and (max-width: 1000px) {
-  header h2 {
-    margin-top: 0;
-  }
+#rp-description p {
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 
