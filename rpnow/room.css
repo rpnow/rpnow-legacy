@@ -364,17 +364,15 @@ body.rp {
 }
 header.rp-titlebar {
   z-index: 1000;
-  background-color: inherit;
-  background-color: #3c3c3c;
   position:fixed;
   top: 0;
   left: 0;
   right: 0;
-  font-size: 22px;
+  background-color: #3c3c3c;
   color: #F5DFF5;
+  font-size: 22px;
   box-shadow: 0 0px 10px rgba(104,52,120,0.5);
   text-align: left;
-  height: 45px;
   line-height: 45px;
   vertical-align: middle;
   padding: 5px 0;
@@ -382,6 +380,7 @@ header.rp-titlebar {
 header.rp-titlebar > div {
   width: 100%;
   height: 100%;
+  display: block;
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 15px;
@@ -424,7 +423,38 @@ header.rp-titlebar a {
 header.rp-titlebar a:hover {
   color: rgb(190,84,190);
 }
-@media all and (max-width: 750px) {
+@media all and (max-width: 800px) {
+  body.rp {
+    padding-top: 120px;
+  }
+  header.rp-titlebar {
+    text-align: center;
+  }
+  header.rp-titlebar ul {
+    float: none;
+    display: block;
+  }
+  header.rp-titlebar li {
+    width: 25%;
+    max-width: 125px;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+  }
+  header.rp-titlebar li a {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media all and (max-width: 450px) {
+  body.rp {
+    margin-top: 30px;
+    padding-top: 24vw;
+  }
+  header.rp-titlebar {
+    font-size: 4.5vw;
+    line-height: 12vw;
+  }
 }
 #rp-description {
   font-style: italic;
@@ -587,6 +617,7 @@ header.rp-titlebar a:hover {
   margin: 20px;
   padding: 5px 10px;
   border: ridge 3px #003380;
+  overflow-wrap: break-word;
 }
 #messages > .info ol {
   display: inline-block;
