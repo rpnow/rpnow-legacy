@@ -425,7 +425,8 @@ header.rp-titlebar a:hover {
 }
 @media all and (max-width: 800px) {
   body.rp {
-    padding-top: 120px;
+    margin-top: 130px;
+    padding-top: 0;
   }
   header.rp-titlebar {
     text-align: center;
@@ -448,7 +449,7 @@ header.rp-titlebar a:hover {
 }
 @media all and (max-width: 450px) {
   body.rp {
-    margin-top: 30px;
+    margin-top: 39px;
     padding-top: 24vw;
   }
   header.rp-titlebar {
@@ -458,9 +459,10 @@ header.rp-titlebar a:hover {
 }
 #rp-description {
   font-style: italic;
-  margin: -30px 0 30px;
-  padding: 40px 5px;
-  color: #3c3c3c;
+  margin: -100px 0 30px;
+  padding: 80px 5px 10px;
+  color: #ccc;
+  background-color: #555;
   box-shadow: 0 0px 10px rgba(104,52,120,0.5);
 }
 #rp-description p {
