@@ -461,8 +461,8 @@ header.rp-titlebar a:hover {
   font-style: italic;
   margin: -100px 0 30px;
   padding: 80px 5px 10px;
-  color: #ccc;
-  background-color: #555;
+  color: #3c3c3c;
+  background-color: #ddd;
   box-shadow: 0 0px 10px rgba(104,52,120,0.5);
 }
 #rp-description p {
@@ -521,11 +521,8 @@ header.rp-titlebar a:hover {
 }
 #messages > .message-narrator > .content {
   border: dotted 1px #bbb;
-  padding: 5px;
+  padding: 15px 20px;
   text-align: left;
-}
-#messages > .message-narrator > .content::first-letter {
-  font-size: 125%;
 }
 #messages > .message-narrator > .message-details {
   margin: -5px 28px -2px;
