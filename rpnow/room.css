@@ -484,6 +484,7 @@ header.rp-titlebar a:hover {
   max-width: 650px;
   display: inline-block;
   text-align: left;
+  word-wrap: break-word;
 }
 #messages.room-feed {
   margin-bottom: 135px;
