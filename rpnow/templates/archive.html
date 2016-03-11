@@ -18,7 +18,7 @@
 
 {% block content %}
   {% if numpages == 0 %}
-  <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
+  <p>This RP has no content. Why not go back and <a href="{{ docroot }}rp/{{ room }}">start writing</a>?</p>
   {% else %}
   {{ _self.pages(docroot, room, page, numpages) }}
   <div id="messages">
