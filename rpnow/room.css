@@ -365,96 +365,149 @@ body.rp {
 header.rp-titlebar {
   z-index: 1000;
   position:fixed;
+  display: block;
   top: 0;
   left: 0;
   right: 0;
   background-color: #3c3c3c;
   color: #F5DFF5;
-  font-size: 22px;
   box-shadow: 0 0px 10px rgba(104,52,120,0.5);
-  text-align: left;
-  line-height: 45px;
-  vertical-align: middle;
-  padding: 5px 0;
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
 }
 header.rp-titlebar > div {
-  width: 100%;
-  height: 100%;
   display: block;
+  height: 100%;
+  width: 100%;
   max-width: 1500px;
   margin: 0 auto;
-  padding: 0 15px;
-  box-sizing: border-box;
+}
+header.rp-titlebar a {
+  color: #F5DFF5;
+  text-decoration: none;
+  height: 50px;
+  display: inline-block;
 }
 header.rp-titlebar .logo {
+  float: left;
   border-right: solid 2px white;
-  padding-right: 5px;
+  padding: 0 10px;
   display: inline-block;
 }
 header.rp-titlebar h2 {
+  float: left;
   font-weight: bold;
   display: inline-block;
-  font-size: inherit;
   margin: 0;
   color: white;
+  font-size: 140%;
 }
-header.rp-titlebar ul {
+header.rp-titlebar h2 a {
+  padding: 0 10px;
+}
+header.rp-titlebar #title-links {
+  float: right;
   margin: 0;
   padding: 0;
-  float: right;
+  height: inherit;
 }
-header.rp-titlebar li {
+header.rp-titlebar #title-links li {
+  float: left;
   display: inline-block;
   height: 100%;
-  padding: 0 5px;
+  font-size: 40px;
 }
 header.rp-titlebar #title-links a {
+  padding: 0 10px;
   display: inline-block;
 }
+header.rp-titlebar #title-links .icon,
+header.rp-titlebar #title-links .icon::before {
+  display:-ms-flexbox;
+  -ms-flex-pack:center;
+  -ms-flex-align:center;
+  display:-moz-box;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  display: flex;
+  box-pack: center;
+  box-align: center;
+
+  vertical-align: middle;
+  line-height: inherit;
+}
+header.rp-titlebar a:hover,
 header.rp-titlebar #title-links .selected a {
-  color: white;
-  font-weight: bold;
-}
-header.rp-titlebar a {
-  color: #120B13;
-  color: #F5DFF5;
-  text-decoration: none;
-}
-header.rp-titlebar a:hover {
+  background-color: white;
   color: rgb(190,84,190);
 }
 @media all and (max-width: 800px) {
   body.rp {
-    margin-top: 130px;
+    margin-top: 145px;
     padding-top: 0;
   }
   header.rp-titlebar {
     text-align: center;
+    height: auto;
+    font-size: 18px;
   }
-  header.rp-titlebar ul {
+  header.rp-titlebar .logo,
+  header.rp-titlebar h2 {
+    float: none;
+    vertical-align: top;
+  }
+  header.rp-titlebar #title-links {
     float: none;
     display: block;
+    padding: 5px 0;
   }
-  header.rp-titlebar li {
-    width: 25%;
-    max-width: 125px;
-    padding: 0;
+  header.rp-titlebar #title-links li {
+    float: none;
     display: inline-block;
+    width: 23%;
+    padding: 0 1%;
+    max-width: 125px;
     text-align: center;
   }
-  header.rp-titlebar li a {
+  header.rp-titlebar #title-links a {
     width: 100%;
     height: 100%;
+    padding: 0;
+  }
+  header.rp-titlebar #title-links a:hover,
+  header.rp-titlebar #title-links .selected a {
+    border-radius: 20px;
+  }
+  header.rp-titlebar #title-links a .icon,
+  header.rp-titlebar #title-links a .icon::before {
+    display: inline;
+    vertical-align: top;
   }
 }
-@media all and (max-width: 450px) {
+@media all and (max-width: 500px) {
   body.rp {
     margin-top: 39px;
     padding-top: 24vw;
   }
   header.rp-titlebar {
-    font-size: 4.5vw;
+    font-size: 3.5vw;
+    height: 25vw;
     line-height: 12vw;
+  }
+  header.rp-titlebar a {
+    height: 12vw;
+  }
+  header.rp-titlebar #title-links {
+    height: 12vw;
+    padding: 0.5vw 0;
+  }
+  header.rp-titlebar #title-links li {
+    font-size: 10vw;
   }
 }
 #rp-description {

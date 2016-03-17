@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>{% block title %}{{ title }}{% endblock %} - RPNow</title>
+  <link rel="stylesheet" type="text/css" href="{{ docroot }}assets/icomoon.css?v={{ version }}">
   <link rel="stylesheet" type="text/css" href="{{ docroot }}room.css?v={{ version }}">
 </head>
 <body class="rp">
   <header class="rp-titlebar">
     <div>
-      <a class="logo" href="{{ docroot }}">RPNow</a>
-      <a href="{{ docroot }}rp/{{ room }}"><h2>{{ title }}</h2></a>
+      <a class="logo" href="{{ docroot }}">RPNow</a><!--
+      --><h2><a href="{{ docroot }}rp/{{ room }}">{{ title }}</a></h2>
       <ul id="title-links">
-        <li{% if pageSelected == 'home' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}">Roleplay</a>
-        <li{% if pageSelected == 'archive' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/1">Archive</a>
-        <li{% if pageSelected == 'stats' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/stats">Stats</a>
-        <li{% if pageSelected == 'export' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/export">Export</a>
+        <li{% if pageSelected == 'home' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}" title="Write RP"><span class="icon icon-pencil"></span></a>
+        <li{% if pageSelected == 'archive' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/1" title="Archive"><span class="icon icon-books"></span></a>
+        <li{% if pageSelected == 'stats' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/stats"title="Statistics"><span class="icon icon-stats-bars"></span></a>
+        <li{% if pageSelected == 'export' %} class="selected"{% endif %}><a href="{{ docroot }}rp/{{ room }}/export"title="Export"><span class="icon icon-download3"></span></a>
       </ul>
     </div>
   </header>
