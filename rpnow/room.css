@@ -449,7 +449,7 @@ header.rp-titlebar #title-links .selected a {
   background-color: white;
   color: rgb(190,84,190);
 }
-@media all and (max-width: 800px) {
+@media all and (max-width: 850px) {
   body.rp {
     margin-top: 145px;
     padding-top: 0;
@@ -472,9 +472,9 @@ header.rp-titlebar #title-links .selected a {
   header.rp-titlebar #title-links li {
     float: none;
     display: inline-block;
-    width: 23%;
+    width: 18%;
     padding: 0 1%;
-    max-width: 125px;
+    max-width: 100px;
     text-align: center;
   }
   header.rp-titlebar #title-links a {
@@ -666,18 +666,28 @@ header.rp-titlebar #title-links .selected a {
  *   MESSAGE STREAM INFO BOXES
  *
  **********************************************************/
-#messages > .info {
+body.rp .info {
   font-size: 16px;
   text-align: center;
-  background-color: #E8EFFF;
-  margin: 20px;
+  margin: 0 20px 20px;
   padding: 5px 10px;
-  border: ridge 3px #003380;
   overflow-wrap: break-word;
+  color: #666;
+  max-width: 650px;
+  margin: auto;
 }
-#messages > .info ol {
+body.rp .info ol {
   display: inline-block;
   text-align: left;
+}
+body.rp .info a {
+  color: #444;
+  font-weight: bold;
+  display: inline;
+  padding: 20px;
+}
+body.rp .info a:hover {
+  color: rgb(190,84,190);
 }
 
 

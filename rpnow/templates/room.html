@@ -2,31 +2,26 @@
 {% set pageSelected = 'home' %}
 
 {% block content %}
+  <div class="info" id="showing-latest" style="display:none">
+    <p>
+      Showing latest posts.
+      <a href="{{ docroot }}rp/{{ room }}/1">View Archive</a>
+    </p>
+  </div>
+  <div class="info" id="empty-room" style="display:none">
+    <p>Welcome! You can access this RP at any time from the following URL:</p>
+    <a id="friend-link"></a>
+    <p>To invite a friend, simply send them the link. Let the RP begin!</p>
+    <script>
+      document.getElementById('friend-link').innerHTML = window.location.href;
+      document.getElementById('friend-link').href = window.location.href;
+    </script>
+  </div>
+  <div class="info" id="loading">
+    <p>Loading...</p>
+  </div>
+
   <div id="messages" class="room-feed">
-    <div class="info" id="showing-latest" style="display:none">
-      <p>These are the latest {{ postsPerPage }} posts.
-      To view earlier messages, check the <a href="{{ docroot }}rp/{{ room }}/1">archive</a>.</p>
-    </div>
-    <div class="info" id="empty-room" style="display:none">
-      <p><b>Success!</b></p>
-      <p>The RP {% if title %}&quot;{{ title }}&quot;{% endif %} has been created. Just share this link with some friends, and you can all start roleplaying together, in real time!</p>
-      <a id="friend-link"></a>
-      <script>
-        document.getElementById('friend-link').innerHTML = window.location.href;
-        document.getElementById('friend-link').href = window.location.href;
-      </script>
-      <p>Please keep the following things in mind, however:</p>
-      <ol>
-        <li><b>Don't lose the link to this room!</b> If you can't find it, you won't be able to find this room again!</li>
-        <li>Anyone with a link to this room can play here. <b>Be careful who you share it with!</b></li>
-        <li><b>Don't post any sensitive information here!</b> In the event of a database breach, we would not want anything confidential to be lost.</li>
-        <li>RPNow is currently under development, so there's a small chance your stories could be unexpectedly lost &mdash; so, just in case, you can download a copy of the entire RP by clicking the <b>Export</b> link up top.</li>
-      </ol>
-      <p>Have fun!</p>
-    </div>
-    <div class="info" id="loading">
-      <p>Loading...</p>
-    </div>
   </div>
 
   <div id="character-menu" style="display:none">
