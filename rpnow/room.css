@@ -441,7 +441,10 @@ header.rp-titlebar #title-links .icon::before {
   vertical-align: middle;
   line-height: inherit;
 }
-header.rp-titlebar a:hover,
+header.rp-titlebar a:hover:not(:active){
+  background-color: #555;
+  color: white;
+}
 header.rp-titlebar #title-links .selected a {
   background-color: white;
   color: rgb(190,84,190);
