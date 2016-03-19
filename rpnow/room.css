@@ -449,15 +449,30 @@ header.rp-titlebar #title-links .selected a {
   background-color: white;
   color: rgb(190,84,190);
 }
+#rp-description {
+  font-style: italic;
+  margin: -100px 0 30px;
+  padding: 80px 5px 10px;
+  color: #3c3c3c;
+  background-color: #ddd;
+  box-shadow: 0 0px 10px rgba(104,52,120,0.5);
+}
+#rp-description p {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
 @media all and (max-width: 850px) {
   body.rp {
-    margin-top: 145px;
+    margin-top: 0;
     padding-top: 0;
   }
   header.rp-titlebar {
+    position: inherit;
     text-align: center;
     height: auto;
     font-size: 18px;
+    z-index: auto;
   }
   header.rp-titlebar .logo,
   header.rp-titlebar h2 {
@@ -491,12 +506,12 @@ header.rp-titlebar #title-links .selected a {
     display: inline;
     vertical-align: top;
   }
+  #rp-description {
+    margin: 0 0 30px;
+    padding: 10px;
+  }
 }
 @media all and (max-width: 500px) {
-  body.rp {
-    margin-top: 39px;
-    padding-top: 24vw;
-  }
   header.rp-titlebar {
     font-size: 3.5vw;
     height: 25vw;
@@ -513,19 +528,6 @@ header.rp-titlebar #title-links .selected a {
     font-size: 10vw;
   }
 }
-#rp-description {
-  font-style: italic;
-  margin: -100px 0 30px;
-  padding: 80px 5px 10px;
-  color: #3c3c3c;
-  background-color: #ddd;
-  box-shadow: 0 0px 10px rgba(104,52,120,0.5);
-}
-#rp-description p {
-  max-width: 650px;
-  margin: 0 auto;
-}
-
 
 
 
