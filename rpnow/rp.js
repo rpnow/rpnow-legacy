@@ -313,9 +313,9 @@ function RP(id) {
       'textColor': {value: data.Contrast},
       'user': {value: new User(data.IPColor)},
       'createButton': {value: function(callback) {
-        return $('<a/>', {
+        return $('<button/>', {
           text: this.name,
-          href: '#',
+          'type': 'button',
           'style': 'background-color:' + this.color + ';' + 'color:' + this.textColor
         }).click(callback);
       }}

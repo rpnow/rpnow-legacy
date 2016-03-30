@@ -192,7 +192,7 @@ form.form-box .input-button button {
   padding: 20px 10px 10px;
   border: 2px solid #9AB3DC;
   animation: fadein 0.2s;
-  z-index: 2000;
+  z-index: 9999;
 }
 @keyframes fadein {
   from { opacity: 0; }
@@ -363,7 +363,7 @@ body.rp {
   padding-top: 85px;
 }
 header.rp-titlebar {
-  z-index: 1000;
+  z-index: 50;
   position:fixed;
   display: block;
   top: 0;
@@ -630,13 +630,13 @@ header.rp-titlebar #title-links .selected a {
   position: absolute;
   left: 25px;
   top: -13px;
+  z-index: 1;
   background-color: inherit;
   border-radius: 4px;
   padding: 3px 10px;
   font-size: 12px;
   letter-spacing: 1px;
   word-spacing: 1px;
-  z-index: 100;
   box-shadow: 0 1px 2px #555;
 }
 #messages > .message-chara > .content {
@@ -833,87 +833,92 @@ body.rp .info a:hover {
  *   CHARACTER SELECT MENU
  *
  **********************************************************/
+.noscroll {
+  overflow-y: hidden;
+}
 #character-menu {
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
+  width: 650px;
   z-index: 300;
-  background: inherit;
-  border: dotted 1px #555;
-  margin: 20px auto 0;
-  padding: 15px 10px;
+  background-color: inherit;
+  margin: 0 auto;
   box-shadow: 0 0 20px #222;
 }
 @media all and (max-width: 750px) {
   #character-menu {
+    width: auto;
     left: 2px;
     right: 2px;
   }
 }
-@media not all and (max-width: 750px) {
+@media all and (max-height: 600px) {
   #character-menu {
-    left: 0;
-    right: 0;
-    width: 700px;
-    margin: auto;
+    top: 12vh;
+    bottom: 12vh;
+    left: 5vw;
+    right: 5vw;
   }
 }
-#character-menu > h3 {
-  margin: 0 auto;
-}
-#character-menu > ul {
-  display: block;
-  margin: 0 auto 20px;
-  padding-left: 5px;
-  max-width: 600px;
-}
-#character-menu > ul#normal-characters {
-  border: dotted 1px #bbb;
+#character-menu h3 {
   background-color: #eee;
-  max-height: 50vh;
-  overflow-y: auto;
+  margin: 0;
+  padding: 0 30px;
+  text-align: left;
+  height: 10%;
+  line-height: 100%;
 }
-#character-menu > ul > li {
-  display: inline-block;
-  word-wrap: break-word;
-  width: 135px;
-  max-width: 32vw;
-  margin: 5px;
-  padding: 0;
-}
-#character-menu > ul > li > a {
+#character-menu ul#character-list {
   display: block;
-  padding: 2px;
+  margin: 0 auto;
+  padding-left: 0;
+  max-width: 600px;
+  overflow-y: scroll;
+  height: 90%;
+}
+#character-menu ul#character-list > li {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 31%;
+  height: 50px;
+  margin: 1%;
+  float:left;
+  line-height: 0.9;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+@media all and (max-width: 750px) {
+  #character-menu ul#character-list > li {
+    width: 31%;
+  }
+  #character-menu ul#character-list button {
+    font-size: 3.5vw;
+  }
+}
+#character-menu ul#character-list button {
+  display: block;
   text-align: center;
   font-weight: bold;
   text-decoration: none;
   border-radius: 4px;
   box-shadow: 0 1px 2px #888;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
 }
-#character-menu > ul > li > a:hover {
+#character-menu ul#character-list button:hover {
   opacity: 0.5;
 }
-#character-menu > ul#special-characters > li {
-  width: 155px;
-  box-shadow: 0 1px 2px #888;
-}
-#character-menu > ul#special-characters > li > a {
-  border-radius: 0;
-  box-shadow: none;
-}
-#character-menu > ul > li#narrator-button {
-  background-color: #fff;
-  padding: 5px;
-}
-#character-menu > ul > li#narrator-button > a {
+#character-menu button#narrator-button {
   color: #555;
   border: dotted 1px #bbb;
   border-radius: 0;
   box-shadow: none;
 }
-#character-menu > ul > li#ooc-button {
+#character-menu button#ooc-button {
   background-color: #3c3c3c;
-}
-#character-menu > ul > li#ooc-button > a {
   font-size: 75%;
   line-height: 1.5;
   padding: 10px;

@@ -26,12 +26,11 @@
 
   <div id="character-menu" style="display:none">
     <h3>Characters</h3>
-    <ul id="special-characters">
-      <li id="narrator-button"><a href="#">Narrator</a></li>
-      <li id="ooc-button"><a href="#">Out of Character</a></li>
+    <ul id="character-list">
+      <li><button type="button" id="narrator-button">Narrator</button></li>
+      <li><button type="button" id="ooc-button">Out of Character</button></li>
+      <li><button type="button" id="new-character-button">New Character...</button></li>
     </ul>
-    <ul id="normal-characters"></ul>
-    <button type="button" id="new-character-button">New Character...</button>
   </div>
 
   <form id="new-character" class="form-box" autocomplete="off" style="display:none">
@@ -112,12 +111,42 @@
       return 'room_' + rp.id + '_' +  name;
     }
 
+    function createOverlay(under, clickFunc) {
+      if(!$('#overlay').length) {
+        $('<div/>', { id:'overlay' }).appendTo('body');
+        $('#overlay').css({
+          position: 'fixed',
+          'background-color': 'rgba(0,0,0, 0.5)',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0
+        });
+        $('body').toggleClass('noscroll', true);
+      }
+      else {
+        $('#overlay').unbind('click');
+      }
+      $('#overlay').css({'z-index': $(under).css('zIndex') - 1})
+      if(clickFunc) $('#overlay').click(clickFunc);
+    }
+    function destroyOverlay() {
+      $('#overlay').remove();
+        $('body').toggleClass('noscroll', false);
+    }
+
     function showCharacterSelectMenu() {
-      $('#character-menu').stop().slideDown(250);
+      $('#character-menu').stop().slideDown(200);
+      if($(window).height() <= 600) {
+        createOverlay('#character-menu', hideCharacterSelectMenu);
+      }
     }
     function hideCharacterSelectMenu() {
-      $('#character-menu').slideUp(250);
-      $('#message-box textarea').focus();
+      $('#character-menu').slideUp(200);
+      destroyOverlay();
+      if($(window).height() > 600) {
+        $('#message-box textarea').focus();
+      }
     }
     function clickVoiceButton(evt, c) {
       setVoice(c);
@@ -125,30 +154,19 @@
       evt.preventDefault();
     }
 
-    function createOverlay() {
-      $('<div/>', { id:'overlay' }).appendTo('body');
-      $('#overlay').css({
-        position: 'fixed',
-        'background-color': 'rgba(0,0,0, 0.5)',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        'z-index': 599
-      });
-    }
-    function destroyOverlay() {
-      $('#overlay').remove();
-    }
-
     function showNewCharacterMenu() {
-      createOverlay();
+      createOverlay('#new-character', hideNewCharacterMenu);
       $('#new-character').show();
       $('#new-character input[name=name]').focus();
     }
 
     function hideNewCharacterMenu() {
-      destroyOverlay();
+      if($(window).height() <= 600) {
+        createOverlay('#character-menu', hideCharacterSelectMenu);
+      }
+      else {
+        destroyOverlay();
+      }
       $('#new-character').hide();
     }
 
@@ -237,12 +255,14 @@
         }
         for(var i = 0; i < charas.length; ++i) {
           (function(c) {
-            $('#character-menu ul#normal-characters').append(
+            $('#character-menu ul#character-list').append(
               $('<li/>').append(
                 c.createButton(function(evt) { clickVoiceButton(evt, c); })
               )
             );
           })(charas[i]);
+
+          showCharacterSelectMenu();
         }
         setVoice(
           localStorage.getItem(localStorageKey('last_voice'))
@@ -269,7 +289,7 @@
         }
       });
       chat.onChara(function(chara) {
-        $('#character-menu ul#normal-characters').append(
+        $('#character-menu ul#character-list').append(
           $('<li/>').append(
             chara.createButton(function(evt) { clickVoiceButton(evt, chara); })
           )
@@ -283,13 +303,13 @@
       */
 
       // button functions
-      $('#character-menu li#narrator-button a').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
-      $('#character-menu li#ooc-button a').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
       $('#message-box button#change-character').click(function(evt) {
         evt.preventDefault();
         showCharacterSelectMenu();
       });
-      $('#new-character-button').click(showNewCharacterMenu);
+      $('#character-menu button#narrator-button').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
+      $('#character-menu button#ooc-button').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
+      $('#character-menu #new-character-button').click(showNewCharacterMenu);
       $('#cancel-character').click(hideNewCharacterMenu);
       $('#send-button').click(sendMessage);
       $('#new-character').submit(function(evt) {
@@ -303,7 +323,12 @@
 
         chat.sendChara(name, color, function() {
           $('#new-character')[0].reset();
-          $('#overlay').remove();
+          if($(window).height() <= 600) {
+            createOverlay('#character-menu', hideCharacterSelectMenu);
+          }
+          else {
+            destroyOverlay();
+          }
         });
       });
       $('#message-box textarea').keypress(function(evt) {
