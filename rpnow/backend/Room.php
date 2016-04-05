@@ -147,7 +147,7 @@ class Room {
       $statement = $this->db->prepare("SELECT
       `Number`, `Type`, `Content`, UNIX_TIMESTAMP(`Time_Created`) AS `Time_Created`, UNIX_TIMESTAMP(`Time_Updated`) AS `Time_Updated`, `IP`, `Chara_Number`, `Deleted`
       FROM `Message` WHERE `Room_Number` = :room
-      ORDER BY `Number` ASC LIMIT 9999 OFFSET :n");
+      ORDER BY `Number` ASC LIMIT 999999 OFFSET :n");
       $statement->bindParam(':n', intval($n), PDO::PARAM_INT);
     }
     else {
