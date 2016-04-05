@@ -1,6 +1,6 @@
 <?php
 // RPNow Version Number
-$rpVersion = '0.10.0';
+$rpVersion = '0.10.0-festival1';
 
 // Require source files
 require_once 'config.php';
