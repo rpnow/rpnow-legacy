@@ -97,7 +97,7 @@ $app->post('/create/', $downCheck, function () use ($app) {
 // RP Pages
 $app->group('/rp', $downCheck, function() use ($app) {
   global $numericRouteCondition;
-  
+
   // Main room chat
   $app->get('/:id/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -109,7 +109,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $room->close();
     $app->render('room.html');
   });
-  
+
   // Archive pages
   $app->get('/:id/:page/', function ($id, $page) use ($app) {
     $room = Room::GetRoom($id);
@@ -126,7 +126,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $room->close();
     $app->render('archive.html');
   })->conditions(array('page' => $numericRouteCondition));
-  
+
   // Generate some statistics for the room
   $app->get('/:id/stats/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -140,7 +140,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
     $room->close();
     $app->render('stats.html');
   });
-  
+
   // Export room to txt file
   $app->get('/:id/export/', function ($id) use ($app) {
     $room = Room::GetRoom($id);
@@ -164,7 +164,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
       else {
         echo str_replace("\n", "\r\n", wordwrap($message['Content'], 72, "\n"));
       }
-      
+
       echo "\r\n\r\n";
     }
     $room->close();
@@ -175,7 +175,7 @@ $app->group('/rp', $downCheck, function() use ($app) {
 // API
 $app->group('/api', $downCheckAjax, function() use ($app) {
   global $numericRouteCondition;
-  
+
   // Get archive page data
   $app->get('/archive/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -189,7 +189,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     $room->close();
     echo json_encode($data);
   })->conditions(array('page' => $numericRouteCondition));
-  
+
   // Get latest posts for room
   $app->get('/chat/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -209,7 +209,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     $room->close();
     echo json_encode($data);
   });
-  
+
   // Receive room updates
   function echoRoomUpdates($room, $app) {
     $msgs = null;
@@ -222,11 +222,11 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
       $msgs = $room->getMessages('after', $app->request()->post('msgCounter'));
       $charas = $room->getCharacters($app->request()->post('charaCounter'));
     }
-    
+
     $data = array();
     if(count($msgs) != 0) $data['newMsgs'] = $msgs;
     if(count($charas) != 0) $data['newCharas'] = $charas;
-    
+
     echo json_encode($data);
   }
   $app->get('/updates/', function () use ($app) {
@@ -236,7 +236,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     echoRoomUpdates($room, $app);
     $room->close();
   });
-  
+
   // Send message to room
   $app->post('/message/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -258,7 +258,7 @@ $app->group('/api', $downCheckAjax, function() use ($app) {
     echoRoomUpdates($room, $app);
     $room->close();
   });
-  
+
   // Add character to room
   $app->post('/character/', function () use ($app) {
     $app->response->headers->set('Content-Type', 'application/json');
@@ -293,21 +293,21 @@ $app->get('/sample/archive/', function () use ($app) {
 // Admin panel!
 if(isset($rpAdminCredentials)) {
   require_once 'backend/Admin.php';
-  
+
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     'path' => '/admin/',
     'realm' => 'RPNow Admin Panel',
     'users' => $rpAdminCredentials
   )));
-  
+
   $app->group('/admin', function() use ($app) {
     global $numericRouteCondition;
-    
+
     // admin home
     $app->get('/', function () use ($app) {
       $app->render('admin/dash.html');
     });
-    
+
     // RPs that were most recently active
     $app->get('/activity(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::RecentActivity($num);
@@ -318,7 +318,7 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
-    
+
     // RPs ordered by most recently created
     $app->get('/newest(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::NewestRooms($num);
@@ -329,7 +329,7 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
-    
+
     // top rps in the last (hour, day, week, month, all-time)
     $app->get('/top(/:scale(/:num))/', function ($scale = 'day', $num = 30) use ($app) {
       // get relevent RPs
@@ -362,7 +362,7 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     });
-    
+
     // RPs with the most time between their start and their most recent post
     $app->get('/duration(/:num)/', function ($num = 30) use ($app) {
       $rps = Admin::LongestDuration($num);
@@ -373,12 +373,12 @@ if(isset($rpAdminCredentials)) {
       ));
       $app->render('admin/rptable.html');
     })->conditions(array('num' => $numericRouteCondition));
-    
+
     // streams messages from all RPs into one channel
     $app->get('/activity-stream/', function () use ($app) {
       echo "Stream of all messages from all RPs";
     });
-    
+
     // search for keywords in titles, or in fulltext
     $app->get('/search/:type/:keyword/', function ($type, $keyword) use ($app) {
       // convert '+' back to a space and decode other uri elements
@@ -424,5 +424,61 @@ $app->get('/popmigrate/', function() use ($app) {
   echo ':)';
 });
 */
+
+/* FESTIVAL!!! */
+$app->get('/festival/', $downCheck, function () use ($app) {
+  $rps = json_decode(file_get_contents("assets/festsum.json"));
+  $app->view()->setData(array('rps' => $rps));
+  $app->render('festival.html');
+});
+
+//redirect
+$app->get('/festival/:rp/', $downCheck, function ($rp) use ($app) {
+  $app->redirect($app->request->getRootURI() . "/festival/$rp/1");
+})->conditions(array('rp' => '[a-z0-9\-]{0,}'));
+
+// VIEW RP
+$app->get('/festival/:rp/:page/', $downCheck, function ($rp, $page) use ($app) {
+  global $rpPostsPerPage;
+  $jfile = "assets/festdata/" . $rp . ".txt";
+  if(!file_exists($jfile)) {
+    $app->pass();
+  }
+  $j = json_decode(file_get_contents($jfile));
+  $sums = json_decode(file_get_contents("assets/festsum.json"));
+  $sum = null;
+  for($i = 0; $i < count($sums); $i++) {
+    if($sums[$i]->url == $rp) {
+      $sum = $sums[$i];
+      break;
+    }
+  }
+  $app->view()->setData(array(
+    'title' => $sum->title,
+    'desc' => $sum->desc,
+    'entry' => true,
+    'page' => $page,
+    'id' => $rp,
+    'numpages' => ceil(count($j->msgs) / $rpPostsPerPage)
+  ));
+  if(isset($sum->image))
+    $app->view()->setData(array('image' => $sum->image));
+  $app->render('archive.html');
+})->conditions(array('rp' => '[a-z0-9\-]{0,}', 'page' => $numericRouteCondition));
+
+$app->get('/festival/:rp/archive/', function ($rp) use ($app) {
+  $app->response->headers->set('Content-Type', 'application/json');
+  $page = $app->request->get('page');
+  global $rpPostsPerPage;
+  $jfile = "assets/festdata/" . $rp . ".txt";
+  if(!file_exists($jfile)) {
+    $app->pass();
+  }
+  $j = json_decode(file_get_contents($jfile));
+  echo json_encode(array(
+    'msgs'=> array_slice($j->msgs, ($page-1) * $rpPostsPerPage, $rpPostsPerPage),
+    'charas'=> $j->charas
+  ));
+});
 
 ?>

@@ -5,10 +5,10 @@
 {% macro pages(docroot, room, page, numpages) %}
   {% if numpages > 1 %}
     <div class="pages">
-      Page: 
+      Page:
       {% for i in 1..numpages %}
         {% if i == page %}<b>{{ i }}</b>
-        {% else %}<a href="{{ docroot }}rp/{{ room }}/{{ i }}">{{ i }}</a>{% endif %}
+        {% else %}<a href="./{{ i }}">{{ i }}</a>{% endif %}
         {% if i != numpages %} | {% endif %}
       {% endfor %}
     </div>
@@ -20,6 +20,9 @@
   <p>This RP has no content. Why not go back and <a href="{{ docroot }}{{ room }}">start writing</a>?</p>
   {% else %}
   {{ _self.pages(docroot, room, page, numpages) }}
+  {% if page == 1 and image %}
+  <a href="{{ image }}"><img src="{{ image }}" height="150px" class="entry-img"></img></a>
+  {% endif %}
   <div id="messages">
     <div class="info" id="loading">
       <p>Loading...</p>
@@ -32,6 +35,8 @@
   <script>
     {% if sample %}
     var rp = new RP(RP.SAMPLE);
+    {% elseif entry %}
+    var rp = new RP(new RP.ENTRY('{{ id }}'));
     {% else %}
     var rp = new RP('{{ room }}');
     {% endif %}

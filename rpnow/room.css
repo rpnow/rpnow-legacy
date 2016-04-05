@@ -686,3 +686,17 @@ ul#stats {
   padding-left: 40px;
   max-width: 650px;
 }
+#festival-link {
+  color: red;
+  font-weight: bold;
+}
+#festival-float {
+  text-align: right;
+  padding: 10px 30px;
+}
+
+.entry-img {
+  display: block;
+  margin: 0 auto 20px;
+  box-shadow: 5px 5px 10px #555;
+}

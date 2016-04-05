@@ -1,0 +1,24 @@
+{% extends "article.layout.html" %}
+
+{% block title %}RP Fest!{% endblock %}
+{% block description %}RPNow Festival!{% endblock %}
+
+{% block content %}
+  <h1>RP Fest!</h1>
+  <p>Welcome to the first annual RP festival!</p>
+
+  {% for type in ['Original Fluff', 'Original Angst', 'Fan Fluff', 'Fan Angst'] %}
+  <div class="entry-category">
+    <h2>{{ type }}</h2>
+    {% for rp in rps %}
+    {% if rp.type == type %}
+    <div class="entry">
+      <h3><a href="festival/{{ rp.url }}">{{ rp.title }}</a></h3>
+      <p class="rating">Rating: {{ rp.rating }}
+      <p>{{ rp.desc }}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+{% endblock %}
