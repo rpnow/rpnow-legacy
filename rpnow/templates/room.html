@@ -24,8 +24,7 @@
   <div id="messages" class="room-feed">
   </div>
 
-  <div id="character-menu" style="display:none">
-    <h3>Characters</h3>
+  <div id="character-selector" class="room-dialog" style="display:none">
     <ul id="character-list">
       <li><button type="button" id="narrator-button">Narrator</button></li>
       <li><button type="button" id="ooc-button">Out of Character</button></li>
@@ -33,7 +32,7 @@
     </ul>
   </div>
 
-  <form id="new-character" class="form-box" autocomplete="off" style="display:none">
+  <form id="new-character" class="room-dialog" autocomplete="off" style="display:none">
     <h3>New Character</h3>
     <div class="input-section">
       <div class="input-name">Name</div>
@@ -136,13 +135,13 @@
     }
 
     function showCharacterSelectMenu() {
-      $('#character-menu').stop().slideDown(200);
+      $('#character-selector').stop().slideDown(200);
       if($(window).height() <= 600) {
-        createOverlay('#character-menu', hideCharacterSelectMenu);
+        createOverlay('#character-selector', hideCharacterSelectMenu);
       }
     }
     function hideCharacterSelectMenu() {
-      $('#character-menu').slideUp(200);
+      $('#character-selector').slideUp(200);
       destroyOverlay();
       if($(window).height() > 600) {
         $('#message-box textarea').focus();
@@ -162,7 +161,7 @@
 
     function hideNewCharacterMenu() {
       if($(window).height() <= 600) {
-        createOverlay('#character-menu', hideCharacterSelectMenu);
+        createOverlay('#character-selector', hideCharacterSelectMenu);
       }
       else {
         destroyOverlay();
@@ -255,7 +254,7 @@
         }
         for(var i = 0; i < charas.length; ++i) {
           (function(c) {
-            $('#character-menu ul#character-list').append(
+            $('#character-list').append(
               $('<li/>').append(
                 c.createButton(function(evt) { clickVoiceButton(evt, c); })
               )
@@ -287,7 +286,7 @@
         }
       });
       chat.onChara(function(chara) {
-        $('#character-menu ul#character-list').append(
+        $('#character-list').append(
           $('<li/>').append(
             chara.createButton(function(evt) { clickVoiceButton(evt, chara); })
           )
@@ -305,9 +304,9 @@
         evt.preventDefault();
         showCharacterSelectMenu();
       });
-      $('#character-menu button#narrator-button').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
-      $('#character-menu button#ooc-button').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
-      $('#character-menu #new-character-button').click(showNewCharacterMenu);
+      $('#narrator-button').click(function(evt) { clickVoiceButton(evt, 'Narrator'); });
+      $('#ooc-button').click(function(evt) { clickVoiceButton(evt, 'OOC'); });
+      $('#new-character-button').click(showNewCharacterMenu);
       $('#cancel-character').click(hideNewCharacterMenu);
       $('#send-button').click(sendMessage);
       $('#new-character').submit(function(evt) {
@@ -322,7 +321,7 @@
         chat.sendChara(name, color, function() {
           $('#new-character')[0].reset();
           if($(window).height() <= 600) {
-            createOverlay('#character-menu', hideCharacterSelectMenu);
+            createOverlay('#character-selector', hideCharacterSelectMenu);
           }
           else {
             destroyOverlay();

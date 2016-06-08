@@ -830,76 +830,84 @@ body.rp .info a:hover {
 
 /**********************************************************
  * roleplay chat page:
- *   CHARACTER SELECT MENU
+ *   CHARACTER SELECT/NEW CHARACTER MENU
  *
  **********************************************************/
 .noscroll {
   overflow-y: hidden;
 }
-#character-menu {
+.room-dialog {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  width: 650px;
-  z-index: 300;
+  width: 700px;
   background-color: inherit;
   margin: 0 auto;
+  padding: 8px;
   box-shadow: 0 0 20px #222;
+  box-sizing: border-box;
+}
+#character-selector {
+  z-index: 300;
+}
+#new-character {
+  z-index: 600;
 }
 @media all and (max-width: 750px) {
-  #character-menu {
+  .room-dialog {
     width: auto;
     left: 2px;
     right: 2px;
   }
 }
 @media all and (max-height: 600px) {
-  #character-menu {
+  .room-dialog {
     top: 12vh;
     bottom: 12vh;
     left: 5vw;
     right: 5vw;
   }
 }
-#character-menu h3 {
-  background-color: #eee;
-  margin: 0;
-  padding: 0 30px;
-  text-align: left;
-  height: 10%;
-  line-height: 100%;
-}
-#character-menu ul#character-list {
+ul#character-list {
   display: block;
   margin: 0 auto;
   padding-left: 0;
   max-width: 600px;
   overflow-y: scroll;
-  height: 90%;
+  height: 100%;
 }
-#character-menu ul#character-list > li {
-  display: inline-block;
+ul#character-list > li {
+  display: block;
   box-sizing: border-box;
   width: 31%;
   height: 50px;
   margin: 1%;
-  float:left;
+  float: left;
   line-height: 0.9;
   word-wrap: break-word;
   overflow: hidden;
 }
 @media all and (max-width: 750px) {
-  #character-menu ul#character-list > li {
+  ul#character-list > li {
     width: 31%;
   }
-  #character-menu ul#character-list button {
-    font-size: 3.5vw;
+  ul#character-list button {
+    font-size: 2.9vw;
   }
 }
-#character-menu ul#character-list button {
+@media all and (max-width: 450px) {
+  ul#character-list > li {
+    width: 31%;
+  }
+  ul#character-list button {
+    font-size: 4vw;
+  }
+}
+ul#character-list button {
   display: block;
   text-align: center;
+  line-height: 0.9;
   font-weight: bold;
   text-decoration: none;
   border-radius: 4px;
@@ -908,46 +916,20 @@ body.rp .info a:hover {
   height: 100%;
   padding: 5%;
 }
-#character-menu ul#character-list button:hover {
+ul#character-list button:hover {
   opacity: 0.5;
 }
-#character-menu button#narrator-button {
+ul#character-list button#narrator-button {
   color: #555;
   border: dotted 1px #bbb;
   border-radius: 0;
   box-shadow: none;
 }
-#character-menu button#ooc-button {
+ul#character-list button#ooc-button {
   background-color: #3c3c3c;
   font-size: 75%;
-  line-height: 1.5;
   padding: 10px;
   color: #bbb;
-}
-
-
-
-
-/**********************************************************
- * roleplay chat page:
- *   NEW CHARACTER POP-UP
- *
- **********************************************************/
-#new-character {
-  border: dotted 1px #3c3c3c;
-  z-index: 600;
-  background-color: inherit;
-  position: fixed;
-  top: 25px;
-  left: 5px;
-  right: 5px;
-  margin: auto;
-  max-width: 350px;
-  padding: 0 25px;
-}
-#new-character input[type=submit] {
-  margin: 20px;
-  padding: 10px 20px;
 }
 #new-character h3 {
   line-height: 1;
