@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <textarea name="in" id="in"></textarea>
+    <button type="button" onclick="run()">go</button>
+    <hr>
+    <textarea name="out" id="out"></textarea>
+    <script>
+      function run() {
+        var x = document.getElementById("in").value;
+        x = JSON.parse(x);
+        for (var i = x.msgs.length - 1; i >= 0; i--)
+          if(x.msgs[i].Type === "OOC")
+            x.msgs.splice(i,1);
+        document.getElementById("out").value = JSON.stringify(x);
+        document.getElementById("in").value = "";
+      }
+    </script>
+  </body>
+</html>
