@@ -1,0 +1,8 @@
+* move CSS to individual files
+* improve character list
+* improve create character screen
+* improve message input box
+* improve page numbering
+* slim3
+* admin config setup thru web
+* message length limit
