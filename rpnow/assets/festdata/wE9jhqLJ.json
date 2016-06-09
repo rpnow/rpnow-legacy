@@ -1,0 +1,2336 @@
+{
+  "msgs": [
+    {
+      "Number": "3121832",
+      "Content": "Lead on, then",
+      "Time_Created": "1458245623",
+      "Time_Updated": null,
+      "IPColor": [
+        "#a50ac8",
+        "#0e3b45",
+        "#2d73db"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49606",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121847",
+      "Content": "*Reading his chair and has barely spoken all evening*",
+      "Time_Created": "1458245674",
+      "Time_Updated": null,
+      "IPColor": [
+        "#a50ac8",
+        "#0e3b45",
+        "#2d73db"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121849",
+      "Content": "*leads them all out to the house*",
+      "Time_Created": "1458245683",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121861",
+      "Content": "*looks up from my crochet and takes my earphones out* house defense manuver 45. now! go!",
+      "Time_Created": "1458245719",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121893",
+      "Content": "*Sensed it too and stands* Stay inside *Grabs his guns and goes to the door*",
+      "Time_Created": "1458245847",
+      "Time_Updated": null,
+      "IPColor": [
+        "#a50ac8",
+        "#0e3b45",
+        "#2d73db"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121903",
+      "Content": "*runs upstairs for mine* not goin alone!",
+      "Time_Created": "1458245894",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121930",
+      "Content": "I said stay inside. You are not to step out of this house *Goes out to face them* So here we are again, Anderson",
+      "Time_Created": "1458245998",
+      "Time_Updated": null,
+      "IPColor": [
+        "#a50ac8",
+        "#0e3b45",
+        "#2d73db"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121938",
+      "Content": "*poised from the window* ___who said i was leaving the house?___",
+      "Time_Created": "1458246041",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121945",
+      "Content": "___you've got anderson. i've got the damned humans. tag team it___",
+      "Time_Created": "1458246073",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121954",
+      "Content": "aye, ye still get one chance tae get the hell outta here.",
+      "Time_Created": "1458246098",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3121989",
+      "Content": "Or what? What do you hope to accomplish here?",
+      "Time_Created": "1458246290",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122006",
+      "Content": "i _will_ kill ye this night, heathen.",
+      "Time_Created": "1458246345",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122042",
+      "Content": "No, you won't. I told you then, the sun has set on your chance of defeating me.",
+      "Time_Created": "1458246470",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122057",
+      "Content": "then i'll fight in the dark. *comes at you bayonett in hand*",
+      "Time_Created": "1458246515",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122095",
+      "Content": "*dodges* only a man can hope to kill a monster, why make history repeat itself?",
+      "Time_Created": "1458246629",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122111",
+      "Content": "The rest of the fellowship charges him",
+      "Time_Created": "1458246670",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122113",
+      "Content": "*twists and lands a hit that burns like fuck* because i can",
+      "Time_Created": "1458246676",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122132",
+      "Content": "*picking fellowship off w/ rubber bullets*",
+      "Time_Created": "1458246711",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122169",
+      "Content": "*snarls, becoming more angry* You might've had a chance then. You could've succeeded had you not given up your humanity *starts shooting",
+      "Time_Created": "1458246824",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122213",
+      "Content": "*dodges, taking the ones that would have hit the fellowship memebers by accident and comes back at him w/ another bayonet that stings just like the first*",
+      "Time_Created": "1458247053",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122236",
+      "Content": "*dark shiz start goin on around him as he drops the guns and rips out the bayonets, throwing them back at him before charging*",
+      "Time_Created": "1458247162",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122270",
+      "Content": "*dodges like he himself doesn't even wanna touch those blades and charges him*",
+      "Time_Created": "1458247345",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122287",
+      "Content": "*picking off fellowship memebers w/ rubber bullets before i even really notice, stereo going because teenager. until shadows start gathering in her room* wtf?",
+      "Time_Created": "1458247420",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122339",
+      "Content": "*ducks and grabs the back of his collar, slamming him into the tree. Seeing Anderson avoid the blades sending him over the edge* Why did you do it?! You could've ended this then but you did this! You were strong, you didn't need to chose the path a a pathetic coward!",
+      "Time_Created": "1458247633",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122350",
+      "Content": "*ducks a bullet* shit! um..........that's not me........",
+      "Time_Created": "1458247682",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122367",
+      "Content": "ye know very well why. *slices the wrist holding him and ducks out, pivoting and stabbing you into the tree",
+      "Time_Created": "1458247760",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122420",
+      "Content": "*pulls away from the tree and pulls out the blade, but keeps it* No I don't! *slices his arms off with it*",
+      "Time_Created": "1458247973",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122461",
+      "Content": "because its yer pride talkin out yer ass! a mortal man's never gonnae send ye to the devil where ye belong! *actually starting to think he's running out of bayonets but charges anyway*",
+      "Time_Created": "1458248113",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122529",
+      "Content": "Then what of you, Judas priest?! Can two monsters hope to go beyond a stalemate?",
+      "Time_Created": "1458248293",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122542",
+      "Content": "*screams* *and cue the worst acid trip anyone's ever been on*",
+      "Time_Created": "1458248348",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122555",
+      "Content": "*aaaaaand slice all to pieces. doesn't exactly think just runs after screaming kid*",
+      "Time_Created": "1458248403",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122612",
+      "Content": "We're not done yet *black mass appears before him just outside your room, too far gone to fully register you* I refuse to repeat history again *stabs his hand into his chest*",
+      "Time_Created": "1458248589",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122636",
+      "Content": "*stops w/ a gut wrenching \"urkk\" noise*",
+      "Time_Created": "1458248702",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122665",
+      "Content": "shitfuckshitfuck *dashing out onto the roof determined to stick to the \"stay inside\" rule, but still* shitfuckcuntmotherfuckingtits *jumps down the tree and breaks off into a sprint to Nova's*",
+      "Time_Created": "1458248786",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122681",
+      "Content": "This time, you won't be returning *other arm turns into a dog and devours him*",
+      "Time_Created": "1458248847",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122703",
+      "Content": "x.x",
+      "Time_Created": "1458248922",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122707",
+      "Content": "*yay anticlimactic death*",
+      "Time_Created": "1458248931",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "52003",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122724",
+      "Content": "*stops half way to Nova's remembering what he said about everywhere and nowhere. changes direction and goes to the meddow cause at least there i can see him coming.*",
+      "Time_Created": "1458248987",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122850",
+      "Content": "*doesn't go after you right away, slowly comes back to himself after Anderson's gone* *almost two hourse pass before he's fully back and finally goes for her*",
+      "Time_Created": "1458249314",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122880",
+      "Content": "*up a tree and has enough time to hope that the fellowship didn't see me run like a bitch*",
+      "Time_Created": "1458249380",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122898",
+      "Content": "*walks into the area so you can see him coming* are you injured?",
+      "Time_Created": "1458249433",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122910",
+      "Content": "*pulls gun up* just fine.",
+      "Time_Created": "1458249461",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122941",
+      "Content": "Then return to the house. The fellowship members have fled and the area is safe.",
+      "Time_Created": "1458249572",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3122956",
+      "Content": "*won't put it down* i'm just fine right here till dawn",
+      "Time_Created": "1458249638",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123061",
+      "Content": "*silent for a long moment* I will not be returning yet, there is business I must address..... Whether you wait till dawn or not, be sure to. Just know I have no intention of following you",
+      "Time_Created": "1458249913",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123067",
+      "Content": "*walks away*",
+      "Time_Created": "1458249933",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123074",
+      "Content": "*does that little skeptical look*",
+      "Time_Created": "1458249952",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123102",
+      "Content": "*disappears in the darkness* *appears in Erik's music room* I require a favor from you",
+      "Time_Created": "1458250038",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123111",
+      "Content": "if it has anything to do w/ the fellowship attacking again, i'm unable to comply.",
+      "Time_Created": "1458250077",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123204",
+      "Content": "I require someone to watch Winter, if your daughter will call or make sure she is safe that will be fine. It would be best if I did not return for the time being.",
+      "Time_Created": "1458250357",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123212",
+      "Content": "what happened....?",
+      "Time_Created": "1458250379",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123309",
+      "Content": "There was another attack......... She saw something I had hoped her to never have to see",
+      "Time_Created": "1458250628",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123323",
+      "Content": "for the love of.....where is she?",
+      "Time_Created": "1458250660",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123369",
+      "Content": "The meadow, in a tree......",
+      "Time_Created": "1458250769",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123383",
+      "Content": "*head palm* well at least she's smart...",
+      "Time_Created": "1458250800",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123395",
+      "Content": "you need to go make that right. there's nothing else to be done",
+      "Time_Created": "1458250822",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123498",
+      "Content": "How? I am not like you Noir when I slip I do not simply get angry or fight another. My child is so terrified she has pointed a gun at me despite knowing it will do no good. How do I attempt to make this right? *genuinely lost at how to fix this*",
+      "Time_Created": "1458251070",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123553",
+      "Content": "she might need some time. but there's no running away from it. because if you run away from it, she has no reason to trust you again.",
+      "Time_Created": "1458251216",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123644",
+      "Content": "Then, for now, how do I get her out of the tree?",
+      "Time_Created": "1458251485",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123656",
+      "Content": ".........lure her w/ caffeine? how the hell should i know?",
+      "Time_Created": "1458251522",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49325",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123814",
+      "Content": "*sighs* very well. Thank you. *walks out of the room, noticing Nova on the stairs, listening* she is safe and uninjured *walks out the door and heads to his own house before going to the meadow*",
+      "Time_Created": "1458251932",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123849",
+      "Content": "*still camped out on that tree but ended up letting the gun down the trunk realizing that i only have it loaded w/ rubber*",
+      "Time_Created": "1458251985",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123852",
+      "Content": "*because i'm intelligent*",
+      "Time_Created": "1458251992",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123897",
+      "Content": "*notices as he walks up to the tree* you cannot spend the entire night up there",
+      "Time_Created": "1458252074",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123910",
+      "Content": "watch me.",
+      "Time_Created": "1458252108",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123976",
+      "Content": "*sighs and hands a thermos up* If you fall asleep you'll fall",
+      "Time_Created": "1458252251",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3123990",
+      "Content": "*gives you that skeptical look but takes it* nah i'd be fine.",
+      "Time_Created": "1458252289",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124009",
+      "Content": "Is staying in a tree in the darkness the best thing for your mind, though?",
+      "Time_Created": "1458252342",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124100",
+      "Content": "at least here i have a decent line of sight.",
+      "Time_Created": "1458252579",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124150",
+      "Content": "You'll have a better one from the roof",
+      "Time_Created": "1458252673",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124197",
+      "Content": "nope. shit can come from underneath me.",
+      "Time_Created": "1458252780",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124212",
+      "Content": "And if you sealed the roof",
+      "Time_Created": "1458252817",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124240",
+      "Content": "it made it through my seals.",
+      "Time_Created": "1458252899",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124278",
+      "Content": "It will never come near you again",
+      "Time_Created": "1458253009",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124537",
+      "Content": "*pulls knees up to my chest*",
+      "Time_Created": "1458253659",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124606",
+      "Content": "*deep breath* I'm sorry. I got caught up in my own anger and I didn't concider how it would effect you",
+      "Time_Created": "1458253866",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124682",
+      "Content": "my seals didn't work. that means if that happens again, my seals won't keep a damn thing out. this is my failure....",
+      "Time_Created": "1458254085",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124714",
+      "Content": "No it's mine. As my child you are my highest priority and as your guardian it's my job to protect you and that includes protecting you from myself. This is in no way your fault.",
+      "Time_Created": "1458254228",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124777",
+      "Content": "and if i had more of a reaction time, i could have stayed and fought, not ran.",
+      "Time_Created": "1458254428",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124804",
+      "Content": "How could you have fought anymore? The fellowship members were dealt with and you were facing something entirely different.",
+      "Time_Created": "1458254519",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124848",
+      "Content": "you forget i'm not exactly w/o power myself.",
+      "Time_Created": "1458254671",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124850",
+      "Content": "shit's fuckin creepy tho",
+      "Time_Created": "1458254680",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124879",
+      "Content": "I am aware",
+      "Time_Created": "1458254758",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124902",
+      "Content": "heh. and that's why you can't go find Clive Barker",
+      "Time_Created": "1458254807",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124920",
+      "Content": "*actually genuinely smiles* I doubt that what that man has turned to film is the worst his mind has created.",
+      "Time_Created": "1458254891",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124947",
+      "Content": "*shrugs* that's how artists work. all their nightmares get put into.....soemthing",
+      "Time_Created": "1458254972",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124962",
+      "Content": "Shall we continue this at home, then?",
+      "Time_Created": "1458255082",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124965",
+      "Content": ".........what if i like my tree?",
+      "Time_Created": "1458255099",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3124975",
+      "Content": "Then I suppose we'll be spending the rest of the night here then",
+      "Time_Created": "1458255156",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125003",
+      "Content": "you're really gonna sit at the root of this tree.......?",
+      "Time_Created": "1458255287",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125078",
+      "Content": "It's better than standing at the roots of this tree. *pauses a moment* I am not going to leave you alone to suffer for my own mistakes. I did that to my son and generations later this family has been reduced to children trained to be soldiers once again. And after watching history repeat itself for centuries one becomes tired of it",
+      "Time_Created": "1458255606",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125138",
+      "Content": "i bet...",
+      "Time_Created": "1458255824",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125177",
+      "Content": "I understand things will not return to the way they were immediately, I felt this approach would be better than trying to lure you down with caffeine",
+      "Time_Created": "1458256011",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125182",
+      "Content": "*but I felt",
+      "Time_Created": "1458256021",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125210",
+      "Content": "who said to lure me down w/ caffeine",
+      "Time_Created": "1458256134",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125222",
+      "Content": "Noir",
+      "Time_Created": "1458256176",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125255",
+      "Content": "........i don't even wanna know how that might have been ok",
+      "Time_Created": "1458256266",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125310",
+      "Content": "Then do not ask because I am not quite sure myself",
+      "Time_Created": "1458256458",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125314",
+      "Content": "like how would that even work? a string w/ a closed thurmos on the end of it?",
+      "Time_Created": "1458256476",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125341",
+      "Content": "*chuckles* I will have to ask him next time.",
+      "Time_Created": "1458256619",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125370",
+      "Content": "besides. confined spaces don't do it for me.",
+      "Time_Created": "1458256842",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125391",
+      "Content": "Very well *shrugs his coat off and hands it up to you for blanket*",
+      "Time_Created": "1458256931",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125413",
+      "Content": ".......?",
+      "Time_Created": "1458257026",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125466",
+      "Content": "You said you do not do well in confined spaces and have expressed a wish to remain in the tree.",
+      "Time_Created": "1458257211",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125575",
+      "Content": "the hell are you staying for?",
+      "Time_Created": "1458257709",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125625",
+      "Content": "So you are not alone in the dark, and you may rest if you are able. When the sun rises I shall return to the house and you may do as you wish",
+      "Time_Created": "1458257913",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125653",
+      "Content": "*still trying to get around asking \"why the hell does it matter\"*",
+      "Time_Created": "1458258078",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125669",
+      "Content": "*fuck it* why does it matter if i'm alone out here?",
+      "Time_Created": "1458258220",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125689",
+      "Content": "Because the night tends to do things to one's mind, and as a child hunter, there are already things that haunt you and fears that plague you. And I've already scared you",
+      "Time_Created": "1458258349",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125709",
+      "Content": "just......warn me next time. that shit was gonna come out from under my bed whether i helped or not.....",
+      "Time_Created": "1458258441",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125728",
+      "Content": "There will not be a next time. It will not happen again",
+      "Time_Created": "1458258526",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125755",
+      "Content": "shit happens. you can't control it all the time",
+      "Time_Created": "1458258715",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125761",
+      "Content": "I can try",
+      "Time_Created": "1458258740",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125774",
+      "Content": "besides. it's the same thing that happens when i get pissed. shouldn't have even bugged me.",
+      "Time_Created": "1458258780",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125785",
+      "Content": "It's harder to face it.",
+      "Time_Created": "1458258832",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125825",
+      "Content": "besides, it's not like it was actively coming at me. more like confused as to why it was there and latching onto anything it thought could use it...",
+      "Time_Created": "1458258966",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125827",
+      "Content": "idk....",
+      "Time_Created": "1458258970",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125830",
+      "Content": "i could be over analyzing.",
+      "Time_Created": "1458258979",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125844",
+      "Content": "*no response*",
+      "Time_Created": "1458259035",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125850",
+      "Content": "i mean it's kinda what i do.",
+      "Time_Created": "1458259076",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125857",
+      "Content": "No, it's understandable",
+      "Time_Created": "1458259124",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125863",
+      "Content": "could have also been the oddest hallucination in the world...",
+      "Time_Created": "1458259164",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125879",
+      "Content": "Hard to say....",
+      "Time_Created": "1458259219",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125888",
+      "Content": "i mean there's no reason for it. but it's kinda possible. and every kid used to be scared of the monster under the bed.....",
+      "Time_Created": "1458259281",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125902",
+      "Content": "*sees the sun beginning to rise* perhaps this is a discussion to continue this evening, if you are comfortable doing so",
+      "Time_Created": "1458259354",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125914",
+      "Content": "*shrugs*",
+      "Time_Created": "1458259433",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125917",
+      "Content": "*dangles your coat for you*",
+      "Time_Created": "1458259452",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125948",
+      "Content": "*takes it* what do intend on doing today?",
+      "Time_Created": "1458259624",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125954",
+      "Content": "dunno.....",
+      "Time_Created": "1458259638",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125971",
+      "Content": "*nods* stay out of trouble and stay safe",
+      "Time_Created": "1458259754",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3125982",
+      "Content": "i will. what can happen during the day",
+      "Time_Created": "1458259795",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3126026",
+      "Content": "We shall see... *walks away*",
+      "Time_Created": "1458260008",
+      "Time_Updated": null,
+      "IPColor": [
+        "#8f5499",
+        "#ec0cf3",
+        "#aa16b6"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49324",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3126031",
+      "Content": "*curls back up, keeping that thermos of coffee*",
+      "Time_Created": "1458260041",
+      "Time_Updated": null,
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Type": "Character",
+      "Chara_Number": "49323",
+      "Deleted": "0"
+    }
+  ],
+  "charas": [
+    {
+      "Number": "49321",
+      "Name": "Nova",
+      "Color": "#e100e1",
+      "Contrast": "white",
+      "IPColor": [
+        "#fd4109",
+        "#292604",
+        "#81f3b6"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49323",
+      "Name": "Winter",
+      "Color": "#fa6218",
+      "Contrast": "black",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49324",
+      "Name": "Alucard",
+      "Color": "#b80000",
+      "Contrast": "white",
+      "IPColor": [
+        "#fd4109",
+        "#292604",
+        "#81f3b6"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49325",
+      "Name": "Erik",
+      "Color": "#000000",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49366",
+      "Name": "Cool girl",
+      "Color": "#00c0ff",
+      "Contrast": "black",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49436",
+      "Name": "Principal",
+      "Color": "#0000ff",
+      "Contrast": "white",
+      "IPColor": [
+        "#242f9e",
+        "#4d0fa2",
+        "#9d1ac5"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49606",
+      "Name": "preacher",
+      "Color": "#30cf34",
+      "Contrast": "black",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49687",
+      "Name": "Ms. Connie",
+      "Color": "#800000",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "49892",
+      "Name": "Teacher",
+      "Color": "#ffff00",
+      "Contrast": "black",
+      "IPColor": [
+        "#b44978",
+        "#efb4f9",
+        "#11712f"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "50243",
+      "Name": "nemisis posse",
+      "Color": "#0080ff",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51163",
+      "Name": "Cop",
+      "Color": "#0000c7",
+      "Contrast": "white",
+      "IPColor": [
+        "#353582",
+        "#ef433f",
+        "#875039"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51271",
+      "Name": "receptionist",
+      "Color": "#400040",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51277",
+      "Name": "Ms/Mr Jones",
+      "Color": "#ff7abd",
+      "Contrast": "black",
+      "IPColor": [
+        "#24d5b1",
+        "#5796b9",
+        "#09e20e"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51280",
+      "Name": "browns",
+      "Color": "#804000",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51374",
+      "Name": "Marie",
+      "Color": "#008000",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51403",
+      "Name": "Markus",
+      "Color": "#00ffd5",
+      "Contrast": "black",
+      "IPColor": [
+        "#cfdc64",
+        "#d09639",
+        "#835411"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51434",
+      "Name": "Lawyers",
+      "Color": "#737373",
+      "Contrast": "white",
+      "IPColor": [
+        "#cfdc64",
+        "#d09639",
+        "#835411"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51437",
+      "Name": "judge",
+      "Color": "#c2c2c2",
+      "Contrast": "black",
+      "IPColor": [
+        "#cfdc64",
+        "#d09639",
+        "#835411"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "51748",
+      "Name": "Shooter",
+      "Color": "#004000",
+      "Contrast": "white",
+      "IPColor": [
+        "#b11a52",
+        "#32aaf7",
+        "#bd9e47"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "52003",
+      "Name": "Anderson",
+      "Color": "#444480",
+      "Contrast": "white",
+      "IPColor": [
+        "#9e53ff",
+        "#984e7a",
+        "#86c91b"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "52876",
+      "Name": "Charles",
+      "Color": "#6401ad",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "53727",
+      "Name": "Raoul",
+      "Color": "#ff0000",
+      "Contrast": "white",
+      "IPColor": [
+        "#306536",
+        "#3ceac2",
+        "#d1792b"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "54000",
+      "Name": "Seras",
+      "Color": "#ffff00",
+      "Contrast": "black",
+      "IPColor": [
+        "#cf1f7f",
+        "#c51285",
+        "#0076a1"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "54559",
+      "Name": "Wolves",
+      "Color": "#808080",
+      "Contrast": "black",
+      "IPColor": [
+        "#376e57",
+        "#0e78dc",
+        "#7f1121"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "54655",
+      "Name": "Edgington",
+      "Color": "#7b01f5",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "55481",
+      "Name": "Alpha Garren",
+      "Color": "#353535",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "55527",
+      "Name": "Kimberly (Echols)",
+      "Color": "#00dea2",
+      "Contrast": "black",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "56524",
+      "Name": "James",
+      "Color": "#2f4fbd",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "56543",
+      "Name": "Jix",
+      "Color": "#00a1a1",
+      "Contrast": "white",
+      "IPColor": [
+        "#61d5e6",
+        "#906541",
+        "#b64569"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "56544",
+      "Name": "Jix",
+      "Color": "#400040",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "57292",
+      "Name": "Raya",
+      "Color": "#ff0000",
+      "Contrast": "white",
+      "IPColor": [
+        "#227c04",
+        "#b2563c",
+        "#9b739f"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "58184",
+      "Name": "Jessica",
+      "Color": "#3cae65",
+      "Contrast": "black",
+      "IPColor": [
+        "#8cf808",
+        "#bda02d",
+        "#ecb90d"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "58443",
+      "Name": "Vader",
+      "Color": "#000000",
+      "Contrast": "white",
+      "IPColor": [
+        "#0a32fd",
+        "#b6ee07",
+        "#050bd4"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "59309",
+      "Name": "David",
+      "Color": "#f33303",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "63238",
+      "Name": "Nadir",
+      "Color": "#ff7c00",
+      "Contrast": "black",
+      "IPColor": [
+        "#bbf8a0",
+        "#02c165",
+        "#6489ea"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "63348",
+      "Name": "Integra",
+      "Color": "#c0bbff",
+      "Contrast": "black",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "64129",
+      "Name": "Luke",
+      "Color": "#8d3287",
+      "Contrast": "white",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "64286",
+      "Name": "Dolores Umbridge",
+      "Color": "#de58a0",
+      "Contrast": "black",
+      "IPColor": [
+        "#d3bc47",
+        "#171b1d",
+        "#5aa3bb"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "64359",
+      "Name": "Remus",
+      "Color": "#dddddd",
+      "Contrast": "black",
+      "IPColor": [
+        "#bbf8a0",
+        "#02c165",
+        "#6489ea"
+      ],
+      "Deleted": "0"
+    }
+  ]
+}

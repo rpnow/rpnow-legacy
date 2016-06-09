@@ -1,0 +1,1820 @@
+{
+  "charas": [
+    {
+      "Number": "59266",
+      "Name": "Beautiful Dramatic Doctor Man",
+      "Color": "#4cd1dd",
+      "Contrast": "black",
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "59267",
+      "Name": "Very Short Nurse",
+      "Color": "#8ef4b7",
+      "Contrast": "black",
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "59275",
+      "Name": "Jim",
+      "Color": "#ad49dd",
+      "Contrast": "white",
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Deleted": "0"
+    }
+  ],
+  "msgs": [
+    {
+      "Number": "3286336",
+      "Content": "We are in a Hospital, observing 2 people, a beautiful Doctor and a very short nurse. They appear to be preforming an autopsy.",
+      "Time_Created": "1459107003",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286350",
+      "Content": "Nurse, scalpel.",
+      "Time_Created": "1459107023",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286378",
+      "Content": "*Hands Beautyiful Doctor the scalpel*",
+      "Time_Created": "1459107095",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286413",
+      "Content": "Thank you Nurse. *begins to cut into the man* A shame Mr. Trump had to go, eh?",
+      "Time_Created": "1459107172",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286430",
+      "Content": "Oh, yes. Quite the shame, yes. *Rolls eyes*",
+      "Time_Created": "1459107208",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286452",
+      "Content": "*chuckles* Oh yes. What do you wager the cause of death will be? Drug overdose?",
+      "Time_Created": "1459107260",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286477",
+      "Content": "Mmm... I'd bet on an ego overdose, sir.",
+      "Time_Created": "1459107317",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286499",
+      "Content": "*chuckles beautifuly* You may well be right about that young lady!",
+      "Time_Created": "1459107367",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286505",
+      "Content": "*DRAMATIC GASP*",
+      "Time_Created": "1459107377",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286515",
+      "Content": "*CONFUSED STARE*",
+      "Time_Created": "1459107397",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286523",
+      "Content": "Wha- what the?!? There- there's...",
+      "Time_Created": "1459107424",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286535",
+      "Content": "*Holds breath*",
+      "Time_Created": "1459107445",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286538",
+      "Content": "THERE IS A FISH WHERE TRUMPS HEART SHOULD BE?!??!?!",
+      "Time_Created": "1459107450",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286550",
+      "Content": "*GAAASSSSSPPPP* WHAT COULD EXPLAIN THIS DOCTOR?!?!",
+      "Time_Created": "1459107480",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286563",
+      "Content": "*Fidgets on her stumpy legs*",
+      "Time_Created": "1459107508",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286611",
+      "Content": "Suddenly the fish opens it's eyes, and with it's final breath it spews a waterfall of acid- melting President Trump's body, as well as the Doctor in one swoop. The Nurse stumbles back- and falls, for shE HAS LOST A LEG!",
+      "Time_Created": "1459107623",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286628",
+      "Content": "*oozing puddle*",
+      "Time_Created": "1459107666",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286631",
+      "Content": "*SCCCCRRREEEEEEEEECCCHHHHHHHH*",
+      "Time_Created": "1459107669",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286648",
+      "Content": "DOCTOR< YOU WOULDN'T HAPPEN TO STILL BE ALIVE, WOULD YOU?!",
+      "Time_Created": "1459107701",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286661",
+      "Content": "*still an oozing puddle*",
+      "Time_Created": "1459107731",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59266",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286671",
+      "Content": "It is clear why Nurse is a nurse and not a doctor.",
+      "Time_Created": "1459107760",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286673",
+      "Content": "I GUESS NOT AND- OMIGODMYLEG!!!",
+      "Time_Created": "1459107764",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286681",
+      "Content": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "Time_Created": "1459107785",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286706",
+      "Content": "*walks in* Hey guys I'm going out to get everyone a pizza what kind- OH MY GOD WHAT HAPPENED?!?",
+      "Time_Created": "1459107856",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286728",
+      "Content": "JIM THERE WAS A FISH INSIDE TRUMP THEN IT SPIT ACID AND MELTED DOCTOR BEAUTIFUL AND MY LEG HELP ME I'M CRIPPLED",
+      "Time_Created": "1459107919",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286743",
+      "Content": "HIS POOR BEAUTIFUL FACE",
+      "Time_Created": "1459107956",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286746",
+      "Content": "A FISH?!?!? WHAT?!?! DOCTOR'S DEAD??!?! WhAT?!?",
+      "Time_Created": "1459107963",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286751",
+      "Content": "WHAAATT!?!?",
+      "Time_Created": "1459107974",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286756",
+      "Content": "I THINK HE'S DEAD HE MIGHT JUST BE A SENTIENT PUDDLE!!!",
+      "Time_Created": "1459107985",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286761",
+      "Content": "WE'VE GOT TO GEt YOU tO THE HOSpITAL",
+      "Time_Created": "1459107998",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286766",
+      "Content": "OH MY GOD WE ARE IN A HOSPITAL",
+      "Time_Created": "1459108008",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286768",
+      "Content": "HEEELLLLLLPPPPP MEEEEEEEEEE",
+      "Time_Created": "1459108021",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286774",
+      "Content": "*runs from room* HHHHEEEELp",
+      "Time_Created": "1459108035",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286787",
+      "Content": "AAAAAAAAAAAARRRGGGGHHHHHH",
+      "Time_Created": "1459108072",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286839",
+      "Content": "Nurses, doctors, and staff rush in to the rescue. Short nurse is taken to some sort of surgery room or something, and they seal up hear leg- however, since her leg was melted into a pile of ooze, it could not be reattached. From this day forward, short nurse was out for revenge- both for her leg, as well as the beautiful doctor. And trump too, I guess. But that was more of an afterthought.",
+      "Time_Created": "1459108219",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286925",
+      "Content": "Years later, The Very Short Nurse is investigating authorities as closely as possible. She has found evidence of Fish within other authorities, but what can she do? How can she be sure they contain fish? Keep searching Short Nurse. The truth is out there!!",
+      "Time_Created": "1459108469",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286976",
+      "Content": "*knocks on short nurse's door* hEEy? Are you there? I brought donuts! ARE YOU HOME? HELLLOOOO?",
+      "Time_Created": "1459108618",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3286993",
+      "Content": "*opens front door looking bedraggled and tired*",
+      "Time_Created": "1459108654",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287030",
+      "Content": "There you are! You look terrible. Were you up all night again? I mean- I know you say that you know what you saw, but are you REALLy that sure that there are fish inside Politicians? I mean, c'mon, this is ruining your life!",
+      "Time_Created": "1459108758",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287075",
+      "Content": "Not just politicians Jim!! Authorities!!! THE FISH ARE OUT THERE!!",
+      "Time_Created": "1459108874",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287088",
+      "Content": "And you know what else ruined my life, Jim? THE FISH!!",
+      "Time_Created": "1459108897",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287208",
+      "Content": "Alright, nurse, alright... anyway- What I originally cam here to talk to you about: I got promoted! I am now the head manager of Arby's! I couldn't believe it- I've just come such a long way from being hired from that stuPID hospital, y'know? Anyway, I'm having a party tomorrow at my place. It'll be a blast! I've invited everyone at the local Arby's to come, and I thought I'd ask you too, I mean, you are my best friend *whispers* and only friend.. and, well, uh, y'know, come! I mean- if you want, don't feel pressured or anything, I just uh, yeah.",
+      "Time_Created": "1459109191",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287261",
+      "Content": "Alright Jim, I'll come, I'll come. And thanks for the doughnut bribe, although you probably wouldn't have needed it.",
+      "Time_Created": "1459109342",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287281",
+      "Content": "AWESOME! Well, see you theeeerrrrrRRe! *runs to car and drives away well over the speed limit*",
+      "Time_Created": "1459109408",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287291",
+      "Content": "HEY!! WHEN EVEN IS THE PARTY YOU DOOOOOORRRRKKKKK!!!!",
+      "Time_Created": "1459109443",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287375",
+      "Content": "It's the next day, and short nurse has arrived on Jim's doorstep. She is carrying a platter of Salmon that she convinced her mom to cook for this very occasion. She rings the bell, and the door is immediately flung wide open. The mumbling talk of uncomfortable teens and Arby's workers hits her. Jim is grinning ear to ear, and it is quite unsettling.",
+      "Time_Created": "1459109665",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287382",
+      "Content": "Hey, I brought your favorite!",
+      "Time_Created": "1459109687",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287392",
+      "Content": "Come on in! I appreciate it! Hahahah! c'mon in then!",
+      "Time_Created": "1459109728",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287439",
+      "Content": "*Is suspicious.* You seem rather... cheery- and not socially awkward- today Jim. You feeling okay? Been swimming recently? Eaten any suspicious sushi?",
+      "Time_Created": "1459109842",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287477",
+      "Content": "*Jim looks puzzled* no...? * you both step inside* Here, set the fish over there on the refreshment table. *looks around at party* What a great turnout eh! This is great!",
+      "Time_Created": "1459109975",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287490",
+      "Content": "YES Jim. It IS great. *STILL SUSPICIOUS*",
+      "Time_Created": "1459110023",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287527",
+      "Content": "The party has gone on for over 2 hours by now. A third of the guests have left, and another third of the guests are just sitting with their phones. Jim has yet to taste any of the Salmon.",
+      "Time_Created": "1459110136",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287561",
+      "Content": "*I KNEW IT.  JIM IS THE NEW AUTHORITY IN ARBY'S. WHY DOES THIS ALWAYS HAPPEN TO ME? JIM IS MY BFF MAN. BUT NOT ANYMORE... NOW HE'S A FISH!!!!*",
+      "Time_Created": "1459110229",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287569",
+      "Content": "*chatting with unenthusiastic teens*",
+      "Time_Created": "1459110249",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287574",
+      "Content": "*DO I HAVE TO KILL HIM?? WHAT DO I DO WHAT DO I DO?!*",
+      "Time_Created": "1459110266",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287603",
+      "Content": "*approaches* Hey, you're looking kinda sick over here. Did someone bring beer or something? That would NOT be legal. *grows slightly paler* I could lose my job for that you know..",
+      "Time_Created": "1459110359",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287628",
+      "Content": "Oh yes Jim. AAAAALLLL the beer. You job is at stake!! Your LIVELYHOOD is at stake!!",
+      "Time_Created": "1459110430",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287659",
+      "Content": "w-whAt? You're not serious right? RiGht? Oh gOD this can't be happening to me! Promise me you won't tell! I could lose evErything! I can't afford to mess this job up!",
+      "Time_Created": "1459110530",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287683",
+      "Content": "*whispered* I won't tell Jim, as long as you give me good solid proof that you aren't one of THEM. Come to my place, if you want to keep your job.",
+      "Time_Created": "1459110612",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287701",
+      "Content": "H-huh? One of what? What do you mean..?",
+      "Time_Created": "1459110658",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287707",
+      "Content": "*reluctantly follows you to your place*",
+      "Time_Created": "1459110677",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287719",
+      "Content": "SteP InTO mY offiCE.",
+      "Time_Created": "1459110703",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287736",
+      "Content": "The room is filled with all kinds of x-rays, and other medical equipment.",
+      "Time_Created": "1459110751",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287750",
+      "Content": "*gulps* What's this all about? You aren't going to torture me, are you? I'm your best friend!",
+      "Time_Created": "1459110794",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287786",
+      "Content": "No, no torture. nothing that will hurt you in any way, shape, or form. That is, if I'm really talking to Jim, and not to a Fish. Let me run my tests. None will hurt, trust me.",
+      "Time_Created": "1459110878",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287815",
+      "Content": "But- can't x-rays give you cancer? I don't want to do that! You can't make me do it! This isn't legal anyway, is it?!",
+      "Time_Created": "1459110960",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287821",
+      "Content": "The Very Short Nurse begins to start her machines, hoping to examine Jim's heart.",
+      "Time_Created": "1459110976",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287829",
+      "Content": "*looks as though he's ready to make a break for it*",
+      "Time_Created": "1459110999",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287835",
+      "Content": "Don't worry, I have all the proper safety equipment.",
+      "Time_Created": "1459111012",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287844",
+      "Content": "Don't run, Jim. I just need peace of mind. You'll do that for me, won't you?",
+      "Time_Created": "1459111042",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287852",
+      "Content": "*gulps* I don't know..",
+      "Time_Created": "1459111101",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287860",
+      "Content": "Please Jim, I promise I won't hurt you.",
+      "Time_Created": "1459111134",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287868",
+      "Content": "F-fine...",
+      "Time_Created": "1459111158",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287876",
+      "Content": "Alright.",
+      "Time_Created": "1459111178",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287883",
+      "Content": "The Nurse runs her tests, closely examining the heart, and the space around it.",
+      "Time_Created": "1459111206",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Narrator",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287904",
+      "Content": "*Muttered* Just as I thought...",
+      "Time_Created": "1459111273",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287915",
+      "Content": "What do you have to say for yourself, Fish?!?!",
+      "Time_Created": "1459111307",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287921",
+      "Content": "*scowls* so now you know then.. do you have peace of mind, nurse? Are you happy now?",
+      "Time_Created": "1459111331",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287926",
+      "Content": "I don't hurt anyone, I haven't done anything wrong!",
+      "Time_Created": "1459111346",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287938",
+      "Content": "Mmmmmm... *Lost in thought* *Not even paying attention*",
+      "Time_Created": "1459111370",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287963",
+      "Content": "No one will believe you, you know! *yelling* Let me be! I could ruin you! I have AuTHORITY! I COULD MAKE YOU BURN!",
+      "Time_Created": "1459111464",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287981",
+      "Content": "*Pulls whole dead fish from her pocket*",
+      "Time_Created": "1459111533",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3287990",
+      "Content": "*Dangles in front of Jim-Fish*",
+      "Time_Created": "1459111548",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288004",
+      "Content": "*Leans away* STOP THAT! Why are you doing that?!",
+      "Time_Created": "1459111600",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288035",
+      "Content": "ooOOoOoOOOOooOooo very good results. Lemme just- *Walks over to computer, seemingly to write notes* *Stops and thinks for a second* Wait no. Uhhhhhh.... *Seems to have forgotten what she was doing* *Turns back around* Uhhhhhhh... do you think you could stop inhabiting my BFF man, or is this permanent??",
+      "Time_Created": "1459111753",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288049",
+      "Content": "Like, it kinda looks like you've eaten his heart then replaced it... so is Jim dead??",
+      "Time_Created": "1459111798",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288062",
+      "Content": "*scoffs* Of course he it! And even if he wasn't, I would never leave! I have authority now! I have power!!",
+      "Time_Created": "1459111854",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288072",
+      "Content": "*growls* And you'll soon be dead as well, I can;t let you live to tell your tale.",
+      "Time_Created": "1459111901",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288080",
+      "Content": "*Unmoved* Mmmmmm..... Okay then. How did you get into him?? Like where did you come from??",
+      "Time_Created": "1459111933",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288107",
+      "Content": "*scoffs again* Like I'd tell! You already know too much! I will not jeopardize our mission. *Jim-fish pales, realizing what he had just said*",
+      "Time_Created": "1459112065",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288115",
+      "Content": "...Mmmmmmmm good a mission I love missions.....",
+      "Time_Created": "1459112111",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288127",
+      "Content": "*tightly clamps his mouth, clearly with the intention not to say another word*",
+      "Time_Created": "1459112183",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288150",
+      "Content": "*Hundreds of fish on strings suddenly drop from the ceiling, at the push of the \"F\" key on the Nurse's keyboard*",
+      "Time_Created": "1459112268",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288154",
+      "Content": "SPEAAAAKKKKKKK",
+      "Time_Created": "1459112275",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288163",
+      "Content": "*the scream of someone who did not expect his dead bretheren to suddenly fall from the ceiling*",
+      "Time_Created": "1459112342",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288169",
+      "Content": "YOu're- YOu'RE crAZY!",
+      "Time_Created": "1459112359",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288171",
+      "Content": "SPPPEEEEEAAAAAAKKKKKKKKKK!!!!!",
+      "Time_Created": "1459112363",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288173",
+      "Content": "*bolts for the door*",
+      "Time_Created": "1459112374",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288174",
+      "Content": "SPPEEEAAAAKKKKK FISSSHHHHHHHH!!!!!!!",
+      "Time_Created": "1459112374",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288179",
+      "Content": "*THE DOOR IS COVERED IN FISH*",
+      "Time_Created": "1459112387",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288184",
+      "Content": "*SPRINTS AFTER HIM*",
+      "Time_Created": "1459112404",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288186",
+      "Content": "*WAiLING SCREAM*",
+      "Time_Created": "1459112407",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288190",
+      "Content": "*TACKLES JIM-FISH*",
+      "Time_Created": "1459112429",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288199",
+      "Content": "*ON HER STUBBY LEG AND PEG LEG THAT WE FORGOT TO MENTION*",
+      "Time_Created": "1459112466",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288200",
+      "Content": "*sobbbing on floor* I'll tAlk, I'LL tAlk..!",
+      "Time_Created": "1459112466",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288204",
+      "Content": "GooOOOooooDD.",
+      "Time_Created": "1459112490",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288212",
+      "Content": "Now, what is the Fish's mission?",
+      "Time_Created": "1459112524",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288300",
+      "Content": "*speaking between sobs* We- we just want to live up here! We want a say in- in what is going on in the world! So- so we decided that- we- we would just take over the b-biggest authorities we could find..! We would j-just eat their hearts, and then control them with our s-superior inte-intellect! We, we plan on taking over all of the Humans with any Authority first, then we could just take the rest, and we would be the ones controlling the Earth! pleAse forgiVe me, the waters are just getting soO filthy,, I couldn't take it down there any longer! Pleaase, just let me go! don't kill me, just leave me be! I'll go back to the Ocean, I promise! I- I can deal with that, just don't kill me-ee-EEEE! *uncontollable sobs*",
+      "Time_Created": "1459112859",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288349",
+      "Content": "THAT'S ALL WELL AND GOOD, AND STOP SCREAMING I'M NOT GONNA KILL YOU, BUT HOW ON EARTH DO YOU GET INSIDE PEOPLE ALIVE?!",
+      "Time_Created": "1459113030",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288358",
+      "Content": "AND WHY DO YOU SPIT ACID?!?!",
+      "Time_Created": "1459113072",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288425",
+      "Content": "*sniffle* How do you know about the acid? I didn't tell you.",
+      "Time_Created": "1459113325",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288452",
+      "Content": "YOU SEE THIS HUNK 'O WOOD THAT I GOT FOR A LEG?!?!?! YEAH. WONDER WHY TRUMP HASN'T BEEN ABOUT LATELY?!?!? YEAH. WONDER WHY BECOMING A DOCTOR FOR A LIVING ISN'T AS APPEALING AS IT USED TO BE?!?!?! TTTHHHHHEEEEE FFFFIIISSSHHHHHHH!!!!!!!!!!",
+      "Time_Created": "1459113451",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288457",
+      "Content": "oh",
+      "Time_Created": "1459113479",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288460",
+      "Content": "FFFFFFFIIIIIIIIIISSSSSHHHHHHH",
+      "Time_Created": "1459113493",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288476",
+      "Content": "SO YEAH. ACID? GETTING INSIDE PEOPLE WHILE STILL ALIVE?? HOW????",
+      "Time_Created": "1459113558",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288482",
+      "Content": "oh. Superior intellect.",
+      "Time_Created": "1459113579",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288488",
+      "Content": "yoooouuuuuuuuuuuuuuuuu succckkkkkkkkkkkkkkkkkkk",
+      "Time_Created": "1459113606",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288502",
+      "Content": "*has calmed down conciderably",
+      "Time_Created": "1459113652",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288527",
+      "Content": "*has calmed down conciderably* That's the only answer I got for ya, bub. *shrug*",
+      "Time_Created": "1459113715",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288550",
+      "Content": "So do you not even know then?? Also, how are you not suffocating?? ARE YOU BREATHING JIM'S BLOOD U LITTLE WATER SCUM",
+      "Time_Created": "1459113784",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288568",
+      "Content": "i DOn't knoW lEavE mE AloN",
+      "Time_Created": "1459113843",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288586",
+      "Content": "YEAH OKAY YOU NERD WITH YOUR \"SUPERIOR INTELLIGENCE\" AND CRAP",
+      "Time_Created": "1459113887",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288592",
+      "Content": "NOW IMMA FREAKING GET YOU BACK TO THE OCEAN",
+      "Time_Created": "1459113904",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288601",
+      "Content": "juSt lET ME GO",
+      "Time_Created": "1459113914",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59275",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288643",
+      "Content": "SPREAD THE WORD. THERE'S A NEW AUTHORITY IN TOWN. AND THIS ONE FREAKING EDUCATED AS HECKLES AND IS OUT FOR BLOOOOODDDD. ALSO, I WANT JIM'S BODY YOU LITTLE PIECE OF CRAP.",
+      "Time_Created": "1459114004",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288655",
+      "Content": "IF I SEE YOU AGAIN, I WON'T BE SO NICE.",
+      "Time_Created": "1459114044",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3288657",
+      "Content": "LET'S GO.",
+      "Time_Created": "1459114053",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "59267",
+      "Deleted": "0"
+    }
+  ]
+}

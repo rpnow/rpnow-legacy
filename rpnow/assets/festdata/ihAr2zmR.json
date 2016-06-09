@@ -1,0 +1,1360 @@
+{
+  "charas": [
+    {
+      "Number": "41289",
+      "Name": "J",
+      "Color": "#959595",
+      "Contrast": "black",
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Deleted": "0"
+    },
+    {
+      "Number": "41290",
+      "Name": "Dan",
+      "Color": "#00a408",
+      "Contrast": "white",
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Deleted": "0"
+    }
+  ],
+  "msgs": [
+    {
+      "Number": "1952471",
+      "Content": "J felt like Christmas had come early this year.\nHe could hardly maintain his composure as he strode through the halls towards his favorite lab, where the new subject had been strapped down good and secure already. Ecto-ranium alloy restraints, unbreakable and phase-proof. Expensive as hell to make but well worth the effort.",
+      "Time_Created": "1452806034",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1952541",
+      "Content": "The halls were mostly empty this time of night, J was merely going in to 'observe' and ask a few questions for now. The first round of exploratory surgeries wouldn't happen for a few days at least, not until they had this one drained enough that the sedatives would even work on him. \n\nHopefully, this monster had enough sense of self preservation to make the interrogation process go nice and smooth. J would hate to have to resort to snipping off body parts if he could help it. If all went well, they'd have his girlfriend right beside him soon enough. Just the thought had him practically giddy as he slipped on some gloves outside the lab and entered his security PIN. \n\n\"Oh, good, you're awake.\" J nearly beamed when he entered the secured lab, adjusting his glasses as he approached the new subject. That human disguise had been quite convincing for awhile, but it wasn't going to make J any more merciful now. \n\"Do you have any lingering pain from your capture? I hear tell the Agents who brought you in weren't all that gentle....\" His polite tone was undercut significantly as he paced around the table with a smug little smirk on his face.",
+      "Time_Created": "1452806703",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1953110",
+      "Content": "Dan prided himself on his strength, but whatever these restraints were made out of was too much for him to break. He'd have thought there would be _something_ that gave, but the material seemed to sap his energy and physical power.\n\nIt all happened because he'd been caught napping on the job - not by his boss, but by the supposedly incompetent Guys in White. The ecto-weapons they'd used were specifically designed to render him immobile and put him in excruciating pain. It was enough to make him pass out for real while they brought him in to wherever this place was.\n\n\"You can fuck right off to hell,\" Dan snarled, baring the full size of his fangs, which were normally hidden by his human disguise. \"You have no idea who you're dealing with, so I'll give you one minute before I blow this place apart.\" If he had to, he'd Wail. Hopefully it wouldn't come down to that, it risked too much backlash from the Observants.",
+      "Time_Created": "1452809715",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1953518",
+      "Content": "\"Well now that's rude isn't it?\" J sighed, taking his sweet time pacing around the table until he came to a stop beside Dan's head, looming over the disguised Ghost. Hmm, fangs on this one, fairly sizable too. Might need to improvise a muzzle for some of the tests he wanted to run. \n\"Ah, but you're right, we haven't been properly introduced yet have we? You can call me J, and I will be your warden, your doctor, and either your best friend or your worst nightmare for the forseeable future. That last one is really dependent on you and how cooperative you feel like being Dan.\" He chuckled and started to pace again, this time checking through all of the equipment and sensors that were currently active and giving him nice, clear readouts on his subject's vitals. \n\n\"If you cooperate, and answer my questions, I can promise plenty of painkillers and sedatives for the worst of the tests. Refuse, and you get to feel every minute of me cutting into you and pulling out the pieces I want.\"",
+      "Time_Created": "1452811979",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1953769",
+      "Content": "_How the fuck did this shithead know Dan's name?_ It had him tensing, worried. Were these the bastards that had 'raised' Charlie? If that was the case, they knew where Charlie was. They'd been stalking the two of them... His eyes glowed red, and his rage gave him a renewed boost of strength as he tried to break free.\n\n\"Minute's up, asshole.\" A simple blast of ectoplasm from his eyes should be enough to melt the restraints hold him in place. But when it failed, the look of shock on Dan's face turned pretty quickly to rage. He wasn't going to let himself take this. He'd rip this bastard's head clean off his shoulders and--\n\nHe couldn't. His hands were metaphorically tied, thanks to the Observants. He couldn't do what he _needed_ to do to escape right here and now. \"You're going to regret fucking with me.\"",
+      "Time_Created": "1452813204",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1953927",
+      "Content": "\"I think the only person whose going to regret fucking with anyone is you.\" J shrugged, glancing over his shoulder after Dan's little attempt at escape. \nEye-beams? That was new. J would have to figure out a workaround for that, and stay out of  direct line of sight until then. Though....why Dan hadn't just aimed for J in the first place was a mystery to him.\n\n\"Ecto-ranium Alloy, nice isn't it? Fifteen years of trial and error helped us develop a metal that no ghost or ghostly power can damage. You can thank Charlotte for being our lab rat for those once we drag her back here too.\" And he fully planned on bringing her back too, but not just yet. Charlotte hadn't avoided being caught all these years by sheer dumb luck, she was smart. J needed information, which Dan was going to provide.\n\nEither willingly, or by force.",
+      "Time_Created": "1452813838",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1954199",
+      "Content": "There was no other choice. If Dan wanted to get out of here in one piece, he'd have to Wail. The damn restraints were sapping his strength, though, so hopefully he could build up enough force to do some structural damage and blow this place apart.\n\nHe took in a deep breath, focusing his power in his chest and throat before letting out a Wail that made the entire room shake, blowing up several pieces of equipment and causing surface cracking on reinforced walls. But he didn't have the power to do any structural damage to the building. Not right now.\n\nBy the time the Wail died down, his human disguise had to be dropped, disappearing as white rings surrounded him. The flames of his hair were small and dim, reflecting his low power, and the red glow in his eyes was near nonexistent. He took a few breaths before swearing. \"FUCK!\"",
+      "Time_Created": "1452815004",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1954632",
+      "Content": "J didn't have a single moment to brace himself before the most unholy, bone-rattling noise he'd ever heard started to shake the room and resonated so hard through his body it brought him to his knees. He managed to avoid being hit by any of the smoldering metal that ricocheted off the exploding consoles, but even shielding his ears he felt something in the left one pop painfully. \n\nWhen the last of the shockwaves died down and the room silent once more, J unshielded his ears only to find his left hand smeared with blood that had started to trickled down his neck. Mother fucker had blown out his eardrum!\n\n\"Son of a Bitch!\" He hissed, stumbling to his feet and catching himself on a wall to avoid falling again from the vertigo. J couldn't hear shit out of his left side and the right was still ringing painfully. What the actual fucking shit was /that?/ \n\n\"You....just bought yourself....a /world/ of hurt boy....\"",
+      "Time_Created": "1452817589",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1954773",
+      "Content": "Dan growled, baring fangs at J once again. Seeing that he'd burst the man's eardrum was a small satisfaction, though. If nothing else, he got some minor form of payback. Unfortunately, he doubted he'd be able to do much more than what he already had until the restraints were off him.\n\n\"Take these cuffs off me and I'll show you just what I'm capable of,\" he panted. Goddammit, he needed to regain his strength. He'd have to wait this out, much as he hated to admit it. There was no way he was breaking out unless his taunts actually worked on J - something he didn't think was going to happen.\n\nWorse, he knew that J wasn't kidding. Dan really _was_ in for a hard time now. But he wasn't going to give the sick fuck the satisfaction of hearing him scream. Not now, not ever. \"Go fuck yourself.\"",
+      "Time_Created": "1452818453",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1955190",
+      "Content": "J growled, stalking towards the table once more. This little bastard was going to learn his place around here real quick. Starting now. \n\nHe paused on his way to the table to open a drawer in a nearby rolling cart that had managed to stay upright during the attack. The tools here were special, made for things like Dan. If he wasn't so utterly livid, J might have taken the moment to really take in the undisguised creature before him. He'd have plenty of time later, to observe and take notes and really delve into the data. \n\nRight now though, he was a little busy taking one of the larger scalpels and digging it in good and deep through Dan's chest, just below his sternum where his diaphragm would be if he had one. Glowing green bubbling up and soaking through the logo on his chest.\n \n\"If you pull that /bullshit/ again, you lose vocal-cord privilege. I'll keep ripping them out until they stop regenerating.\" He punctuated the statement with a cruel twist of the blade, letting go and leaving the blade buried deep where it was.",
+      "Time_Created": "1452819921",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1955720",
+      "Content": "Sick sadistic bastard. Dan snarled, gritting his teeth to avoid crying out in pain at the scalpel digging in. Fortunately, his ectoplasm was more malleable than his once-human flesh had been, and he was able to avoid anything too damaging. That blade, if it was made of the same shit as his restraints, might wind up leaving a scar, though.\n\n\"I told you. You have no goddamn idea who you're fucking with. The _second_ I get out of these restraints, you'll wish you were dead.\" Dan was still panting, the flames of his hair dimming lower. He was damn near out of energy, and after just one Wail that wasn't even at full strength. Fucking hell, he was going to need time to recover.\n\nDan's eyes closed, and he tried to focus what little energy he had left on pushing out the blade and healing himself up. After this, he'd just focus on regaining his strength. Someone was bound to make a mistake with a taser at some point, and when they did...",
+      "Time_Created": "1452822204",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1955862",
+      "Content": "\"And that's where your threat falls flat Dan.\" J sneered, watching the blade slowly push out of Dan's flesh. Interesting, he was much better at that than Charlotte had been. Maybe this one wouldn't shrivel up after just a few weeks. \n\n\"You're never getting out of those restraints. Not until I burn you out for all your worth.\" With that, J settled his palm over the handle of the blade and brought his hand down onto Dan's chest in a swift, rough push against the metal. The Scalpel ended up almost completely buried in the ghosts body and J stepped away then to clean the Ectoplasm and blood off their hands. \n\n\"Next time I come through, I'll have some questions for you to answer. Answer them quickly, and accurately, and we wont have to repeat this little incident again.\" \n\nWith that, he turned his back on Dan and departed. J would give Dan two days to think over his situation, and how cooperative he wanted to be, before making another move. Let him squirm.",
+      "Time_Created": "1452823030",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1955953",
+      "Content": "For two days, Dan was able to work on recovering his powers. He stayed quiet, able to recover some of his strength, but not enough for a full-powered Ghostly Wail. With this... ecto-ranium or whatever it was called, plus whatever else J had him hooked up to, it was keeping him from utilizing everything he was actually capable of.\n\nAgents were in and out, working on the machinery he'd destroyed and fretting over the crack in the wall his Wail had caused. Dan glared, and snarled, but left them alone. Killing would only summon the Observants. So far, aside from that first (and so far _only_ ) meeting with J, he was mostly left under observation. It wasn't too bad except for going stir-crazy.\n\nHe looked up when someone walked in the door, expecting yet another repair personnel, but Dan's eyes started glowing furiously when he recognized J. \"What the fuck do you want?\" he grunted.",
+      "Time_Created": "1452823634",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1956147",
+      "Content": "J ignored Dan's oh so pleasant greeting at first, seemingly very absorbed in the chart he was carrying in with him. Some observation logs, a few details on his vitals over the last two days. Nothing out of the ordinary ever since that Wailing incident, which was only slightly confusing for J. \n\n\"I see you were able to reject the scalpel, do you have any pain from the injury still?\" J started amicably enough, approaching the table same as he had before and looking Dan over. There was a small hole in his uniform from the scalpel, and a darker spot on his skin from the closed wound. \n\nAside from that there was a steady drip from the IV in Dan's arm, a mild sedative formulated for their old subject. Looks like it worked just as well on a full ghost. It was enough to keep him from rejecting that as well at least. Along with the chart in his hand, he had a small blue bag on his possession. If Dan felt like cooperating, then J wouldn't have to use it's contents.",
+      "Time_Created": "1452824397",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1956505",
+      "Content": "Dan knew they had him on sedatives, but it was pretty weak - he still felt rage and energy ready to go, even if he did feel like his eyes wanted to droop if he let himself not pay attention to anything for too long. Fortunately, with his little troublemaking incident, there were plenty of things and people for him to pay attention to.\n\nThat J wanted to know if he was in pain, however... That was a strange question, to him. He wasn't sure what the man wanted with that information, but Dan gave in to his first instinct - bragging. \"Of course I'm not in pain. Like that little scalpel would leave any lasting damage on me.\"",
+      "Time_Created": "1452825700",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1956839",
+      "Content": "\"Excellent.\" J smirked, and set down his chart. No pain meant Dan had recovered fully from the admittedly minor wound. It meant J's calculations for dosage would be unaffected should he decide to make use of the contents of the little blue bag he now set down on the rolling cart beside Dan's table. \n\n\"Now, as I said before, I have questions. All you have to do is answer them, and this meeting will be much more pleasant than the last one.\" Now, with his hands free, J was able to fish a small audio recorder out of his lab coat and activate it. He liked to keep detailed logs of these experiments and interrogation sessions, and Dan's little stunt had ruined the video surveillance equipment in the room so this would have to do for now. \n\n\"Firstly, just for the record, how much has miss Charlotte told you about the GiW, and what we do here?\" Part of J wanted these answers to come quickly and easily so they could get to dragging her ass back as well, but another part of him hoped Dan would be stubborn. He'd been itching to try some of those vials on a subject that wouldn't immediately destabilize.",
+      "Time_Created": "1452826811",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1957058",
+      "Content": "Oh hell no. Like _fuck_ Dan was going to be answering any questions about Charlie. They'd managed to escape this place once before, he wasn't letting them get dragged back again. There was a twinge of something in his core at that thought, of J having Dan's datefriend strapped down - probably to this very table. It made his eyes glow and he tried to lunge at J, fangs bared.\n\n\"Go die in a fire. I'm not telling you a damn thing about Charlie, so save your breath.\" Maybe it was what little was left of his hero complex that made him so protective of them, willing to go through hell to keep Charlie safe. Dan didn't want to think on it too much. He wouldn't do this for just anyone. But Charlie was his favorite - and more.",
+      "Time_Created": "1452827945",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1957302",
+      "Content": "\"Oh, well, that's unfortunate for you.\" J sighed, nonplussed by Dan's little lunge there. He took a moment to fiddle with the IV drip hooked up to his arm, cutting off the flow of the sedative and switching to a harmless saline solution. Just a carrier for more important things.\n\n\"Really, if you think you're /protecting/ her somehow you're sorely mistaken. She's coming back, one way or another, all you're doing by withholding information is making /your/ stay more unpleasant.\" Now J busied himself  with the bag from before, pulling out a series of small syringes filled with vaguely glowing fluid in various colors. \n\n\"If ever there was a good time to be selfish, it's now. How familiar /have/ you gotten with their ghost abilities?\"",
+      "Time_Created": "1452829367",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1961120",
+      "Content": "The fucking _nerve_ of this guy, thinking he could somehow kidnap Charlie back without a fight. No way, not while Dan still existed. He lunged again, nearly dislocating his shoulders in the process.\n\n\"I know enough to say you don't stand a snowball's chance in hell against them.\" It was only a partial bluff - Dan might have been captured, but he had also still been taken off guard. If Charlie had any idea the GiW were coming for them, the bastards wouldn't get very far. And from what Dan had learned, Charlie was a lot more wary of the government agency coming for them than Dan had been.\n\nThat J was working with chemicals designed to manipulate or cause pain to ghosts wasn't lost on Dan, but he was too pissed off to care right now.",
+      "Time_Created": "1452862048",
+      "Time_Updated": null,
+      "IPColor": [
+        "#3b638a",
+        "#95f2aa",
+        "#7e7db3"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1962617",
+      "Content": "\"You're being awfully difficult for someone strapped down on a surgical slab.\" J rolled his eyes, reaching over only briefly to shove Dan back onto the table. There was a surprising amount of strength in that otherwise unassuming frame of his, enough to get Dan to stop trying to dislocate his shoulders.\n\n\"You're not entirely wrong though. She's smart enough to not give us an opening, I'll give her that. Charlotte's been very good about keeping her progress off our radar, so as of now we'd be flying blind against her.\" While he spoke, J went about selecting a small syringe filled with an opaque, glowing blue liquid. He always liked to start off interrogation sessions with this one. It had the dual effect of neutralizing the sedatives they used, as well as heightening nerve sensitivity. And at this dosage, even for a ghost, the level of sensitivity would make even bare minimum contact incredibly uncomfortable. Maximum pain with minimal damage was his preference when he wanted to keep the subjects alive as long as possible. \n\n\"That's why I need you to be a bit more specific. What abilities have you seen her use, what limitations have you noticed, don't skimp on the details.\" He set the empty needle down, and began prepping the next, should Dan continue being stubborn.",
+      "Time_Created": "1452875623",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1962659",
+      "Content": "Go Charlie. Way to keep this bastard on his toes. \"Good for them.\" He sneered at J, not liking being forced back. Besides, what was a little pain compared to having his ghost halves ripped out? He'd hold off telling these guys anything about Charlie.\n\nRather than give a proper answer, Dan spat in J's direction, hoping that it would hit him in the face. It was the only response he deserved.",
+      "Time_Created": "1452876448",
+      "Time_Updated": null,
+      "IPColor": [
+        "#0c40fa",
+        "#5a054b",
+        "#9a1f7c"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1962773",
+      "Content": "The glob of spit missed J's face, but it did hit his shoulder with a satisfying splat. J didn't seem to take that answer well, if the look of irritation on his face was any indication. \n\n\"What are you, four?\" J sighed, wiping the remaining spit off his shoulder and flicking it back at Dan's face. Thank goodness he had put on gloves before coming in here. But, if Dan felt like being a brat, then so be it. \n\nJust to be sure the sensitizing drug was in full effect, J took a scalpel and dragged a shallow cut down the center of Dan's chest. Enough to cut through his uniform and split the skin underneath, not enough that he couldn't recover in a few minutes at least. When he got the reaction he'd been hoping for, J moved on to the prepped needle full of deep blood red fluid. \n\n\"When we used this on Charlotte, it took her three days to recover from the pain. I've been wanting to try it on a full-ghost for quite some time.\" He didn't bother injecting this one into the IV, instead digging the needle firmly into Dan's shoulder. It probably stung like a bitch, didn't it? \n\"Once more, tell me what you know about Charlotte's powers.\" May as well give him a chance to make the right choice, although J might just inject this nasty drug anyways. Just to see what might happen.",
+      "Time_Created": "1452879045",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1965355",
+      "Content": "\"Technically speaking, ten. If you _have_ to know.\" It was probably more information than he should've given, but he had to make some kind of witty comeback. And who knew, the information might intimidate them. After all, if a ten-year-old ghost could do the kind of damage he did with a partially-powered Wail, what could a twenty or hundred year old ghost do?\n\nOf course, there were only a tiny handful of ghosts stronger than Dan, but they didn't need to know that. They especially didn't need to know that if they could keep him captive, Charlie would almost certainly be stuck. Not that he'd give them that chance.\n\nDan hissed in pain, grimacing and baring fangs as the scalpel cut into him. It wasn't until the second needle was jabbed into his shoulder that he swore. _\"Son of a fuck!\"_ He tried to pull back, met only with the cold metal of the examining table. But he wasn't going to give up anything about Charlie. \"Bring it, asshole.\"",
+      "Time_Created": "1452896600",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1970584",
+      "Content": "J did quirk his eyebrow at the comment about Dan's age. Only ten? Interesting, he'd have to pursue that line later. After the effects of this next drug were done running their course. \n\n\"Very well, but remember: You had a chance to avoid this.\" He sighed, and pushed the plunger of the syringe down. The red fluid was thick and began to glow bright enough to be seen through skin and Dan's uniform as it entered his body. The burning sensation alone would be uncomfortable, but within a few minutes it would spread through more than just his arm and the heat would only increase over time. Steadily, unbearably, till...well, last time they'd used this it took three days and a lot of morphine to keep Charlotte from going into shock. \n\nWhile the drug spread, J made quick work of removing Dan's uniform from the waist up. Obviously, when this was done with Charlotte, the drug followed the path of their veins. In Dan, it followed different patterns, and J wanted to take detailed notes.\n\n\"Now, on a scale of one to ten, how's your pain?\"",
+      "Time_Created": "1452918473",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1970835",
+      "Content": "Dan snorted at first, rolling his eyes. Seriously, did this guy think he was really capable of breaking him? Dan Phantom? Creator of one apocalypse already? Fat fucking chance. But when the slight burning sensation spread across his arm and into his chest.\n\nFuckfuckfuck_fuck_ it was headed towards his core, fuck no nonono. As soon as the glow hit his core, Dan closed his eyes tight and grit his teeth to keep from crying out. He wouldn't give J the satisfaction of hearing him scream.\n\n\"Is _fuck you_ a number?\" he panted, starting to sweat and tremble. Dear god that hurt like a son of a bitch.",
+      "Time_Created": "1452919587",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1971073",
+      "Content": "\"I'll take that as at least a Six for now. When it hits Ten, and it will, you'll be begging for relief. At least, if you're anything like Charlotte when it comes to pain tolerance.\" J pulled out the chart again, watching the glowing red veins spreading through Dan's skin in little lightning patterns. Not unlike lichtenberg scars, actually. He made a note to test this again later and bring a camera to take video and photographic evidence. \n\n\"Right now you have two drugs coursing through you. The first one I administered, which is still currently being pumped into your body at a steady rate, increases the sensitivity of your nervous system. So even minor injury in your current state, is going to sting like a motherfucker. The second, as you can see, has a violent reaction with ectoplasm, resulting in heat and light generating upon contact. These two combined together, well...I can only imagine how agonizing this is going to get for you soon.\"",
+      "Time_Created": "1452920778",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1972972",
+      "Content": "\"You're a sick bastard,\" Dan snarled, grimacing as a fresh wave of intense pain ran through his core. This wasn't 'science', this was methodical torture. J was just a modern day dungeon master all dressed up in a white suit and lab coat.\n\nHe could feel his core spreading the red chemical through his entire body, sparking through him with horrific burning sensations. Within minutes, it was as painful as having his ghost halves ripped out and the subsequent merging of the two. While Dan refused to scream, he felt tears of pain dripping down the sides of his face. It was either scream or cry, and while he'd have loved to do neither, he didn't have much choice at the moment.",
+      "Time_Created": "1452940440",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1973499",
+      "Content": "\"Mmm, yes, yes I know.\" J only chuckled, still jotting down notes on his chart. How long it took for the patters to spread through most of Dan's torso and limbs, how long before Dan began to have an unwilling physical reaction. Within minutes J had to take a deep breath to maintain his composure and not outright laugh at the tears. Dan was putting up a better showing than Charlotte had at least, she started screaming within two minutes. They were approaching the five minute mark and he was still gritting his teeth through it, color J impressed. \n\n\"Whatever you're feeling right now? That's your nine. Ten is coming real soon, it's going to make you beg just like she did. Now remember, you decided to be a little brat and not answer my questions, so you have nobody to blame but yourself.\" J feigned disappointment, setting his hand on Dan's shoulder and digging his thumb hard into the injection site. The sensation had to be unbearable, and he kept the pressure firm and steady while he continued to talk. \n\n\"Well, that's not true. The root problem here, is Charlotte. You made the mistake of picking the wrong slut to get attached to, so really it's her fault that you are right here, right now, experiencing some of the worst pain I've managed to cook up for your kind. If you hadn't gotten close to her, we probably would've left you alone. Try to keep that in mind now...\"  J shrugged, and with his free hand fished another small syringe out of the bag he'd brought. This one was a softly glowing green, almost completely filled. He waited until Dan's gaze focused enough to see it before continuing. \n\n\"This, right here, neutralizes the effects of that nasty red drug. It wont completely kill the pain, but it'll be more bearable. Like a high-grade fever, instead of burning alive from the inside out. Tell me what I want to know, and I'll give it to you. Refuse, and you get to ride out the next three or so days like this.\"",
+      "Time_Created": "1452958207",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1973632",
+      "Content": "The rage at having _his_ datefriend called a slut and J trying to shift the blame onto them was enough to temporarily override the worst of his pain as Dan tried to lunge forward again. \"Charlie's _mine_ and as soon as I'm out of here you'll regret ever laying a hand on them!\"\n\nHe stared at the green syringe when it was brought out, then looked up at J so the man _knew_ Dan understood. \"You can take that needle and shove it up your ass.\" He slumped back against the exam table, closing his eyes and taking deep breaths to try and keep from crying or screaming or both. He had a high pain tolerance. He could make it through this.",
+      "Time_Created": "1452961544",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1974078",
+      "Content": "\"Oh, looks like I struck a nerve there didn't I?\" J chuckled, stepping back and taking the syringe with him. Maybe Dan wouldn't answer his questions willingly, but there was still a chance J could provoke him into giving up information out of anger alone. Especially with that level of pain as a distraction.\n\n\"You keep talking as though you're ever getting out of here to start with. It took fifteen years and no less than a dozen attempts for Charlotte to get out, and we've gotten very good at holding your kind down since then. Soon, she's going to be right here next to you, with that same red glow pumping through her veins. Assuming you survive long enough, you'll get to hear her beg for mercy, Dan.\"",
+      "Time_Created": "1452966958",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1974156",
+      "Content": "Dan's eyes were glowing bright enough to be seen even though he had them clenched shut. He was _pissed_ and he refused to give up any useful information. Threats, instead. Threats were good. Threats were _safe._\n\n\"You've never held a ghost even close to me. Remember that awful noise I made? That's only a goddamned _fraction_ of my power, running on the dregs of my energy.\" He wouldn't tell them exactly how powerful his Ghostly Wail was, because they didn't need the information to reinforce anything. Not that there was reinforcing against him. He singlehandedly took down Amity's giant ghost shield, and that had been specifically _designed_ to hold against him.",
+      "Time_Created": "1452968529",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1974550",
+      "Content": "J raised a brow at that. Only a fraction of his power? Well, if that was the case and not a huge bluff on Dan's part, then Christmas really did come early for J! \n\n\"Then I guess we'll just have to keep you good and drained now won't we?\" He shrugged, and made another note. He could always test the theory later by doubling this drugs dosage on him. Worst case scenario the pain would send him into shock and they'd have to let him recover, which was an annoying process.\n\n\"I must say your resolve is astonishing. I wouldn't have expected anyone in that much pain to remain so adamant about protecting that little /slut/ .\" The slur seemed to bother Dan before, and J was intentionally working him up now. \n\"Either you're a masochist, or you've really got it bad for her...\"",
+      "Time_Created": "1452971210",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1975180",
+      "Content": "Fuck, that backfired. Dan was just starting to get his strength back... Although if he laid low like he had been, he should be able to make them think he was bluffing until it was too late. With any luck, anyway.\n\n\"They're _mine_ and my favorite and I don't let anyone fucking touch what's mine!\" He snarled, clenching his fists painfully. Dan was left, once more, panting and sweating with tears running down his face. He did have it bad for Charlie. Fucking emotions... if it weren't for his feelings, he'd have turned Charlie in with zero hesitation as part of a plan to break out quickly and with minimal fuss.",
+      "Time_Created": "1452974539",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1978610",
+      "Content": "\"My my, so possessive...\" J was circling now, pacing, taking notes as the information came to him. From what they'd learned from his old coworkers and a few patrons at the club, he was known for going through sexual partners like candy. Charlotte was the only one who had gotten Dan to give monogamy a shot. \n\n\"That's something we have in common though. Charlotte was my favorite too, and they will be mine again soon enough. And I'm going to make sure you've got a front row seat for all the things I do to them...\"",
+      "Time_Created": "1452985311",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1979980",
+      "Content": "\"I hope you get to feel every goddamn thing you did to Charlie before you die a slow, painful death.\" Dan took a deep, shuddering breath before exhaling with a quiet groan. At least it felt like the pain had reached its peak - he hadn't felt any increase in the pain in his chest for at least two minutes. He could deal with this. He had the pain tolerance.\n\nThe downside was how much it was wearing on him. It had probably only been what, ten minutes? And inside of that, he'd started crying, shaking, sweating and panting. But he wasn't screaming or begging. He wouldn't give J that satisfaction.",
+      "Time_Created": "1452991221",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1980491",
+      "Content": "As soon as Dan started to inhale deeply, J recoiled a bit and shielded his right ear, bracing for another one of those unholy screams from before. He was already deaf of his left side right now, and hoping it was only temporary. J didn't want to risk losing what hearing remained on his right side. \n\nBut then the wail didn't come, and he relaxed again. \n\n\"Oh, I won't. But you will. That, Dan, is a promise.\" If Dan didn't crack after the first twenty four hours of constant agony, J would switch things up. They still had sampling, vivisection, artifacts, and plenty of experimental equipment that needed a test subject. Then they'd go back to the drugs, rinse and repeat, until either Dan gave up the information they wanted or he broke down entirely. J could make due with either option.\n\nBut, for now, this conversation was going nowhere. J gathered his materials, turned off the audio recorder, and made his leave silently. The willpower on this one was strong, and J was going to have fun breaking him.",
+      "Time_Created": "1452992734",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1981097",
+      "Content": "Vivisection was a nasty fucking thing, and to do it while Dan was still in pain was just a sick sadistic move. But after another one or two of those - he couldn't remember because he was entranced by _something_ that kept him calm and compliant during the entire duration - J had moved on to cutting off limbs.\n\nWhen it had become clear that Dan could regenerate lost limbs within a few hours, the sadistic fuck had gotten cut-happy. But doing that so much had left Dan much too low on ectoplasm, and he was _hungry._ If J kept up what he'd been doing, Dan wouldn't have enough ectoplasm left to heal. He might permanently kick it, and that thought terrified him as much as it tempted him. But he couldn't do that to Charlie. Couldn't let them think he'd died for good.\n\nWhen J came in, Dan looked pale, nearly white compared to his usual mintish color, and the flames of his hair were almost nonexistant. God, he couldn't believe he was about to do this. \"Look you sick fuck, I need something from you, and I'm willing to tell you something about ghost biology Charlie could never have known the kind of detail about that I do. It's called Ghost Hunger.\" Dear god, please let them know jack shit about it or this wouldn't work.",
+      "Time_Created": "1452994268",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1981983",
+      "Content": "J was calm and collected as ever as he entered the Lab again. Two weeks or so now since Dan's arrival, and the beast still hadn't broken down. \n\nAt least, until now.\n\nHe didn't do anything to hide his grin at Dan's plea, striding up and silently starting the camera that had been situated above the table for the last week. J liked to keep detailed logs, and video was his favorite. As Dan would learn soon enough, should he continue being a stubborn bitch about all this. For now though, J was willing to see where Dan was going with this...\n\n\"....My silence is your cue to continue.\"",
+      "Time_Created": "1452996205",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1983115",
+      "Content": "Oh good, J was listening. That he was smiling wasn't pleasant, because dear _god_ the man had a punchable face when he smiled, but he was still listening. \"Ghosts need to replenish their ectoplasm after a while, how long depends on the ghost. They can normally do this by going back to the Ghost Zone, but if one is stuck outside there for too long, they have to find another way to replenish it. That's called Ghost Hunger because they start craving other ghosts.\"\n\nDan closed his eyes, taking a breath. \"I need you to find me another ghost so I can eat it and replenish my ectoplasm. Otherwise I'm not going to be able to heal up the next time you cut me open.\" Ugh, he hated admitting that. Hated admitting that he was so weak, especially to J.",
+      "Time_Created": "1452999092",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1983597",
+      "Content": "\"Hmm, interesting...that does explain quite a few anomalies in our research.\" J raised his brows, thoroughly intrigued. Granted, most of their research subjects were neither sentient enough or lasted long enough to explain this sort of thing, so at the very least Dan was starting to prove useful in that respect. \n\n\"Is this a quality over quantity type of situation? Or will any ghost do so long as they're big enough?\" J wasn't necessarily agreeing to help him just yet, so far Dan hadn't given him much of a reason to want to keep him alive. The surgeries and severed parts had given them quite a bit to work with, sure. But he still wasn't giving up the information they /actually/ wanted.",
+      "Time_Created": "1453000306",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1984579",
+      "Content": "\"Quantity. Eating a stronger ghost helps but it's really about how much ectoplasm they have.\" Dan groaned, closing his eyes. He needed to eat, and soon. He'd give out whatever information about this that J wanted. \"... Please. I need to eat.\"",
+      "Time_Created": "1453002487",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1985252",
+      "Content": "\"Hmm, I can see that...\" J's smirk only widened at the small plea from Dan. Oh this was his favorite part of the job. Charlotte had broken so easily in her youth, he almost forgot how satisfying it could be when an actual challenge finally broke down. \n\n\"Well, you'll have to be moved to a special containment unit beforehand, and it may take some time to find you something substantial to eat....but I think we may have enough on site to tide you over until then...\" J leaned in closer, still smirking like the sadistic, smug son of a bitch he was.\n\n\"The real question here is, why should I go through all that trouble for you?\"",
+      "Time_Created": "1453003753",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1985381",
+      "Content": "There had to be something Dan could say that would get him to agree. But he'd exhausted all the things he could readily remember about ghost hunger... But that wasn't what J wanted. J wanted something about _Charlie._ Although maybe there was something Dan could give them. Something relatively safe.\n\n\"... Because I know what kind of rare elemental core Charlie has.\"",
+      "Time_Created": "1453004064",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1986250",
+      "Content": "Oh, /now/ we're getting somewhere!\n\n\"Atta boy, that's the kind of attitude I like to see.\" J chuckled to himself, straightening up and pulling out his phone. He knew eventually Dan would break down and start to spill state secrets, it was just a matter of time and desperation. There were a few parts of that statement that J wanted some elaboration on, but first things first. \n\n\"J here. Get the primary containment room set up, max power on all systems. We're moving CV-002 out of the lab for a few days at least.\" The phone call was brief and his orders quickly put into action. It might take an hour or so before everything was ready, that room hadn't been in use in a few months and some of the upgrades took time to boot up. \n\n\"Now, go ahead and elaborate good and clear for the video. Once you're done we'll move you out of here.\"",
+      "Time_Created": "1453006037",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1986635",
+      "Content": "Good, Dan was getting what he wanted. Letting on that Charlie had a rare core type probably wouldn't do much to J's 'enthusiasm' for wanting them back, but it was enough information, or at least the promise of information, that gave Dan the leverage he needed. Especially because he was apparently going into a containment room instead of being held in the lab. Containment rooms might have a different setup for him.\n\n\"Food first. Then I'll talk.\"",
+      "Time_Created": "1453007015",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1986855",
+      "Content": "J narrowed his eyes at Dan with that little demand, but he couldn't say he was entirely surprised. After all, he held all the cards here, Dan was going to hold on to what little leverage he had while he had it. Especially in his current state. \n\n\"...Fair deal I suppose. Once you're moved and secure, we'll deliver what we have to tide you over until a more suitable prey can be found.\" No need to force the issue, he'd rather give positive reinforcement for cooperating than make the situation even more unpleasant and difficult. The subject of Charlotte's 'Core' was particularly interesting to him, as it tied in to a theory he'd had about the nature of ghosts for some time now. Unfortunately no other test subjects, aside from Charlotte or Dan, had survived long enough to confirm or deny his theory.",
+      "Time_Created": "1453007521",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1991543",
+      "Content": "So playing the good little obedient ghost was working. A not-so-small part of Dan said that he could've been treated better, could've been given a chance to break out, if he'd just given up what he knew about Charlie from the start. But he stifled that part of him into silence. He... fuck. He'd fallen for Charlie and didn't want to do anything that might hurt them. That might make him lose someone else he cared about.\n\nSo he waited to be moved, a plan starting to formulate in his mind. He'd have to test the walls for weaknesses if he was going to be allowed to move around. But he couldn't use his powers, which meant he'd have to resort to using his fists. He'd gotten good at that, even when he couldn't do any real damage. One good lesson from the experience with his Amity's ghost shield, hopefully able to be put to work.",
+      "Time_Created": "1453045385",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1991913",
+      "Content": "J didn't stick around long after that, if Dan wasn't going to talk until he ate then he was going to make sure the process didn't take longer than absolutely necessary. Given the information Dan was willing to provide, J wasn't in the most patient mood.\n\nElemental core....good lord J had hit the jackpot here. Not just in relation to Charlotte but in relation to his research as a whole! He'd theorized something to that effect for awhile, but there was no safe way of confirming it surgically. J only worried about killing them because, if his theory was wrong, it would've cost him his only long-term subjects. Not worth it. Yet.\n\nIt wasn't until they'd prepped the containment room and gotten Dan moved inside that they finally released the restraints and he was free to move around for the first time in two weeks. The room was medium sized, enough room for Dan to pace maybe ten strides in any given direction. The walls were lined with panels of a similar material to his previous restraints, lightly pulsing green lights running between them. No furnishing, dim lighting, a bit on the cold side. Miserable place really.",
+      "Time_Created": "1453050688",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1995079",
+      "Content": "Dan could move. Thank whatever deity existed that he had room to move again. It wasn't nearly enough space, like a tiger trapped in a cage, but it was more than he'd had in quite some time. Once he'd been given another ghost so he could eat, he could start systematically testing for weaknesses.\n\nRight in the now, though, he was pacing back and forth, debating about putting on his human disguise. He decided against it - despite the advantage it would give him in taking his prey off-guard, it would use up too much of what little precious power he had managed to save up again. Maybe now that he was in this room, he could rest enough to get his powers back. Maybe he could discreetly lean against the cracks in the panels where the lights ran and drain them of their electricity...",
+      "Time_Created": "1453066098",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1998377",
+      "Content": "Dan only had to wait a little while, maybe a half hour, before J came to the containment room with a blue cooler in tow. He'd sent out a group of agents to hunt down something bigger and better, but for now the contents of the cooler would have to do. Everything else they had right now was just wisps or destabilized dregs of old subjects. \n\n\"This should hold you over until my agents get back with something more substantial. And when you're done, we'll get back to that whole 'core' topic you mentioned earlier.\" J slid the cooler across the floor, keeping himself on the other side of the shielded doorway. Dan might be weak and barely keeping it together, but he was still dangerous in J's opinion.",
+      "Time_Created": "1453079527",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1999053",
+      "Content": "Dan opened up the cooler, snarling a little when he saw his own arm on the inside of it. It wasn't ideal, but it was technically his own ectoplasm. Eating his arm would just be recovering the energy he'd expended to regrow it in the first place. Besides, it wasn't like he cared - he was willing to eat another, possibly sentient ghost to replenish himself. Already a minor taboo. Then again, when had he cared about taboos?\n\nBy the time Dan finished, he was licking at the green ectoplasm splattered over his face and fingers, eyes closed so he didn't have to see J looking at him. He'd had his back facing the door the entire time to minimize the chance of the bastard seeing anything in the first place.\n\nNow that he'd eaten something, the flames of his hair were higher and brighter. Not by much, but he'd be able to heal up from any minor damage done to him now. \"You done getting more yet?\"",
+      "Time_Created": "1453083746",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1999309",
+      "Content": "\"Sorry, you'll have to make due with that for now.\" J shrugged, leaning against the wall beside the doorway. He'd watched as much as he could, both out of scientific curiosity and pure personal fascination. Unfortunately he didn't get too clear of a view from where he was, but the video surveillance would fill in the blanks later. \n\n\"Now, why don't you go ahead and elaborate on what you know about Charlotte's core.\" J was getting increasingly impatient now, which did not bode well for Dan. He only played nice so long as he got what he wanted.",
+      "Time_Created": "1453085426",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1999427",
+      "Content": "Dan scowled, knowing he wasn't going to be getting any more ectoplasm until he gave J _something._ He licked his lips, getting the last of green goo off of them, and sat floating in the air with a ghostly tail. At least floating took almost no energy, and was much more comfortable than sitting on the floor. Besides, this gave him a height advantage over J.\n\n\"First, you gotta know what a core _is._ It's what gives a ghost a shape, a personality, a function, an obsession. Most ghosts have a standard, average ectoplasmic core, but some ghosts have an elemental core. You've got your basic water, ice, fire, electricity, air, etcetera, and then you have the rare ones. Following along so far?\"",
+      "Time_Created": "1453086094",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "1999675",
+      "Content": "\"I follow. I might need a more comprehensive list of Core types later, but please, go on...\" J was thoroughly intrigued, and hoped the audio on the surveillance cameras was clear enough to catch all of this. He hadn't brought his chart to take notes, damn it. \n\nHe'd had his theories about a 'power source' for ghosts, some part of them that was responsible for their abilities. Mostly over his observation that, depending on the method of destruction, some Ghosts wouldn't reform after being taken down by the field Operatives. Not to mention the vast range of different abilities on a subject-by-subject basis. Charlie had certainly displayed a few...unusual abilities that they hadn't observed in any full-ghosts.",
+      "Time_Created": "1453087733",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2001348",
+      "Content": "God he was going to regret this. He'd barely recovered any ectoplasm, and now here he was about to tell them to fuck off. Dan stared straight at J, then flipped him off with both hands. \"You want more, you can suck my dick and _maybe_ I'll think about it.\"\n\nYup, he was fucked. But god, he'd been wanting to properly flip J off for a while now.",
+      "Time_Created": "1453095701",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2001722",
+      "Content": "Oh if looks could kill.",
+      "Time_Created": "1453097656",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2001851",
+      "Content": "J was entirely unamused by that little display right there, and for a brief moment Dan could see just how much he'd /pissed him off./ \nBut just as quickly, the expression was gone and replaced with the clinically aloof one that J usually favored. If that's how Dan wanted to be, then okay. \n\"Shame, and here I thought we were making progress.\" He sighed, and checked his watch. It would likely be quite some time before the Operatives returned with another ghost for Dan to feed off of. J still planned on letting him eat, but only enough to just barely keep him stable. \n\"Never thought I'd genuinely miss how /easy/ Charlotte was to break. She's easy in a different way now but still, that was a useful quality back then...\"",
+      "Time_Created": "1453098603",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2003981",
+      "Content": "Dan's sneer turned into a snarl, and he rushed towards the shielded door to punch it with all his available physical strength. He felt the electricity in it flowing into him, like a trickle charge. It wasn't much, but it added a little extra kick to jumpstart whatever equivalent he had to adrenaline.\n\n\"You tortured a _child._ Charlie's older now. They're smart. And when the time comes for them to take their revenge on you, you'll see me watching and laughing the entire time.\" He gave one more punch to the ghost shield before drifting backwards, eyes glowing red.",
+      "Time_Created": "1453130690",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2004020",
+      "Content": "J couldn't help it, after recoiling a bit from Dan punching the shield, he laughed. Laughed pretty damn hard too. How many times had someone said that to him, assuming he felt any kind of guilt over what he'd done to Charlotte? The response was almost a rehearsed speech by this point.",
+      "Time_Created": "1453131547",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2004060",
+      "Content": "\"No, I tortured a monster. That's what the two of you are. Dangerous, destructive monsters that need to be destroyed. Charlotte in particular is an abomination in every sense of the word, and every minute she continues existing is an affront to nature.\" J approached the doorway again, grinning all the while. \n\n\"And she knows it too. That's why she's going to end up right where you are, in this same exact room. The same one we kept her in for fifteen years.\" He chuckled again \"Oh, if those walls could talk....\"\n\nHm...now there's a thought! J's specialty was mostly physical torture but he knew a thing or two about turning it psychological. And Dan was so very attached to Charlie, maybe he'd like to see just how much she'd managed to endure before...",
+      "Time_Created": "1453132491",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2004096",
+      "Content": "\"You don't know jack _shit_ about the kind of monster you're keeping caged right now. More powerful bastards than you have tried to get rid of me, and they all failed.\" On top of that, he could only hope Clockwork was still on his side, still watching out for him. Unless this was some kind of sick joke on the part of the Observants, just an over-elaborate way of eliminating him from the picture.\n\nNo. They were efficient and to the point, without fail. This wasn't efficient. There was something up Clockwork's sleeve, if he was letting him go through this, but with any luck at all, the Master of Time was still watching out for his afterlife.\n\n\"If these walls could talk, the only thing they'd say is just how sick a bastard you really are.\"",
+      "Time_Created": "1453133379",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2005275",
+      "Content": "\"Really now Dan, after all this time you're still underestimating me. But, you're finally right about one thing. These walls would certainly have quite a story to tell you...\" J smirked and pulled his phone out again. A quick message to the records department had them digging up some of their old archive videos to email him. J had his own copies, but they were tucked away in his office. \n\n\"In fact, I personally think that's a story worth telling.\" \n\nThe setup was relatively quick, and in J's opinion very much worth the effort. Keeping the screen just outside the shield, just barely out of Dan's reach, was going to make enduring the footage so much worse. Even if he didn't look, he'd still hear it with the volume at max. \n\n\"Enjoy the show Dan.\" \n\nWhen the screen flickered to life, the first visual was of a kid, probably no older than nine, sitting on the edge of a table. At that age, Charlie's hair had been very short, and they'd yet to gain their iconic facial scars. Instead, they sported a fresh, purple bruise just under their left eye.",
+      "Time_Created": "1453144567",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2005707",
+      "Content": "Dan bit back a comment about J being the one still underestimating _him,_ knowing that threats would only heighten the security around him. But he bristled when J made a comment about 'telling a story.' What. What was he doing.\n\nIt wasn't until the screen was brought up to the door, just outside the ghost shield, that he realized what was going on. They were going to make him watch and listen to what they did to Charlie. _\"You sick sonuvabitch!\"_ he shouted, punching furiously at the ghost shield in a desperate effort to turn off the screen. But he couldn't, and he slumped down finally to press his fingers against the shield where he could see young Charlie's face. \"I'm so sorry, Charlie. You shouldn't have had to go through that...\" he whispered, hopefully too quiet for any monitoring equipment to hear.",
+      "Time_Created": "1453146613",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2007233",
+      "Content": "/ 'Charlotte, where did you get that bruise?'/ J's voice spoke up behind the camera, the view shifting slightly as he paced around the table Charlie was sitting on. \n/'....Maddox.'/ Charlie glanced up at the camera, but almost immediately averted their gaze and started to fidget with the tight silver bracelets around their wrists. A matching set with the thick band around their neck.  \n/'Why did Maddox give you that bruise?/ More fidgeting from Charlie at that, and when the camera approached closer they shrunk in on themselves a little. Their voice was very small, almost inaudible to the camera.\n/'....I bit him.'/ \n/'You know better than that Charlotte.'/  J sighed, and there was a brief moment where the camera view was unclear and shaky before settling again, across from where Charlie sat on some kind of stand. J's face wasn't visible in the shot, but judging by how Charlie squirmed away from him as he entered the camera view and approached, he must have been livid. \n/'If you're going to bite like an animal then you get treated like an animal, is that what you want?'/\n/'No sir...'/ Kid looked on the verge of tears, still cringing away from J as the man came to a stop standing in front of them. His back was to the camera, and it was impossible to see what he was doing from the angle, but Charlie could see just fine. Whatever it was, it had them gasp suddenly and make an attempt at scrambling away before J caught their arm and roughly pulled them back into place. \n/'No! Nono I'll be good! I'll be good I promise!'/ Charlie tried with all their strength to wiggle out of J's grip and pry his hand off, their form flickering invisible a couple of times before he set down whatever he was holding and shook them roughly by the collar of their shirt. \n/'Yes, you will. Now, be a good girl, and stay still.'/ J's voice was low and dangerous and the tone at least got Charlie to stop trying to go intangible to escape. It didn't stop them however, from gripping tight on J's hand and trying to loosen his grip on their arm as he held them in place. He didn't seem to care, simply continuing on and retrieving what he'd set down earlier. Dan would recognize that deep red drug in the syringe once it was visible and being pushed deep into Charlie's arm. By the time he pulled the needle out and let them go, Charlie was sobbing audibly and the red glow was quickly travelling down their arm, following the pattern of their veins bright enough to be seen through their skin. J was unmoved by their whimpering and increasingly vocal sounds of distress as he returned to the camera and picked it back up.\n/'Stand up now. If you can stay standing for five minutes, I'll give you the other one.'/ \n\nCharlie did as they were told, and made a valiant effort despite the visible pain as the red glow spread through the rest of their body. Unfortunately, within thirty seconds they were crying, and by the time a minute and a half passed, their legs couldn't support them anymore. Everything after that was just screaming and begging for mercy that, as Dan would see, never came...",
+      "Time_Created": "1453154262",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2007332",
+      "Content": "Seeing Charlie being treated like that, a small child being given the same drug he'd had... Dan sunk to his knees, pounding his fists against the ghost shield. He couldn't tear his eyes away, had to keep watching with tears in his eyes. He couldn't do anything. Dan was helpless because _it had already happened_ and he was only seeing the proof of that.\n\n\"Charlie...\" his voice was hoarse from crying, and his core ached. J was going to die a painful death, one way or another. He wouldn't let the bastard get away with what he'd done.",
+      "Time_Created": "1453154930",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2007762",
+      "Content": "The screaming continued for thirty long, agonizing minutes before it began to taper off, the visual from the camera never leaving the writhing child on the floor. At some point J set it down on the stand again, still trained on Charlie, while he paced around them. After two hours, their voice gave out and they were reduced to hoarse whimpering and helpless squirming. \n\nJ had left at the start of the video, but the guards outside the containment unit both looked sick when the time to change shifts came around. Even by their standards, J was terrifying. He'd been there, firsthand, watching that scene and hadn't even flinched watching a /child/ in agony like that. \n\nOnce the video was over, three hours after the start, Dan had only a brief reprieve from the noise and the sights, before the next one started up and the whole ugly process began again. J had left him with a solid 24 hours of video, torture footage and surgery archives, to make sure Dan didn't have a moments break from the torment of watching his girlfriend's childhood abuse. J was going to break him, one way or another.",
+      "Time_Created": "1453157114",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2009133",
+      "Content": "When the videos got to surgery footage, Dan had to go hide in a corner, facing away from the screen and covering his ears. It wasn't enough to drown out the screams, though, and he seriously contemplated Wailing just so something would be louder than the awful sounds he was hearing.\n\nFor the full 24 hours, Dan alternated between hiding in the far corner and pounding on the ghost shield demanding to see J so he could wring the man's fucking neck. If J thought he was going to break, was going to let Charlie go through any of that again, but this time with more targeted information? No. Fuck no. _Never._",
+      "Time_Created": "1453164593",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2010374",
+      "Content": "When the 24 hours were up, the screen flickered to blue and the room was deathly quiet for the first time since it all started. And that was only a fraction of the archival footage they had, not to mention all of the purely audio records. Fifteen years worth of footage from just a few days after Charlotte's birth, till the day they escaped. \n\nThere was about half an hours break where Dan was left to the silence before he was graced with the presence of his captor once more. J, for his part, looked thoroughly amused as he approached the shield and rested his elbow against the top of the screen. \n\"Enjoy the show Dan?\"",
+      "Time_Created": "1453171573",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2010912",
+      "Content": "\"You're sick.\" Dan's voice was hoarse, his eyes red and puffy from crying. \"You'll slip up though, and I _will_ get out and you will regret every second you ever touched Charlie. I'll make sure of it.\"\n\nJ had already made the mistake of letting Dan loose from his restraints, of putting him in a room with electricity he could touch and draw on for a trickle charge. It might take him a while, but he could get back up to full eventually. And god, when he did, he was going to fucking _wreck_ shit here.",
+      "Time_Created": "1453173915",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2011133",
+      "Content": "\"Mmm, I take it you didn't like the home-movies?\" J hummed, completely nonplussed by Dan's threats. Honestly, by this point, what result did the ghost expect to get? A cower of fear perhaps? Intimidation? What a joke. \n\n\"I figured you of all creatures could appreciate how pretty Charlotte can beg when they're truly desperate.\" That tone right there would've been sickening even if J wasn't talking about a literal child begging for mercy. \n\nJ is antagonizing Dan on purpose, riling him up intentionally, and it's working. Dan was the one who wanted to be difficult and go back on their deal, so he got to endure whatever torment J could think of until he decided to cooperate again.",
+      "Time_Created": "1453174578",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2016175",
+      "Content": "\"There was a time once when the whole world cowered in fear of me. It's a fucking pity I never knew about you back then because I would've taken a lot of pleasure in making sure you died a slow and painful death.\" He'd never known Charlie back then. Might have even killed them before they had a chance to use their powers to get away. The thought hurt, just a little.\n\nBut J. Dan hoped J had died. In one of his many attacks on the GiW, maybe. At least he was certainly dead now in Dan's original timeline - the one that no longer existed. He'd take his pleasure from that and the thought of Charlie ripping the bastard to shreds until he could get free.",
+      "Time_Created": "1453217822",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2016251",
+      "Content": "J was entirely unimpressed, and it showed. The relentless torment and hunger were apparently weighing on this subject pretty badly, but still not getting the results J was looking for, and he was out of patience. \n\n\"Well, in the here and now, you're just a lab rat. One that seems intent on biting the hand that feeds you and I for one am tired of waiting for you to comply. And so are my superiors for that matter.\" J sighed, turning off the screen and pushing it out of the way briefly. \n\n\"I really do not like using this method of interrogation. It's unsatisfying and a bit of a drain on me, but unfortunately you've decided to remain difficult.\" While he spoke, J fished out two things from the inside of his lab coat. The first being what initially appeared to be short, blue glass rod. From behind the shield Dan might not be able to see the script etched into it in ghost language. \n\nThe second thing he pulled out, was a small scalpel, which he promptly dug into his own palm with only a grimace and a half-muttered \"Fuck.\" when he was done cutting a small incision deep enough to guarantee a steady flow of blood for at least a few minutes.",
+      "Time_Created": "1453219247",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2016567",
+      "Content": "Dan laughed weakly, not seeing the ghost speech written on the rod. \"You really think you're getting anything out of me?\" He was more determined than ever not to say anything now. Honestly, he didn't think he'd be able to stand actually hearing his datefriend screaming, right next to him, as J worked on them. His core would give out.\n\nHe did look up when J cut into his own hand, eyebrows furrowed. What the hell was he doing? \"Oh so it looks like you're a masochistic fuck as _well_ as a sadistic one. Keep your kinks away from me you disgusting bastard.\"",
+      "Time_Created": "1453222069",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2016769",
+      "Content": "\"Hmm, don't tempt me.\" J shrugged absently, flexing his hand a little to get a small pool of blood gathered in his palm. Once he was satisfied, he picked up the little glass rod again and delicately set it onto his bloody palm. \n\nThe reaction was almost instantaneous, the blue glass shifted violently to red and began to glow brightly in J's palm. He gripped it tight, and not a drop of his blood was spilled, the glass absorbing every drop that he offered. J didn't like using this, it would continue pulling his blood and draining his energy until he released it and covered the wound on his hand. But it would work for now. \n\n\"Now, third times the charm I suppose. I have some questions, and you are going to answer them. Do you understand?\" He approached the shielded doorway even more closely, the rod pulsing softly in his hand in time with his pulse. Dan might recognize the glow, and the feeling that overwhelmed him when he looked at it. He'd seen it once before, in another lifetime as Danny Phantom, in the hands of a man named Freakshow.",
+      "Time_Created": "1453223669",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2018058",
+      "Content": "Fuck fuck fuck _fuck_ Dan knew that feeling. He tried desperately to look away, to close his eyes, to do _something_ but look at that glowing artifact. But he couldn't tear his eyes from it, couldn't stop himself from staring, from nodding or speaking. \"Yeah, I understand.\"\n\nInternally, he raged against the control, but he wasn't a half-ghost anymore. He was full-ghost and he was fucking _helpless_ against the power of the artifact. There was nothing Dan could do to stop J from forcing him to spill everything he knew about Charlie and their powers.",
+      "Time_Created": "1453231058",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2018114",
+      "Content": "\"Very good. Now, back up nice and slow, and sit down against the wall.\" J instructed calmly, smirking lightly as Dan's gaze focused on the light. The artifact was at the very least reliable for quick and easy results, it was the bloodletting part that always made the team reluctant to use it. They'd lost two agents before to it, the artifact was greedy and bloodthirsty. J had to be careful here. Once Dan did as he was told, J stepped through the shield and into the room. \n\n\"Tell me what powers you've seen Charlotte use. Be specific and detailed. When did they use them, what did they use them for, and what limitations do you know of?\"",
+      "Time_Created": "1453231424",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2018229",
+      "Content": "Ink: Dan knows Charlie mainly relies on Light constructs and blinding opponents for fighting, is strongest during daytime and especially outside, can use their power to penetrate ectoshields, and can teleport through light sources. He also knows that they have to end fights quickly when using constructs because of the stress it puts on their Core, and if they don't get sunlight regularly their powers end up severely weakened. Additionally, he probably knows that they're impossible to sneak up on in the dark because of their nightvision",
+      "Time_Created": "1453232065",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "OOC",
+      "Chara_Number": null,
+      "Deleted": "0"
+    },
+    {
+      "Number": "2018316",
+      "Content": "Unable to stop himself, Dan told J everything he could remember about what he'd learned of Charlie's powers from their sparring sessions. By the time he was finished, he was shaking in restrained anger and felt sick with guilt. He wanted nothing more than to _murder_ J in the most violent way possible, Observants and their rules be damned.\n\nDan started panting and sweating as he tried to fight off the artifact's control. The fact that he could do anything at all was probably because of his past as a half-ghost, but he was using any leverage he could get to try and break free of J's mental hold on him.",
+      "Time_Created": "1453232583",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2018727",
+      "Content": "The harder Dan fought the effects of the artifact, the more J could feel the little glass rod draining him. Dan's willpower was incredible to be able to put up any kind of resistance at all, usually the ghosts they used this on were reduced to compliant little robots. \n\n\"Very good Dan, I think that's all we need for now.\" J exhaled, a little shaky, stepping back cautiously from Dan as he began to loosen his grip on the glass rod. Too much now, they'd been at it for almost half an hour and J was going to start getting lightheaded soon, especially with how hard Dan was fighting it. \n\nStill, he kept a firm hold on the artifact until he was safely on the other side of the shield, only then releasing the glass and pulling it away from the wound with a bit of effort necessary. Damn thing was trying to latch on to him...",
+      "Time_Created": "1453235148",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2019189",
+      "Content": "The very instant that J had the artifact away from his wounded hand, Dan was launching himself at the shield, pounding his fists at it. \"I'll fucking _kill_ you!\" he screamed, baring his teeth. God, he was so tempted to Wail. He had a better buildup of power now, he could do it, right? At least enough to knock out the ghost shield, he was certain of it.\n\nHe backed up to the other side of the room, took a deep breath, once again concentrating his power into his throat, and let out an ear-splitting unearthly noise. He watched as the ghost shield flickered, and didn't think to keep going until it was fully down. He just rushed it again, only to be met with a solid force keeping him from getting through. _\"Fuck!\"_ he swore, pounding on the shield again. He didn't have enough power left to do another Wail, let alone one powerful enough to take down the shield on the door.",
+      "Time_Created": "1453237885",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2019451",
+      "Content": "While Dan pounded away at the shield again, J was on the ground. He'd been in the direct line of fire this time, and his head was still ringing from the force of that unholy noise. There was blood trickling now from his left ear again, adding to the already significant bloodloss he'd endured so far. He was dizzy, gaze unfocused, but most importantly for Dan...\n\nJ was scared. \n\nThat wail had almost taken down the shield, and with it the only protection J had from being slaughtered right then and there. The weight of that implication wasn't lost on the Agent, who used what remained of his coordination to get to his feet again. For the first time, J had no smug commentary when he left. No taunting this time, not through the unbearable ringing in his hears. \n\nAt the very least Dan wouldn't have to endure any more video footage for awhile. His wail had shattered the screen.",
+      "Time_Created": "1453240149",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2019721",
+      "Content": "Seeing J in fear was the last bit of satisfaction Dan would have for over a month. Now that the man had what he wanted, there was no reason to hold back in torturing him. The drug trials, artifact testing, and surgeries he could almost understand were it not for the wholly unnecessary sadism behind them. But locking him in that containment room and making him watch the video records... There was no excuse for that other than J being a sick son of a bitch.\n\nIt was when he was in that containment room, pressed tight against the shield, eyes transfixed on the screen and unable to look away, that he heard some kind of commotion. He finally shifted his gaze to the guards, tapping at the shield to get their attention. \"What's going on?\" he asked, his voice hoarse from crying.",
+      "Time_Created": "1453241906",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2020644",
+      "Content": "\"Quiet.\" One of the guards grumbled at him, but otherwise ignored Dan. After the first few weeks of each shift of guards being increasingly unsettled by the video footage, they'd started turning down the volume whenever J wasn't around to at least give themselves a break. It had become a small signal to Dan that, whenever the volume was turned back up, J would arrive a few minutes later.\n\nSo Dan had at least a little bit to recompose himself before J arrived again, looking positively giddy. For the first time in ages though, when he got to the shield, he turned the screen off and the room was no longer filled with incessant sounds of violence.\n\n\"Congratulations Dan, you're about to have a roommate.\"",
+      "Time_Created": "1453247720",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2020893",
+      "Content": "Dan barely even tried to compose himself when the volume was turned back up. There was no hiding how sunken in and red his eyes were from crying and exhaustion. There was no hiding how the flames of his hair were only barely there. He felt broken, and had seriously considered begging out loud for the Observants to kill him already. Better them than J.\n\nBut he knew the implication of J's words when the man did finally come. Dan snarled, baring his fangs in a weak threat. \"I won't let you anywhere _near_ Charlie.\" He punched ineffectually at the shield, using it to keep himself standing upright. If J somehow did manage to bring Charlie in, he would protect them with his entire existence. He swore it.",
+      "Time_Created": "1453249365",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2021468",
+      "Content": "\"You wont get a choice.\" J smirked, baring his teeth right back at Dan. The last month and a half had killed what little fear Dan had temporarily instilled in him. J had reduced this creature to less than nothing, just another lab rat on the verge of burning out. He'd leave him alive now just so he could watch them drag Charlie back here. J might even let them be together for a little bit, just to tear them apart again. \n\n\"We've finally got ourselves an opening, and with all the information you so generously provided for us, taking her down is just a matter of time. Thank you again for that, really, couldn't have gotten this far without you...\"",
+      "Time_Created": "1453252113",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2021607",
+      "Content": "The idea of Charlie being brought back was enough to instill some small amount of strength into him, and he pulled back to ram his shoulder into the shield. Dan could take it down if he just tried _hard_ enough, he knew he could. J wouldn't know what hit the entire goddamn facility when he got out. Even if the Observants killed him after, he wouldn't leave enough of the staff alive to have a place to keep Charlie.\n\nDan repeated the action, over and over again. He'd had to switch shoulders, and could feel both of them bruising. \"You'll never take them alive you son of a bitch! Not while I'm around!\"",
+      "Time_Created": "1453252821",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2021818",
+      "Content": "\"Jeez, boss, really?\" One of the Guards groaned when Dan began throwing his weight into the shield again, yelling after the Operative that had already turned his back to leave and oversee the capture of CV-001. Leaving the guards to deal with a screaming, violent, and /annoying/ ghost. \n\n\"Boss, you know he's gonna be like this for hours now.\"\n\"If he gets to be too much trouble, you both have Tazers. Use them.\" J waved off the Guards concerns, way too elated by the current mission to even be bothered by the insubordinate attitude. Honestly, they were cleared to use force if necessary, they had no reason to complain. \n\n\"You heard 'im, knock it off!\" The other guard beside the doorway growled at Dan through the doorway, knocking his fist against the doorframe to get his attention. Both guards were getting really sick of listening to Dan throwing his tantrums after every visit from J.",
+      "Time_Created": "1453253907",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2021864",
+      "Content": "_Tasers_ good god they'd had tasers this whole time and __J had just said to use them on him.__ Dan smirked, throwing his entire weight towards the shield one more time. \"Or what? You really think some _toy_ is going to do anything to me?\"\n\nWhy didn't he think of this sooner? He could've gotten out ages ago if he'd thought to make them taze him. He snarled, pressing his face and chest up close to the shield, providing plenty of surface area near his core for them to jump-start him. \"You're __dead__ J! Don't think for a moment I'm letting you get away with this!\"",
+      "Time_Created": "1453254340",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2021950",
+      "Content": "\"Oh fucks sake-\" The guard to Dan's left growled, reaching for his belt and pulling out a metal rod that immediately began sparking when he gripped the base tight. That alone seemed to make the other guard edgy, and he tried to calm his partner down but he was clearly having none of it. \n\"Maddox-\"\n\"No, fuck you, I'm not listening to this bullshit for another six hours!\"\n\nJ would likely count himself immensely lucky for walking away when he did later on. He wasn't there to see the results when Maddox shoved his hand through the shield to dig the Tazer hard against Dan's chest with a loud series of electrical sparks.",
+      "Time_Created": "1453254962",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2022014",
+      "Content": "The moment the electricity hit his core, the flames of his hair danced brighter and higher than they had in months, and he grabbed hold of the guard's hand, forcing him to keep the taser on. Dan started laughing maniacally, the rush of his core being recharged more than enough to get him to do a full-powered Wail. \"You won't be listening to anything at all in a minute, here.\"\n\nOnce he was fully charged, he crushed Maddox's wrist and let him go before taking a deep breath and Wailing. This time, the dinky shield on the door failed almost immediately, and he could feel the building rumbling around him. He didn't stop, not until he started bringing down walls and the ceiling. This place was going _down_ now that he had a say in the matter. Fatalities didn't matter to him, not at this point. He had to get to Charlie.",
+      "Time_Created": "1453255434",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2022334",
+      "Content": "When Dan wailed, nobody was ready.\nNot the guards who scrambled away from the sound desperately trying to shield their ears only to have their eardrums rupture anyways. Knocked unconscious by the shockwaves alone just like most others caught in the immediate blast zone. The whole building shook with the force of his Wailing, structural supports groaning with the effort of keeping the building upright and only partially succeeding. Walls crumbled, floors and ceilings rattled hard enough to come loose, equipment shorted and sparked into sudden fires. \n\nThe room he'd been kept in all this time took the worst beating of all, material specifically designed to hold up against ghostly powers cracked and shattered from the force.The ceiling buckled and caved along with the walls, exposing the electrical wiring underneath the panels that began to smolder slightly.",
+      "Time_Created": "1453257018",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2022560",
+      "Content": "This time, there wouldn't be any half-assing anything. Dan wasn't leaving until the entire building had been brought down and started to _burn._ With the surge of adrenaline from the shock, he had more than enough power for another Wail, even if it wouldn't be at full strength.\n\nHe went for it anyway, hoping to knock out the rest of the structure and bring the building down. If the bastards _did_ catch Charlie, there wouldn't be a Facility left to take them back to. And he wasn't leaving until the walls collapsed.\n\nWhen his second Wail didn't bring down the building, he pulled a panel off the wall, exposing the wiring and grabbing hold of it. He could draw enough power to blow a fuse, and then overload the entire system, destroying all of their computers. Ohhhh that would piss J off so bad, he bet. All the more reason to do it.",
+      "Time_Created": "1453258219",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2022847",
+      "Content": "To their credit, the GiW operatives were trying to mobilize. It wasn't hard to figure out what was happening and where the source of the destruction was, it was only a matter of pulling themselves together and getting to the equipment they needed to put a stop to it. That was a task easier said than done, with the two rapidfire Wails having severely compromised the structure of the building. One more would bring it down, if the rapidly spreading fires didn't do it first.\n\nIt didn't take long for the priority to shift from defense, to evacuation, and the alarm sirens signaled for everyone to get out. The second the first Wail had hit, J recognized it and immediately changed his path to the exit. These were stronger than anything Dan had used so far, and he would worry about figuring out /how/ he had managed that after he got out of the goddamn path of destruction! He needed to get to safety and then signal the Operatives in Amity to either fall back or take their captive to a different facility before Dan headed their way! \n\nAs for himself, J was a coward. He knew how to make himself scarce and untrackable.",
+      "Time_Created": "1453259471",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2503cf",
+        "#421484",
+        "#baa9df"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41289",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2023275",
+      "Content": "Dan knew the sound of alarms when he heard them, and just kept laughing as he felt machinery explode from being overloaded. All of J's precious archive footage, hopefully gone for good. It wasn't until he was certain that every computer in the building was destroyed that he finally left. With any luck, the electrical fires would burn it to the ground.\n\nNow it was time to go make sure Charlie was _safe._",
+      "Time_Created": "1453261375",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "Character",
+      "Chara_Number": "41290",
+      "Deleted": "0"
+    },
+    {
+      "Number": "2023308",
+      "Content": "END RP",
+      "Time_Created": "1453261485",
+      "Time_Updated": null,
+      "IPColor": [
+        "#ce7c2a",
+        "#5b7d0e",
+        "#eca8ac"
+      ],
+      "Type": "OOC",
+      "Chara_Number": null,
+      "Deleted": "0"
+    }
+  ]
+}
