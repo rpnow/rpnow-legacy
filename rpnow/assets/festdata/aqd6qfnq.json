@@ -251,6 +251,34 @@
       "Deleted": "0"
     },
     {
+      "Number": "3189599",
+      "Content": "My vocabulary is sublime, for I must always rhyme.",
+      "Time_Created": "1458533719",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "57964",
+      "Deleted": "0"
+    },
+    {
+      "Number": "3189613",
+      "Content": "Ahhh that's right, I had forgotten. You and your kind speak Rhymish",
+      "Time_Created": "1458533765",
+      "Time_Updated": null,
+      "IPColor": [
+        "#2531b1",
+        "#d0565f",
+        "#ca9d07"
+      ],
+      "Type": "Character",
+      "Chara_Number": "57963",
+      "Deleted": "0"
+    },
+    {
       "Number": "3189587",
       "Content": "*lifts a tea cup to their excellence*",
       "Time_Created": "1458533667",
@@ -293,20 +321,6 @@
       "Deleted": "0"
     },
     {
-      "Number": "3189599",
-      "Content": "My vocabulary is sublime, for I must always rhyme.",
-      "Time_Created": "1458533719",
-      "Time_Updated": null,
-      "IPColor": [
-        "#2531b1",
-        "#d0565f",
-        "#ca9d07"
-      ],
-      "Type": "Character",
-      "Chara_Number": "57964",
-      "Deleted": "0"
-    },
-    {
       "Number": "3189606",
       "Content": "*solemn trumpeting*",
       "Time_Created": "1458533740",
@@ -318,20 +332,6 @@
       ],
       "Type": "Character",
       "Chara_Number": "57965",
-      "Deleted": "0"
-    },
-    {
-      "Number": "3189613",
-      "Content": "Ahhh that's right, I had forgotten. You and your kind speak Rhymish",
-      "Time_Created": "1458533765",
-      "Time_Updated": null,
-      "IPColor": [
-        "#2531b1",
-        "#d0565f",
-        "#ca9d07"
-      ],
-      "Type": "Character",
-      "Chara_Number": "57963",
       "Deleted": "0"
     },
     {
