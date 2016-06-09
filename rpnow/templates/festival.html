@@ -6,6 +6,9 @@
 {% block content %}
   <h1>RP Fest!</h1>
   <p>Welcome to the first annual RP festival!</p>
+  <p>Voting is not yet taking place.
+    We're currently still waiting on communications with some authors to ensure their roleplays are presented properly.
+    Feel free to read some of the RPs in the meantime.
 
   {% for type in ['Original Fluff', 'Original Angst', 'Fan Fluff', 'Fan Angst'] %}
   <div class="entry-category">
@@ -13,8 +16,8 @@
     {% for rp in rps %}
     {% if rp.type == type %}
     <div class="entry">
-      <h3><a href="festival/{{ rp.url }}">{{ rp.title }}</a></h3>
-      <p class="rating">Rating: {{ rp.rating }}
+      <h3><a href="festival/{{ rp.url }}/1">{{ rp.title }}</a></h3>
+      <p class="rating">Rating: {{ rp.rating }}</p>
       <p>{{ rp.desc }}</p>
     </div>
     {% endif %}
