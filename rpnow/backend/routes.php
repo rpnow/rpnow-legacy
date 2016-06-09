@@ -440,11 +440,6 @@ $app->get('/festival/:rp/', $downCheck, function ($rp) use ($app) {
 // VIEW RP
 $app->get('/festival/:rp/:page/', $downCheck, function ($rp, $page) use ($app) {
   global $rpPostsPerPage;
-  $jfile = "assets/festdata/" . $rp . ".txt";
-  if(!file_exists($jfile)) {
-    $app->pass();
-  }
-  $j = json_decode(file_get_contents($jfile));
   $sums = json_decode(file_get_contents("assets/festsum.json"));
   $sum = null;
   for($i = 0; $i < count($sums); $i++) {
@@ -453,6 +448,11 @@ $app->get('/festival/:rp/:page/', $downCheck, function ($rp, $page) use ($app) {
       break;
     }
   }
+  if(is_null($sum)) {
+    $app->pass();
+  }
+  $jfile = "assets/festdata/" . $sum->id . ".json";
+  $j = json_decode(file_get_contents($jfile));
   $app->view()->setData(array(
     'title' => $sum->title,
     'desc' => $sum->desc,
@@ -461,8 +461,6 @@ $app->get('/festival/:rp/:page/', $downCheck, function ($rp, $page) use ($app) {
     'id' => $rp,
     'numpages' => ceil(count($j->msgs) / $rpPostsPerPage)
   ));
-  if(isset($sum->image))
-    $app->view()->setData(array('image' => $sum->image));
   $app->render('archive.html');
 })->conditions(array('rp' => '[a-z0-9\-]{0,}', 'page' => $numericRouteCondition));
 
@@ -470,10 +468,20 @@ $app->get('/festival/:rp/archive/', function ($rp) use ($app) {
   $app->response->headers->set('Content-Type', 'application/json');
   $page = $app->request->get('page');
   global $rpPostsPerPage;
-  $jfile = "assets/festdata/" . $rp . ".txt";
-  if(!file_exists($jfile)) {
+
+  $sums = json_decode(file_get_contents("assets/festsum.json"));
+  $sum = null;
+  for($i = 0; $i < count($sums); $i++) {
+    if($sums[$i]->url == $rp) {
+      $sum = $sums[$i];
+      break;
+    }
+  }
+  if(is_null($sum)) {
     $app->pass();
   }
+
+  $jfile = "assets/festdata/" . $sum->id . ".json";
   $j = json_decode(file_get_contents($jfile));
   echo json_encode(array(
     'msgs'=> array_slice($j->msgs, ($page-1) * $rpPostsPerPage, $rpPostsPerPage),
