@@ -4,11 +4,10 @@
 {% block description %}RPNow Festival!{% endblock %}
 
 {% block content %}
-  <h1>RP Fest!</h1>
-  <p>Welcome to the first annual RP festival!</p>
-  <p>Feel free to take some time to read some of the entrants to our roleplay contest and vote on your favorites.</p>
+  <h1>Vote for your favorite RPs!</h1>
+  <p>Welcome to RPNow's first roleplay writing contest! Read each of these entries and <strong><a href="http://goo.gl/forms/pZRIl2n1BTm6jtAM2">vote on your favorites!</a></strong></p>
+  <p>As a reminder, <strong>authors must remain anonymous until voting has ended!</strong> Feel free to promote the contest itself, but avoid promoting or encouraging people to vote for your own RP submission.</p>
   <p>For more information, check our <a href="http://blog.rpnow.net/">tumblr blog!</a></p>
-  <p><a style="font-size:200%;color:red" href="http://goo.gl/forms/pZRIl2n1BTm6jtAM2">Cast your votes here!</a></p>
 
   {% for type in ['Original Fluff', 'Original Angst', 'Fan Fluff', 'Fan Angst'] %}
   <div class="entry-category">
@@ -24,4 +23,8 @@
     {% endfor %}
   </div>
   {% endfor %}
+  <div style="padding:50px 0 100px;text-align: center;">
+    <h1>Vote!</h1>
+    <a href="http://goo.gl/forms/pZRIl2n1BTm6jtAM2">Vote on your favorite entries here!</a>
+  </div>
 {% endblock %}
