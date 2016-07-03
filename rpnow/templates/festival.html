@@ -4,28 +4,6 @@
 {% block description %}RPNow Festival!{% endblock %}
 
 {% block content %}
-  <h1>Vote for your favorite RPs!</h1>
-  <p>Welcome to RPNow's first roleplay writing contest! Read each of these entries and <strong><a href="http://goo.gl/forms/pZRIl2n1BTm6jtAM2">vote on your favorites!</a></strong></p>
-  <p>As a reminder, <strong>authors must remain anonymous until voting has ended!</strong> Feel free to promote the contest itself, but avoid promoting or encouraging people to vote for your own RP submission.</p>
-  <p>For more information, check our <a href="http://blog.rpnow.net/">tumblr blog!</a></p>
-  <p><strong>Voting ends June 30!</strong></p>
-
-  {% for type in ['Original Fluff', 'Original Angst', 'Fan Fluff', 'Fan Angst'] %}
-  <div class="entry-category">
-    <h2>{{ type }}</h2>
-    {% for rp in rps %}
-    {% if rp.type == type %}
-    <div class="entry">
-      <h3><a href="festival/{{ rp.url }}/1">{{ rp.title }}</a></h3>
-      <p class="rating">Rating: {{ rp.rating }}</p>
-      <p>{{ rp.desc }}</p>
-    </div>
-    {% endif %}
-    {% endfor %}
-  </div>
-  {% endfor %}
-  <div style="padding:50px 0 100px;text-align: center;">
-    <h1>Vote!</h1>
-    <a href="http://goo.gl/forms/pZRIl2n1BTm6jtAM2">Vote on your favorite entries here!</a>
-  </div>
+  <h1>Thanks for voting, everyone!</h1>
+  <p>Results will be up soon.</p>
 {% endblock %}
