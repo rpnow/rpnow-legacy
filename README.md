@@ -4,7 +4,7 @@
 ## Features
 Noteworthy features of RPNow include:
 * No registration process
-* Entirely in-browser; no downloads
+* Entirely in-browser; no downloads for the user
 * Works on both desktop and mobile
 * Requires no browser plugins such as Flash or Java
 * Updates in real time; no refreshing needed
@@ -15,8 +15,7 @@ Noteworthy features of RPNow include:
 ## Requirements
 * Apache with mod_rewrite and .htaccess enabled
 * PHP >= 5.3.0
-* MySQL
-* SSL certificate (optional)
+* MySQL or MariaDB
 
 ## Installing
 1. Download the RPNow repository from GitHub
@@ -28,4 +27,6 @@ Noteworthy features of RPNow include:
 7. To enable the admin panel, uncomment the appropriate lines in the config.php file. _Be sure to change the admin username and password!_
 
 ## Credits
-For additional information on the contributors, libraries, and references, see [about.html](rpnow/templates/about.html).
+RPNow was created almost entirely by me, [Nigel Nelson](http://nigelnelson.me).
+
+For additional information on software and libraries used, as well as a list of donors and other contributors, see [credits.md](CREDITS.MD).
