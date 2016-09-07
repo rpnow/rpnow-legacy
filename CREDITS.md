@@ -5,17 +5,24 @@ RPNow was created in March 2015 by me, [Nigel Nelson](http://nigelnelson.me).
 I single-handedly designed and coded the site's initial incarnation, and am
 still responsible for nearly all of the code in the project.
 
-The idea was originally inspired by __Hannah Liddell__, who now assists with
-making design decisions, as well as interacting with and gathering feedback
-from the users of the site.
+
+Donors
+------
+HUGE thanks to the generous people who make monthly donations to me on
+[my Patreon](https://www.patreon.com/rpnow). People who donate $5 or more
+monthly are listed below:
+* Desiree Braun
+* Charlie and Elliott
+* Diana Lennox
+* Eline Zhang
 
 
 Technologies Used
 -----------------
-RPNow can easily be installed on a [LAMP stack
+RPNow can easily be installed on a [LAMP stack]
 (http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29), simply by
 dropping in and modifying some files into the public www directory. However,
-the live version hosted on [LEMP stack](https://lemp.io/) with [MariaDB
+the live version hosted on [LEMP stack](https://lemp.io/) with [MariaDB]
 (https://mariadb.org/) instead. The front-end uses HTML5, CSS, and
 JavaScript, meaning no browser plugins are required for clients to use it.
 
@@ -42,14 +49,19 @@ Additional technologies used to develop RPNow:
 
 Special Thanks
 --------------
-These people receive special thanks for using the service early on and
-for providing needed feedback, testing, and support.
-* Jackson Marriott
-* Svetlana Tovarisch
+... to my friends and family who offered feedback and support during making
+of this project:
 * Brice Nelson
 * Carrie Nelson
 * Katie Nelson
+* Jackson Marriott
+* Svetlana Tovarisch
 * Jon Romrell
 
-Thanks also to a host of users who have provided feedback and suggestions
-for the site.
+Thanks also to the myriad of users who reported bugs and provided feedback
+throughout development.
+
+Finally, a loving thank-you to Hannah Liddell, who originally inspired RPNow.
+Her valuable input on design decisions, her help in engaging the site's
+community, and her love and support all made this project possible. It would
+not exist without her.
