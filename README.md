@@ -30,3 +30,6 @@ Noteworthy features of RPNow include:
 RPNow was created almost entirely by me, [Nigel Nelson](http://nigelnelson.me).
 
 For additional information on software and libraries used, as well as a list of donors and other contributors, see [credits.md](CREDITS.MD).
+
+## License
+RPNow is licensed under the [GNU General Public License (3.0)](LICENSE)
