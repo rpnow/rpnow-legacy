@@ -14,7 +14,7 @@ monthly are listed below:
 * Desiree Braun
 * Charlie and Elliott
 * Diana Lennox
-* Eline Zhang
+* Eli
 
 
 Technologies Used
