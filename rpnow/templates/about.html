@@ -1,56 +1,39 @@
 {% extends "article.layout.html" %}
 
 {% block title %}About{% endblock %}
-{% block description %}Technical details and credits for RPNow.{% endblock %}
+{% block description %}About RPNow{% endblock %}
 
 {% block content %}
   <h1>About RPNow</h1>
   <p>
-    <a href="https://rpnow.net/">RPNow</a> is an <a href="https://github.com/rpnow/rpnow">open-source</a> web application that allows anyone to conduct a private <a href="http://en.wikipedia.org/wiki/Play-by-post_role-playing_game">text-based roleplay</a> with a small group of friends. It is specialized to allow for real-time play as well as for creation of multiple characters.
-  </p>
-  <h2>Contributors</h2>
-  <ul>
-    <li><a href="http://nigelnelson.me">Nigel Nelson</a> AKA <a href="http://184game.tumblr.com">Shamble Sides</a> &mdash; Lead project director, designer &amp; developer</li>
-    <li>Sleepy Constellation &mdash; Design feedback</li>
-    <li>Jackson Marriott &mdash; Feedback &amp; suggestions</li>
-    <li>Hannah Liddell &mdash; Feedback &amp; suggestions</li>
-    <li>Megan Monk &mdash; Feedback &amp; suggestions</li>
-    <li>Svetlana Tovarisch &mdash; Feedback &amp; suggestions</li>
-  </ul>
-  <h2>Technologies</h2>
-  <p>
-    The RPNow back-end is built on <a href="http://httpd.apache.org/">Apache</a>, <a href="http://php.net/">PHP</a>, and <a href="https://www.mysql.com/">MySQL</a>: in other words, a <a href="http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29">LAMP</a> server.
+    <a href="https://rpnow.net/">RPNow</a> is the Dead-Simple Roleplay Chatroom Service. It is the <em>only</em> roleplay site that requires no user registration, supports multiple characters per user, keeps your roleplays permanents, and allows you to download the complete transcripts as text files.
   </p>
   <p>
-    The front-end is made entirely in <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> &mdash; in other words, no browser plugins are required for the user to use this application. All they need is a <a href="http://browsehappy.com/">semi-modern web browser</a>.
-  <h2>Libraries Used</h2>
-  <p>RPNow also uses the following libraries.</p>
-  <ul>
-    <li><a href="http://www.slimframework.com/">Slim</a>: Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
-      <ul><li>... Along with Mika Tuupola's <a href="http://www.appelsiini.net/projects/slim-basic-auth">Slim-Basic-Auth</a> add-on.</li></ul>
-    </li>
-    <li><a href="http://twig.sensiolabs.org/">Twig</a>: The flexible, fast, and secure template engine for PHP</li>
-    <li><a href="https://jquery.com/">jQuery</a>: jQuery is a fast, small, and feature-rich JavaScript library.</li>
-    <li><a href="https://bgrins.github.io/spectrum/">Spectrum</a>: The No Hassle jQuery Colorpicker</li>
-    <li><a href="http://momentjs.com/">Moment.js</a>: Parse, validate, manipulate, and display dates in JavaScript.</li>
-  </ul>
-  <h2>Additional Resources</h2>
+    To start a roleplay, simply type in a title, and press the begin button! It's that simple! Don't believe us? <a href="https://rpnow.net">Try it!</a>
   <p>
-    Thanks to the following websites, technologies, and people for helping make this project possible.
+    RPNow was written almost exclusively by Nigel Nelson, with special help from Hannah Liddell.
+  </p>
+
+  <h2>Donations</h2>
+  <p>
+    RPNow is entirely supported by user donations. <b>If you want to support RPNow, <a href="https://www.patreon.com/rpnow">please become my patron on Patreon!</a></b>
+  </p>
+  <p>
+    The following people actively support RPNow by donating $5 or more per month:
   </p>
   <ul>
-    <li><a href="http://www.wampserver.com/en/">WampServer</a> has been invaluable to me as a Windows user, allowing me to test this project locally.</li>
-    <li><a href="https://cdnjs.com/">cdnjs</a> kindly hosts a large number of JavaScript and CSS libraries for free, including those used in RPNow.</li>
-    <li><a href="http://24ways.org/2010/calculating-color-contrast/">Brian Suda's article</a> about color contrast was useful.</li>
-    <li><a href="http://stackoverflow.com/">The good people of Stack Overflow</a> seem to always have just the right questions and answers when I'm stuck on something in particular.</li>
-    <li><a href="http://bettermotherfuckingwebsite.com/">BetterMotherF***ingWebsite.com</a> inspired the minimal design.</li>
+    <li>Desiree Braun</li>
+    <li>Charlie and Elliott</li>
+    <li>Diana Lennox</li>
+    <li>Eli</li>
+    <li>... and 1 other who chose not to be listed.</li>
   </ul>
+
   <h2>Links</h2>
   <ul>
-    <li><a href="https://rpnow.net/">RPNow.net (main site)</a></li>
-    <li><a href="https://github.com/rpnow/rpnow">RPNow GitHub repository</a></li>
-    <li><a href="http://blog.rpnow.net/">RPNow on Tumblr</a></li>
+    <li><a href="https://rpnow.net/">RPNow.net Homepage</a></li>
+    <li><a href="http://blog.rpnow.net/">RPNow Tumblr blog</a> &mdash; Latest updates on RPNow development and community activities</li>
+    <li><a href="https://github.com/rpnow/rpnow">RPNow on GitHub</a> &mdash; RPNow is open-source. You can check out its source code here.</li>
+    <li><a href="https://www.patreon.com/rpnow">RPNow on Patreon</a> &mdash; Support RPNow development; become my patron!</li>
   </ul>
-  <h2>License</h2>
-  <p>RPNow is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0-standalone.html">GNU General Public License (Version 3.0)</a>.</p>
 {% endblock %}
