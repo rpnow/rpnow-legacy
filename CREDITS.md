@@ -9,12 +9,13 @@ still responsible for nearly all of the code in the project.
 Donors
 ------
 HUGE thanks to the generous people who make monthly donations to me on
-[my Patreon](https://www.patreon.com/rpnow). People who donate $5 or more
-monthly are listed below:
+[my Patreon](https://www.patreon.com/rpnow). The following people actively
+support RPNow by donating $5 or more per month:
 * Desiree Braun
 * Charlie and Elliott
 * Diana Lennox
 * Eli
+* ... and 1 other who chose not to be listed.
 
 
 Technologies Used
