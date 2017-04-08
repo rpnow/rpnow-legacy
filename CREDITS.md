@@ -11,11 +11,14 @@ Donors
 HUGE thanks to the generous people who make monthly donations to me on
 [my Patreon](https://www.patreon.com/rpnow). The following people actively
 support RPNow by donating $5 or more per month:
-* Desiree Braun
-* Charlie and Elliott
-* Diana Lennox
-* Eli
-* ... and 1 other who chose not to be listed.
+
+*   **Jackson Marriott**
+*   **Karl O'Malley**
+*   Charlie and Elliott
+*   Diana Lennox
+*   Eli
+*   Mika
+*   ... and 1 more who chose not to be listed.
 
 
 Technologies Used
