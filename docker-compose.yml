@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+  nginx:
+    image: "nginx:1.10"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./rpnow:/var/www/html:ro
+    ports:
+      - "7979:80"
+    links:
+      - php
+
+  php:
+    image: "php:5.6-fpm"
+    volumes:
+      - ./rpnow:/var/www/html:ro
+
+# volumes:
+#   www:
