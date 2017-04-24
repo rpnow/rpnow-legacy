@@ -32,6 +32,9 @@ services:
       MYSQL_DATABASE: rpnow
       MYSQL_USER: rpnow_user
       MYSQL_PASSWORD: some_long_secret
+    volumes:
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - db_data:/var/lib/mysql
 
-# volumes:
-#   db_data:
+volumes:
+  db_data:
