@@ -21,7 +21,7 @@ $rpDBServer = 'db';
 ## Database name
 $rpDBName   = 'rpnow';
 ## A user with SELECT and INSERT permissions to that database.
-$rpDBUser   = 'root';
+$rpDBUser   = 'rpnow_user';
 ## Password for that user; PLEASE make it long and random!
 $rpDBPass   = 'some_long_secret';
 
