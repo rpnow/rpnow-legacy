@@ -17,13 +17,13 @@
 
 ## The server on which the database is located;
 ##  If it's the same as the webserver, use 'localhost'.
-$rpDBServer = 'localhost';
+$rpDBServer = 'db';
 ## Database name
-$rpDBName   = 'rp_db';
+$rpDBName   = 'rpnow';
 ## A user with SELECT and INSERT permissions to that database.
-$rpDBUser   = 'rp_db_user';
+$rpDBUser   = 'root';
 ## Password for that user; PLEASE make it long and random!
-$rpDBPass   = 'abc123';
+$rpDBPass   = 'some_long_secret';
 
 ## Admin credentials array.
 ##  To enable the admin panel, uncomment and **CHANGE** the
