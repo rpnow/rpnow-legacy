@@ -13,18 +13,14 @@ Noteworthy features of RPNow include:
 * Download a text backup of the RP at any time
 
 ## Requirements
-* Apache with mod_rewrite and .htaccess enabled
-* PHP >= 5.3.0
-* MySQL or MariaDB
+* Docker (Tested with Docker 17.04.0)
+* Docker-compose (Tested with 1.10.0)
 
-## Installing
-1. Download the RPNow repository from GitHub
-2. Place the contents of the /rpnow/ directory somewhere on the target web server
-3. Import the MySQL database from /docs/rpnow.sql
-4. Give a user SELECT and INSERT permissions on that database
-5. Update config.php with the appropriate database credentials
-6. If you have an SSL certificate for your site, uncomment the HTTPS segment in the .htaccess file
-7. To enable the admin panel, uncomment the appropriate lines in the config.php file. _Be sure to change the admin username and password!_
+## Running
+1.  `docker-compose build`
+2.  `docker-compose run --rm build composer install`
+3.  `docker-compose up`
+4.  To enable the admin panel, uncomment the appropriate lines in the config.php file. _Be sure to change the admin username and password!_
 
 ## Credits
 RPNow was created almost entirely by me, [Nigel Nelson](http://nigelnelson.me).
