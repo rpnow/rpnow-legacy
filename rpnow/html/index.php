@@ -1,12 +1,11 @@
 <?php
 // RPNow Version Number
-$rpVersion = '0.10.0';
+$rpVersion = '1.1.0';
 
 // Require source files
 require '../vendor/autoload.php';
 \Slim\Slim::registerAutoloader();
 
-require_once '../config.php';
 require_once '../backend/Room.php';
 
 // Create the application
