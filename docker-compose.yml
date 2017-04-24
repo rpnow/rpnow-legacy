@@ -18,6 +18,13 @@ services:
     links:
       - db
 
+  build:
+    image: "composer:1.4"
+    working_dir: /var/www/html
+    volumes:
+      - ./rpnow:/var/www/html
+    command: composer install
+
   db:
     image: "mariadb:5.5"
     environment:
