@@ -2,7 +2,7 @@
 
 if(!isset($rpVersion)) die();
 
-require_once 'config.php';
+require_once __DIR__.'/../config.php';
   
 class Admin {
   public static function RecentActivity($maxRows) {

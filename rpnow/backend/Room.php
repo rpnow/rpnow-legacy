@@ -2,8 +2,8 @@
 
 if(!isset($rpVersion)) die();
 
-require_once 'config.php';
-require_once 'Connection.php';
+require_once __DIR__.'/../config.php';
+require_once __DIR__.'/Connection.php';
 
 class Room {
   const GENERIC_EXCEPTION = 776690000;

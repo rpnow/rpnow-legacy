@@ -292,7 +292,7 @@ $app->get('/sample/archive/', function () use ($app) {
 
 // Admin panel!
 if(isset($rpAdminCredentials)) {
-  require_once 'backend/Admin.php';
+  require_once __DIR__.'/Admin.php';
   
   $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     'path' => '/admin/',
