@@ -1,6 +1,8 @@
 # RPNow
 **RPNow** is an open-source web application that lets anyone quickly create a private chatroom to roleplay with their friends.
 
+___Note:__ This project has been superseded by [rpnow2](https://github.com/rpnow/rpnow2), and is __no longer receiving updates.___
+
 ## Features
 Noteworthy features of RPNow include:
 * No registration process
