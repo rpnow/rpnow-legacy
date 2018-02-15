@@ -36,7 +36,7 @@ $rpAdminCredentials = array(
 ## The length of the auto-generated URL for each RP room.
 ##  Minimum recommended for a live website is 4.
 ##  Maximum allowed is 20.
-$rpIDLength = 7;
+$rpIDLength = 8;
 ## The characters to be used in that URL.
 ##  By default, certain ambiguous characters (such as O and 0)
 ##  are excluded entirely.
